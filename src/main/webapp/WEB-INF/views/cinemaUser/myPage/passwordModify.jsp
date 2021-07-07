@@ -6,11 +6,11 @@
 	<main id="passwordModifyMain">
 	<div id="passwordModfiyTile">비밀번호 수정</div>
 
-	<form id="passwordModifyForm">
-
+	<form id="passwordModifyForm" method="POST">
+		<input type="hidden" name="userId" value="0000">
 		<div class="passwordInputBox" id="newPasswordInputBox">
 			<div class="passwordInputEx">새로운 비밀번호 입력</div>
-			<input type="password" name="newUserPw" class="passwordModifyInput"
+			<input type="password" name="userPw" class="passwordModifyInput"
 				id="newPw">
 		</div>
 
