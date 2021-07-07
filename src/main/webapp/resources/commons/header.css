@@ -1,0 +1,126 @@
+@charset "UTF-8";
+/* logo font */
+@import
+	url('https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap')
+	;
+
+@font-face {
+	font-family: 'gmarket';
+	src: url('font/GmarketSansTTFMedium.ttf') format('truetype');
+}
+
+/* 각 태그들의 크기를 직접 보시려면 border 주석을 제거하면 됩니다. */
+body {
+	font-family: 'gmarket';
+	font-size: 10pt;
+}
+
+header {
+	/* border: 1px solid black; */
+	margin-top: 80px;
+	margin-bottom: 100px;
+}
+
+#loginStatusBox {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding-right: 20px;
+	/* border: 1px solid black; */
+}
+
+#loginStatus {
+	list-style: none;
+	display: flex;
+	/* border: 1px solid black  ; */
+}
+
+#loginStatus li {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0px 15px;
+	font-size: 9pt;
+	height: 17px;
+	/* border: 1px solid black; */
+}
+
+#loginStatus li:not (:last-child ) {
+	border-right: 1px solid black;
+}
+
+#loginStatus li:hover {
+	text-decoration: underline;
+}
+
+#logo {
+	width: 500px;
+	margin: 0 auto;
+	text-align: center;
+	font-family: 'Zen Tokyo Zoo', cursive;
+	font-size: 40pt;
+	user-select: none;
+	cursor: pointer;
+	/* border: 1px solid black; */
+}
+
+#headerListBox {
+	position: relative;
+	margin-top: 50px;
+	/* border: 1px solid black; */
+}
+
+#headerList {
+	display: flex;
+	justify-content: center;
+	list-style: none;
+	/* border: 1px solid blue; */
+	margin-bottom: 0px;
+}
+
+#headerList li {
+	position: relative;
+	/* display: flex; */
+	/* justify-content: center; */
+	/* align-items: center; */
+	width: 150px;
+	height: 25px;
+	/* border: 1px solid red; */
+}
+
+.menuText {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100px;
+	height: 30px;
+	margin: 0 auto;
+	/* border: 1px solid black; */
+}
+
+.menuText p {
+	position: absolute;
+}
+
+#headerList li:not (:last-child ) {
+	border-right: 1px solid black;
+}
+/* 드롭 다운 메뉴 css */
+.dropDownMenu {
+	display: flex;
+	justify-content: center;
+	padding-top: 10px;
+	/* border: 1px solid black; */
+}
+
+#serviceCenterDropDown {
+	width: 270px;
+}
+
+.serviceCenterDropDownElement {
+	padding: 0 10px;
+}
+
+.hidden {
+	display: none;
+}

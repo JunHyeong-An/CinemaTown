@@ -1,0 +1,242 @@
+@charset "UTF-8";
+
+.joinTitle {
+	text-align: center;
+	border-bottom: 4px solid grey;
+	margin-bottom: 30px;
+	padding-bottom: 10px;
+	border-color: white;
+}
+
+.mainBody {
+	background-color: rgba(229, 238, 238, 0.418);
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+.joinMain {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	width: 500px;
+	margin: 0 auto;
+	/* border: 1px solid black; */
+	position: relative;
+}
+
+#idCheck {
+	width: 130px;
+	height: 35px;
+	border-radius: 10px;
+	outline: none;
+	border-color: rgb(214, 209, 209);
+	background-color: rgb(214, 209, 209);
+	color: white;
+	cursor: pointer;
+}
+
+.Form, .phoneForm, .emailCheckForm {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: rgb(198, 204, 204);
+	/* border: 1px solid black; */
+}
+
+.phoneForm {
+	padding-bottom: 40px;
+}
+
+.emailCheckForm {
+	padding-bottom: 20px;
+}
+.joinInput,#userIdValue {
+	width: 500px;
+	height: 30px;
+	outline: none;
+	border-radius: 10px;
+	padding-left: 10px;
+	margin: 15px 0;
+	border: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	box-shadow: 0.5px 0.5px 0.5px grey;
+}
+
+.passwordMsg,#checkIdMsg {
+	margin-left: 150px;
+	font-size: 6px;
+}
+
+.joinName {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* border: 1px solid black; */
+	width: 200px;
+	height: 50px;
+}
+
+.joinBirthName {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* border: 1px solid black; */
+	width: 100px;
+	height: 50px;
+	padding-right: 30px;
+}
+
+.joinBirth {
+	width: 230px;
+	height: 30px;
+	outline: none;
+	border-radius: 10px;
+	padding-left: 10px;
+	margin: 15px 0;
+	border: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	box-shadow: 0.5px 0.5px 0.5px grey;
+}
+
+.joinGender {
+	width: 35px;
+	height: 35px;
+	outline: none;
+	border-radius: 10px;
+	padding-left: 10px;
+	margin: 15px 0;
+	border: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	box-shadow: 0.5px 0.5px 0.5px grey;
+}
+
+.joinPhoneOne {
+	width: 140px;
+	height: 33px;
+	outline: none;
+	border-radius: 10px;
+	padding-left: 10px;
+	margin: 15px 0;
+	border: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	box-shadow: 0.5px 0.5px 0.5px grey;
+}
+
+.joinPhone {
+	width: 160px;
+	height: 30px;
+	outline: none;
+	border-radius: 10px;
+	padding-left: 10px;
+	margin: 15px 0;
+	border: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	box-shadow: 0.5px 0.5px 0.5px grey;
+}
+
+.joinEmail {
+	width: 180px;
+	height: 30px;
+	outline: none;
+	border-radius: 10px;
+	padding-left: 10px;
+	margin: 15px 0;
+	border: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	box-shadow: 0.5px 0.5px 0.5px grey;
+}
+
+.joinEmailCheck {
+	width: 300px;
+	height: 30px;
+	outline: none;
+	border-radius: 10px;
+	padding-left: 10px;
+	margin: 15px 0;
+	padding-right: 30px;
+	margin-right: 20px;
+	border: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	box-shadow: 0.5px 0.5px 0.5px grey;
+}
+#confirmEmail {
+	width: 93px;
+	height: 35px;
+	border-radius: 10px;
+	outline: none;
+	border-color: rgb(214, 209, 209);
+	background-color: rgb(214, 209, 209);
+	color: white;
+	cursor: pointer;
+}
+#submitEmail {
+	width: 130px;
+	height: 35px;
+	border-radius: 10px;
+	outline: none;
+	border-color: rgb(214, 209, 209);
+	background-color: rgb(214, 209, 209);
+	color: white;
+	cursor: pointer;
+}
+
+.joinAddress {
+	width: 360px;
+	height: 30px;
+	outline: none;
+	border-radius: 10px;
+	padding-left: 10px;
+	margin: 15px 0;
+	border: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	box-shadow: 0.5px 0.5px 0.5px grey;
+}
+
+#submitAddress {
+	width: 130px;
+	height: 35px;
+	border-radius: 10px;
+	outline: none;
+	border-color: rgb(214, 209, 209);
+	background-color: rgb(214, 209, 209);
+	color: white;
+	cursor: pointer;
+}
+
+#submitJoin {
+	width: 700px;
+	height: 50px;
+	border-radius: 10px;
+	outline: none;
+	border: 1px solid black;
+	color: white;
+	background-color: black;
+	margin-top: 40px;
+	cursor: pointer;
+}
+
+.blind {
+	color: black;
+}
+
+#joinMsg {
+	margin-top: 10px;
+	text-align: center;
+	color: red;
+}
