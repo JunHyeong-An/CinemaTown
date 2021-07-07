@@ -73,15 +73,6 @@ function checkRequiredValueSubmit(ar, event) {
       event.preventDefault()
    }
 }
-//메뉴밑줄
-function makeUnderLine(li) {
-   li.onmouseover = function() {
-      li.querySelector(".menuText").style.borderBottom = '2px solid black'
-   }
-   li.onmouseleave = function() {
-      li.querySelector(".menuText").style.borderBottom = 'none'
-   }
-}
 
 //아이디중복
 function checkIdOverlap() {
@@ -169,11 +160,6 @@ submitBtn.onclick = function(event) {
       checkRequiredValueSubmit(ar, event)
    })
 }
-
-// 메뉴 밑줄
-liBoxes.forEach(li => {
-   makeUnderLine(li)
-})
 
 // 아이디 중복검사
 userId.onkeyup = function(event){
