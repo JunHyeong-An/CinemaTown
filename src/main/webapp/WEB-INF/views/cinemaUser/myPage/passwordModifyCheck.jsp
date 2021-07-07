@@ -5,11 +5,12 @@
 <div class="colorBox">
 	<main id="pwMain">
 	<div class="pwTitle">비밀번호 변경하기</div>
-	<form class="pwCheckForm">
+	<form class="pwCheckForm" method="POST">
 
 		<input type="submit" value="본인확인" id="submitBtn">
 
 		<div class="pwInputBox" id="PwInputBox">
+			<input type="hidden" name="userId" value="${login.userId }">
 			<input type="password" name="userPw" class="pwInput"
 				placeholder="현재 비밀번호 입력">
 		</div>
