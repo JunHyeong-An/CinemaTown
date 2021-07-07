@@ -209,9 +209,11 @@ const authHandler = function(event){
       console.log(text)
       if(text == 'true'){
          authMailMsg.innerText = '인증 성공!!'
+         authMailMag.style.color ='green'
       }
       else{
          authMailMsg.innerText = '인증 실패!!'
+         authMailMag.style.color ='red'
       }
    })
 }
