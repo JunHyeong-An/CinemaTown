@@ -194,7 +194,9 @@
 	color: white;
 	cursor: pointer;
 }
-
+#sendMailMsg{
+	padding-left: 150px;
+}
 .joinAddress {
 	width: 360px;
 	height: 30px;

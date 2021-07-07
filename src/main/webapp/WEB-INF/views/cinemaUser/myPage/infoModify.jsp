@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ include file="../../header.jsp"%>
-<link rel="stylesheet" href="${cpath }/resources/cinemaUser/myPage/modify.css">
+<link rel="stylesheet" href="${cpath }/resources/cinemaUser/myPage/infoModify.css">
 <div class="mainBody">
         <main class="modifyMain">
             <div class="modifyTitle">
@@ -71,4 +71,4 @@
 </div>
 <%@ include file="../../footer.jsp"%>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="${cpath }/resources/cinemaUser/myPage/modify.js"></script>
+<script src="${cpath }/resources/cinemaUser/myPage/infoModify.js"></script>
