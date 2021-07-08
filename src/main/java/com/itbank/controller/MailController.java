@@ -22,7 +22,6 @@ public class MailController{		// 회원가입에서 메일 인증 받는 클래�
 	@GetMapping(value="/cinemaUser/mailto/{mailAddress}/", produces="text/plain;charset=utf-8" )
 	public String mailto(@PathVariable String mailAddress, HttpSession session) throws IOException {
 		
-		System.out.println("인증번호를 받을 이메일 주소 : " + mailAddress);
 		
 		String authNumber = mailService.getAuthNumber();
 		String hashNumber = Hash.getHash(authNumber);

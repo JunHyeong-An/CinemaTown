@@ -7,7 +7,7 @@
 	<div id="passwordModfiyTile">비밀번호 수정</div>
 
 	<form id="passwordModifyForm" method="POST">
-		<input type="hidden" name="userId" value="0000">
+		<input type="hidden" name="userId" value="${userId }">
 		<div class="passwordInputBox" id="newPasswordInputBox">
 			<div class="passwordInputEx">새로운 비밀번호 입력</div>
 			<input type="password" name="userPw" class="passwordModifyInput"

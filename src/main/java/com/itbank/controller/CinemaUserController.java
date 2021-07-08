@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,26 +32,33 @@ public class CinemaUserController {
 	// id, pw 입력해서 로그인 구현
 	@PostMapping("/login")
 	public String login(CinemaUserDTO dto, HttpSession session, HttpServletResponse response, HttpServletRequest request, String keepLogin) {      
-
-		// login logic
-		CinemaUserDTO login = cus.login(dto);
-		session.setAttribute("login", login);
 		
-		String keepLoginRe = request.getParameter("keepLogin");
-		System.out.println(login);
-		if(keepLoginRe !=null) {
-		// JSESSION cookie
-			if(keepLoginRe.equals("on")) {
-				if(session.getAttribute("login") != null) {
-					Cookie jsId = new Cookie("JSESSIONID", session.getId());
-					jsId.setMaxAge(86400 * 7);
-					jsId.setPath("/test/cinemaUser");
-					response.addCookie(jsId);
-				}
-	
-			}
+		CinemaUserDTO login = cus.login(dto);
+		
+
+		if(login !=  null) {
+			session.setAttribute("userId", login.getUserId());
+			
+			return "redirect:/cinemaUser/myPage/passwordModifyCheck";
 		}
-		return "home";
+		
+//		String keepLoginRe = request.getParameter("keepLogin");
+//
+//		if(keepLoginRe !=null) {
+//		// JSESSION cookie
+//			if(keepLoginRe.equals("on")) {
+//				if(session.getAttribute("login") != null) {
+//					Cookie jsId = new Cookie("JSESSIONID", session.getId());
+//					jsId.setMaxAge(86400 * 7);
+//					jsId.setPath("/test/cinemaUser");
+//					response.addCookie(jsId);
+//				}
+//	
+//			}
+//		}
+		return "redirect:/cinemaUser/login";
+	
+		
 	}
 
 	// 로그아웃 구현
@@ -60,6 +68,9 @@ public class CinemaUserController {
 		session.invalidate();
 		return "redirect:/";
 	}
+
+
+
 	// 회원가입 페이지에서 아이디 중복체크하기
 	@GetMapping("/idCheck/{userId}/")
 	@ResponseBody
@@ -77,44 +88,36 @@ public class CinemaUserController {
 	@PostMapping("/join")
 	public String insert(CinemaUserDTO dto) {
 		int row = cus.insert(dto);
-		return "cinemaUser/login";	// 리다이렉트로 바꿔야함
+		return "redirect:/cinemaUser/login";
 	}
 
 	// 정보 변경 페이지 넘어가기 전에 비밀번호 확인 받는 페이지
 	@GetMapping("/myPage/passwordModifyCheck")
-	public String passwordModifyCheck() {
+	public String passwordModifyCheck() {		
 		return "cinemaUser/myPage/passwordModifyCheck";
 	}
 
 	// 정보 변경 전에 비밀번호 기입 시 일치, 불일치 확인하기
 	@PostMapping("/myPage/passwordModifyCheck")
-	public ModelAndView passwordModifyCheck(CinemaUserDTO dto, HttpSession session) {
-
+	public String passwordModifyCheck(CinemaUserDTO dto, HttpSession session) {
 		// passwordModifyCheck.jsp에서 비밀번호 일치 후 정보 변경 페이지 보여주기 
-		ModelAndView mav = new ModelAndView();
+		
 		CinemaUserDTO cinemaUserInfo = cus.passwordModifyCheck(dto);
-		if(cinemaUserInfo != null) {
-			
-			mav.setViewName("redirect:/cinemaUser/myPage/infoModify");
-			//			mav.addObject("info", cinemaUserInfo);
-			//			mav.addObject("userBirth", cinemaUserInfo.getUserBirth().split("-")[0]);
-			//			mav.addObject("userEmail1", cinemaUserInfo.getUserEmail().split("@")[0]);
-			//			mav.addObject("userEmail2", cinemaUserInfo.getUserEmail().split("@")[1]);
-			//			mav.addObject("userPh", cinemaUserInfo.getUserPh());
-			//			mav.addObject("userAddr", cinemaUserInfo.getUserAddr());
-			//			mav.addObject("userAddr1", cinemaUserInfo.getUserAddr().split(",")[0]);
-			//			mav.addObject("userAddr2", cinemaUserInfo.getUserAddr().split(",")[1]);
+		if(cinemaUserInfo != null) {			
+			session.setAttribute("userInfo", cinemaUserInfo);
+			return "redirect:/cinemaUser/myPage/infoModify";
 		}
-		else {
-			mav.setViewName("redirect:/cinemaUser/myPage/passwordModifyCheck");
-		}
-		return mav;
+		
+		return "redirect:/cinemaUser/myPage/passwordModifyCheck";
+		
 	}
 
+	// user의 정보 변경할 수 있는 페이지
 	@GetMapping("/myPage/infoModify")
-	public ModelAndView infoModify(HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		CinemaUserDTO cinemaUserInfo = (CinemaUserDTO)session.getAttribute("login");
+	public ModelAndView infoModify(HttpSession session, ModelAndView mav) {
+	
+		CinemaUserDTO cinemaUserInfo = (CinemaUserDTO)session.getAttribute("userInfo");
+		
 		mav.addObject("info", cinemaUserInfo);
 		mav.addObject("userBirth", cinemaUserInfo.getUserBirth().split("-")[0]);
 		mav.addObject("userEmail1", cinemaUserInfo.getUserEmail().split("@")[0]);
@@ -143,6 +146,7 @@ public class CinemaUserController {
 	// user의 비밀번호 변경할 페이지 보여주기
 	@GetMapping("/myPage/passwordModify")
 	public String passwordModify() {
+		
 		return "cinemaUser/myPage/passwordModify";
 	}
 
@@ -150,7 +154,6 @@ public class CinemaUserController {
 	@PostMapping("/myPage/passwordModify")
 	public String passwordModify(CinemaUserDTO dto) {
 		int row = cus.passwordModify(dto);
-		System.out.println(row);
 		return "home";
 	}
 
