@@ -9,4 +9,5 @@
    <a href="${cpath }/cinemaUser/join">가입</a>
    <a href="${cpath }/cinemaUser/login">로그인</a>
    <a href="${cpath }/cinemaUser/myPage/passwordModifyCheck">회원수정</a>
+   <a href="${cpath }/master/masterHeader">리뷰홈</a>
 <%@ include file="footer.jsp" %>

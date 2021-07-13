@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+.mainHeader {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.reviewHeader {
+	padding-top: 10px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.movieNameSelectForm {
+	padding: 20px;
+}
+
+.movieNameSelect {
+	width: 200px;
+	height: 30px;
+	border-radius: 10px;
+}
+
+.movieOption {
+	border-radius: 10px;
+	border: 1px solid black;
+}
+
+.div4 {
+	display: flex;
+	padding: 20px;
+}
+
+.textArea {
+	border: 1px solid black;
+	width: 500px;
+	height: 100px;
+	text-align: left;
+	margin-right: 20px;
+	padding: 5px;
+}
+
+span {
+	margin-bottom: 20px;
+}
+
+.areaDate {
+	padding-right: 230px;
+}
+
+.paging {
+	padding: 15px;
+	cursor: pointer;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+button {
+	padding: 10px;
+	height: 100px;
+	border-radius: 7px;
+	border-color: #dadada;
+}

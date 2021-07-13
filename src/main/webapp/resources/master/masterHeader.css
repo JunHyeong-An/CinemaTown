@@ -1,0 +1,56 @@
+@charset "UTF-8";
+/* logo font */
+@import
+	url('https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap')
+	;
+
+@font-face {
+	font-family: 'gmarket';
+	src: url('font/GmarketSansTTFMedium.ttf') format('truetype');
+}
+
+/* 각 태그들의 크기를 직접 보시려면 border 주석을 제거하면 됩니다. */
+body {
+	font-family: 'gmarket';
+	font-size: 10pt;
+}
+
+header {
+	border-bottom: 1px solid #dadada;
+}
+
+.header {
+	display: inline-block;
+	flex-flow: column;
+	justify-content: center;
+}
+
+.Logo {
+	font-size: 20px;
+}
+
+.mainPageLogo {
+	display: flex;
+	justify-content: flex-end;
+	/* border: 1px solid black; */
+}
+
+.mainPageGo>h3>a {
+	text-decoration: none;
+}
+
+.header {
+	width: 100%;
+	/* border: 1px solid black; */
+	text-align: center;
+}
+
+.nav {
+	padding: 20px;
+}
+
+.nav>ul>li {
+	display: inline-block;
+	padding-left: 25px;
+	padding-right: 25px;
+}
