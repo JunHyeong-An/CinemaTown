@@ -27,7 +27,7 @@ public class CinemaMovieController {
 	@GetMapping("/ticketing")	///ticketing/{movieName}/{showDay}/
 	public String ticketing(Model model) {	//@pathValue 사용해서 넣어주기
 		List<HashMap<String, Object>> ticketingList = cms.ticketingList();
-		List<CinemaMovieDTO> movieList	=	cms.movieList();
+		List<CinemaMovieDTO> movieList	=	cms.movieList();   
 		model.addAttribute("ticketingList", ticketingList);
 		model.addAttribute("movieList", movieList);
 		return "cinemaMovie/ticketing";
