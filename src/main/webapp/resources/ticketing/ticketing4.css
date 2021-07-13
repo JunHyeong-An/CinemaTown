@@ -1,0 +1,220 @@
+#paymentContainer {
+    display: flex;
+    border-right: 1px solid black;
+}
+
+#paymentMovieInfoContainer {
+    width: 368px; 
+    padding-top: 50px; 
+    padding-bottom: 30px;
+}
+
+#movieInfo {
+    margin: 0 auto;
+    width: 200px;
+}
+
+#movieInfo img {
+    width: 200px;
+    height: 300px;
+}
+
+#paymentInfo {
+    width: 200px; 
+    margin: 0 auto;
+}
+
+#paymentMoreInfo {
+    display: flex;
+    flex-flow: column; 
+    align-items: center; 
+    justify-content: center;
+}
+
+#paymentMovieTitle {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    margin: 20px 0;
+}
+
+.innerPaymentMoreInfo {
+    margin-bottom: 10px;
+}
+
+
+#paymentInfoContainer {
+    width: 450px;
+}
+
+#totalCost {
+    display: flex; 
+    align-items: flex-end; 
+    height: 200px; 
+    background-color: rgb(247, 247, 247); 
+}
+
+table {
+    border-collapse: collapse;
+    width: 200px;
+    height: 80px;
+    text-align: center;
+    color: gray;
+}
+
+#totalCostInner {
+    display: flex;
+    justify-content: space-between; 
+    border: 1px solid black;
+    width: 100%;
+    padding: 10px;
+    color: white;
+    background-color: black;
+}
+
+#totalCost span {
+    font-size: 15pt;
+    font-weight: bold;
+}
+
+#paymentMethodChoice {
+    display: flex; 
+}
+
+.paymentMethod {
+    width: 225px;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+.methodSelect {
+    background-color: red;
+    color: white;
+}
+
+.methodUnSelect {
+    background-color: lightgray;
+    color: black;
+}
+
+#cards {
+    display: flex; 
+    flex-flow: wrap;
+    padding: 0 80px; 
+    padding-top: 30px; 
+    justify-content: space-between; 
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid lightgray; 
+    border-radius: 10px;
+    width: 120px; 
+    height: 60px; 
+    margin-bottom: 30px;
+    font-size: 11pt; 
+    font-weight: bolder;
+}
+
+.hidden {
+    display: none;
+}
+
+#paymentPersonalInfo table {
+    width: 400px;
+    margin: 0 auto;
+    text-align: left;
+    color: black;
+    font-weight: bold;
+}
+
+#paymentPersonalInfo table input[type="password"] {
+    width: 50px;
+    outline: none;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid gray;
+}
+
+/* #paymentPersonalInfo table td,
+#paymentPersonalInfo table tr,
+#paymentPersonalInfo table th {
+    border: 1px solid black;
+} */
+
+#paymentPersonalInfo table td {
+    width: 400px;
+}
+
+#paymentPersonalInfo table th {
+    width: 80px;
+}
+
+#cardPw {
+    width: 50px;
+}
+
+#paymentBtnBox {
+    text-align: center;
+}
+
+#paymentBtn {
+    background-color: red;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+}
+
+/* 4 */
+#paymentResultBox {
+    width: 448px; 
+    display: flex; 
+    flex-flow: column;
+    border-left: 1px solid black
+}
+
+#paymentMsg {
+    height: 319px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    font-size: 15pt;
+    font-weight: bolder;
+}
+
+#paymentResultInfo {
+    height: 150px;
+    background-color: rgb(247,247,247);
+    padding:0 30px;
+    padding-top: 30px; 
+}
+
+#paymentTitle {
+    font-size: 13pt;
+    font-weight: bolder;
+    margin-bottom: 15px;
+}
+
+#paymentResultInfo table {
+    width: 250px;
+    text-align: left;
+    color: black;
+    font-weight: bold;
+}
+#paymentResultInfo table th {
+    width: 80px;
+}
+
+#totalCostResult {
+    height: 21px;
+    display: flex; 
+    justify-content: space-between;
+    background-color: black; 
+    color: white;
+    padding: 20px; 
+}
