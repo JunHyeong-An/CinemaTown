@@ -72,6 +72,11 @@ public class CinemaMovieService {
 		
 	}
 
+	public List<CinemaMovieDTO> movieList() {
+
+		return dao.movieList();
+	}
+
 	
 	
 

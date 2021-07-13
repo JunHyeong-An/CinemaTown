@@ -57,6 +57,9 @@ public interface CinemaMovieDAO {
 
 	@Update("update cinemaSeat set reserved = 'n' where ticketing_idx=#{ticketing_idx}")
 	int seatCancel(@Param("ticketing_idx")int ticketing_idx);
+
+	@Select("select * from cinemaMovie")
+	List<CinemaMovieDTO> movieList();
 	
 
 	
