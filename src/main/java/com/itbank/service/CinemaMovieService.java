@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,7 @@ import com.itbank.model.CinemaMovieDAO;
 import com.itbank.model.CinemaMovieDTO;
 import com.itbank.model.CinemaScheduleDTO;
 import com.itbank.model.CinemaTicketingDTO;
+import com.itbank.model.CinemaUserDTO;
 
 @Service
 public class CinemaMovieService {
@@ -30,9 +33,7 @@ public class CinemaMovieService {
 	}
 
 	public int insertMovie(CinemaScheduleDTO dto, String hallName) {
-		// seatCountRemain이 처음에는 hall_idx의 총 좌석수가 들어가야한다.
-		// hall_idx 불러오는 메서드 필요
-		// ㄴ>위 두 개합쳐서 cinemaScheduleDTO에 담아서 2개 각각 사용하기
+
 		CinemaHallDTO hall_dto = dao.hallInfo(hallName);
 		dto.setHall_idx(hall_dto.getHall_idx());
 		dto.setSeatCountRemain(hall_dto.getSeatCountAll());
@@ -43,15 +44,18 @@ public class CinemaMovieService {
 	
 	}
 
-	public int ticketing(CinemaTicketingDTO dto) {
+	public int ticketing(CinemaTicketingDTO dto, int schedule_idx, HttpSession session) {
 		// userId받아오기(로그인 세션값으로 들고오기)
-		
+		CinemaUserDTO login = (CinemaUserDTO) session.getAttribute("login");
+		dto.setUserId(login.getUserId());
 		
 		// schedule_idx받아오기
+//		dto.setSchedule_idx();
 		
 		
 		// hall_idx받아오기(Hall테이블에서 받아올지 schedule테이블에서 join해서 가져올지 생각해보기)
-	
+//		dto.setHall_idx(hall_idx);
+		
 			
 		return dao.ticketing(dto);
 	}
@@ -66,9 +70,16 @@ public class CinemaMovieService {
 		return dao.getTicketing_idx();
 	}
 
-	public int ticketingCancel(int ticketing_idx) {
-		dao.seatCancel(ticketing_idx);
-		return	dao.ticketingCancel(ticketing_idx);
+	// 예매 취소 시 => 예매 취소, 좌석 취소, 결제 취소, 매출 취소
+	public void ticketingCancel(int ticketing_idx) {
+		dao.ticketingCancel(ticketing_idx);		// 예매티켓 취소시 schedule_idx반환하기	==> mybatis이용
+		int schedule_idx = 0;
+		dao.seatCancel(ticketing_idx);		// 예매 자리 취소 시 해당 adultCount + teenagerCount값 가져오기	==> mybatis이용
+		int seatCountRemainAdd = 0;
+		dao.seatCountRemainAdd(schedule_idx, seatCountRemainAdd);// 남은 좌석 수 다시 추가되기
+		int payment_idx = dao.paymentCancel(ticketing_idx);	// 예매 결제 취소시 해당 payment_idx값 가져오기	==> mybatis이용
+		dao.salesCancel(payment_idx);					// 매출 취소
+		
 		
 	}
 
@@ -76,8 +87,6 @@ public class CinemaMovieService {
 
 		return dao.movieList();
 	}
-
-	
 	
 
 	

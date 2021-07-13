@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itbank.model.CinemaMovieDTO;
 import com.itbank.model.CinemaScheduleDTO;
@@ -26,12 +27,17 @@ public class CinemaMovieController {
 	
 	@GetMapping("/ticketing")	///ticketing/{movieName}/{showDay}/
 	public String ticketing(Model model) {	//@pathValue 사용해서 넣어주기
-		List<HashMap<String, Object>> ticketingList = cms.ticketingList();
 		List<CinemaMovieDTO> movieList	=	cms.movieList();   
 		model.addAttribute("movieList", movieList);
-		model.addAttribute("ticketingList", ticketingList);
+		
 		return "cinemaMovie/ticketing";
 	}
+	
+	@PostMapping(value="/ticketing/{movieName}/{showDay}/", produces="application/json;charset=utf-8")
+	@ResponseBody
+	public List<HashMap<String, Object>> ticketing(){
+		return cms.ticketingList();
+	} 
 
 	@GetMapping("/schedule")	///ticketing/{movieName}/{showDay}/
 	public String schedule(Model model) {	//@pathValue 사용해서 넣어주기
@@ -39,6 +45,7 @@ public class CinemaMovieController {
 		model.addAttribute("screenScheduleList", screenScheduleList);
 		return "cinemaMovie/schedule";
 	}
+	
 	
 	@GetMapping("/insertMovie")
 	public String insertMovie() {
@@ -51,15 +58,11 @@ public class CinemaMovieController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("/ticketing2")		// 나중에 ticketing과 post와 연결되니 이건 지워야함.
-	public String ticketing() {
-		return "cinemaMovie/ticketing2";
-	}
 	
 	@PostMapping("/ticketing2")
-	public String ticketing2(CinemaTicketingDTO dto) {
+	public String ticketing2(CinemaTicketingDTO dto, int schedule_idx) {
 		
-		cms.ticketing(dto);
+//		int row = cms.ticketing(dto,schedule_idx);
 		int ticketing_idx = cms.getTicketing_idx();
 		
 		
