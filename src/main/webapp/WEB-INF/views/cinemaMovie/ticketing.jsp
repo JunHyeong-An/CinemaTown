@@ -5,6 +5,25 @@
 <link rel="stylesheet" href="${cpath }/resources/ticketing/ticketing3.css">
 <link rel="stylesheet" href="${cpath }/resources/ticketing/ticketing4.css">
 <link rel="stylesheet" href="${cpath }/resources/ticketing/ticketing.css">
+<div id="coverBox"></div>
+<div id="coverBoxInfo">
+		<div id="coverBoxHeader">
+			<div>
+				<span>영화제목 : </span><span id="coverBoxMovieName"></span>
+			</div>
+			<div id="coverBoxExit">X</div>		
+		</div>
+		<div>
+			<span>시작 시간 : </span><span id="coverBoxStartTime"></span>
+			<p id="coverBoxHallName"></p>
+		</div>
+			
+		<p style="padding: 10px 0;">예매를 계속 진행하시겠습니까?</p>
+		<div style="text-align: right;">
+			<input id="toSeatSelect" type="button" value="좌석선택">
+		</div>
+	</div>
+
 <div id='container'>
 	<div id="ticketingMain">
 		<!-- ticketing1 header -->

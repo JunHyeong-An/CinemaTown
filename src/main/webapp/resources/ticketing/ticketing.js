@@ -16,41 +16,41 @@ changeElements[0].classList.add("insertFlex")
 elementsHeader[0].classList.remove("hidden")
 
 //test
-ticketingSideList.forEach((li, i) => {
-    li.onclick = function() {
-        listInit()
-        headerInit()
-        elementsInit()
-
-        showElements(i)
-        showHeader(i)
-        li.classList.replace("listUnSelect", "listSelect")
-    }
-})
-
-function listInit() {
-    ticketingSideList.forEach(li => {
-        li.classList.replace("listSelect", "listUnSelect")
-    })
-}
-
-function showElements(i) {
-    changeElements[i].classList.remove("hidden")
-}
-
-function elementsInit() {
-    changeElements.forEach(e => {
-        e.classList.add("hidden")
-    })
-}
-
-function headerInit() {
-    elementsHeader.forEach(e => {
-        e.classList.add("hidden")
-    })
-}
-
-function showHeader(i) {
-    elementsHeader[i].classList.remove("hidden")
-}
+//ticketingSideList.forEach((li, i) => {
+//    li.onclick = function() {
+//        listInit()
+//        headerInit()
+//        elementsInit()
+//
+//        showElements(i)
+//        showHeader(i)
+//        li.classList.replace("listUnSelect", "listSelect")
+//    }
+//})
+//
+//function listInit() {
+//    ticketingSideList.forEach(li => {
+//        li.classList.replace("listSelect", "listUnSelect")
+//    })
+//}
+//
+//function showElements(i) {
+//    changeElements[i].classList.remove("hidden")
+//}
+//
+//function elementsInit() {
+//    changeElements.forEach(e => {
+//        e.classList.add("hidden")
+//    })
+//}
+//
+//function headerInit() {
+//    elementsHeader.forEach(e => {
+//        e.classList.add("hidden")
+//    })
+//}
+//
+//function showHeader(i) {
+//    elementsHeader[i].classList.remove("hidden")
+//}
 ///////////////////////////////////////////////////////

@@ -19,8 +19,19 @@ const dateDcrBtn = document.querySelector("#dateDcrBtn")
 const showingMovieList = Array.from(document.querySelectorAll("#showingMovieList li"))
 const dateSection = document.querySelector("#dateSection")
 
+const showTimeList = document.querySelector("#showTimeList")
+const coverBox = document.querySelector("#coverBox")
+const coverBoxInfo = document.querySelector("#coverBoxInfo")
 
+let changeCnt = 0
 
+// 보내줘야하는 변수들
+let movieName = ""
+let ticketingDate = ""
+let ticketingTime = ""
+let ticktingHallName = ""
+
+	
 // 달과 날짜를 출력해줌
 function insertMonthAndDate() {
     selectDateBox.innerHTML = ''
@@ -49,9 +60,6 @@ function insertMonthAndDate() {
 }
 
 //영화버튼 누르면 그 영화에 배당된 시간 출력
-
-let movieName = ""
-let ticketingDate = ""
 
 movieListInit()
 showingMovieList.forEach(li => {
@@ -138,8 +146,39 @@ function getMovieList() {
 	}
 	
 	fetch(url, opt)
-	.then(resp => {
-		console.log(resp)
+	.then(resp => resp.json())
+	.then(json => {
+		showTimeList.innerHTML = ''
+		for(i in json) {
+			const div = document.createElement("div")
+			const p1 = document.createElement("p")
+			const p2 = document.createElement("p")
+			const span1 = document.createElement("span")
+			const span2 = document.createElement("span")
+			const span3 = document.createElement("span")
+			
+			div.setAttribute("class", "timeNode")
+			p1.setAttribute("class", "nodeTime")
+			p2.setAttribute("class", "nodeInfo")
+			span1.setAttribute("class", "remainingSeats")
+			span3.setAttribute("class", "hallName")
+			
+			p1.innerHTML = json[i].START_TIME
+			span1.innerHTML = json[i].SEATCOUNTREMAIN + "석 "
+			span2.innerHTML = " / " + json[i].SEATCOUNTALL + "석 "
+			span3.innerHTML = json[i].HALLNAME
+			
+			p2.appendChild(span1)
+			p2.appendChild(span2)
+			p2.appendChild(span3)
+			
+			div.appendChild(p1)
+			div.appendChild(p2)
+			
+			div.addEventListener("click", function(){showCoverBox(div, json[i].MOVIENAME)})
+			
+			showTimeList.appendChild(div)
+		}
 	})
 }
 
@@ -218,5 +257,48 @@ dateIncBtn.onclick = increaseDate
 dateDcrBtn.onclick = decreaseDate
 
 // 달력 관련 끝
+function showCoverBox(div, movieName) {
+	coverBox.style.display = "flex"
+	coverBoxInfo.style.display = "block"
+		
+	const coverBoxMovieName = coverBoxInfo.querySelector("#coverBoxMovieName")
+	const coverBoxExit = coverBoxInfo.querySelector("#coverBoxExit")
+	const coverBoxStartTime = coverBoxInfo.querySelector("#coverBoxStartTime")
+	const coverBoxHallName = coverBoxInfo.querySelector("#coverBoxHallName")
+	const toSeatSelect = coverBoxInfo.querySelector("#toSeatSelect")
+	
+	console.log(div)
+	
+	coverBoxMovieName.innerHTML = movieName
+	coverBoxStartTime.innerHTML = div.querySelector(".nodeTime").innerHTML
+	coverBoxHallName.innerHTML = div.querySelectorAll("span")[2].innerHTML
+	
+	coverBoxExit.onclick = function() {
+		coverBox.style.display = "none"
+		coverBoxInfo.style.display = "none"
+	}
+	
+	toSeatSelect.onclick = function() {
+		ticketingTime = div.querySelector(".nodeTime").innerHTML
+		ticketingTime = ticketingTime.replace(":", "")
+		ticketingDate += ticketingTime
+		ticketingHallName = div.querySelector(".hallName").innerHTML
+
+		coverBox.style.display = "none"
+		coverBoxInfo.style.display = "none"
+		changeElement(changeCnt)
+	}
+}
+
+function changeElement(i) {
+	changeElements[i].classList.add("hidden")
+	changeElements[i+1].classList.remove("hidden")
+	ticketingSideList[i].classList.remove("listSelect")
+	ticketingSideList[i].classList.add("listUnSelect")
+	ticketingSideList[i+1].classList.remove("listUnSelect")
+	ticketingSideList[i+1].classList.add("listSelect")
+	changeCnt++
+}
+
 
 
