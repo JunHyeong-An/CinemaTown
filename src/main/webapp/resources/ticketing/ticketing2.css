@@ -104,21 +104,6 @@ p {
     background-color: black;
 }
 
-.ageLimit {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid red;
-    background-color: rgb(183, 2, 2);
-    color: white;
-    font-size: 8pt;
-    font-weight: bold;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    margin-right: 15px;
-}
-
 #countPerson {
     display: flex;
     justify-content: center;

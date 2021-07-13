@@ -16,6 +16,10 @@ const monthDreBtn = document.querySelector("#monthDreBtn")
 const dateIncBtn = document.querySelector("#dateIncBtn")
 const dateDcrBtn = document.querySelector("#dateDcrBtn")
 
+const showingMovieList = Array.from(document.querySelectorAll("#showingMovieList li"))
+const dateSection = document.querySelector("#dateSection")
+
+
 
 // 달과 날짜를 출력해줌
 function insertMonthAndDate() {
@@ -29,6 +33,48 @@ function insertMonthAndDate() {
     blockMonthBtn(monthIncBtn, monthDreBtn)
     blockDateBtn(dateIncBtn, dateDcrBtn)
     insertDate()
+    
+    let ageLimits = Array.from(document.querySelectorAll(".ageLimit"))
+    ageLimits.forEach(limit => {
+    	if(limit.innerHTML == 0) {
+    		limit.innerHTML = "전체"
+    		limit.style.fontSize = "5pt"
+    		limit.style.backgroundColor = "#55C155"
+    	}
+    	else if(limit.innerHTML == 12) limit.style.backgroundColor = "#45B9F3"
+    	else if(limit.innerHTML == 15) limit.style.backgroundColor = "#EFBB11"
+    	else if(limit.innerHTML == 18) limit.style.backgroundColor = "#CA1212"
+    })
+
+}
+
+//영화버튼 누르면 그 영화에 배당된 시간 출력
+
+let movieName = ""
+let ticketingDate = ""
+
+movieListInit()
+showingMovieList.forEach(li => {
+	dateSection.classList.add("hidden")
+	li.onclick = function() {
+		movieListInit()
+		li.style.backgroundColor = "#707070"
+		li.style.color = "white"
+		dateSection.classList.remove("hidden")
+		ticketingDate = document.querySelector("#headerYear").innerHTML
+						+ document.querySelector("#headerMonth").innerHTML
+						+ document.querySelector("#headerDate").innerHTML
+		
+		movieName = li.querySelector(".movieName").innerHTML
+		getMovieList()
+	}
+})
+
+function movieListInit() {
+	showingMovieList.forEach(li => {
+		li.style.backgroundColor = "inherit"
+		li.style.color = "gray"
+	})
 }
 
 // 날짜 출력 함수
@@ -63,6 +109,7 @@ function insertDate() {
 
     // 각 날짜를 눌렀을 때 이벤트
     const dates = Array.from(document.querySelectorAll(".dates"))
+   
     
     dates[0].style.backgroundColor = 'gray'
     dates.forEach(element => {
@@ -75,8 +122,25 @@ function insertDate() {
             let userSelectDate = element.querySelector("div").innerHTML < 10 ? '0' + (element.querySelector("div").innerHTML) : element.querySelector("div").innerHTML
             showSelectDate.innerHTML = userSelectDate
             headerDate.innerHTML = userSelectDate
+            
+            ticketingDate = document.querySelector("#headerYear").innerHTML
+			+ document.querySelector("#headerMonth").innerHTML
+			+ document.querySelector("#headerDate").innerHTML
+			getMovieList()
         }
     })
+}
+
+function getMovieList() {
+	const url = "ticketing/" + movieName +"/" + ticketingDate + "/"
+	const opt = {
+		method: "GET"
+	}
+	
+	fetch(url, opt)
+	.then(resp => {
+		console.log(resp)
+	})
 }
 
 // 달 증가
@@ -154,3 +218,5 @@ dateIncBtn.onclick = increaseDate
 dateDcrBtn.onclick = decreaseDate
 
 // 달력 관련 끝
+
+

@@ -13,7 +13,7 @@
 			<div class="movieAndDate">
 				<p>날짜 선택</p>
 				<p>
-					2021/<span id="headerMonth"></span>/<span id="headerDate"></span>
+					<span id="headerYear">2021</span>/<span id="headerMonth"></span>/<span id="headerDate"></span>
 				</p>
 			</div>
 		</div>
@@ -80,16 +80,19 @@
 				<!--ticketing1-->
 				<div class="changeElements" id="ticketing1">
 					<ul id="showingMovieList">
-						<li>
-							<div class="ageLimit">12</div> <span class="movieName">블랙위도우</span>
-						</li>
+						<c:forEach var="movieList" items="${movieList }">
+							<li>
+								<div class="ageLimit">${movieList.ageLimit }</div> 
+								<span class="movieName">${movieList.movieName }</span>
+							</li>
+						</c:forEach>
 					</ul>
 					<div id="dateSection">
 						<div id="selectDateBox">
 							<div id="selectMonth">
 								<div class="monthBtnBox">
 									<div id="monthDreBtn" class="dateMove">
-										<img src="/arrowLeftBlack.png" class="monthBtnImg">
+										<img src="${cpath }/resources/ticketing/img/arrowLeftBlack.png" class="monthBtnImg">
 									</div>
 								</div>
 
@@ -97,7 +100,7 @@
 
 								<div class="monthBtnBox">
 									<div id="monthIncBtn" class="dateMove">
-										<img src="/arrowRightBlack.png" class="monthBtnImg">
+										<img src="${cpath }/resources/ticketing/img/arrowRightBlack.png" class="monthBtnImg">
 									</div>
 								</div>
 							</div>
@@ -119,26 +122,14 @@
 
 						<div id="showTimeList">
 							<!-- 갯수 만큼 for 문  -->
-							<div class="timeNode">
-								<p class="nodeTime">09 : 30</p>
-								<p>
-									<span class="remainingSeats">236</span> / 250 1관
-								</p>
-							</div>
-
-							<div class="timeNode">
-								<p class="nodeTime">09 : 30</p>
-								<p>
-									<span class="remainingSeats">236</span> / 250 1관
-								</p>
-							</div>
-							<div class="timeNode">
-								<p class="nodeTime">09 : 30</p>
-								<p>
-									<span class="remainingSeats">236</span> / 250 1관
-								</p>
-							</div>
-
+<%-- 							<c:forEach> --%>
+<!-- 								<div class="timeNode"> -->
+<!-- 									<p class="nodeTime">09 : 30</p> -->
+<!-- 									<p> -->
+<!-- 										<span class="remainingSeats">236</span> / 250 1관 -->
+<!-- 									</p> -->
+<!-- 								</div> -->
+<%-- 							</c:forEach> --%>
 						</div>
 					</div>
 				</div>

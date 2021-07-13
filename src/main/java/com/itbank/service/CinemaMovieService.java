@@ -22,9 +22,9 @@ public class CinemaMovieService {
 	
 	@Autowired private CinemaMovieDAO dao;
 
-	public List<HashMap<String, Object>> ticketingList() {
+	public List<HashMap<String, Object>> ticketingList(String movieName, String showDay) {
 		
-		return dao.ticketingList();
+		return dao.ticketingList(movieName, showDay);
 	}
 
 	public List<HashMap<String, Object>> screenScheduleList() {
@@ -45,15 +45,15 @@ public class CinemaMovieService {
 	}
 
 	public int ticketing(CinemaTicketingDTO dto, int schedule_idx, HttpSession session) {
-		// userId받아오기(로그인 세션값으로 들고오기)
+		// userId諛쏆븘�삤湲�(濡쒓렇�씤 �꽭�뀡媛믪쑝濡� �뱾怨좎삤湲�)
 		CinemaUserDTO login = (CinemaUserDTO) session.getAttribute("login");
 		dto.setUserId(login.getUserId());
 		
-		// schedule_idx받아오기
+		// schedule_idx諛쏆븘�삤湲�
 //		dto.setSchedule_idx();
 		
 		
-		// hall_idx받아오기(Hall테이블에서 받아올지 schedule테이블에서 join해서 가져올지 생각해보기)
+		// hall_idx諛쏆븘�삤湲�(Hall�뀒�씠釉붿뿉�꽌 諛쏆븘�삱吏� schedule�뀒�씠釉붿뿉�꽌 join�빐�꽌 媛��졇�삱吏� �깮媛곹빐蹂닿린)
 //		dto.setHall_idx(hall_idx);
 		
 			
@@ -70,15 +70,15 @@ public class CinemaMovieService {
 		return dao.getTicketing_idx();
 	}
 
-	// 예매 취소 시 => 예매 취소, 좌석 취소, 결제 취소, 매출 취소
+	// �삁留� 痍⑥냼 �떆 => �삁留� 痍⑥냼, 醫뚯꽍 痍⑥냼, 寃곗젣 痍⑥냼, 留ㅼ텧 痍⑥냼
 	public void ticketingCancel(int ticketing_idx) {
-		dao.ticketingCancel(ticketing_idx);		// 예매티켓 취소시 schedule_idx반환하기	==> mybatis이용
+		dao.ticketingCancel(ticketing_idx);		// �삁留ㅽ떚耳� 痍⑥냼�떆 schedule_idx諛섑솚�븯湲�	==> mybatis�씠�슜
 		int schedule_idx = 0;
-		dao.seatCancel(ticketing_idx);		// 예매 자리 취소 시 해당 adultCount + teenagerCount값 가져오기	==> mybatis이용
+		dao.seatCancel(ticketing_idx);		// �삁留� �옄由� 痍⑥냼 �떆 �빐�떦 adultCount + teenagerCount媛� 媛��졇�삤湲�	==> mybatis�씠�슜
 		int seatCountRemainAdd = 0;
-		dao.seatCountRemainAdd(schedule_idx, seatCountRemainAdd);// 남은 좌석 수 다시 추가되기
-		int payment_idx = dao.paymentCancel(ticketing_idx);	// 예매 결제 취소시 해당 payment_idx값 가져오기	==> mybatis이용
-		dao.salesCancel(payment_idx);					// 매출 취소
+		dao.seatCountRemainAdd(schedule_idx, seatCountRemainAdd);// �궓�� 醫뚯꽍 �닔 �떎�떆 異붽��릺湲�
+		int payment_idx = dao.paymentCancel(ticketing_idx);	// �삁留� 寃곗젣 痍⑥냼�떆 �빐�떦 payment_idx媛� 媛��졇�삤湲�	==> mybatis�씠�슜
+		dao.salesCancel(payment_idx);					// 留ㅼ텧 痍⑥냼
 		
 		
 	}
@@ -91,9 +91,9 @@ public class CinemaMovieService {
 
 	
 	
-	// seatCountRemain 계산도 들어가야함.결제시 -, 취소시+ => update 시키기
-			// ㄴ>예매테이블과 조인하기
-	//ajax로 결제 취소와 결제완료시 각각 url을 통해 join해서 성인 수+ 청소년 수 값을 구해 계산하기
+	// seatCountRemain 怨꾩궛�룄 �뱾�뼱媛��빞�븿.寃곗젣�떆 -, 痍⑥냼�떆+ => update �떆�궎湲�
+			// �꽩>�삁留ㅽ뀒�씠釉붽낵 議곗씤�븯湲�
+	//ajax濡� 寃곗젣 痍⑥냼�� 寃곗젣�셿猷뚯떆 媛곴컖 url�쓣 �넻�빐 join�빐�꽌 �꽦�씤 �닔+ 泥��냼�뀈 �닔 媛믪쓣 援ы빐 怨꾩궛�븯湲�
 	
 	
 	
