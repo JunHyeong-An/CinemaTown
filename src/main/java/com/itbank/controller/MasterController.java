@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itbank.model.reviewDTO;
+import com.itbank.model.serviceCenterDTO;
+import com.itbank.service.MasterService;
 import com.itbank.service.reviewService;
 
 @Controller
@@ -18,6 +20,7 @@ import com.itbank.service.reviewService;
 public class MasterController {
 	
 	@Autowired private reviewService rs;
+	@Autowired private MasterService mse;
 	   // master 홈
 	   @GetMapping("/master/masterHome")
 	   public void masterHome() {}
@@ -36,6 +39,14 @@ public class MasterController {
 	   @ResponseBody
 	   public List<reviewDTO> movieReviewList(@PathVariable String movieName){
 	      return rs.reviewList(movieName);
+	   }
+	   
+	   //문의 정보 리스트 불러오기
+	   @GetMapping("/masterServiceCenter/masterLost")
+	   public String lostList(Model model) {
+		   List<serviceCenterDTO> list = mse.lostList();
+		   model.addAttribute("lostList", list);
+		   return "/master/masterServiceCenter/masterLost";
 	   }
 	   
 }
