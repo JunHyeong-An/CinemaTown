@@ -106,6 +106,47 @@ function selectSeat(seat) {
         seat.classList.remove('seatSelect')
         selectCnt--
     }
+
+    if(selectCnt == totalCount && totalCount != 0) {
+    	let arr = []
+    	seats.forEach(seat => {
+    		if(seat.classList.contains("seatSelect")){
+    			arr.push(seat.innerHTML) 
+    		}
+    	})
+    	
+    	selectSeats = arr.join()
+    	
+    	coverBox.style.display = "block"
+    	document.querySelector("#coverBoxInfo2").style.display = "block"
+    	document.querySelector("#userSelectSeats").innerHTML = selectSeats
+    	document.querySelector("#coverBoxInfo2").querySelector("#coverBoxExit").onclick = function() {
+    		document.querySelector("#coverBoxInfo2").style.display = "none"
+    		coverBox.style.display = "none"
+    	}
+    	
+    	document.querySelector("#toPayment").onclick = function() {
+    		changeElement(changeCnt++)
+    		document.querySelector("#coverBoxInfo2").style.display = "none"
+    		coverBox.style.display = "none"
+    		
+    		adultCnt = adultCount.innerHTML
+    		studentCnt = studentCount.innerHTML
+    		
+    		document.querySelector("#t3TicketingDateInfo").innerHTML = 
+    			ticketingDate.substring(0, 4) + "년 " + ticketingDate.substring(4, 6) + "월 " + ticketingDate.substring(6, 8) + "일"
+    		document.querySelector("#t3TicketingTime").innerHTML = 
+    			ticketingTime.substring(0, 2) + "시 " + ticketingTime.substring(2, 4) + "분"
+    		document.querySelector("#t3TicketingHallName").innerHTML = ticktingHallName
+    		document.querySelector("#t3MovieName").innerHTML = movieName
+    		document.querySelector("#t3Age").appendChild(ageLimitBox)
+    		document.querySelector("#t3TotalCost").innerHTML = 
+    			(adultCnt * adultCost + studentCnt * studentCost) + "원"
+    			
+    		totalCost = adultCnt * adultCost + studentCnt * studentCost
+    	}
+    	
+    }
 }
 
 function selectSeatInit() {

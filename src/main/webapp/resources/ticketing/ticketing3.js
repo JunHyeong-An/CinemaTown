@@ -37,6 +37,7 @@ cards.forEach(card => {
 })
 
 function showPayment(card) {
+	cardCompany = card.innerHTML
     cardBackInit()
     card.style.backgroundColor = "gray"
 
@@ -56,4 +57,57 @@ function cardBackInit() {
     cards.forEach(card => {
         card.style.backgroundColor = "white"
     })
+}
+
+document.querySelector("#paymentBtn").onclick = function() {
+	cardNum = ""
+	const cardNums = Array.from(document.querySelectorAll(".cardNum"))
+	const cardPw = document.querySelector("#cardPw")
+	
+	cardNums.forEach(num => {
+		cardNum += String(num.value)
+	})
+	
+	if(cardNum.length != 16) {
+		document.querySelector("#paymentNotice").innerHTML = "값을 채워주세요"
+		return
+	}
+	else {
+		document.querySelector("#paymentNotice").innerHTML = ""
+		
+		if(cardPw.value.length != 4) {
+			document.querySelector("#paymentNotice").innerHTML = "비밀번호를 입력해주세요"
+			return
+		}
+		else {
+			cardPassword = cardPw.value
+			document.querySelector("#paymentNotice").innerHTML = ""
+		}
+	}
+	// 모든 값 전송
+	
+	let ob = {}
+	ob.movieName = movieName	// 영화이름
+	ob.ticketingDate = ticketingDate	// 영화 시작 날짜
+	ob.ticketingTime = ticketingTime
+	ob.ticktingHallName = ticktingHallName
+	ob.selectSeats = selectSeats
+	ob.adultCnt = adultCnt
+	ob.studentCnt = studentCnt
+	ob.totalCost = totalCost
+	ob.cardNum = cardNum
+	ob.cardCompany = cardCompany
+	ob.cardPassword = cardPassword
+	ob.scheduleIdx = movieScheduleIdx
+	
+	let ticketingJson = JSON.stringify(ob)
+	const url = "ticketing/" + ticketingJson + "/"
+	const opt = {
+		method: "GET"
+	}
+	
+	fetch(url, opt)
+	.then(resp => {
+		console.log(resp)
+	})
 }

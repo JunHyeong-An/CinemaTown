@@ -35,6 +35,12 @@ p {
     /* border: 1px solid red; */
 }
 
+#age {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .movieAndDate {
     display: flex;
     justify-content: center;
@@ -209,7 +215,7 @@ p {
     display: flex;
     margin-top: 50px;
     justify-content: center;
-    /* border: 1px solid white; */
+/*     border: 1px solid white; */
 }
 
 #centerSeatsSection {

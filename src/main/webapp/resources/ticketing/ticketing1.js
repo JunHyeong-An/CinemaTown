@@ -24,13 +24,6 @@ const coverBox = document.querySelector("#coverBox")
 const coverBoxInfo = document.querySelector("#coverBoxInfo")
 
 let changeCnt = 0
-
-// 보내줘야하는 변수들
-let movieName = ""
-let ticketingDate = ""
-let ticketingTime = ""
-let ticktingHallName = ""
-
 	
 // 달과 날짜를 출력해줌
 function insertMonthAndDate() {
@@ -74,6 +67,7 @@ showingMovieList.forEach(li => {
 						+ document.querySelector("#headerDate").innerHTML
 		
 		movieName = li.querySelector(".movieName").innerHTML
+		ageLimitBox = li.querySelector(".ageLimit")
 		getMovieList()
 	}
 })
@@ -156,7 +150,13 @@ function getMovieList() {
 			const span1 = document.createElement("span")
 			const span2 = document.createElement("span")
 			const span3 = document.createElement("span")
+			const input1 = document.createElement("input")
+			const input2 = document.createElement("input")
 			
+			input1.setAttribute("type", "hidden")
+			input2.setAttribute("type", "hidden")
+			input1.classList.add("movieEndTime")
+			input2.classList.add("movieScheduleIdx")
 			div.setAttribute("class", "timeNode")
 			p1.setAttribute("class", "nodeTime")
 			p2.setAttribute("class", "nodeInfo")
@@ -167,6 +167,9 @@ function getMovieList() {
 			span1.innerHTML = json[i].SEATCOUNTREMAIN + "석 "
 			span2.innerHTML = " / " + json[i].SEATCOUNTALL + "석 "
 			span3.innerHTML = json[i].HALLNAME
+			input1.value = json[i].END_TIME
+			input2.value = json[i].SCHEDULE_IDX
+			
 			
 			p2.appendChild(span1)
 			p2.appendChild(span2)
@@ -174,8 +177,9 @@ function getMovieList() {
 			
 			div.appendChild(p1)
 			div.appendChild(p2)
-			
-			div.addEventListener("click", function(){showCoverBox(div, json[i].MOVIENAME)})
+			div.appendChild(input1)
+			div.appendChild(input2)
+			div.addEventListener("click", function(){showCoverBox(div, json[i])})
 			
 			showTimeList.appendChild(div)
 		}
@@ -257,7 +261,7 @@ dateIncBtn.onclick = increaseDate
 dateDcrBtn.onclick = decreaseDate
 
 // 달력 관련 끝
-function showCoverBox(div, movieName) {
+function showCoverBox(div, json) {
 	coverBox.style.display = "flex"
 	coverBoxInfo.style.display = "block"
 		
@@ -267,11 +271,14 @@ function showCoverBox(div, movieName) {
 	const coverBoxHallName = coverBoxInfo.querySelector("#coverBoxHallName")
 	const toSeatSelect = coverBoxInfo.querySelector("#toSeatSelect")
 	
-	console.log(div)
-	
-	coverBoxMovieName.innerHTML = movieName
+	coverBoxMovieName.innerHTML = json.MOVIENAME
 	coverBoxStartTime.innerHTML = div.querySelector(".nodeTime").innerHTML
 	coverBoxHallName.innerHTML = div.querySelectorAll("span")[2].innerHTML
+	
+	document.querySelector("#movieScheduleIdx")
+	
+	movieEndTime = div.querySelector(".movieEndTime").value
+	movieScheduleIdx = div.querySelector(".movieScheduleIdx").value
 	
 	coverBoxExit.onclick = function() {
 		coverBox.style.display = "none"
@@ -282,22 +289,47 @@ function showCoverBox(div, movieName) {
 		ticketingTime = div.querySelector(".nodeTime").innerHTML
 		ticketingTime = ticketingTime.replace(":", "")
 		ticketingDate += ticketingTime
-		ticketingHallName = div.querySelector(".hallName").innerHTML
+		ticktingHallName = div.querySelector(".hallName").innerHTML
 
 		coverBox.style.display = "none"
 		coverBoxInfo.style.display = "none"
-		changeElement(changeCnt)
+		
+		const selectMovieInfo = document.querySelector("#selectMovieInfo")
+		const t2MovieName = document.querySelector("#t2MovieName")
+		const t2Month = document.querySelector("#t2Month")
+		const t2Date = document.querySelector("#t2Date")
+		const t2StartTime = document.querySelector("#t2StartTime")
+		const t2EndTime = document.querySelector("#t2EndTime")
+		const t2HallName = document.querySelector("#t2HallName")
+		
+		document.querySelector("#age").appendChild(ageLimitBox)
+		t2MovieName.innerHTML = movieName
+		t2StartTime.innerHTML = ticketingTime
+		t2EndTime.innerHTML = movieEndTime
+		t2HallName.innerHTML = ticktingHallName
+		t2Month.innerHTML = document.querySelector("#headerMonth").innerHTML
+		t2Date.innerHTML = document.querySelector("#headerDate").innerHTML
+		
+		changeElement(changeCnt++)
 	}
 }
 
 function changeElement(i) {
+	// main 내용 바꾸기
+	if(i == 0) {
+		changeElements[i].classList.remove("insertFlex")
+	}
 	changeElements[i].classList.add("hidden")
 	changeElements[i+1].classList.remove("hidden")
+	// 사이드 리스트 메뉴 바꾸기
 	ticketingSideList[i].classList.remove("listSelect")
 	ticketingSideList[i].classList.add("listUnSelect")
 	ticketingSideList[i+1].classList.remove("listUnSelect")
 	ticketingSideList[i+1].classList.add("listSelect")
-	changeCnt++
+	
+	// main header 바꾸기
+	elementsHeader[i].classList.add("hidden")
+	elementsHeader[i+1].classList.remove("hidden")
 }
 
 

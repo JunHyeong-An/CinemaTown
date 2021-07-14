@@ -7,10 +7,31 @@
 //    ADULTCOUNT             NUMBER
 //    TEENAGERCOUNT          NUMBER
 //    DELETED                   CHAR(1)
-
+const changeArea = document.querySelector("#changeArea")
 const ticketingSideList = Array.from(document.querySelectorAll("#ticketingSideList li"))
 const changeElements = Array.from(document.querySelectorAll(".changeElements"))
 const elementsHeader = Array.from(document.querySelectorAll(".ticketingHeader"))
+
+const adultCost = 14000
+const studentCost = 11000
+
+// 보내줘야하는 변수들
+let movieName = ""
+let ticketingDate = ""
+let ticketingTime = ""
+let ticktingHallName = ""
+let selectSeats = ""
+let adultCnt = ""
+let studentCnt = ""
+let totalCost = ""
+let cardNum = ""
+let cardCompany = ""
+let cardPassword = ""
+	
+// ticketing2로 보내는 변수들
+let movieEndTime = ""
+let movieScheduleIdx = ""
+let ageLimitBox = null
 
 changeElements[0].classList.add("insertFlex")
 elementsHeader[0].classList.remove("hidden")
