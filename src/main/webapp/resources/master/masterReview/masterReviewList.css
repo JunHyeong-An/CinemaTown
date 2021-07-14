@@ -47,7 +47,7 @@ span {
 }
 
 .areaDate {
-	padding-right: 230px;
+	padding-right: 250px;
 }
 
 .paging {
@@ -56,7 +56,13 @@ span {
 	font-size: 20px;
 	font-weight: bold;
 }
-
+#movieNameButton{
+	border-radius: 7px;
+	padding:10px;
+	border-color: #dadada;
+	height: 40px;
+	text-align: center;
+}
 button {
 	padding: 10px;
 	height: 100px;

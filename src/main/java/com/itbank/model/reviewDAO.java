@@ -22,14 +22,14 @@ public interface reviewDAO {
 	@Update("update review set reviewContent=#{reviewContent} where review_idx=#{review_idx}")
 	int reviewModify(reviewDTO dto);
 
+	@Select("select movieName from cinemaMovie")
+	String[] movieNameList();
+
 	@Delete("delete from review where review_idx=#{review_idx}")
 	int reviewDelete(int review_idx);
 
-	@Select("select * from review where movieName=#{movieName} order by reviewDay desc")
-	List<reviewDTO> movieDelete(@Param("movieName")String movieName1);
-
-	@Select("select movieName from cinemaMovie")
-	String[] movieNameList();
+//	@Delete("delete from review where movieName=#{movieName}")
+//	int reviewDelete(String movieName);
 
 
 	

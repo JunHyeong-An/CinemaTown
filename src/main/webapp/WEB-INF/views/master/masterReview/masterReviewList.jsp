@@ -12,29 +12,36 @@
 	<div class="mainHeader">
         <div class="reviewHeader">리뷰 관리</div>
         <div class="movieNameSelectForm">
-            <select class="movieNameSelect" id="movieNameId1">
+            <select class="movieNameSelect" name="movieName" id="movieName">
              <c:forEach var="moviename" items="${movieNameList }">
-                <option class="movieOption" id="movieNameId2">${moviename}</option>             
+                <option class="movieOption" >${moviename}</option>             
              </c:forEach>
             </select>
         </div>
-        <div><input type="button" value="선택"></div>
-        <div class="main">
+        <div><input type="button" value="선택" id="movieNameButton"></div>
+        <div class="main"> 
         </div>
-        <div>
-            <span class="paging"><</span>
-            <span class="paging">1</span>
-            <span class="paging">2</span>
-            <span class="paging">3</span>
-            <span class="paging">4</span>
-            <span class="paging">5</span>
-            <span class="paging">6</span>
-            <span class="paging">7</span>
-            <span class="paging">8</span>
-            <span class="paging">9</span>
-            <span class="paging">10</span>
-            <span class="paging">></span>
-        </div>
+<!--         <div class="paging-number"> -->
+<%-- 			<c:if test="${paging.prev }"> --%>
+<%-- 				<a href="${cpath }?page=${paging.begin - 1}"> --%>
+<!-- 					◁ -->
+<!-- 				</a> -->
+<%-- 			</c:if> --%>
+		
+<%-- 			<c:forEach var="i" begin="${paging.begin }" end="${paging.end }"> --%>
+<%-- 				<a href="${cpath }?page=${i}"> --%>
+<%-- 					${i == param.page ? '<strong>' : ''} --%>
+<%-- 						&nbsp;&nbsp;${i }&nbsp;&nbsp; --%>
+<%-- 					${i == param.page ? '</strong>' : ''} --%>
+<!-- 				</a> -->
+<%-- 			</c:forEach> --%>
+			
+<%-- 			<c:if test="${paging.next }"> --%>
+<%-- 				<a href="${cpath }?page=${paging.end + 1}"> --%>
+<!-- 					▷ -->
+<!-- 				</a> -->
+<%-- 			</c:if> --%>
+<!-- 		</div> -->
     </div>
 <script src="${cpath }/resources/master/masterReview/masterReviewList.js"></script>
 </body>
