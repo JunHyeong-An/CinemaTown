@@ -28,12 +28,13 @@
    
    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
       <property name="dataSource" ref="dataSource" />
-<!--       <property name="configLocation" value="classpath:config/mybatis.xml" /> -->
-<!--       <property name="mapperLocations"> -->
-<!--          <list> -->
-<!--             <value>classpath:config/mapper-product.xml</value> -->
-<!--          </list> -->
-<!--       </property> -->
+      <property name="configLocation" value="classpath:config/mybatis.xml" />
+      <property name="mapperLocations">
+         <list>
+            <value>classpath:config/mapper-ticketing.xml</value>
+            <value>classpath:config/mapper-payment.xml</value>
+         </list>
+      </property>
    </bean>
    
    <bean id="sqlSessionTemplate"

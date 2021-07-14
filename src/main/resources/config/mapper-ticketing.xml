@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="com.itbank.model.CinemaTicketingDAO">
+
+	<!-- 예매 시 -->
+	<insert id="ticketing" parameterType="ticketing_dto" useGeneratedKeys="true">
+		<selectKey resultType="int" keyProperty="ticketing_idx" order="AFTER">
+			select max(ticketing_idx) from cinemaTicketing
+		</selectKey>
+		
+		insert into cinemaTicketing(userId, schedule_idx, hall_idx, seatNameAll, adultCount, teenagerCount) 
+			values(#{userId}, #{schedule_idx}, (select hall_idx from cinemaSchedule where schedule_idx=#{schedule_idx}), #{seatNameAll}, #{adultCount}, #{teenagerCount})
+	
+	</insert>
+	
+	<!-- 예매 취소 시 -->
+	<update id="ticketingCancel" parameterType="int" useGeneratedKeys="true">
+		<selectKey resultType="java.util.HashMap" keyProperty="schedule_idx" order="AFTER">
+			select SCHEDULE_IDX from cinemaTicketing where ticketing_idx = #{ticketing_idx}
+		</selectKey>
+		
+		update cinemaTicketing set deleted = 'y' where ticketing_idx = #{ticketing_idx}
+	
+	</update>
+	
+</mapper>

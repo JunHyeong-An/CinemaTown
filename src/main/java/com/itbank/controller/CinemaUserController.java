@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,13 +31,15 @@ public class CinemaUserController {
 	@PostMapping("/login")
 	public String login(CinemaUserDTO dto, HttpSession session, HttpServletResponse response, HttpServletRequest request, String keepLogin) {      
 		
+		// login logic
 		CinemaUserDTO login = cus.login(dto);
+		session.setAttribute("login", login);
 		
 
 		if(login !=  null) {
 			session.setAttribute("userId", login.getUserId());
 			
-			return "redirect:/cinemaUser/myPage/passwordModifyCheck";
+			return "redirect:/";
 		}
 		
 //		String keepLoginRe = request.getParameter("keepLogin");
@@ -153,6 +154,7 @@ public class CinemaUserController {
 	@PostMapping("/myPage/passwordModify")
 	public String passwordModify(CinemaUserDTO dto) {
 		int row = cus.passwordModify(dto);
+		// 로그아웃 시키고 session값지우고 다시 로그인 시킬것인지 의논하기★
 		return "home";
 	}
 
@@ -162,7 +164,7 @@ public class CinemaUserController {
 		return "cinemaUser/deleteCheck";
 	}
 
-	// user의 비밀번호를 기입한 후 탈퇴하기
+	// user의 비밀번호를 기입한 후 탈퇴하기 ==> ajax로 처리할 건지 의논하기★
 	@PostMapping("/deleteCheck")
 	public int deleteCheck(CinemaUserDTO dto) {
 		return cus.deleteCheck(dto);

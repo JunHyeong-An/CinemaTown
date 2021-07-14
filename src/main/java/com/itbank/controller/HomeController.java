@@ -15,8 +15,8 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String home(Model model) {
-		String[] movieNameList	= cms.movieNameList();
-		model.addAttribute("movieNameList", movieNameList);   
+		String[] movieUrlList	= cms.movieUrlList();
+		model.addAttribute("movieUrlList", movieUrlList);   
 		return "home";
 	}
 	

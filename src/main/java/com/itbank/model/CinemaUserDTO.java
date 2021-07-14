@@ -2,28 +2,22 @@ package com.itbank.model;
 
 public class CinemaUserDTO {
 
-//	USER_IDX  NOT NULL NUMBER         
-//	USERID    NOT NULL VARCHAR2(20)   
-//	USERPW    NOT NULL VARCHAR2(150)  
-//	USERNAME  NOT NULL VARCHAR2(20)   
-//	USERBIRTH NOT NULL VARCHAR2(20)   
-//	USEREMAIL NOT NULL VARCHAR2(100)  
-//	USERADDR  NOT NULL VARCHAR2(1000) 
-//	USERPH    NOT NULL VARCHAR2(20)   
-//	USERGRADE          NUMBER    
-//	USERGENDER          VARCHAR2(10)   
-//	USERAGE             NUMBER   
+//	USERID     NOT NULL VARCHAR2(20)   
+//	USERPW     NOT NULL VARCHAR2(150)  
+//	USERNAME   NOT NULL VARCHAR2(20)   
+//	USERBIRTH  NOT NULL VARCHAR2(20)   
+//	USEREMAIL  NOT NULL VARCHAR2(100)  
+//	USERADDR   NOT NULL VARCHAR2(1000) 
+//	USERPH     NOT NULL VARCHAR2(20)   
+//	USERAGE    NOT NULL NUMBER         
+//	USERGENDER NOT NULL VARCHAR2(10)   
+//	USERGRADE           NUMBER    
 
 	
-	private int user_idx, userGrade, userAge; 
+	private int userGrade, userAge; 
 	private String userId, userPw, userName, userBirth, userEmail, userAddr, userPh, userGender;
 	
-	public int getUser_idx() {
-		return user_idx;
-	}
-	public void setUser_idx(int user_idx) {
-		this.user_idx = user_idx;
-	}
+
 	public int getUserGrade() {
 		return userGrade;
 	}

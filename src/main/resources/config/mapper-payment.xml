@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="com.itbank.model.CinemaPaymentDAO">
+
+	<!-- 예매 취소 시 결제 취소하기-->
+	<update id="paymentCancel" parameterType="int" useGeneratedKeys="true">
+		<selectKey resultType="java.util.HashMap" keyProperty="payment_idx" order="AFTER">
+			select PAYMENT_IDX from cinemaPayment where ticketing_idx = #{ticketing_idx}
+		</selectKey>
+		
+		update cinemaPayment set canceled = 'y' where ticketing_idx=#{ticketing_idx}
+	
+	</update>
+	
+</mapper>

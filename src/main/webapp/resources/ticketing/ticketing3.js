@@ -101,13 +101,15 @@ document.querySelector("#paymentBtn").onclick = function() {
 	ob.scheduleIdx = movieScheduleIdx
 	
 	let ticketingJson = JSON.stringify(ob)
+	console.log(ticketingJson)
 	const url = "ticketing/" + ticketingJson + "/"
 	const opt = {
-		method: "GET"
+		method: "POST"
 	}
 	
 	fetch(url, opt)
-	.then(resp => {
-		console.log(resp)
+	.then(function(resp)  {return resp.text()})
+	.then(function(text)  {
+		console.log(text)
 	})
 }
