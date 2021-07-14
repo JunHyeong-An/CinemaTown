@@ -1,0 +1,265 @@
+* {
+    user-select: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+p {
+    margin: 0;
+}
+
+#container {
+    padding: 50px 0;
+    background-color: rgb(128, 128, 128);
+}
+
+#ticketingMain {
+    box-sizing: border-box;
+    width: 900px;
+    /* height: 1000px; */
+    margin: 0 auto;
+    background-color: white;
+    border: 1px solid black;
+}
+
+#ticketingHeader {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    /* border: 1px solid red; */
+}
+
+#age {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.movieAndDate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
+    font-size: 15pt;
+    /* border: 1px solid black; */
+}
+
+.movieAndDate:first-child {
+    border-right: 1px solid white;
+}
+
+.movieAndDate p {
+    margin: 0 10px;
+}
+
+#ticketingSelectSection {
+    display: flex;
+}
+
+#ticketingSideList {
+    box-sizing: border-box;
+    width: 80px;
+    color: gray;
+    font-weight: bold;
+    /* border: 1px solid black; */
+}
+
+#ticketingSideList li {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 140px;
+    border-right: 1px solid black;
+}
+
+#ticketingSideList li:not(:last-child) {
+    border-bottom: 1px solid black;
+}
+
+#ticketingSideList p {
+    font-size: 20pt;
+}
+
+.ticketingSideListLocation {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    height: 80px;
+    /* border: 1px solid black; */
+}
+
+#selectMovieInfo {
+    box-sizing: border-box;
+    width: 900px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    color: white;
+    background-color: black;
+}
+
+#countPerson {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid black; */
+    width: 100%;
+    height: 80px;
+    background-color: lightgray;
+    font-size: 15pt;
+    font-weight: bold;
+}
+
+#countPerson span {
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+.countForm {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 110px;
+    height: 40px;
+    margin-right: 50px;
+    margin-left: 10px;
+    background-color: white;
+}
+
+#seatLayoutWrap {
+    width: 900px;
+    /* border: 1px solid black; */
+}
+
+.plusAndMinus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid black; */
+    width: 20px;
+}
+
+#seatLayout {
+    height: 480px;
+    background-color: black;
+    /* border: 1px solid red; */
+}
+
+#screenAndExit {
+    display: flex;
+    /* border: 1px solid white; */
+}
+
+.door {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    background-color: rgb(183, 2, 2);
+    color: white;
+    font-weight: bold;
+}
+
+#exit {
+    margin-right: 30px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#enter {
+    display: flex;
+    align-items: flex-end;
+    box-sizing: border-box;
+    width: 100px;
+    height: 396px;
+    /* border: 1px solid white; */
+}
+
+#enterance {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+#screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    background-color: white;
+    width: 400px;
+    height: 35px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin: 0 auto;
+    margin-left: 220px;
+    font-size: 20pt;
+    font-weight: bolder;
+}
+
+#seatSections {
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
+/*     border: 1px solid white; */
+}
+
+#centerSeatsSection {
+    width: 250px;
+}
+
+.seatsSection {
+    display: flex;
+    flex-flow: wrap;
+    background-color: black;
+    width: 100px;
+    height: 350px;
+    margin: 0 30px;
+    padding-top: 10px;
+    /* border: 1px solid white; */
+}
+
+.seat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13pt;
+    font-weight: bold;
+    background-color: white;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    width: 40px;
+    height: 30px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.seatSelect {
+    background-color: red;
+    color: white;
+}
+
+#seatsLineId {
+    color: white;
+    margin-left: 30px;
+    font-size: 20pt;
+}
+
+#seatsLineId li {
+    height: 45px;
+    /* border: 1px solid white; */
+}

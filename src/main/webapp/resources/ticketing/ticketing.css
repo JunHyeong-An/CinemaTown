@@ -1,0 +1,39 @@
+#changeArea {
+    position: relative;
+}
+
+#ticketing1 {
+    height: 100%; 
+    position: absolute; 
+}
+
+#seatLayoutWrap {
+    position: absolute; 
+    width: 820px;
+    /* block */
+}
+
+#ticketing3 {
+    /*적용안됨*/
+    position: absolute; 
+    /* block */
+}
+
+#ticketing4 {
+    position: absolute; 
+    /* block */
+}
+
+.listSelect {
+    background-color: red;
+    color: white;
+}
+
+.listUnSelect {
+    background-color: white;
+    color: black;
+}
+
+.insertFlex {
+    display: flex;
+}
