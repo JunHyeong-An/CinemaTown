@@ -283,12 +283,15 @@
 											</td>
 										</tr>
 										<tr>
-											<td id="paymentBtnBox" colspan="2">
-												<input id="paymentBtn" type="button" value="결제하기">
+											<td colspan="2">
+												<div id="paymentBtnBox">
+													<p id="paymentNotice"></p>
+													<input id="paymentBtn" type="button" value="결제하기">												
+												</div>
 											</td>
 										</tr>
 									</table>
-									<p id="paymentNotice"></p>
+									
 								</div>
 							</div>
 						</div>
