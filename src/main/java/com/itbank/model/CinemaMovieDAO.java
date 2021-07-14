@@ -79,6 +79,9 @@ public interface CinemaMovieDAO {
 
 	@Select("select * from cinemaMovie")
 	List<CinemaMovieDTO> movieList();
+
+	@Select("select movieName from cinemaMovie")
+	String[] movieNameList();
 	
 	
 	

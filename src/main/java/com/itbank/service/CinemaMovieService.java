@@ -33,7 +33,7 @@ public class CinemaMovieService {
 	}
 
 	public int insertMovie(CinemaScheduleDTO dto, String hallName) {
-
+		
 		CinemaHallDTO hall_dto = dao.hallInfo(hallName);
 		dto.setHall_idx(hall_dto.getHall_idx());
 		dto.setSeatCountRemain(hall_dto.getSeatCountAll());
@@ -86,6 +86,12 @@ public class CinemaMovieService {
 	public List<CinemaMovieDTO> movieList() {
 
 		return dao.movieList();
+	}
+
+	// HomeController에 띄울 영화 제목 목록
+	public String[] movieNameList() {
+		
+		return dao.movieNameList();
 	}
 	
 

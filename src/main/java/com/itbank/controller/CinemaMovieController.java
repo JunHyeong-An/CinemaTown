@@ -26,8 +26,8 @@ public class CinemaMovieController {
 
 	@Autowired private CinemaMovieService cms;
 	
-	@GetMapping("/ticketing")	///ticketing/{movieName}/{showDay}/
-	public String ticketing(Model model) {	//@pathValue �궗�슜�빐�꽌 �꽔�뼱二쇨린
+	@GetMapping("/ticketing")
+	public String ticketing(Model model) {
 		List<CinemaMovieDTO> movieList	=	cms.movieList();   
 		model.addAttribute("movieList", movieList);
 		
@@ -37,9 +37,6 @@ public class CinemaMovieController {
 	@GetMapping(value="/ticketing/{movieName}/{showDay}/", produces="application/json;charset=utf-8")
 	@ResponseBody
 	public List<HashMap<String, Object>> ticketing(@PathVariable String movieName, @PathVariable String showDay){
-		System.out.println(movieName);
-		System.out.println(showDay);
-		System.out.println(cms.ticketingList(movieName, showDay));
 		return cms.ticketingList(movieName, showDay);
 	} 
 
