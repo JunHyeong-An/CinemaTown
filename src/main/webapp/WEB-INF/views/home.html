@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* logo font */
+        @import url('https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap');
+        @font-face {
+            font-family: 'gmarket';
+            src: url('font/GmarketSansTTFMedium.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'gmarketLight';
+            src: url('font/GmarketSansTTFLight.ttf') format('truetype');
+        }
+
+        /* 각 태그들의 크기를 직접 보시려면 border 주석을 제거하면 됩니다. */
+
+        body {
+            font-family: 'gmarket';
+            font-size: 10pt;
+        }
+
+        #headerBanner {
+            display: flex;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid black;
+            background-color: black;
+        }
+
+        #bannerCloseBtn {
+            color: white;
+            position: absolute;
+            right: 25px;
+            font-size: 15pt;
+            cursor: pointer;
+        }
+
+        header {
+            border: 1px solid black;
+            margin-bottom: 50px;
+            background-color: black;
+        }
+
+        #loginStatusBox {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding-right: 20px;
+            /* border: 1px solid black; */
+        }
+
+        #loginStatus {
+            color: white;
+            list-style: none;
+            display: flex;
+            /* border: 1px solid black  ; */
+        }
+
+        #loginStatus li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px 15px;
+            font-size: 9pt;
+            height: 17px;
+            /* border: 1px solid black; */
+        }
+
+        #loginStatus li:not(:last-child) {
+            border-right: 1px solid white;
+        }
+
+        #loginStatus li:hover {
+            text-decoration: underline;
+        }
+
+        #logo {
+            width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            font-family: 'Zen Tokyo Zoo', cursive;
+            font-size: 40pt;
+            user-select: none;
+            cursor: pointer;
+            color: white;
+            /* border: 1px solid black; */
+        }
+
+        #headerListBox {
+            color: white;
+            position: relative;
+            margin-top: 50px;
+            /* border: 1px solid red; */
+        }
+
+        #headerList {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            /* border: 1px solid blue; */
+            margin-bottom: 0px;
+        }
+
+        #headerList li {
+            position: relative;
+            /* display: flex; */
+            /* justify-content: center; */
+            /* align-items: center; */
+            width: 150px;
+            height: 25px;
+            /* border: 1px solid red; */
+        }
+
+        .menuText {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 30px;
+            margin: 0 auto;
+            /* border: 1px solid black; */
+        }
+
+        .menuText p {
+            position: absolute;
+        }
+
+        #headerList li:not(:last-child) {
+            border-right: 1px solid white;
+        }
+        /* 드롭 다운 메뉴 css */
+        .dropDownMenu {
+            display: flex;
+            justify-content: center;
+            padding-top: 10px;
+            /* border: 1px solid black; */
+        }
+
+        #serviceCenterDropDown {
+            width: 270px;
+        }
+
+        .serviceCenterDropDownElement {
+            padding: 0 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #posterSection {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            margin: 60px 0;
+        }
+
+        .movePoster {
+            margin: 0 50px;
+            color: white;
+        }
+
+        .mainPoster {
+            width: 20%;
+            margin: 0 10px;
+        }
+/*##############################################################################*/
+
+        #movieList {
+            font-family:'gmarket';
+            font-size: 10pt;
+            height: 400px;
+/*          border: 1px solid black; */
+            padding: 10px 10px 10px 10px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+        }
+
+        #movieSchedule {
+            height: 380px;
+            width: 80%;
+            position: relative;
+         /* border: 1px solid red; */
+            float: left;
+            padding: 10px 10px 10px 10px;   
+            justify-content: center;
+        }
+        #movieTop10 {
+            float: right;
+            border-radius: 10px;
+            height: 90%;
+            width: 20%;
+            padding-left: 2%;
+            padding-top: 10px;
+            display: table;
+            position: relative;
+            background-color: black;
+            color: white;
+            margin-right: 40px;
+        }
+        a {
+            text-decoration-line: none;
+        }
+        #movieTop10 li {
+            vertical-align: middle;
+            line-height: 280%;
+        }
+        #movieScheduleTitle {
+            text-align: center;
+            font-family: 'gmarket';
+            font-size: 12pt;
+            font-weight: bolder;
+            margin-top: 0;
+            margin-bottom: 30px;
+/*          border: 2px solid turquoise; */
+            width: 300px;
+            float: top;
+            margin-left: 45%;
+            border-bottom: 1.5px solid black;
+        }
+
+        .movieNameList {
+            /* border: 1px solid green;  */
+            height: 90%;
+            width: 25%;
+            float: left;
+            position: relative;
+
+        }
+        .movieName {
+            float: right;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            width: 150px;
+            /* border: 1px solid rebeccapurple;  */
+            margin-bottom: 14.5px;
+            margin-right: 15%;
+            border-radius: 5px;
+            background-color: black;
+            color: white;
+        }
+        .movieSelect {
+            /* border: 2px solid yellow;  */
+            padding-top: 8px;
+            float: left;
+            width: 73%;
+        }
+        .movieSelect Li {
+            margin-top: 5px;
+        }
+
+        .movieSelectBox {
+            line-height: 170%;
+            font-size: 9pt;
+            text-align: center;
+            height: 40px;
+            width: 80px;
+            float: left;
+            margin-top: 6.5px;
+            margin-right: 20px;
+            border: 0;
+            white-space:nowrap;
+	        overflow:hidden;
+	        text-overflow:ellipsis;
+            box-shadow:0.5px 0.5px 0.5px grey;
+            border-radius: 10px;
+        }
+/*#################################################################################*/
+
+        #board {
+            display: flex;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(190, 214, 214, 0.418);
+            margin-top: 50px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .iconList {
+            float: left;
+            margin-left: 60px;
+            width: 120px;
+            height: 120px;
+            justify-content: center;
+            /* border: 1px solid black; */
+            text-align: center;
+            justify-content: center;
+        }
+        .iconList:first-child {
+            margin-left: 30px;
+        }
+        .icon {
+            width: 90px;
+            height: 100px;
+            /* border: 1px solid red; */
+            margin: 0 auto;
+            margin-top: 5px;
+        }
+        .icon img { max-width: 100%; }
+
+/*############################################################################*/
+
+footer {
+            font-family: 'gmarketLight';
+            font-size: 10pt;
+            margin-top: 50px;
+            color: gray;
+        }
+
+        #footerAdBanner {
+            /* border: 1px solid black; */
+            height: 100px;
+            margin-bottom: 170px;
+            /* background-color: yellow; */
+        }
+        #footerAdBanner img { max-width: 100%; }
+
+        #moreInfo {
+            display: flex;
+            list-style: none;
+            margin-bottom: 40px;
+            padding-left: 0;
+            /* border: 1px solid black; */
+        }
+
+        #moreInfo > li {
+            padding: 0 10px;
+            border-right: 1px solid gray;
+            /* border: 1px solid black; */
+        }
+        #moreInfo > li:first-child {
+            border-left: 1px solid gray;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <header>
+        <div id="headerBanner">
+            <img src="상단광고.jpg">
+            <span id="bannerCloseBtn">X</span>
+        </div>
+        <!-- header안에 맨위에있는 로그인 박스 -->
+        <div id="loginStatusBox">
+            <ul id="loginStatus">
+                <li>로그인</li>
+                <li>회원가입</li>
+            </ul>
+        </div>
+        <!-- 로고 -->
+        <h1 id="logo">CINEMA TOWN</h1>
+
+        <!-- 로고 밑에 들어가는 메뉴를 전체적으로 감싸는 div(나중에 들어갈 드롭 메뉴에 사용될 것으로 예상. 사용되지 않으면 제거해도 무방합니다.) -->
+        <div id="headerListBox">
+            <!-- 실질적인 메뉴 headerList에 css로 display:flex를 줘서 전부 가로로 정렬 시킴-->
+            <ul id="headerList">
+                <li><div class="menuText">영화</div><div class="dropDownMenu hidden"><a>상영시간표</a></div></li>
+                <li><div class="menuText">예매</div><div class="dropDownMenu hidden"><a>예매</a></div></li>
+                <li><div class="menuText">이벤트</div><div class="dropDownMenu hidden"><a>이벤트</a></div></li>
+                <li>
+                    <div class="menuText">고객센터</div>
+                    <div id="serviceCenterDropDown" class="dropDownMenu hidden">
+                        <a class="serviceCenterDropDownElement">공지사항</a>
+                        <a class="serviceCenterDropDownElement">일대일 문의</a>
+                        <a class="serviceCenterDropDownElement">분실물 문의</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div id="posterSection">
+            <div class="movePoster">◀</div>
+            <img class="mainPoster" src="1.jpg">
+            <img class="mainPoster" src="2.jpg">
+            <img class="mainPoster" src="3.jpg">
+            <img class="mainPoster" src="4.jpg">
+            <div class="movePoster">▶</div>
+        </div>
+    </header>
+
+
+    <div id="movieList">
+        <div id="movieSchedule">
+            <div id="movieScheduleTitle">
+                <div class="currentDate">2021년 7월 7일</div>
+            </div>
+            <div class="movieNameList">
+                <ul style="list-style: none;">
+                    <li><div class="movieName">발신제한</div></li>
+                    <li><div class="movieName">콰이어트 플레이스2</div></li>
+                    <li><div class="movieName">킬러의 보디가드2</div></li>
+                    <li><div class="movieName">크루엘라</div></li>
+                    <li><div class="movieName">미드나이트</div></li>
+                    <li><div class="movieName">컨저링</div></li>
+                </ul>
+            </div>
+            <div class="movieSelect">
+                <div class="movieSelectBox"><a href="" style="color:black">21:45<br>4관</a></div>
+                <div class="movieSelectBox"><a href="" style="color:black">24:00<br>5관</a></div>
+            </div>
+            <div class="movieSelect">
+                <div class="movieSelectBox"><a href="" style="color:black">09:05<br>1관</a></div>
+                <div class="movieSelectBox"><a href="" style="color:black">12:05<br>2관</a></div>
+                <div class="movieSelectBox"><a href="" style="color:black">18:15<br>3관</a></div>
+                <div class="movieSelectBox"><a href="" style="color:black">20:00<br>1관</a></div>
+
+            </div>
+            <div class="movieSelect">
+                <div class="movieSelectBox"><a href="" style="color:black">09:05<br>1관</a></div>
+                <div class="movieSelectBox"><a href="" style="color:black">12:05<br>2관</a></div>
+                <div class="movieSelectBox"><a href="" style="color:black">18:15<br>3관</a></div>
+                <div class="movieSelectBox"><a href="" style="color:black">20:00<br>1관</a></div>
+                <div class="movieSelectBox"><a href="" style="color:black">21:45<br>4관</a></div>
+            </div>
+            <div class="movieSelect">
+                <div class="movieSelectBox"><a href="" style="color:black">09:05<br>1관</a></div>
+                <div class="movieSelectBox"><a href="" style="color:black">12:05<br>2관</a></div>
+                <div class="movieSelectBox"><a href="" style="color:black">20:00<br>1관</a></div>
+                <div class="movieSelectBox"><a href="" style="color:black">21:45<br>4관</a></div>
+                <div class="movieSelectBox"><a href="" style="color:black">24:00<br>5관</a></div>
+                <div class="movieSelectBox"><a href="" style="color:black">21:45<br>4관</a></div>
+            </div>
+            <div class="movieSelect">
+                <div class="movieSelectBox"><a href="" style="color:black">09:05<br>1관</a></div>
+                <div class="movieSelectBox"><a href="" style="color:black">24:00<br>5관</a></div>
+            </div>
+            <div class="movieSelect">
+                <div class="movieSelectBox"><a href="" style="color:black">09:05<br>1관</a></div>
+                <div class="movieSelectBox"><a href="" style="color:black">12:05<br>2관</a></div>
+                <div class="movieSelectBox"><a href="" style="color:black">18:15<br>3관</a></div>
+                <div class="movieSelectBox"><a href="" style="color:black">24:00<br>5관</a></div>
+            </div>
+        </div>
+        
+        <div id="movieTop10">
+            <ol type="1">
+                <li><a href="" style="color:white">　발신제한</a></li>
+                <li><a href="" style="color:white">　킬러의 보디가드2</a></li>
+                <li><a href="" style="color:white">　콰이어트 플레이스2</a></li>
+                <li><a href="" style="color:white">　크루엘라</a></li>
+                <li><a href="" style="color:white">　루카</a></li>
+                <li><a href="" style="color:white">　미드나이트</a></li>
+                <li><a href="" style="color:white">　인 더 하이츠</a></li>
+                <li><a href="" style="color:white">　체르노빌</a></li>
+                <li><a href="" style="color:white">　컨저링3</a></li>
+                <li><a href="" style="color:white">　빛나는 순간</a></li>
+            </ol>
+        </div>
+        
+    </div>
+
+
+    <div id="board">
+        <div class="iconList">
+            <a href="" style="color:black">
+                <div class="icon"><img src="userIcon.png"></div>
+                <div class="iconBottom">내정보</div>
+            </a>
+        </div>
+        <div class="iconList">
+            <a href="" style="color:black">
+                <div class="icon"><img src="InformationIcon.png"></div>
+                <div class="iconBottom">1:1문의</div>
+            </a>
+        </div>
+        <div class="iconList">
+            <a href="" style="color:black">
+                <div class="icon"><img src="boardIcon.png"></div>
+                <div class="iconBottom">공지사항</div>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <div id="footerAdBanner">
+            <img src="footerAd.png" alt="광고" id="footerAdBannerImg">
+        </div>
+        <ul id="moreInfo">
+            <li>회원약관</li>
+            <li>개인정보처리방침</li>
+            <li>이메일무단수집거부</li>
+            <li>영상정보처리기기 운영 및 관리방침</li>
+            <li>회원 안내</li>
+            <li>배정 기준</li>
+            <li>채용 안내</li>
+            <li>광고/임대문의</li>
+            <li>윤리경영</li>
+            <li>기업정보</li>
+        </ul>
+
+        <div id="addressAndEmail">
+            <p>서울특별시 송파구 올림픽로 1005 아이티뱅크월드타워 270층 고객센터 1544-7755</p>
+            <p>대표이사 김진현 사업자등록번호 313-87-11979 통신판매신고번호 제 5045호 개인정보 보호 최고 책임자 허용승</p>
+            <p>COPYRIGHT <small>&copy;</small> CINEMA TOWN ALL RIGHT RESERVED.</p>
+        </div>
+    </footer>
+
+    <script>
+        // header.js 랑 다를거 없음
+        // 메뉴 밑줄 표시 및 드롭다운
+        const li = document.querySelectorAll("#headerList li")
+        const dropDowns = document.querySelectorAll(".dropDownMenu")
+        li.forEach((l, i) => {
+            l.onmouseover = function() {
+                l.querySelector(".menuText").style.borderBottom = '2px solid white'
+                dropDowns[i].style.display = 'flex'
+            }
+            dropDowns[i].onmouseover = function() {
+                l.querySelector(".menuText").style.borderBottom = '2px solid white'
+                dropDowns[i].style.display = 'flex'
+            }
+            l.onmouseleave = function() {
+                l.querySelector(".menuText").style.borderBottom = 'none'
+                dropDowns[i].style.display = 'none'
+            }
+            dropDowns[i].onmouseleave = function() {
+                l.querySelector(".menuText").style.borderBottom = 'none'
+                dropDowns[i].style.display = 'none'
+            }
+        })
+        ////////////////////////////////////////////////////////////////////
+    </script>
+
+    <script>
+        const bannerCloseBtn = document.querySelector("#bannerCloseBtn")
+        const headerBanner = document.querySelector("#headerBanner")
+
+        bannerCloseBtn.onclick = function() {
+            headerBanner.style.display = "none"
+        }
+    </script>
+</body>
+</html>

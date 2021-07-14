@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="cpath" value="${pageContext.request.contextPath }" />
+<c:set var="movieNameList" value="${movieNameList }"/>
+<c:forEach var="name" items="${movieNameList }">
+	<input class="movieNames" type="hidden" value="${name }">
+</c:forEach>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +19,7 @@
 <body>
 	<header>
         <div id="headerBanner">
-            <img src="/상단광고.jpg">
+            <img src="${cpath }/resources/commons/imgs/상단광고.jpg">
             <span id="bannerCloseBtn">X</span>
         </div>
         <!-- header안에 맨위에있는 로그인 박스 -->
@@ -48,13 +52,10 @@
 
         <div id="posterSection">
             <div class="movePoster">◀</div>
-            <img class="mainPoster" src="/2.jpg">
-            <img class="mainPoster" src="/3.jpg">
-            <img class="mainPoster" src="/1.jpg">
-            <img class="mainPoster" src="/2.jpg">
+            <div id="posterSectionImg">
+            
+            </div>
             <div class="movePoster">▶</div>
         </div>
     </header>
 <script src="${cpath }/resources/commons/homeHeader.js"></script>
-</body>
-</html>

@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /* logo font */
 @import
 	url('https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap')
@@ -9,16 +8,38 @@
 	src: url('font/GmarketSansTTFMedium.ttf') format('truetype');
 }
 
-/* ê° íƒœê·¸ë“¤ì˜ í¬ê¸°ë¥¼ ì§ì ‘ ë³´ì‹œë ¤ë©´ border ì£¼ì„ì„ ì œê±°í•˜ë©´ ë©ë‹ˆë‹¤. */
+@font-face {
+	font-family: 'gmarketLight';
+	src: url('font/GmarketSansTTFLight.ttf') format('truetype');
+}
+
+/* °¢ ÅÂ±×µéÀÇ Å©±â¸¦ Á÷Á¢ º¸½Ã·Á¸é border ÁÖ¼®À» Á¦°ÅÇÏ¸é µË´Ï´Ù. */
 body {
 	font-family: 'gmarket';
 	font-size: 10pt;
 }
 
+#headerBanner {
+	display: flex;
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid black;
+	background-color: black;
+}
+
+#bannerCloseBtn {
+	color: white;
+	position: absolute;
+	right: 25px;
+	font-size: 15pt;
+	cursor: pointer;
+}
+
 header {
-	/* border: 1px solid black; */
-	margin-top: 80px;
-	margin-bottom: 100px;
+	border: 1px solid black;
+	margin-bottom: 50px;
+	background-color: black;
 }
 
 #loginStatusBox {
@@ -30,6 +51,7 @@ header {
 }
 
 #loginStatus {
+	color: white;
 	list-style: none;
 	display: flex;
 	/* border: 1px solid black  ; */
@@ -46,7 +68,7 @@ header {
 }
 
 #loginStatus li:not (:last-child ) {
-	border-right: 1px solid black;
+	border-right: 1px solid white;
 }
 
 #loginStatus li:hover {
@@ -61,13 +83,15 @@ header {
 	font-size: 40pt;
 	user-select: none;
 	cursor: pointer;
+	color: white;
 	/* border: 1px solid black; */
 }
 
 #headerListBox {
+	color: white;
 	position: relative;
 	margin-top: 50px;
-	/* border: 1px solid black; */
+	/* border: 1px solid red; */
 }
 
 #headerList {
@@ -103,9 +127,9 @@ header {
 }
 
 #headerList li:not (:last-child ) {
-	border-right: 1px solid black;
+	border-right: 1px solid white;
 }
-/* ë“œë¡­ ë‹¤ìš´ ë©”ë‰´ css */
+/* µå·Ó ´Ù¿î ¸Ş´º css */
 .dropDownMenu {
 	display: flex;
 	justify-content: center;
@@ -123,4 +147,22 @@ header {
 
 .hidden {
 	display: none;
+}
+
+#posterSection {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	margin: 60px 0;
+}
+
+.movePoster {
+	margin: 0 50px;
+	color: white;
+}
+
+.mainPoster {
+	width: 20%;
+	margin: 0 10px;
 }

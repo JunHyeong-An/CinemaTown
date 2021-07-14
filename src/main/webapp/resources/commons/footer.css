@@ -1,38 +1,35 @@
-@charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap');
-        @font-face {
-            font-family: 'gmarket';
-            src: url('font/GmarketSansTTFLight.ttf') format('truetype');
-            /* src: url('font/GmarketSansTTFMedium.ttf') format('truetype'); */
-        }
-        
-        footer {
-            font-family: 'gmarket';
-            font-size: 10pt;
-            margin-top: 100px;
-            color: gray;
-        }
+footer {
+	font-family: 'gmarketLight';
+	font-size: 10pt;
+	margin-top: 50px;
+	color: gray;
+}
 
-        #footerAdBanner {
-            border: 1px solid black;
-            height: 100px;
-            margin-bottom: 40px;
-            background-color: yellow;
-        }
+#footerAdBanner {
+	/* border: 1px solid black; */
+	height: 100px;
+	margin-bottom: 170px;
+	/* background-color: yellow; */
+}
 
-        #moreInfo {
-            display: flex;
-            list-style: none;
-            margin-bottom: 40px;
-            padding-left: 0;
-            /* border: 1px solid black; */
-        }
+#footerAdBanner img {
+	max-width: 100%;
+}
 
-        #moreInfo > li {
-            padding: 0 10px;
-            border-right: 1px solid gray;
-            /* border: 1px solid black; */
-        }
-        #moreInfo > li:first-child {
-            border-left: 1px solid gray;
-        }
+#moreInfo {
+	display: flex;
+	list-style: none;
+	margin-bottom: 40px;
+	padding-left: 0;
+	/* border: 1px solid black; */
+}
+
+#moreInfo>li {
+	padding: 0 10px;
+	border-right: 1px solid gray;
+	/* border: 1px solid black; */
+}
+
+#moreInfo>li:first-child {
+	border-left: 1px solid gray;
+}

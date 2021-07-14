@@ -24,3 +24,10 @@ li.forEach((l, i) => {
 	}
 })
 ////////////////////////////////////////////////////////////////////
+
+const bannerCloseBtn = document.querySelector("#bannerCloseBtn")
+        const headerBanner = document.querySelector("#headerBanner")
+
+        bannerCloseBtn.onclick = function() {
+            headerBanner.style.display = "none"
+        }
