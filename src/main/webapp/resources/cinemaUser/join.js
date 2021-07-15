@@ -96,6 +96,7 @@ function checkIdOverlap() {
       fetch(url, opt)
       .then(function(resp) {return resp.text()})
       .then(function(text) {
+
          if(text=='1'){
             checkIdMsg.innerText = '아이디중복입니다.'
             checkIdMsg.style.color = 'red'

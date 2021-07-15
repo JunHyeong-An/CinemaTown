@@ -8,7 +8,7 @@ public class CinemaMovieDTO {
 //	DELETED              CHAR(1)   
 	
 	private int ageLimit;
-	private String movieName, deleted;
+	private String movieName, deleted, urlName;
 	private long runningTime;
 	
 	public int getAgeLimit() {
@@ -34,6 +34,12 @@ public class CinemaMovieDTO {
 	}
 	public void setRunningTime(long runningTime) {
 		this.runningTime = runningTime;
+	}
+	public String getUrlName() {
+		return urlName;
+	}
+	public void setUrlName(String urlName) {
+		this.urlName = urlName;
 	}
 	
 
