@@ -17,7 +17,7 @@
 			</div>	
 			<div class="mainPageGo">
 				<h3>
-					<a href="">CINEMA TOWN</a>
+					<a href="${cpath }">CINEMA TOWN</a>
 				</h3>
 			</div>
 		</div>

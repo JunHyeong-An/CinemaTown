@@ -51,9 +51,7 @@ public class MasterService {
 	}
 	
 	public int insertMovie(CinemaScheduleDTO dto, String hallName) {
-		// seatCountRemain이 처음에는 hall_idx의 총 좌석수가 들어가야한다
-		// hall_idx 불러오는 메서드 필요
-		// ㄴ -> 위 두개 합쳐서 cinemaScheduleDTO에 담아서 2개 각각 사용하기
+		
 		CinemaHallDTO hall_dto = dao.hallInfo(hallName);
 		dto.setHall_idx(hall_dto.getHall_idx());
 		dto.setSeatCountRemain(hall_dto.getSeatCountAll());

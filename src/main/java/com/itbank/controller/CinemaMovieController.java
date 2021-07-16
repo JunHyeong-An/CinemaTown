@@ -53,17 +53,6 @@ public class CinemaMovieController {
 	}
 	
 	
-	@GetMapping("/insertMovie")
-	public String insertMovie() {
-		return "cinemaMovie/insertMovie";
-	}
-	
-	@PostMapping("/insertMovie")
-	public String insertMovie2(CinemaScheduleDTO dto, String hallName) {
-		int row = cms.insertMovie(dto, hallName);
-		return "redirect:/";
-	}
-	
 	
 	// 예매하기
 	@PostMapping("/ticketing/{ticketingJson}/")

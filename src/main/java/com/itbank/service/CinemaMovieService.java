@@ -42,18 +42,6 @@ public class CinemaMovieService {
 	}
 
 
-	// 영화 스케줄 삽입 => 관리자 페이지 내용이므로 url설정 체크해보기★
-	public int insertMovie(CinemaScheduleDTO dto, String hallName) {
-
-		CinemaHallDTO hall_dto = hall_dao.hallInfo(hallName);
-		dto.setHall_idx(hall_dto.getHall_idx());
-		dto.setSeatCountRemain(hall_dto.getSeatCountAll());
-
-		Date endTime = new Date(dto.getStartTime().getTime() + movie_dao.runningTime(dto.getMovieName()) * 60000);
-		dto.setEndTime(endTime);
-		return schedule_dao.insertMovie(dto);
-
-	}
 
 	// 예매하기, 결제하기, 매출등록 
 	@Transactional
