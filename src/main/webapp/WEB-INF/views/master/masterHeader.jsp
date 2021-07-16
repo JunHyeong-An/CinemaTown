@@ -13,8 +13,8 @@
 	<header>
 		<div class="mainPageLogo">
 			<div>
-				<img src="/master/home1.png" width="40px">
-			</div>
+				<img src="${cpath }/resources/master/home1.png" width="40px">
+			</div>	
 			<div class="mainPageGo">
 				<h3>
 					<a href="">CINEMA TOWN</a>
@@ -27,11 +27,11 @@
 			</div>
 			<div class="nav">
 				<ul>
-					<li>영화관리</li> |
-					<li>매출확인</li> |
-					<li>리뷰관리</li> |
-					<li>이벤트</li> |
-					<li>게시판관리</li>
+					<li><a href="${cpath }/master/masterMovie/masterMovieList/">영화관리</a><span class="line">|</span></li>
+					<li><a href="${cpath }/master/masterHome">매출확인</a><span class="line">|</span></li>
+					<li><a href="${cpath }/master/masterReview/masterReviewList/">리뷰관리</a><span class="line">|</span></li>
+					<li><a href="${cpath }/master/masterEventList">이벤트</a><span class="line">|</span></li>
+					<li><a href="">게시판관리</a></li>
 				</ul>
 			</div>
 		</diV>
