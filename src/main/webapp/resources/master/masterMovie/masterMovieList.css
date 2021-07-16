@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+.body {
+	width:100%;
+	height: 1000px;
+}
+.mainHeader {
+	text-align: center;
+}
+
+.headerTwice {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.movieAddName {
+	padding-top: 40px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 40px;
+}
+
+.movieAddName>a {
+	border: 1px solid black;
+	text-decoration: none;
+	background-color: rgba(0, 0, 0, 0.575);
+	color: white;
+	border-radius: 10px;
+	padding: 6px
+}
+
+.main {
+	padding-left: 500px;
+    justify-content: center;
+    align-items: center;
+	
+}
+table {
+	padding: 20px;
+}
+
+td, th {
+	border: 1px solid black;
+	padding: 10px;
+	width: 300px;
+}
+
+th {
+	background-color: #dadada;
+	width: 150px;
+}
+
+
+
+#a {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: center;
+}

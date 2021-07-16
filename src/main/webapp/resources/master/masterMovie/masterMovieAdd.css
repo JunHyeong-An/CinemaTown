@@ -1,1 +1,65 @@
-@charset "UTF-8";
+.main {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.searchList {
+	padding-bottom: 20px;
+}
+
+.searchList {
+	width: 200px;
+}
+
+.tableMovie {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+}
+
+span>#EmoticonImg {
+	width: 30px;
+	height: 20px;
+}
+
+span>#movieImg {
+	width: 100px;
+	height: 100px;
+}
+
+li {
+	cursor: pointer;
+}
+
+.ulList {
+	list-style: none;
+	width: 500px;
+	padding: 0px;
+}
+
+.poster>img {
+	width: 100px;
+	height: 194px;
+}
+
+.movieInfo {
+	display: none;
+	flex-flow: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.insertMovieButton {
+	width: 500px;
+	height: 30px;
+	border-radius: 10px;
+	outline: none;
+	border: 1px solid black;
+	color: white;
+	background-color: black;
+	margin-top: 40px;
+	cursor: pointer;
+}

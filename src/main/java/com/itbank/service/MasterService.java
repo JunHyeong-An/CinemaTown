@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.itbank.model.CinemaMovieDTO;
 import com.itbank.model.MasterDAO;
 import com.itbank.model.serviceCenterDTO;
 
@@ -16,6 +17,9 @@ public class MasterService {
 	public List<serviceCenterDTO> lostList() {
 		return dao.lostList();
 	}
-	
+
+	public List<CinemaMovieDTO> movieList() {
+      return dao.movieList();
+   }
 	
 }

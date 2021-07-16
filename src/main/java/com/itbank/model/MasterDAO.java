@@ -9,4 +9,6 @@ public interface MasterDAO {
 	@Select("select * from cinemaLost")
 	List<serviceCenterDTO> lostList();
 
+	@Select("select * from cinemaMovie order by movieName desc")
+	List<CinemaMovieDTO> movieList();
 }
