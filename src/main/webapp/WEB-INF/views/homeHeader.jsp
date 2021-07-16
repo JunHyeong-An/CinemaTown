@@ -25,8 +25,8 @@
         <!-- header안에 맨위에있는 로그인 박스 -->
         <div id="loginStatusBox">
             <ul id="loginStatus">
-                <li>로그인</li>
-                <li>회원가입</li>
+                <li><a href="${cpath }/cinemaUser/login">로그인</a></li>
+                <li><a href="${cpath }/cinemaUser/join">회원가입</a></li>
             </ul>
         </div>
         <!-- 로고 -->
@@ -37,7 +37,7 @@
             <!-- 실질적인 메뉴 headerList에 css로 display:flex를 줘서 전부 가로로 정렬 시킴-->
             <ul id="headerList">
                 <li><div class="menuText">영화</div><div class="dropDownMenu hidden"><a>상영시간표</a></div></li>
-                <li><div class="menuText">예매</div><div class="dropDownMenu hidden"><a>예매</a></div></li>
+                <li><div class="menuText">예매</div><div class="dropDownMenu hidden"><a href="${cpath }/cinemaMovie/ticketing">예매</a></div></li>
                 <li><div class="menuText">이벤트</div><div class="dropDownMenu hidden"><a>이벤트</a></div></li>
                 <li>
                     <div class="menuText">고객센터</div>
@@ -52,8 +52,16 @@
 
         <div id="posterSection">
             <div class="movePoster">◀</div>
-            <div id="posterSectionImg">
-            
+            <div id="posterBox">
+            	<div id="posterSectionImg">                                                           
+	            	<div class="mainPoster" style="background-color: red;"></div>
+	            	<div class="mainPoster" style="background-color: green;"></div>
+	            	<div class="mainPoster" style="background-color: yellow;"></div>
+	            	<div class="mainPoster" style="background-color: blue;"></div>
+	            	<div class="mainPoster" style="background-color: orange;"></div>
+	            	<div class="mainPoster" style="background-color: white;"></div>
+	            	<div class="mainPoster" style="background-color: lightgray;"></div>
+            	</div>
             </div>
             <div class="movePoster">▶</div>
         </div>

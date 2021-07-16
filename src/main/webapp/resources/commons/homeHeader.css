@@ -15,6 +15,11 @@ body {
 	font-size: 10pt;
 }
 
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
 #headerBanner {
 	display: flex;
 	position: relative;
@@ -151,11 +156,22 @@ header {
 	align-items: center;
 	color: white;
 	margin: 60px 0;
+/* 	border: 1px solid green; */
+}
+
+#posterBox {
+	position: relative;
+	width: 1200px;
+	height: 480px;
+/* 	border: 1px solid red; */
+	overflow: hidden;
 }
 
 #posterSectionImg {
-	width: 1200px;
-	border: 1px solid white;
+	position: absolute;
+/* 	width: 1200px; */
+	display: flex;
+/* 	border: 1px solid white; */
 }
 
 .movePoster {
@@ -165,5 +181,6 @@ header {
 
 .mainPoster {
 	width: 280px;
+	height:480px;
 	margin: 0 10px;
 }

@@ -58,16 +58,7 @@
         
         <div id="movieTop10">
             <ol type="1">
-                <li><a href="" style="color:white">　발신제한</a></li>
-                <li><a href="" style="color:white">　킬러의 보디가드2</a></li>
-                <li><a href="" style="color:white">　콰이어트 플레이스2</a></li>
-                <li><a href="" style="color:white">　크루엘라</a></li>
-                <li><a href="" style="color:white">　루카</a></li>
-                <li><a href="" style="color:white">　미드나이트</a></li>
-                <li><a href="" style="color:white">　인 더 하이츠</a></li>
-                <li><a href="" style="color:white">　체르노빌</a></li>
-                <li><a href="" style="color:white">　컨저링3</a></li>
-                <li><a href="" style="color:white">　빛나는 순간</a></li>
+            
             </ol>
         </div>
     </div>
@@ -76,19 +67,19 @@
     <div id="board">
         <div class="iconList">
             <a href="" style="color:black">
-                <div class="icon"><img src="userIcon.png"></div>
+                <div class="icon"><img src="${cpath }/resources/commons/imgs/userIcon.png"></div>
                 <div class="iconBottom">내정보</div>
             </a>
         </div>
         <div class="iconList">
             <a href="" style="color:black">
-                <div class="icon"><img src="InformationIcon.png"></div>
+                <div class="icon"><img src="${cpath }/resources/commons/imgs/InformationIcon.png"></div>
                 <div class="iconBottom">1:1문의</div>
             </a>
         </div>
         <div class="iconList">
             <a href="" style="color:black">
-                <div class="icon"><img src="boardIcon.png"></div>
+                <div class="icon"><img src="${cpath }/resources/commons/imgs/boardIcon.png"></div>
                 <div class="iconBottom">공지사항</div>
             </a>
         </div>

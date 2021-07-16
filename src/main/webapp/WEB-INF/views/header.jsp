@@ -22,14 +22,14 @@
             </ul>
         </div>
         <!-- 로고 -->
-        <h1 id="logo">CINEMA TOWN</h1>
+        <h1 id="logo"><a href="${cpath }/">CINEMA TOWN</a></h1>
 
         <!-- 로고 밑에 들어가는 메뉴를 전체적으로 감싸는 div(나중에 들어갈 드롭 메뉴에 사용될 것으로 예상. 사용되지 않으면 제거해도 무방합니다.) -->
         <div id="headerListBox">
             <!-- 실질적인 메뉴 headerList에 css로 display:flex를 줘서 전부 가로로 정렬 시킴-->
             <ul id="headerList">
                 <li><div class="menuText">영화</div><div class="dropDownMenu hidden"><a>상영시간표</a></div></li>
-                <li><div class="menuText">예매</div><div class="dropDownMenu hidden"><a>예매</a></div></li>
+                <li><div class="menuText">예매</div><div class="dropDownMenu hidden"><a href="${cpath }/cinemaMovie/ticketing">예매</a></div></li>
                 <li><div class="menuText">이벤트</div><div class="dropDownMenu hidden"><a>이벤트</a></div></li>
                 <li><div class="menuText">고객센터</div>
                     <div id="serviceCenterDropDown" class="dropDownMenu hidden">
