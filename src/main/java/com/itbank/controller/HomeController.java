@@ -24,10 +24,12 @@ public class HomeController {
 	@GetMapping("/")
 	public String home(Model model) {
 		String[] movieUrlList	= cms.movieUrlList();
-		//String[] movieNameList = cms.movieName();	
+		String[] movieName	= cms.movieName();
+		model.addAttribute("movieName", movieName); 
 		model.addAttribute("movieUrlList", movieUrlList); 
 		return "home";
 	}
+	
 	
 	@GetMapping(value="/list",produces="application/json;charset=utf-8")
 	@ResponseBody

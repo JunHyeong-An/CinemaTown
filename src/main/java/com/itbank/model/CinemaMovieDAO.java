@@ -71,6 +71,9 @@ public interface CinemaMovieDAO {
 			"    where cinemaSchedule.showDay = to_char(sysdate,'yyyyMMdd') " + 
 			"    group by cinemaMovie.movieName")
 	int[] scheduleCountList();
+
+	@Select("select movieName from cinemaMovie")
+	String[] movieName();
 	
 	
 }

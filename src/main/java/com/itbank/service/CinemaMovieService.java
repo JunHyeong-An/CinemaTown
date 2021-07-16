@@ -134,6 +134,12 @@ public class CinemaMovieService {
 		
 		return movie_dao.scheduleCountList();
 	}
+
+
+	public String[] movieName() {
+		
+		return movie_dao.movieName();
+	}
 	
 	
 
