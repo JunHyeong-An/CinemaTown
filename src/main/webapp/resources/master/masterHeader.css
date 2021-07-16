@@ -1,12 +1,11 @@
 @charset "UTF-8";
 /* logo font */
 @import
-	url('https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap')
-	;
+	url('https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap');
 
 @font-face {
 	font-family: 'gmarket';
-	src: url('resources/commons/font/GmarketSansTTFMedium.ttf') format('truetype');
+	src: url('../commons/font/GmarketSansTTFMedium.ttf') format('truetype');
 }
  
 /* 각 태그들의 크기를 직접 보시려면 border 주석을 제거하면 됩니다. */
