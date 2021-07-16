@@ -48,8 +48,7 @@ public class CinemaMovieController {
 
 	@GetMapping("/schedule")	///ticketing/{movieName}/{showDay}/
 	public String schedule(Model model) {	//@pathValue �궗�슜�빐�꽌 �꽔�뼱二쇨린
-		List<HashMap<String, Object>> screenScheduleList = cms.screenScheduleList();
-		model.addAttribute("screenScheduleList", screenScheduleList);
+		// 다시 작업
 		return "cinemaMovie/schedule";
 	}
 	
@@ -66,6 +65,7 @@ public class CinemaMovieController {
 	}
 	
 	
+	// 예매하기
 	@PostMapping("/ticketing/{ticketingJson}/")
 	@ResponseBody
 	public int ticketing(@PathVariable String ticketingJson, CinemaTicketingDTO dto, HttpSession session) throws JsonMappingException, JsonProcessingException {

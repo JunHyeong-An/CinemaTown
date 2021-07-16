@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itbank.model.CinemaHallDAO;
 import com.itbank.model.CinemaHallDTO;
@@ -40,13 +41,8 @@ public class CinemaMovieService {
 		return movie_dao.ticketingList(movieName, showDay);
 	}
 
-	// 상영시간표 리스트
-	public List<HashMap<String, Object>> screenScheduleList() {
 
-		return movie_dao.screenScheduleList();
-	}
-
-	// 영화 스케줄 삽입 => 관리자 페이지 내용이므로 url설정 체크해보기★, 트랜잭션 추가하기★
+	// 영화 스케줄 삽입 => 관리자 페이지 내용이므로 url설정 체크해보기★
 	public int insertMovie(CinemaScheduleDTO dto, String hallName) {
 
 		CinemaHallDTO hall_dto = hall_dao.hallInfo(hallName);
@@ -59,8 +55,8 @@ public class CinemaMovieService {
 
 	}
 
-	// 예매하기, 결제하기, 매출등록 ==> 트랜잭션 추가하기★
-
+	// 예매하기, 결제하기, 매출등록 
+	@Transactional
 	public int ticketing(CinemaTicketingDTO dto) {
 
 		// 예매하기
@@ -71,15 +67,13 @@ public class CinemaMovieService {
 		String[] seatNameAll = dto.getSeatNameAll().split(",");
 		for (String seatName : seatNameAll) {
 
-			seat_dao.seatInsert(ticketing_idx, seatName);
+			seat_dao.seatInsert(ticketing_idx, seatName, dto.getSchedule_idx());
 		}
 
 		// 상영일정에 남은 좌석 -하기
 		int seatCountRemainMinus = dto.getAdultCount() + dto.getTeenagerCount();
-		schedule_dao.seatCountRemainMinus(dto.getSchedule_idx(), seatCountRemainMinus); // 예매 자리 취소 시 해당 adultCount +
-																						// teenagerCount값 가져오기 ==>
+		schedule_dao.seatCountRemainMinus(dto.getSchedule_idx(), seatCountRemainMinus); 
 																						
-
 		// 결제 insert하기
 		int totalAmount = dto.getAdultCount() * 14000 + dto.getTeenagerCount() * 11000;
 		payment_dao.payment(ticketing_idx, dto.getUserId(), totalAmount);
@@ -93,12 +87,12 @@ public class CinemaMovieService {
 	}
 
 
-	// 예매 취소 시 => 예매 취소, 좌석 취소, 결제 취소, 매출 취소 ==> 트랜잭션 추가하기★
+	// 예매 취소 시 => 예매 취소, 좌석 취소, 결제 취소, 매출 취소
+	@Transactional
 	public void ticketingCancel(int ticketing_idx) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		ticketing_dao.ticketingCancel(ticketing_idx);
 		int schedule_idx = (Integer)map.get("schedule_idx");
-		System.out.println(schedule_idx);
 
 		int seatCountRemainAdd = seat_dao.seatCancel(ticketing_idx);
 		schedule_dao.seatCountRemainAdd(schedule_idx, seatCountRemainAdd);
@@ -121,16 +115,30 @@ public class CinemaMovieService {
 		return movie_dao.movieUrlList();
 	}
 	
+	public String[] movieNameList() {
+		return movie_dao.movieNameList();
+		
+	}
 
+	public String[] start_timeList(String movieName) {
+
+		return movie_dao.start_timeList(movieName);
+	}
+
+	public String[] hallNameList(String movieName) {
+
+		return movie_dao.hallNameList(movieName);
+	}
+
+	public int[] scheduleCountList() {
+		
+		return movie_dao.scheduleCountList();
+	}
 	
 	
-	// seatCountRemain 怨꾩궛�룄 �뱾�뼱媛��빞�븿.寃곗젣�떆 -, 痍⑥냼�떆+ => update �떆�궎湲�
-			// �꽩>�삁留ㅽ뀒�씠釉붽낵 議곗씤�븯湲�
-	//ajax濡� 寃곗젣 痍⑥냼�� 寃곗젣�셿猷뚯떆 媛곴컖 url�쓣 �넻�빐 join�빐�꽌 �꽦�씤 �닔+ 泥��냼�뀈 �닔 媛믪쓣 援ы빐 怨꾩궛�븯湲�
-	
-	
-	
-	
+
+	// ajax로 결제 취소와 결제완료시 각각 url을 통해 join해서 성인 수+ 청소년 수 값을 구해 계산하기
+		
 	
 	
 }
