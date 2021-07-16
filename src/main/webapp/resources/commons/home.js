@@ -34,11 +34,40 @@ fetch(officeUrl, officeopt)
 
 const listUrl = "list"
 const listOpt = {method:"GET"}
+const movieNameList = document.querySelector(".movieNameList ul")
+const movieSchedule = document.querySelector("#movieSchedule")
+const movieScheduleDate = document.querySelector(".currentDate")
+let scheduleDate = new Date()
 
+movieScheduleDate.innerHTML = scheduleDate.getFullYear() + "년 " + (scheduleDate.getMonth() + 1) + "월 "
+							 + scheduleDate.getDate() + "일"
 fetch(listUrl, listOpt)
 .then(resp => {
 	return resp.json()
 })
 .then(json => {
-	console.log(json)
+	for(i in json) {
+		// 영화 이름 추가
+		const movieSelect = document.createElement("div")
+		movieSelect.classList.add("movieSelect")
+		const li = document.createElement("li")
+		const div = document.createElement("div")
+		div.classList.add("movieName")
+		div.innerHTML = json[i].movieName
+		li.appendChild(div)
+		movieNameList.appendChild(li)
+		
+		// 
+		for(j in json[i].hallName) {
+			const div2 = document.createElement("div")
+			const a2 = document.createElement("a")
+			a2.style.color = "black"
+			div2.classList.add("movieSelectBox")
+			
+			a2.innerHTML = json[i].hallName[j] + "<br>" + json[i].start_time[j]
+			div2.appendChild(a2)
+			movieSelect.appendChild(div2)
+		}
+		movieSchedule.appendChild(movieSelect)
+	}
 })

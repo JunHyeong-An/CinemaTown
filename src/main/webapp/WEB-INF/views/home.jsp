@@ -6,22 +6,17 @@
     <div id="movieList">
         <div id="movieSchedule">
             <div id="movieScheduleTitle">
-                <div class="currentDate">2021년 7월 7일</div>
+                <div class="currentDate"></div>
             </div>
             <div class="movieNameList">
                 <ul style="list-style: none;">
-                    <li><div class="movieName">발신제한</div></li>
-                    <li><div class="movieName">콰이어트 플레이스2</div></li>
-                    <li><div class="movieName">킬러의 보디가드2</div></li>
-                    <li><div class="movieName">크루엘라</div></li>
-                    <li><div class="movieName">미드나이트</div></li>
-                    <li><div class="movieName">컨저링</div></li>
+<!--                     <li><div class="movieName">발신제한</div></li> -->
                 </ul>
             </div>
-            <div class="movieSelect">
-                <div class="movieSelectBox"><a href="" style="color:black">21:45<br>4관</a></div>
-                <div class="movieSelectBox"><a href="" style="color:black">24:00<br>5관</a></div>
-            </div>
+<!--             <div class="movieSelect"> -->
+<!--                 <div class="movieSelectBox"><a href="" style="color:black">21:45<br>4관</a></div> -->
+<!--                 <div class="movieSelectBox"><a href="" style="color:black">24:00<br>5관</a></div> -->
+<!--             </div> -->
         </div>
         
         <div id="movieTop10">
