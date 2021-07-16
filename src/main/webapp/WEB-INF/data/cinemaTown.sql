@@ -25,6 +25,7 @@ create table cinemaMovie(
     ageLimit        number              not null,
     runningTime     number              not null,
     urlName         varchar2(500),
+    movieCode		varchar2(10),
     deleted      char(1)   default 'n' check(deleted in('y','n'))
 );
 -------------------------------------------------------------------------------------------------------
@@ -126,7 +127,7 @@ create table cinemaSeat(
     seatName         varchar2(50) not null,
     reserved         char(1)      default 'y' check(reserved in('y','n')),
     constraint ticketing_idx_seat_fk foreign key(ticketing_idx)
-        references cinemaTicketing(ticketing_idx) on delete cascade
+        references cinemaTicketing(ticketing_idx) on delete cascade,
     constraint schedule_idx_seat_fk foreign key(schedule_idx)
         references cinemaSchedule(schedule_idx) on delete cascade
 );
@@ -274,13 +275,13 @@ drop sequence oneToOneAnswer_seq;
 drop table oneToOneAnswer;
 
 create sequence oneToOneAnswer_seq
-    start with1
+    start with 1
     maxvalue 99999999
     increment by 1
     nocache;
 
 create table oneToOneAnswer(
-    oneToOneAnswer_idx   number      default oneToOneAnswer_idx_seq.nextval primary key,
+    oneToOneAnswer_idx   number      default oneToOneAnswer_seq.nextval primary key,
     oneToOne_idx      number      not null,
     answerContent      varchar2(1000)   not null,
     answerDay      varchar2(50)   default to_char(sysdate,'yyyy-MM-dd HH24:mi'),
