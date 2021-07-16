@@ -17,8 +17,8 @@
         <!-- header안에 맨위에있는 로그인 박스 -->
         <div id="loginStatusBox">
             <ul id="loginStatus">
-                <li>로그인</li>
-                <li>회원가입</li>
+                <li><a href="${cpath }/cinemaUser/login">로그인</a></li>
+                <li><a href="${cpath }/cinemaUser/join">회원가입</a></li>
             </ul>
         </div>
         <!-- 로고 -->

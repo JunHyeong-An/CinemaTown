@@ -25,7 +25,7 @@
                 <ul id="miniMenu">
                     <li><div class="miniMunuText">ID 찾기</div></li>
                     <li><div class="miniMunuText">PW 찾기</div></li>
-                    <li><div class="miniMunuText">회원가입</div></li>
+                    <li><div class="miniMunuText"><a href="${cpath }/cinemaUser/join">회원가입</a></div></li>
                 </ul>
             </form>
         </main>
