@@ -41,7 +41,7 @@ function movePoster() {
 	posterPosition -= 300
 	posterSectionImg.style.transition = 800 + "ms"
 	posterSectionImg.style.left = posterPosition + "px"
-	console.log(posterPosition)
+
 	if((-300 * posterCnt) == posterPosition - 1200) {
 		posterPosition = 0
 	}

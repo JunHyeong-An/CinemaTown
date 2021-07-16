@@ -22,38 +22,6 @@
                 <div class="movieSelectBox"><a href="" style="color:black">21:45<br>4관</a></div>
                 <div class="movieSelectBox"><a href="" style="color:black">24:00<br>5관</a></div>
             </div>
-            <div class="movieSelect">
-                <div class="movieSelectBox"><a href="" style="color:black">09:05<br>1관</a></div>
-                <div class="movieSelectBox"><a href="" style="color:black">12:05<br>2관</a></div>
-                <div class="movieSelectBox"><a href="" style="color:black">18:15<br>3관</a></div>
-                <div class="movieSelectBox"><a href="" style="color:black">20:00<br>1관</a></div>
-
-            </div>
-            <div class="movieSelect">
-                <div class="movieSelectBox"><a href="" style="color:black">09:05<br>1관</a></div>
-                <div class="movieSelectBox"><a href="" style="color:black">12:05<br>2관</a></div>
-                <div class="movieSelectBox"><a href="" style="color:black">18:15<br>3관</a></div>
-                <div class="movieSelectBox"><a href="" style="color:black">20:00<br>1관</a></div>
-                <div class="movieSelectBox"><a href="" style="color:black">21:45<br>4관</a></div>
-            </div>
-            <div class="movieSelect">
-                <div class="movieSelectBox"><a href="" style="color:black">09:05<br>1관</a></div>
-                <div class="movieSelectBox"><a href="" style="color:black">12:05<br>2관</a></div>
-                <div class="movieSelectBox"><a href="" style="color:black">20:00<br>1관</a></div>
-                <div class="movieSelectBox"><a href="" style="color:black">21:45<br>4관</a></div>
-                <div class="movieSelectBox"><a href="" style="color:black">24:00<br>5관</a></div>
-                <div class="movieSelectBox"><a href="" style="color:black">21:45<br>4관</a></div>
-            </div>
-            <div class="movieSelect">
-                <div class="movieSelectBox"><a href="" style="color:black">09:05<br>1관</a></div>
-                <div class="movieSelectBox"><a href="" style="color:black">24:00<br>5관</a></div>
-            </div>
-            <div class="movieSelect">
-                <div class="movieSelectBox"><a href="" style="color:black">09:05<br>1관</a></div>
-                <div class="movieSelectBox"><a href="" style="color:black">12:05<br>2관</a></div>
-                <div class="movieSelectBox"><a href="" style="color:black">18:15<br>3관</a></div>
-                <div class="movieSelectBox"><a href="" style="color:black">24:00<br>5관</a></div>
-            </div>
         </div>
         
         <div id="movieTop10">

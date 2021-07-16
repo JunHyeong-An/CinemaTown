@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
+<c:if test="${empty login }">
+	<script>
+		alert("로그인후 이용할 수 있습니다.")
+		location.href = "${cpath}/cinemaUser/login"
+	</script>
+</c:if>
 <link rel="stylesheet" href="${cpath }/resources/ticketing/ticketing1.css">
 <link rel="stylesheet" href="${cpath }/resources/ticketing/ticketing2.css">
 <link rel="stylesheet" href="${cpath }/resources/ticketing/ticketing3.css">

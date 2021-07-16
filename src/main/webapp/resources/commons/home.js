@@ -3,7 +3,7 @@ let currDate = new Date()
 let year = currDate.getFullYear()
 let month = currDate.getMonth()+1 < 10 ? '0' + (currDate.getMonth() + 1) : currDate.getMonth() + 1
 let date = currDate.getDate()-1 < 10 ? '0' + (currDate.getDate() - 1) : currDate.getDate() - 1
-
+		
 // 영화진흥원 키
 var officekey = "?key=5e8a22d1d31b39c318121c8b84fa519d" // key 앞에 <?key=>를 붙여야함 : prameter
 let officeTargetDate = "&targetDt=" + String(year) + String(month) + String(date)
@@ -28,4 +28,17 @@ fetch(officeUrl, officeopt)
 		li.appendChild(a)
 		movieTop10.appendChild(li)
 	}
+})
+
+///////////////////////////////////////////////////////////
+
+const listUrl = "list"
+const listOpt = {method:"GET"}
+
+fetch(listUrl, listOpt)
+.then(resp => {
+	return resp.json()
+})
+.then(json => {
+	console.log(json)
 })
