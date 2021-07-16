@@ -90,6 +90,10 @@ public class CinemaMovieController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("/movieInfo")
+	public String movieInfo() {
+		return "cinemaMovie/movieInfo";
+	}
 	
 
 	
