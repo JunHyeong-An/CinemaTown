@@ -23,7 +23,7 @@
         </div>
         <div class="searchTitle"><h4>선택한 영화 정보</h4></div>
         <div class="tableMovie">
-            <form>
+        <form method="post">
             <div class="movieInfo">
                 영화 포스터 : <input type="url" name=urlName id="urlName" readonly>
                 영화 이름 :   <input type="text" name="movieName" id="movieNameText" readonly>

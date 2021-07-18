@@ -1,8 +1,7 @@
 @charset "UTF-8";
 /* logo font */
 @import
-	url('https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap')
-	;
+	url('https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap');
 
 @font-face {
 	font-family: 'gmarket';

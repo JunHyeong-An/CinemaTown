@@ -1,0 +1,98 @@
+#movieInfoContainer {
+    border: 1px solid red;
+}
+
+#movieInfoPosterAndTitle {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 100px;
+    background-color: black;
+}
+
+#movieInfoPoster {
+    width: 280px;
+    height: 400px;
+}
+
+#movieTitles {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+    color: white;
+}
+
+#koreanTitle {
+    font-size: 30pt;
+}
+
+#engTitle {
+    text-align: right;
+    font-size: 20pt;
+}
+
+#movieInfoMoreInformation {
+    display: flex;
+    padding: 40px 60px;
+}
+
+#movieMoreInfo {
+    width: 700px;
+    margin-right: 80px;
+}
+
+#movieMoreInfo,
+#movieMoreInfo tr, 
+#movieMoreInfo td,
+#movieMoreInfo th {
+    border-collapse: collapse;
+    border-bottom: 1px solid black;
+}
+
+#movieMoreInfo td,
+#movieMoreInfo th {
+    padding: 5px 40px;
+}
+
+#moviePlot {
+    width: 800px;
+}
+
+#movieStillCuts {
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    margin-bottom: 50px;
+}
+
+.movieStillCut {
+    width: 600px;
+    height: 250px;
+    margin: 5px;
+}
+
+#stillCutSection {
+    position: relative;
+    border: 1px solid seagreen;
+    width: 1220px;
+    height: 260px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+#stillCutBox {
+    position: absolute;
+    display: flex;
+    /* left: -610px; */
+}
+
+#moveiTrailer {
+    display: flex;
+    justify-content: center;
+    background-color: black;
+}
+
+#video {
+    width: 500px;
+    height: 300px;
+    background-color: white;
+}

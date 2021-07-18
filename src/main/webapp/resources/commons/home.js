@@ -13,7 +13,7 @@ var kmdbkey = "&ServiceKey=65TF8R843O8851911435"
 const officeUrl = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json" + officekey + officeTargetDate
 const officeopt = {method:"GET"}
 
-//const kmdbUrl = "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2" + kmdbkey + title
+//const kmdbUrl = "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2" + kmdbkey + title              
 
 fetch(officeUrl, officeopt)
 .then(resp => {
@@ -26,6 +26,7 @@ fetch(officeUrl, officeopt)
 		
 		a.innerHTML = json.boxOfficeResult.dailyBoxOfficeList[i].movieNm
 		li.appendChild(a)
+		a.setAttribute("href", cpath + "/cinemaMovie/movieInfo")
 		movieTop10.appendChild(li)
 	}
 })
@@ -47,6 +48,8 @@ fetch(listUrl, listOpt)
 })
 .then(json => {
 	for(i in json) {
+		if(i == 5)
+			break;
 		// 영화 이름 추가
 		const movieSelect = document.createElement("div")
 		movieSelect.classList.add("movieSelect")
@@ -59,6 +62,8 @@ fetch(listUrl, listOpt)
 		
 		// 
 		for(j in json[i].hallName) {
+			if(j == 5)
+				break;
 			const div2 = document.createElement("div")
 			const a2 = document.createElement("a")
 			a2.style.color = "black"
