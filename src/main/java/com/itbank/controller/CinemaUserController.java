@@ -68,16 +68,13 @@ public class CinemaUserController {
 		session.invalidate();
 		return "redirect:/";
 	}
-
-
-
 	// 회원가입 페이지에서 아이디 중복체크하기
 	@GetMapping("/idCheck/{userId}/")
 	@ResponseBody
 	public int idCheck(@PathVariable String userId) {
 		return cus.idCheck(userId);
 	}
-
+	
 	// 회원가입 페이지 보여주기
 	@GetMapping("/join")
 	public String join() {

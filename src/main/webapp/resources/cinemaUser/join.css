@@ -184,6 +184,9 @@
 	color: white;
 	cursor: pointer;
 }
+.emailCheckForm {
+	display: none;
+}
 #submitEmail {
 	width: 130px;
 	height: 35px;

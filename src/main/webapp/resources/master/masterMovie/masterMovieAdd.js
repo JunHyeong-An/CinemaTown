@@ -47,28 +47,30 @@ var key = "?key=5e8a22d1d31b39c318121c8b84fa519d" // key 앞에 <?key=>를 붙�
 						console.log(value2)
 						//kmdb 영화 리스트
 						const li = document.createElement('li')
-						const span = document.createElement('span')
+						const div = document.createElement('div')
+						const div2 = document.createElement('div')
+						div2.className = 'movieNameDiv'
 
-						li.className = 'liList'
-							const liList = document.querySelector('.liList')
-							const movieNm1 = document.createTextNode(name) // 영화이름
-							const rating = value2['Data'][0]['Result'][0].rating //영화 등급
-							const runtime = value2['Data'][0]['Result'][0].runtime //영화 상영시간
-							const movieSeqNum = value2['Data'][0]['Result'][0].movieSeq //영화 seq
-							let posters = value2['Data'][0]['Result'][0].posters    //영화 포스터
-							let arr = posters.split("|") // 포스터 url이 많아서 |로 나눔
+							li.className = 'liList'
+								const liList = document.querySelector('.liList')
+								const movieNm1 = document.createTextNode(name) // 영화이름
+								const rating = value2['Data'][0]['Result'][0].rating //영화 등급
+								const runtime = value2['Data'][0]['Result'][0].runtime //영화 상영시간
+								const movieSeqNum = value2['Data'][0]['Result'][0].movieSeq //영화 seq
 
-							const img = document.createElement('img')
-							img.id = 'movieImg'
-								img.setAttribute("src", arr[0]) // 나눈거에 0번째 포스터를 가져와서 img에 넣었음
-								span.appendChild(img)
+								let posters = value2['Data'][0]['Result'][0].posters    //영화 포스터
+								let arr = posters.split("|") // 포스터 url이 많아서 |로 나눔
 
-								if(searchName.value == '') {    // 검색하지 않고 클릭을하면 
-									ul.innerHTML = ''           // ul을 비워라
-								}
-						li.appendChild(span)
-						li.appendChild(movieNm1)        //li안에 이름을 넣어서 보여준다
-
+								const img = document.createElement('img')
+								img.id = 'movieImg'
+									img.setAttribute("src", arr[0]) // 나눈거에 0번째 포스터를 가져와서 img에 넣었음
+									div.appendChild(img)
+									div2.appendChild(movieNm1)
+									if(searchName.value == '') {    // 검색하지 않고 클릭을하면 
+										ul.innerHTML = ''           // ul을 비워라
+									}
+						li.appendChild(div)
+						li.appendChild(div2)
 						ulList.appendChild(li)
 
 
@@ -82,7 +84,7 @@ var key = "?key=5e8a22d1d31b39c318121c8b84fa519d" // key 앞에 <?key=>를 붙�
 							urlName.value = arr[0]        //포스터 url 받기
 							movieNameText.value = name    //이름 받기
 							runningTime.value = runtime   // 상영시간받기
-							movieCode.value = movieSeqNum
+							movieSeq.value = movieSeqNum
 						}
 					})
 				}

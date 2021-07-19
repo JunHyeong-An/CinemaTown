@@ -10,6 +10,14 @@ const submitBtn = document.querySelector("#submitJoin")
 const checkJoinText = Array.from(document.querySelectorAll("input[type='text'"))
 // home header에 있는 li들을 모두 가져와서 nodelist에서 array로 변환함
 const liBoxes = document.querySelectorAll("#headerList li")
+//회원가입 정규식 변수
+var idPattern = /^[A-Za-z]{1}[A-Za-z0-9]{3,19}$/;
+var pwPattern = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+var emailPattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
+var phonePattern = /^[0-9]{4}$/;
+var birthPattern = /^[0-9]{6}$/;
+var genderPattern = /^[1-4]{1}$/;
+
 
 //-------------------------------함수 선언부---------------------------------
 //폰넘버 합치기
@@ -53,18 +61,25 @@ makeAddressAdd = function() {
 function checkPw() {
    var pw = document.getElementById('password')
    const pwMsg = document.querySelector('.passwordMsg')
-
-   if(pw.value == pwCheck.value){
-      pwMsg.innerText = '비밀번호가 일치합니다.'
-      pwMsg.style.color = 'green'
+   if(pw.value != ''){
+	   if(pwPattern.test(pw.value)){
+		   if(pw.value == pwCheck.value){
+			   pwMsg.innerText = '비밀번호가 일치합니다.'
+				   pwMsg.style.color = 'green'
+		   }
+		   else {
+			   pwMsg.innerText = '비밀번호가 일치하지 않습니다'
+				   pwMsg.style.color = 'red'
+		   }
+	   }else {
+		   alert('비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리를 사용해야합니다.')
+		   pw.value = ''
+			   pwCheck.value = ''
+				   pw.focus();
+	   }	   
+   }else {
+	   joinMsg.innerHTML = "필수값을 입력해주세요"
    }
-   else {
-      pwMsg.innerText = '비밀번호가 일치하지 않습니다'
-      pwMsg.style.color = 'red'
-   }
-
-   if(pw.value == '') joinMsg.innerText = '필수값을 입력해주세요'
-   else joinMsg.innerText = ''
    
 }
 
@@ -96,15 +111,26 @@ function checkIdOverlap() {
       fetch(url, opt)
       .then(function(resp) {return resp.text()})
       .then(function(text) {
-
-         if(text=='1'){
-            checkIdMsg.innerText = '아이디중복입니다.'
-            checkIdMsg.style.color = 'red'
-         }
-         else {
-            checkIdMsg.innerText = '사용가능한아이디입니다.'
-            checkIdMsg.style.color = 'green'
-         }
+    	 if(userId.value != ''){
+    		 if(idPattern.test(userId.value)) {
+    			 if(text=='1'){
+    				 checkIdMsg.innerText = '아이디중복입니다.'
+    					 checkIdMsg.style.color = 'red'
+    			 }
+    			 else {
+    				 checkIdMsg.innerText = '사용가능한아이디입니다.'
+    					 checkIdMsg.style.color = 'green'
+    			 }    		 
+    		 }
+    		 if(!idPattern.test(userId.value)){
+    			 alert("아이디는 영문 대소문자와 숫자 4~12자리로 입력해야합니다!");
+    			 checkIdMsg.innerHTML = ''
+    				 userId.value = ''
+    				 userId.focus();
+    		 }    		 
+    	 }else {
+    		 joinMsg.innerHTML = "필수값을 입력해주세요"
+    	 }
       })
 }
 
@@ -125,8 +151,6 @@ function sample6_execDaumPostcode() {
          } else { // 사용자가 지번 주소를 선택했을 경우(J)
             addr = data.jibunAddress;
          }
-
-         
 
          // 우편번호와 주소 정보를 해당 필드에 넣는다.
          document.getElementById('sample6_postcode').value = data.zonecode;
@@ -161,18 +185,25 @@ submitBtn.onclick = function(event) {
    checkJoinText.forEach(ar => {
       checkRequiredValueSubmit(ar, event)
    })
+   if(authMailMsg.innerText == '인증 실패!!'){
+	   event.preventDefault()
+	   alert('이메일 인증을 실패하셨습니다.')
+	   userNumber.focus()
+   }
+   
 }
 
 // 아이디 중복검사
-userId.onkeyup = function(event){
+userId.onblur = function(event){
    checkIdOverlap()
 }
-//메일 주소를 입력하고 폼을 서브밋하면 작동할 이벤트
+//메일 주소를 입력하고 폼을 서브밋하면 작동할 이벤트 + 정규식
 const confirmEmail = document.getElementById('confirmEmail')
 const sendMailMsg = document.getElementById('sendMailMsg')
 const submitEmail = document.getElementById('submitEmail')
 const authMailMsg = document.getElementById('authMailMsg')
-
+const emailCheckForm = document.querySelector('.emailCheckForm')
+const userNumber = document.querySelector('input[name="auth"]')
 const sendMailHandler = function(event){
    makeEmailAddr()
    const userEmail = document.querySelector('input[name="userEmail"]')
@@ -184,15 +215,26 @@ const sendMailHandler = function(event){
    fetch(url,opt).then(resp => resp.text())
    .then(text => {
       console.log(text)
-      if(text.length == 128){      // hash값을 받았다면 길이는 128이다
-         sendMailMsg.innerText = '입력한 이메일로 인증번호를 전송했습니다'
-         sendMailMsg.style.color = 'blue'
-         sendMailMsg.style.fontWeight = 'bold'
+      console.log(userEmail.value)
+      if(userEmail.value != ''){
+    	  if(emailPattern.test(userEmail.value)){
+    		  if(text.length == 128){      // hash값을 받았다면 길이는 128이다
+    			  sendMailMsg.innerText = '입력한 이메일로 인증번호를 전송했습니다'
+    			  sendMailMsg.style.color = 'blue'
+    			  sendMailMsg.style.fontWeight = 'bold'
+    		  }
+    		  else{                  // error msg를 받았다면 128이 아니다
+    			  sendMailMsg.innerText = text
+    			  sendMailMsg.style.color = 'red'
+    			  sendMailMsg.style.fontWeight = 'bold'
+    		  }    	      		  
+    		  emailCheckForm.style.display = 'flex'
+    	  }else {
+    		  alert('이메일 형식이 아닙니다. 이메일 형식으로 입력해주세요!')
+    	  }
       }
-      else{                  // error msg를 받았다면 128이 아니다
-         sendMailMsg.innerText = text
-         sendMailMsg.style.color = 'red'
-         sendMailMsg.style.fontWeight = 'bold'
+      else{
+    	  joinMsg.innerHTML = "필수값을 입력해주세요"
       }
    })
 }
@@ -221,9 +263,59 @@ const authHandler = function(event){
 }
 submitEmail.onclick = authHandler
 
-
-
-
+//휴대폰번호 정규식 숫자 0~9중에 4자리만 입력가능
+const userPh2 = document.querySelector('input[name="userPh2"]')
+userPh2.onblur = function(event) {
+	if(userPh2.value != ''){
+		if(!phonePattern.test(userPh2.value)) {
+			alert('숫자 0~9중에 4자리만 입력하실수있습니다.')
+			userPh2.value = ''
+			userPh2.focus();
+		}		
+	}else {
+		joinMsg.innerHTML = "필수값을 입력해주세요"
+	}
+	
+}
+const userPh3 = document.querySelector('input[name="userPh3"]')
+userPh3.onblur = function(event) {
+	if(userPh3.value != ''){
+		if(!phonePattern.test(userPh3.value)) {
+			alert('숫자 0~9중에 4자리만 입력하실수있습니다.')
+			userPh3.value = ''
+			userPh3.focus();
+		}		
+	}
+	else {
+		joinMsg.innerHTML = "필수값을 입력해주세요"
+	}
+}
+//생일 정규식 숫자 6자리만 입력가능
+const joinBirth = document.querySelector('.joinBirth')
+joinBirth.onblur = function(event) {
+	if(joinBirth.value != ''){
+		if(!birthPattern.test(joinBirth.value)) {
+			alert('숫자 0~9중에 6자리만 입력하실수있습니다.')
+			joinBirth.value = ''
+			joinBirth.focus();
+		}		
+	}else {
+		joinMsg.innerHTML = "필수값을 입력해주세요"
+	}
+}
+//성별 정규식 숫자 0~4중에 1자리만 입력가능
+const joinGender = document.querySelector('.joinGender')
+joinGender.onblur = function(event) {
+	if(joinGender.value != ''){
+		if(!genderPattern.test(joinGender.value)) {
+			alert('숫자 1~4중에 1자리만 입력하실수있습니다.')
+			joinGender.value = ''
+			joinGender.focus();
+		}		
+	}else {
+		joinMsg.innerHTML = "필수값을 입력해주세요"
+	}
+}
 
 
 

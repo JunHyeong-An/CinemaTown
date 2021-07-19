@@ -31,27 +31,36 @@
 }
 
 .main {
-	padding-left: 500px;
-    justify-content: center;
-    align-items: center;
-	
+	 display: flex;
+     flex-flow: column;
+     justify-content:center;
+     align-items: center;
 }
-table {
-	padding: 20px;
-}
-
-td, th {
+.movieInfoName, th {
 	border: 1px solid black;
 	padding: 10px;
-	width: 300px;
 }
-
+.movieList {
+	display: flex;
+	justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding:20px;
+}
+.movieUrl {
+	align-items:center;
+}
+.movieInfoName {
+	width:100px;
+}
+.movieNameTable{
+	padding-bottom: 4px;
+}
 th {
 	background-color: #dadada;
 	width: 150px;
+	height: 78px;
 }
-
-
 
 #a {
 	display: flex;
