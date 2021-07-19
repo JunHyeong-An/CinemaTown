@@ -75,6 +75,9 @@ public class CinemaUserController {
 		return cus.idCheck(userId);
 	}
 	
+	@GetMapping("/tos")
+	public void tospage() {}
+
 	// 회원가입 페이지 보여주기
 	@GetMapping("/join")
 	public String join() {
@@ -87,7 +90,7 @@ public class CinemaUserController {
 		int row = cus.insert(dto);
 		return "redirect:/cinemaUser/login";
 	}
-
+	
 	// 정보 변경 페이지 넘어가기 전에 비밀번호 확인 받는 페이지
 	@GetMapping("/myPage/passwordModifyCheck")
 	public String passwordModifyCheck() {		

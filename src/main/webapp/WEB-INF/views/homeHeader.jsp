@@ -30,7 +30,7 @@
             <ul id="loginStatus">
             	<c:if test="${empty login }">
                 	<li><a href="${cpath }/cinemaUser/login">로그인</a></li>
-                	<li><a href="${cpath }/cinemaUser/join">회원가입</a></li>
+                	<li><a href="${cpath }/cinemaUser/tos">회원가입</a></li>
             	</c:if>
             	<c:if test="${not empty login }">
             		<li><a href="${cpath }/cinemaUser/logout">로그아웃</a></li>
