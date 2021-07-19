@@ -17,6 +17,9 @@
 <link rel="stylesheet" href="${cpath }/resources/commons/footer.css">
 </head>
 <body>
+<script>
+	const cpath = "${cpath}"
+</script>
 	<header>
         <div id="headerBanner">
             <img src="${cpath }/resources/commons/imgs/상단광고.jpg">

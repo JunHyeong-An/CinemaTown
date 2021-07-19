@@ -13,6 +13,9 @@
 
 </head>
 <body>
+<script>
+	const cpath = "${cpath}"
+</script>
  <header>
         <!-- header안에 맨위에있는 로그인 박스 -->
         <div id="loginStatusBox">
