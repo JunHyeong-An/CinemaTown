@@ -74,10 +74,6 @@ public class CinemaUserController {
 	public int idCheck(@PathVariable String userId) {
 		return cus.idCheck(userId);
 	}
-	
-	@GetMapping("/tos")
-	public void tospage() {}
-
 	// 회원가입 페이지 보여주기
 	@GetMapping("/join")
 	public String join() {

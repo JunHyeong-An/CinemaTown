@@ -56,5 +56,9 @@ public class HomeController {
 
 		return jsonData;
 	}
+	@GetMapping("/cinemaUser/tos")
+	public String tospage() {
+		return "/cinemaUser/tos";
+	}
 	
 }
