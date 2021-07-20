@@ -23,10 +23,11 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String home(Model model) {
-		String[] movieUrlList	= cms.movieUrlList();
-		String[] movieName	= cms.movieName();
-		model.addAttribute("movieName", movieName); 
-		model.addAttribute("movieUrlList", movieUrlList); 
+		
+		String[] movieCodeList	= cms.movieCodeList();
+		
+	
+		model.addAttribute("movieCodeList", movieCodeList); 
 		return "home";
 	}
 	

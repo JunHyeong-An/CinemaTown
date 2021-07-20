@@ -30,10 +30,6 @@ public interface CinemaMovieDAO {
 	@Select("select * from cinemaMovie")
 	List<CinemaMovieDTO> movieList();
 
-	// HomeController에 영화 포스터 띄우기위해 urlName 받아옴
-	@Select("select urlName from cinemaMovie")
-	String[] movieUrlList();
-
 	// 1. HomeController에 간이 상영시간표에 '영화이름들' 가져오기 위해서
 	@Select("select cinemaMovie.movieName" + 
 			"    from cinemaMovie " + 
@@ -72,8 +68,10 @@ public interface CinemaMovieDAO {
 			"    group by cinemaMovie.movieName")
 	int[] scheduleCountList();
 
-	@Select("select movieName from cinemaMovie")
-	String[] movieName();
+
+
+	@Select("select movieCode from cinemaMovie")
+	String[] movieCodeList();
 	
 	
 }
