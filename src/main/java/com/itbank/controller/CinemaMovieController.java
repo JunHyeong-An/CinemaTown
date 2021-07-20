@@ -104,12 +104,14 @@ public class CinemaMovieController {
 	public String scheduleList(Model model) throws JsonProcessingException {
 	
 		List<HashMap<String, Object>> listMap = new ArrayList<HashMap<String, Object>>();
-
 		String[] movieNameList = csls.movieNameList();
-		
+	
 		for(int i=0;i<movieNameList.length;i++) {
 				HashMap<String, Object> map = new HashMap<String, Object>();
+				CinemaMovieDTO movie_dto = csls.runningTimeAgeLimitList(movieNameList[i]);
 				map.put("movieName", movieNameList[i]);
+				map.put("runningTime", movie_dto.getRunningTime());
+				map.put("ageLimit", movie_dto.getAgeLimit());
 				int[] scheduleCountList = csls.scheduleCountList(movieNameList[i]);
 				String[] hallNameList = csls.hallNameList(movieNameList[i]);
 				
@@ -120,19 +122,22 @@ public class CinemaMovieController {
 					dto.setHallName(hallNameList[j]);
 					String[] start_timeList = csls.start_timeList(movieNameList[i], hallNameList[j]);
 					String[] end_timeList = csls.end_timeList(movieNameList[i],hallNameList[j]);
+					int[] seatCountRemainList = csls.seatCountRemainList(movieNameList[i],hallNameList[j]);
 					dto.setStart_time(start_timeList);
 					dto.setEnd_time(end_timeList);
+					dto.setSeatCountRemain(seatCountRemainList);
+					
 					map.put(Integer.toString(j), dto);
 					
 				}
 				listMap.add(map);
 		}
 
-		System.out.println(listMap);
+		
 		String jsonData = mapper.writeValueAsString(listMap);
 		System.out.println(jsonData);
 		return jsonData;
-	}	
+	}		
 	
 
 	

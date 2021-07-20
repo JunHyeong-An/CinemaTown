@@ -9,6 +9,7 @@ public class CinemaScheduleListDTO {
 	private String[] end_time;
 	private String hallName;
 	private int schedule_allCount;
+	private int[] seatCountRemain;
 
 	public String[] getStart_time() {
 		return start_time;
@@ -35,11 +36,22 @@ public class CinemaScheduleListDTO {
 	public void setEnd_time(String[] end_time) {
 		this.end_time = end_time;
 	}
+	public int[] getSeatCountRemain() {
+		return seatCountRemain;
+	}
+	public void setSeatCountRemain(int[] seatCountRemain) {
+		this.seatCountRemain = seatCountRemain;
+	}
 	@Override
 	public String toString() {
 		return "start_time=" + Arrays.toString(start_time) + ", end_time="
-				+ Arrays.toString(end_time) + ", hallName=" + hallName + ", schedule_allCount=" + schedule_allCount;
+				+ Arrays.toString(end_time) + ", hallName=" + hallName + ", schedule_allCount=" + schedule_allCount
+				+ ", seatCountRemain=" + Arrays.toString(seatCountRemain);
 	}
+	
+
+
+
 
 	
 	

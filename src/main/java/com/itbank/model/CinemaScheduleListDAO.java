@@ -46,6 +46,18 @@ public interface CinemaScheduleListDAO {
 			"    on cinemaSchedule.hall_idx = cinemaHall.hall_idx" + 
 			"    where cinemaschedule.moviename = #{movieName} and cinemaschedule.showday = '20210716' and cinemahall.hallName=#{hallName} order by end_time")
 	String[] end_timeList(@Param("movieName")String movieName,@Param("hallName")String hallName);
+	
+	@Select("select runningTime, ageLimit from cinemaMovie where movieName=#{movieName}")
+	CinemaMovieDTO runningTimeAgeLimitList(@Param("movieName")String movieName);
+
+	@Select("select cinemaschedule.seatcountremain" + 
+			"    from cinemaMovie " + 
+			"    join cinemaSchedule" + 
+			"    on cinemaMovie.movieName = cinemaSchedule.movieName " + 
+			"    join cinemaHall" + 
+			"    on cinemaSchedule.hall_idx = cinemaHall.hall_idx" + 
+			"    where cinemaSchedule.showDay = '20210716' and cinemaMovie.movieName=#{movieName} and cinemaHall.hallName=#{hallName} order by cinemaMovie.movieName, cinemaHall.hallName")
+	int[] seatCountRemainList(@Param("movieName")String movieName,@Param("hallName")String hallName);
 
 	
 }
