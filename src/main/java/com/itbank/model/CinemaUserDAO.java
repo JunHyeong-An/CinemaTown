@@ -1,5 +1,7 @@
 package com.itbank.model;
 
+import java.util.Date;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -36,7 +38,14 @@ public interface CinemaUserDAO {
 	@Update("update cinemaUser set userPw=#{userPw} where userId=#{userId}")
 	int passwordModify(CinemaUserDTO dto);
 
-	
+	// 로그인 유지 처리
+	@Update("update cinemaUser set sessionId=#{sessionId}, sessionLimit=#{sessionLimit} where userId=#{userId}")
+	void keepLogin(@Param("userId")String userId, @Param("sessionId")String sessionId, @Param("sessionLimit")Date sessionLimit);
+
+
+	// 세션키 검증
+	@Select("select * from cinemaUser where sessionId=#{sessionId} and sessionLimit > sysdate")
+	CinemaUserDTO checkUserWithSessionId(@Param("sessionId")String sessionId);
 	
 
 	
