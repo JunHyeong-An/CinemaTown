@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 public interface reviewDAO {
 
-	@Select("select * from review where movieName=#{movieName} order by reviewDay desc")
+	@Select("select * from review where movieName=#{movieName} and rownum >=#{rowMin} and row <=#{rowMax} order by reviewDay desc")
 	List<reviewDTO> reviewList(@Param("movieName")String movieName1);
 
 	@Insert("insert into review(movieName, userId, reviewContent)values(#{movieName},#{userId},#{reviewContent})")

@@ -8,7 +8,10 @@ public class reviewDTO {
 //    reviewContent   varchar2(1000)  not null,
 //    reviewDay       varchar2(50)    default to_char(sysdate,'yyyy-MM-dd HH24:mi')
 	
-	private int review_idx;
+//	  rowMin
+//	  rowMax
+	
+	private int review_idx, rowMin, rowMax;
 	private String movieName, userId, reviewContent, reviewDay;
 	
 	public int getReview_idx() {
@@ -40,5 +43,17 @@ public class reviewDTO {
 	}
 	public void setReviewDay(String reviewDay) {
 		this.reviewDay = reviewDay;
+	}
+	public int getRowMin() {
+		return rowMin;
+	}
+	public void setRowMin(int rowMin) {
+		this.rowMin = rowMin;
+	}
+	public int getRowMax() {
+		return rowMax;
+	}
+	public void setRowMax(int rowMax) {
+		this.rowMax = rowMax;
 	}
 }
