@@ -37,6 +37,7 @@
 							id="ageLimit" readonly> 영화 상영 시간 : <input type="text"
 							name="runningTime" id="runningTime" readonly> <input
 							type="hidden" name="movieCode" id="movieSeq" readonly>
+					
 					</div>
 			</div>
 			<div>

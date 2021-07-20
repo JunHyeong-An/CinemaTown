@@ -18,6 +18,7 @@ public interface MasterDAO {
 	@Insert("insert into cinemaMovie (movieName, ageLimit, runningTime, urlName, movieCode) values (#{movieName}, #{ageLimit}, #{runningTime}, #{urlName}, #{movieCode})")
 	int insert(CinemaMovieDTO dto);
 
+	
 	@Select("select * from cinemaHall order by hall_idx")
 	List<CinemaHallDTO> hallList();
 	
