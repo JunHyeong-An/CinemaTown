@@ -66,7 +66,6 @@ fetch(kmdbUrl, opt)
     	img.classList.add("movieStillCut")
     	stillCutBox.appendChild(img)
     })
-    console.log(vod)
     video.setAttribute("src", vod)
     // 스틸컷 슬라이드
     let leftPos = 0;

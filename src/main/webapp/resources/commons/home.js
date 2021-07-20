@@ -8,7 +8,7 @@ let date = currDate.getDate()-1 < 10 ? '0' + (currDate.getDate() - 1) : currDate
 var officekey = "?key=5e8a22d1d31b39c318121c8b84fa519d" // key 앞에 <?key=>를 붙여야함 : prameter
 let officeTargetDate = "&targetDt=" + String(year) + String(month) + String(date)
 // 영화 kmdb 키
-var kmdbkey = "&ServiceKey=65TF8R843O8851911435"
+//var kmdbkey = "&ServiceKey=65TF8R843O8851911435"
 
 const officeUrl = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json" + officekey + officeTargetDate
 const officeopt = {method:"GET"}

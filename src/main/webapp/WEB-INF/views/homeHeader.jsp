@@ -2,10 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="cpath" value="${pageContext.request.contextPath }" />
-<c:set var="movieNameList" value="${movieNameList }"/>
-<c:forEach var="name" items="${movieNameList }">
-	<input class="movieNames" type="hidden" value="${name }">
-</c:forEach>
+<c:set var="movieCodeList" value="${movieCodeList }"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +14,9 @@
 <link rel="stylesheet" href="${cpath }/resources/commons/footer.css">
 </head>
 <body>
+<c:forEach items="${movieCodeList }" var="movieCode">
+	<input type="hidden" value="${movieCode }" class="movieCodes">
+</c:forEach>
 <script>
 	const cpath = "${cpath}"
 </script>
@@ -60,19 +60,11 @@
         </div>
 
         <div id="posterSection">
-            <div class="movePoster">◀</div>
             <div id="posterBox">
-            	<div id="posterSectionImg">                                                           
-	            	<div class="mainPoster" style="background-color: red;"></div>
-	            	<div class="mainPoster" style="background-color: green;"></div>
-	            	<div class="mainPoster" style="background-color: yellow;"></div>
-	            	<div class="mainPoster" style="background-color: blue;"></div>
-	            	<div class="mainPoster" style="background-color: orange;"></div>
-	            	<div class="mainPoster" style="background-color: white;"></div>
-	            	<div class="mainPoster" style="background-color: lightgray;"></div>
+            	<div id="posterSectionImg">      
+<%-- 	            		<img src="${movieUrlList }" class="mainPoster">                                                               		 --%>
             	</div>
             </div>
-            <div class="movePoster">▶</div>
         </div>
     </header>
 <script src="${cpath }/resources/commons/homeHeader.js"></script>
