@@ -20,13 +20,17 @@ fetch(officeUrl, officeopt)
 	return resp.json()
 })
 .then(json => {
+	console.log(json)
 	for(let i = 0; i < 10; i++) {
 		const li = document.createElement("li")
 		const a = document.createElement("a")
+		let openDt = json.boxOfficeResult.dailyBoxOfficeList[i].openDt
+		let movieNm = json.boxOfficeResult.dailyBoxOfficeList[i].movieNm
+		openDt = openDt.replaceAll("-", "")
 		
 		a.innerHTML = json.boxOfficeResult.dailyBoxOfficeList[i].movieNm
 		li.appendChild(a)
-		a.setAttribute("href", cpath + "/cinemaMovie/movieInfo")
+		a.setAttribute("href", cpath + "/cinemaMovie/movieInfo?releaseDts=" + openDt + "&movieNm=" + movieNm)
 		movieTop10.appendChild(li)
 	}
 })
