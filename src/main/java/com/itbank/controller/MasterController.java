@@ -79,6 +79,7 @@ public class MasterController {
 		@PostMapping("/masterMovie/masterMovieAdd")
 		public String movieadd(CinemaMovieDTO dto) {
 			int row = mse.insert(dto);
+			System.out.println(dto.getMovieCode());
 			return "redirect:/master/masterMovie/masterMovieList";
 		}
 		
