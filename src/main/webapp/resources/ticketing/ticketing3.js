@@ -60,6 +60,7 @@ function cardBackInit() {
 }
 
 document.querySelector("#paymentBtn").onclick = function() {
+
 	cardNum = ""
 	const cardNums = Array.from(document.querySelectorAll(".cardNum"))
 	const cardPw = document.querySelector("#cardPw")
@@ -100,17 +101,17 @@ document.querySelector("#paymentBtn").onclick = function() {
 	ob.cardPassword = cardPassword
 	ob.scheduleIdx = movieScheduleIdx
 	
-	window.open("https://mockup-pg-web.kakao.com/v1/8f0f1702754d52f4d95e9fe83daaa3a32acc18ed1e96b480429a312c73c56c22/info")
-//	let ticketingJson = JSON.stringify(ob)
-//	console.log(ticketingJson)
-//	const url = "ticketing/" + ticketingJson + "/"
-//	const opt = {
-//		method: "POST"
-//	}
-//	
-//	fetch(url, opt)
-//	.then(function(resp)  {return resp.text()})
-//	.then(function(text)  {
-//		console.log(text)
-//	})
+
+	let ticketingJson = JSON.stringify(ob)
+	console.log(ticketingJson)
+	const url = "ticketing/" + ticketingJson + "/"
+	const opt = {
+		method: "POST"
+	}
+	
+	fetch(url, opt)
+	.then(function(resp)  {return resp.text()})
+	.then(function(text)  {
+		console.log(text)
+	})
 }

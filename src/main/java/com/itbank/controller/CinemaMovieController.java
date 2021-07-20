@@ -60,9 +60,8 @@ public class CinemaMovieController {
 	
 	// 예매하기
 	@PostMapping("/ticketing/{ticketingJson}/")
-	@ResponseBody
-	public int ticketing(@PathVariable String ticketingJson, CinemaTicketingDTO dto, HttpSession session) throws JsonMappingException, JsonProcessingException {
-
+	public String ticketing(@PathVariable String ticketingJson, CinemaTicketingDTO dto, HttpSession session) throws JsonMappingException, JsonProcessingException {
+		System.out.println(ticketingJson);
 		HashMap<String, String> map = new HashMap<String, String>();
 		
 		map = mapper.readValue(ticketingJson, new TypeReference<HashMap<String,String>>() {});
@@ -81,10 +80,10 @@ public class CinemaMovieController {
 		dto.setTeenagerCount(Integer.parseInt(map.get("studentCnt")));
 		int result = cms.ticketing(dto);
 		
-		if(result == 1) { return 1; }
-		
-		return 0;
 
+		
+		return result == 1 ? "cinemaMovie/kakaoPay" : "redirect:/";
+		
 	}
 	
 	// 예매 취소 시 돌아가는 메서드 ==> 주소 넣어야함
