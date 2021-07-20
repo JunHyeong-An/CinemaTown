@@ -28,11 +28,11 @@
         <!-- header안에 맨위에있는 로그인 박스 -->
         <div id="loginStatusBox">
             <ul id="loginStatus">
-            	<c:if test="${empty login }">
+            	<c:if test="${empty login and empty cookie.loginCookie}">
                 	<li><a href="${cpath }/cinemaUser/login">로그인</a></li>
                 	<li><a href="${cpath }/cinemaUser/tos">회원가입</a></li>
             	</c:if>
-            	<c:if test="${not empty login }">
+            	<c:if test="${not empty login or not empty cookie.loginCookie }">
             		<li><a href="${cpath }/cinemaUser/logout">로그아웃</a></li>
                 	<li><a href="${cpath }/cinemaUser/mypage">마이페이지</a></li>
             	</c:if>
