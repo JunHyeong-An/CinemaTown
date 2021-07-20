@@ -12,7 +12,9 @@ create table cinemaUser(
     userPh          varchar2(20)        not null,
     userAge      number          not null,
     userGender   varchar2(10)    not null,
-    userGrade       number              default 1       --관리자는 0번 고객은 1번 
+    userGrade       number              default 1,       --관리자는 0번 고객은 1번
+    sessionId varchar2(50) default 'none' not null,
+	sessionLimit timestamp 
 );
 -- 유저한명 만들어주기!!(비밀번호 hash처리때문에 반드시 사이트에서 회원가입 실행하기!)
 -------------------------------------------------------------------------------------------------------

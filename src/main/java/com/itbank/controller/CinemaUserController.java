@@ -1,5 +1,8 @@
 package com.itbank.controller;
 
+import java.util.Date;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import com.itbank.model.CinemaUserDTO;
 import com.itbank.service.CinemaUserService;
@@ -29,43 +33,52 @@ public class CinemaUserController {
 
 	// id, pw 입력해서 로그인 구현
 	@PostMapping("/login")
-	public String login(CinemaUserDTO dto, HttpSession session, HttpServletResponse response, HttpServletRequest request, String keepLogin) {      
+	public String login(CinemaUserDTO dto, HttpSession session, String url, HttpServletRequest request, HttpServletResponse response) {      
 		
-		// login logic
+		
 		CinemaUserDTO login = cus.login(dto);
 		session.setAttribute("login", login);
 		
 
 		if(login !=  null) {
 			session.setAttribute("userId", login.getUserId());
+			// JSESSION cookie
+			String keepLogin = request.getParameter("keepLogin");
+			if (keepLogin !=null) {
+				Cookie cookie = new Cookie("loginCookie", session.getId());
+				cookie.setPath("/");
+				int time = 86400 * 7;
+				cookie.setMaxAge(time);
+				response.addCookie(cookie);
+
+				Date sessionLimit = new Date(System.currentTimeMillis() + (1000*time));
+				cus.keepLogin(login.getUserId(), session.getId(), sessionLimit);
+				
+				
+			}
 			
-			return "redirect:/";
+			return url == null ? "redirect:/" : "redirect:"+url;
 		}
-		
-//		String keepLoginRe = request.getParameter("keepLogin");
-//
-//		if(keepLoginRe !=null) {
-//		// JSESSION cookie
-//			if(keepLoginRe.equals("on")) {
-//				if(session.getAttribute("login") != null) {
-//					Cookie jsId = new Cookie("JSESSIONID", session.getId());
-//					jsId.setMaxAge(86400 * 7);
-//					jsId.setPath("/test/cinemaUser");
-//					response.addCookie(jsId);
-//				}
-//	
-//			}
-//		}
-		return "redirect:/cinemaUser/login";
-	
-		
+			
+		return url == null ? "redirect:/" : "redirect:"+url;
 	}
 
 	// 로그아웃 구현
 	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		// session에 저장된 정보 제거
+	public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		CinemaUserDTO login = (CinemaUserDTO) session.getAttribute("login");
+
 		session.invalidate();
+
+		Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+		if (loginCookie != null) {
+			loginCookie.setPath("/");
+			loginCookie.setMaxAge(0);
+			response.addCookie(loginCookie);
+			cus.keepLogin(login.getUserId(), "none", new Date());
+
+		}
+
 		return "redirect:/";
 	}
 	// 회원가입 페이지에서 아이디 중복체크하기
@@ -74,10 +87,6 @@ public class CinemaUserController {
 	public int idCheck(@PathVariable String userId) {
 		return cus.idCheck(userId);
 	}
-	
-	@GetMapping("/tos")
-	public void tospage() {}
-
 	// 회원가입 페이지 보여주기
 	@GetMapping("/join")
 	public String join() {
@@ -140,7 +149,7 @@ public class CinemaUserController {
 	public String infoModify(String userId, String userAddr, String userPh) {		
 
 		int row = cus.infoModify(userId, userAddr, userPh);
-		return "redirect:/"; 	// 어디로 갈건지 설정!!
+		return "redirect:/"; 	
 	}
 
 	// user의 비밀번호 변경할 페이지 보여주기
@@ -154,8 +163,8 @@ public class CinemaUserController {
 	@PostMapping("/myPage/passwordModify")
 	public String passwordModify(CinemaUserDTO dto) {
 		int row = cus.passwordModify(dto);
-		// 로그아웃 시키고 session값지우고 다시 로그인 시킬것인지 의논하기★
-		return "home";
+		
+		return "redirect:/cinemaUser/logout";
 	}
 
 	// user의 탈퇴 페이지 보여주기

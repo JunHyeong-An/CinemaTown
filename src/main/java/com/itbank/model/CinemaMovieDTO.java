@@ -4,10 +4,10 @@ public class CinemaMovieDTO {
 
 //	MOVIENAME   NOT NULL VARCHAR2(500) 
 //	AGELIMIT    NOT NULL NUMBER        
-//	RUNNINGTIME NOT NULL NUMBER  
-//	MOVIECODE            VARCHAR2(10)  
-//	DELETED              CHAR(1)   
-	
+//	RUNNINGTIME NOT NULL NUMBER        
+//	DELETED              CHAR(1)  
+//	URLNAME              VARCHAR2(500) 
+//	MOVIECODE            VARCHAR2(10)  	
 	private int ageLimit;
 	private String movieName, deleted, urlName, movieCode;
 	private long runningTime;

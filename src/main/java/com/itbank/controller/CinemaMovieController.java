@@ -1,5 +1,6 @@
 package com.itbank.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,8 +22,10 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itbank.model.CinemaMovieDTO;
 import com.itbank.model.CinemaScheduleDTO;
+import com.itbank.model.CinemaScheduleListDTO;
 import com.itbank.model.CinemaTicketingDTO;
 import com.itbank.service.CinemaMovieService;
+import com.itbank.service.CinemaScheduleListService;
 
 
 @Controller
@@ -30,6 +33,7 @@ import com.itbank.service.CinemaMovieService;
 public class CinemaMovieController {
 
 	@Autowired private CinemaMovieService cms;
+	@Autowired private CinemaScheduleListService csls;
 	private ObjectMapper mapper = new ObjectMapper();
 	
 	@GetMapping("/ticketing")
@@ -94,6 +98,46 @@ public class CinemaMovieController {
 	public String movieInfo() {
 		return "cinemaMovie/movieInfo";
 	}
+	
+	@GetMapping(value="/schedule/list",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String scheduleList(Model model) throws JsonProcessingException {
+	
+		List<HashMap<String, Object>> listMap = new ArrayList<HashMap<String, Object>>();
+		String[] movieNameList = csls.movieNameList();
+	
+		for(int i=0;i<movieNameList.length;i++) {
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				CinemaMovieDTO movie_dto = csls.runningTimeAgeLimitList(movieNameList[i]);
+				map.put("movieName", movieNameList[i]);
+				map.put("runningTime", movie_dto.getRunningTime());
+				map.put("ageLimit", movie_dto.getAgeLimit());
+				int[] scheduleCountList = csls.scheduleCountList(movieNameList[i]);
+				String[] hallNameList = csls.hallNameList(movieNameList[i]);
+				
+				for(int j=0;j<scheduleCountList.length;j++) {
+					CinemaScheduleListDTO dto = new CinemaScheduleListDTO();
+					
+					dto.setSchedule_allCount(scheduleCountList[j]);
+					dto.setHallName(hallNameList[j]);
+					String[] start_timeList = csls.start_timeList(movieNameList[i], hallNameList[j]);
+					String[] end_timeList = csls.end_timeList(movieNameList[i],hallNameList[j]);
+					int[] seatCountRemainList = csls.seatCountRemainList(movieNameList[i],hallNameList[j]);
+					dto.setStart_time(start_timeList);
+					dto.setEnd_time(end_timeList);
+					dto.setSeatCountRemain(seatCountRemainList);
+					
+					map.put(Integer.toString(j), dto);
+					
+				}
+				listMap.add(map);
+		}
+
+		
+		String jsonData = mapper.writeValueAsString(listMap);
+		System.out.println(jsonData);
+		return jsonData;
+	}		
 	
 
 	

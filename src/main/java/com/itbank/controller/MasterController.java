@@ -17,6 +17,8 @@ import com.itbank.model.CinemaEventListDTO;
 import com.itbank.model.CinemaHallDTO;
 import com.itbank.model.CinemaMovieDTO;
 import com.itbank.model.CinemaScheduleDTO;
+import com.itbank.model.OneToOneAnswerDTO;
+import com.itbank.model.OneToOneDTO;
 import com.itbank.model.reviewDTO;
 import com.itbank.model.serviceCenterDTO;
 import com.itbank.service.MasterService;
@@ -55,12 +57,45 @@ public class MasterController {
 		   return rs.reviewDelete(review_idx);
 	   }
 	   
-	   //臾몄쓽 �젙蹂� 由ъ뒪�듃 遺덈윭�삤湲�
+	   //문의 정보 리스트 불러오기
 	   @GetMapping("/masterServiceCenter/masterLost")
 	   public String lostList(Model model) {
 		   List<serviceCenterDTO> list = mse.lostList();
 		   model.addAttribute("lostList", list);
 		   return "/master/masterServiceCenter/masterLost";
+	   }
+	   
+	   // 1:1문의 리스트 불러오기 
+	   @GetMapping("/masterServiceCenter/masterOneToOne")
+	   public String oneToOneList(Model model) {
+		   List<OneToOneDTO> list = mse.oneToOneList();
+		   model.addAttribute("oneToOneList", list);
+		   return "/master/masterServiceCenter/masterOneToOne";
+	   }
+	   
+	   // 1:1문의 제목 클릭 하고 들어와서 내용 보여주게 하기 (낱개낱개 보여줌), 답변 단것 보여주기
+	   @GetMapping("/masterServiceCenter/masterOneToOne2/{oneToOne_idx}")
+	   public ModelAndView EachOneToOne(@PathVariable int oneToOne_idx ) {
+		   ModelAndView mav = new ModelAndView("master/masterServiceCenter/masterOneToOne2");
+		   List<OneToOneAnswerDTO> list = mse.replyList();
+		   OneToOneDTO dto = mse.EachOneToOne(oneToOne_idx);
+		   mav.addObject("dto",dto);
+		   mav.addObject("replyList", list);
+		   return mav;
+	   }
+	   
+	   // 1:1 문의 제목클릭해서 그 해당 글에 답변 달아 주기
+	   @PostMapping("/masterServiceCenter/masterOneToOne2/{oneToOne_idx}")
+	   public String oneToOneAnswer(OneToOneAnswerDTO dto) {
+		   int row = mse.oneToOneAnswer(dto);
+		   return "/master/masterServiceCenter/masterOneToOne";
+	   }
+	   
+	   // 답변 수정 하기 (jsp에서는 구현 안했음)
+	   @PostMapping("//")
+	   public String oneToOneAnswerModify(OneToOneAnswerDTO dto) {
+		   int row = mse.oneToOneAnswerModify(dto);
+		   return "/master/masterServiceCenter/masterOneToOne";
 	   }
 	   
 	   //�쁺�솕 紐⑸줉 �쓣�슦湲�(愿�由ъ옄)

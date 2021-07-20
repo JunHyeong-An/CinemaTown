@@ -15,6 +15,8 @@ import com.itbank.model.CinemaHallDTO;
 import com.itbank.model.CinemaMovieDTO;
 import com.itbank.model.CinemaScheduleDTO;
 import com.itbank.model.MasterDAO;
+import com.itbank.model.OneToOneAnswerDTO;
+import com.itbank.model.OneToOneDTO;
 import com.itbank.model.serviceCenterDTO;
 
 @Service
@@ -38,6 +40,26 @@ public class MasterService {
 		return dao.lostList();
 	}
 
+	public List<OneToOneDTO> oneToOneList() {
+		return dao.oneToOneList();
+	}
+
+	public OneToOneDTO EachOneToOne(int oneToOne_idx) {
+		return dao.EachOneToOne(oneToOne_idx);
+	}
+
+	public int oneToOneAnswer(OneToOneAnswerDTO dto) {
+		return dao.oneToOneAnswer(dto);
+	}
+
+	public List<OneToOneAnswerDTO> replyList() {
+		return dao.replyList();
+	}
+
+	public int oneToOneAnswerModify(OneToOneAnswerDTO dto) {
+		return dao.oneToOneAnswerModify(dto);
+	}
+	
 	public List<CinemaMovieDTO> movieList() {
       return dao.movieList();
    }

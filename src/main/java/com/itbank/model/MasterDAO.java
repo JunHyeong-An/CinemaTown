@@ -12,6 +12,21 @@ public interface MasterDAO {
 	@Select("select * from cinemaLost")
 	List<serviceCenterDTO> lostList();
 
+	@Select("select * from oneToOne order by otoWriteDay desc")
+	List<OneToOneDTO> oneToOneList();
+
+	@Select("select * from oneToOne where oneToOne_idx=#{oneToOne_idx}")
+	OneToOneDTO EachOneToOne(int oneToOne_idx);
+
+	@Insert("insert into oneToOneAnswer(oneToOne_idx,answerContent) values(#{oneToOne_idx},#{answerContent})")
+	int oneToOneAnswer(OneToOneAnswerDTO dto);
+
+	@Select("select * from oneToOneAnswer")
+	List<OneToOneAnswerDTO> replyList();
+
+	@Update("update oneToOneAnswer set answerContent = '#{answerContent}' where oneToOneAnswer_idx = '#{oneToOneAnswer_idx}'")
+	int oneToOneAnswerModify(OneToOneAnswerDTO dto);
+	
 	@Select("select * from cinemaMovie order by movieName desc")
 	List<CinemaMovieDTO> movieList();
 	

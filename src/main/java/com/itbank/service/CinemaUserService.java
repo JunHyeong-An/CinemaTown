@@ -1,6 +1,8 @@
 package com.itbank.service;
 
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +66,16 @@ public class CinemaUserService {
 	public int passwordModify(CinemaUserDTO dto) {
 		dto.setUserPw(Hash.getHash(dto.getUserPw()));
 		return dao.passwordModify(dto);
+	}
+
+	public void keepLogin(String userId, String sessionId, Date sessionLimit) {
+		dao.keepLogin(userId, sessionId, sessionLimit);
+		
+	}
+	
+	public CinemaUserDTO checkUserWithSessionId(String sessionId) {
+		return dao.checkUserWithSessionId(sessionId);
+		
 	}
 	
 	

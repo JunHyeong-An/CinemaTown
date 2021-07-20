@@ -13,7 +13,4 @@ agreeBtn.onclick = function(event) {
     if(agreeChk[0].checked == false || agreeChk[1].checked == false || agreeChk[2] == false){
          event.preventDefault()
     }
-    else {
-        location.href = '${cpath}/cinemaUser/join.jsp'
-    }
 }

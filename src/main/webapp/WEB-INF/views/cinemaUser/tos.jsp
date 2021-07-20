@@ -6,6 +6,7 @@
 		<div class="h1">
 			<h1>CINEMATOWN 회원가입을 환영합니다!!</h1>
 		</div>
+	<form>
 	<textarea readonly="readonly">
         제 1 조 (목적)
         
@@ -69,12 +70,13 @@
 
 			<div class="allBtn">
 				<div class="agreeBtnSpace">
-					<input type="button" value="동의" class="agreeBtn">
+					<a href="${cpath }/cinemaUser/join"><input type="button" value="동의" class="agreeBtn"></a>
 				</div>
 				<div class="throbBtnSpace">
 					<input type="reset" value="비동의" class="throb">
 				</div>
 			</div>
+	</form>
 </div>
 <%@ include file="../footer.jsp"%>
 <script src="${cpath }/resources/cinemaUser/tos.js"></script>

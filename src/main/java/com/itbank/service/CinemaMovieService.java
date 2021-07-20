@@ -97,11 +97,7 @@ public class CinemaMovieService {
 		return movie_dao.movieList();
 	}
 
-	// HomeController에 띄울 영화 url 목록
-	public String[] movieUrlList() {
-		
-		return movie_dao.movieUrlList();
-	}
+
 	
 	public String[] movieNameList() {
 		return movie_dao.movieNameList();
@@ -124,11 +120,14 @@ public class CinemaMovieService {
 	}
 
 
-	public String[] movieName() {
+
+	public String[] movieCodeList() {
 		
-		return movie_dao.movieName();
+		return movie_dao.movieCodeList();
 	}
-	
+
+
+
 	
 
 	// ajax로 결제 취소와 결제완료시 각각 url을 통해 join해서 성인 수+ 청소년 수 값을 구해 계산하기

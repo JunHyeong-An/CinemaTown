@@ -1,5 +1,5 @@
 #movieInfoContainer {
-    border: 1px solid red;
+	user-select: none;
 }
 
 #movieInfoPosterAndTitle {
@@ -21,13 +21,17 @@
     color: white;
 }
 
-#koreanTitle {
+#title {
     font-size: 30pt;
 }
 
 #engTitle {
     text-align: right;
     font-size: 20pt;
+}
+
+#actors {
+	overflow: hidden;
 }
 
 #movieInfoMoreInformation {
@@ -61,18 +65,18 @@
     display: flex;
     justify-content: center;
     background-color: black;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
 }
 
 .movieStillCut {
     width: 600px;
-    height: 250px;
+    height: 300px;
     margin: 5px;
 }
 
 #stillCutSection {
     position: relative;
-    border: 1px solid seagreen;
+/*     border: 1px solid seagreen; */
     width: 1220px;
     height: 260px;
     overflow: hidden;
@@ -83,6 +87,14 @@
     position: absolute;
     display: flex;
     /* left: -610px; */
+}
+
+.stillCutMove {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	font-size: 20px;
 }
 
 #moveiTrailer {
