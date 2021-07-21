@@ -47,12 +47,13 @@ public class CinemaMovieController {
 	@GetMapping(value="/ticketing/{movieName}/{showDay}/", produces="application/json;charset=utf-8")
 	@ResponseBody
 	public List<HashMap<String, Object>> ticketing(@PathVariable String movieName, @PathVariable String showDay){
+		
 		return cms.ticketingList(movieName, showDay);
 	} 
 
-	@GetMapping("/schedule")	///ticketing/{movieName}/{showDay}/
-	public String schedule(Model model) {	//@pathValue �궗�슜�빐�꽌 �꽔�뼱二쇨린
-		// 다시 작업
+	@GetMapping("/schedule")	
+	public String schedule(Model model) {	
+	
 		return "cinemaMovie/schedule";
 	}
 	
@@ -80,7 +81,7 @@ public class CinemaMovieController {
 		dto.setTeenagerCount(Integer.parseInt(map.get("studentCnt")));
 		int result = cms.ticketing(dto);
 		if(result ==1 ) { 
-			return "cinemaMovie/ticketingSuccess"; 
+			return "redirect:/cinemaMovie/ticketingSuccess"; 
 		}
 		return "redirect:/";
 	}
@@ -115,6 +116,7 @@ public class CinemaMovieController {
 	
 	@GetMapping("/ticketingSuccess")
 	public String ticketingSuccess(HttpSession session, Model model) {
+		
 		String ticketingJson = (String) session.getAttribute("ticketingJson");
 		model.addAttribute("ticketingJson", ticketingJson);
 		return "cinemaMovie/ticketingSuccess";

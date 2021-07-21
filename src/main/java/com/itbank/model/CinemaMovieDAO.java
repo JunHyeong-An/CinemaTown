@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Update;
 public interface CinemaMovieDAO {
 
 	// 예매리스트
-	@Select("select cinemaMovie.movieName,cinemaSchedule.showDay,cinemaSchedule.seatCountRemain,to_char(cinemaSchedule.startTime,'HH24:mi') as start_time, to_char(cinemaSchedule.endTime,'HH24:mi') as end_time," + 
+	@Select("select cinemaMovie.movieName,cinemaMovie.ageLimit,cinemaMovie.urlName,cinemaSchedule.showDay,cinemaSchedule.seatCountRemain,to_char(cinemaSchedule.startTime,'HH24:mi') as start_time, to_char(cinemaSchedule.endTime,'HH24:mi') as end_time," + 
 			"    cinemaHall.hallName,cinemaHall.seatCountAll, cinemaschedule.schedule_idx, cinemaMovie.urlName" + 
 			"    from cinemaMovie" + 
 			"    full outer join cinemaSchedule" + 
