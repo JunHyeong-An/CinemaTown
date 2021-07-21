@@ -40,9 +40,9 @@ public class KakaoPayController {
 	@ResponseBody
 	public String kakaoPay(@PathVariable String ticketingJson, HttpSession session) throws IOException {
 		System.out.println(ticketingJson);
-		HashMap<String, String> map2 = new HashMap<String, String>();
+		HashMap<String, String> kakaoPay = new HashMap<String, String>();
 		
-		map2 = mapper.readValue(ticketingJson, new TypeReference<HashMap<String,String>>() {});
+		kakaoPay = mapper.readValue(ticketingJson, new TypeReference<HashMap<String,String>>() {});
 		session.setAttribute("ticketingJson", ticketingJson);
 		
 		URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
@@ -52,10 +52,10 @@ public class KakaoPayController {
 		conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 		conn.setDoOutput(true);
 		String userId = (String) session.getAttribute("userId");
-		String movieName = URLEncoder.encode(map2.get("movieName"), "UTF-8");
+		String movieName = URLEncoder.encode(kakaoPay.get("movieName"), "UTF-8");
 
 		String parameter = "cid=TC0ONETIME&" + "partner_order_id=11111&" + "partner_user_id="+userId+"&"
-				+ "item_name="+movieName+"&" + "quantity="+Integer.parseInt(map2.get("adultCnt"))+Integer.parseInt(map2.get("studentCnt"))+"&" + "total_amount="+map2.get("totalCost")+"&" + "tax_free_amount=0&"
+				+ "item_name="+movieName+"&" + "quantity="+Integer.parseInt(kakaoPay.get("adultCnt"))+Integer.parseInt(kakaoPay.get("studentCnt"))+"&" + "total_amount="+kakaoPay.get("totalCost")+"&" + "tax_free_amount=0&"
 				+ "approval_url=http://localhost:8080/cinematown/success&" + "cancel_url=http://localhost:8080/cinematown/cancle&"
 				+ "fail_url=http://localhost:8080/cinematown/fail";
 		OutputStream out = conn.getOutputStream();

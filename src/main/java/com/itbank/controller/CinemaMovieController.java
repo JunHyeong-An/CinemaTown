@@ -98,9 +98,11 @@ public class CinemaMovieController {
 	@GetMapping(value="/schedule/list/{tosDateJson}/",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String scheduleList(@PathVariable String tosDateJson, Model model) throws JsonProcessingException {
-		System.out.println(tosDateJson);
+		HashMap<String, String> dateMap = mapper.readValue(tosDateJson, new TypeReference<HashMap<String,String>>() {});
+		String showDay = dateMap.get("date");
+		
 		List<HashMap<String, Object>> listMap = new ArrayList<HashMap<String, Object>>();
-		String[] movieNameList = csls.movieNameList();
+		String[] movieNameList = csls.movieNameList(showDay);
 	
 		for(int i=0;i<movieNameList.length;i++) {
 				HashMap<String, Object> map = new HashMap<String, Object>();
@@ -108,17 +110,17 @@ public class CinemaMovieController {
 				map.put("movieName", movieNameList[i]);
 				map.put("runningTime", movie_dto.getRunningTime());
 				map.put("ageLimit", movie_dto.getAgeLimit());
-				int[] scheduleCountList = csls.scheduleCountList(movieNameList[i]);
-				String[] hallNameList = csls.hallNameList(movieNameList[i]);
+				int[] scheduleCountList = csls.scheduleCountList(showDay,movieNameList[i]);
+				String[] hallNameList = csls.hallNameList(movieNameList[i],showDay);
 				
 				for(int j=0;j<scheduleCountList.length;j++) {
 					CinemaScheduleListDTO dto = new CinemaScheduleListDTO();
 					
 					dto.setSchedule_allCount(scheduleCountList[j]);
 					dto.setHallName(hallNameList[j]);
-					String[] start_timeList = csls.start_timeList(movieNameList[i], hallNameList[j]);
-					String[] end_timeList = csls.end_timeList(movieNameList[i],hallNameList[j]);
-					int[] seatCountRemainList = csls.seatCountRemainList(movieNameList[i],hallNameList[j]);
+					String[] start_timeList = csls.start_timeList(movieNameList[i],showDay ,hallNameList[j]);
+					String[] end_timeList = csls.end_timeList(movieNameList[i],showDay,hallNameList[j]);
+					int[] seatCountRemainList = csls.seatCountRemainList(showDay,movieNameList[i],hallNameList[j]);
 					dto.setStart_time(start_timeList);
 					dto.setEnd_time(end_timeList);
 					dto.setSeatCountRemain(seatCountRemainList);
@@ -131,7 +133,7 @@ public class CinemaMovieController {
 
 		
 		String jsonData = mapper.writeValueAsString(listMap);
-		System.out.println(jsonData);
+		
 		return jsonData;
 	}		
 	
