@@ -104,7 +104,8 @@ document.querySelector("#paymentBtn").onclick = function() {
 
 	let ticketingJson = JSON.stringify(ob)
 	console.log(ticketingJson)
-	const url = "ticketing/" + ticketingJson + "/"
+
+	const url = "kakaoPay/" + ticketingJson + "/"
 	const opt = {
 		method: "POST"
 	}
@@ -113,5 +114,6 @@ document.querySelector("#paymentBtn").onclick = function() {
 	.then(function(resp)  {return resp.text()})
 	.then(function(text)  {
 		console.log(text)
+		open(text)
 	})
 }
