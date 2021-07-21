@@ -1,10 +1,113 @@
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+p {
+    margin: 0;
+}
+
+#container {
+    padding: 50px 0;
+    background-color: rgb(128, 128, 128);
+}
+
+#ticketingMain {
+    box-sizing: border-box;
+    width: 900px;
+    margin: 0 auto;
+    background-color: white;
+    border: 1px solid black;
+}
+
+#ticketingHeader {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    /* border: 1px solid red; */
+}
+
+.movieAndDate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
+    font-size: 15pt;
+    /* border: 1px solid black; */
+}
+
+.movieAndDate:first-child {
+    border-right: 1px solid white;
+}
+
+.movieAndDate p {
+    margin: 0 10px;
+}
+
+#ticketingSelectSection {
+    display: flex;
+}
+
+#ticketingSideList {
+    box-sizing: border-box;
+    width: 80px;
+    color: gray;
+    font-weight: bold;
+    /* border: 1px solid black; */
+}
+
+#ticketingSideList li {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 140px;
+    border-right: 1px solid black;
+}
+
+#ticketingSideList li:not(:last-child) {
+    border-bottom: 1px solid black;
+}
+
+#ticketingSideList p {
+    font-size: 20pt;
+}
+
+.ticketingSideListLocation {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    height: 80px;
+    /* border: 1px solid black; */
+}
+
+.ageLimit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid blue;
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
 #paymentContainer {
     display: flex;
     border-right: 1px solid black;
 }
 
 #paymentMovieInfoContainer {
-    width: 368px; 
+    width: 450px; 
     padding-top: 50px; 
     padding-bottom: 30px;
 }

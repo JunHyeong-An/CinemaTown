@@ -33,7 +33,7 @@ public class KakaoPayController {
 	public String success(@RequestParam("pg_token") String pgToken, HttpSession session) throws IOException {
 		kakaoPayApprove(pgToken, session);
 		
-		return "redirect:/cinemaMovie/ticketingSuccess";
+		return "/cinemaMovie/ticketingSuccess";
 	}
 	
 	@PostMapping("/cinemaMovie/kakaoPay/{ticketingJson}/")

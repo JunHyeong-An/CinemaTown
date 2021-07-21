@@ -2,6 +2,7 @@ const paymentMethods = Array.from(document.querySelectorAll(".paymentMethod"))
 const methodBox = document.querySelectorAll(".methodBox")
 const cards = document.querySelectorAll(".card")
 const table = document.querySelector("#paymentPersonalInfoTable")
+const kakaoPayBtn = document.querySelector("#kakaoPayBtn")
 
 paymentMethods.forEach((method, i) => {
     method.addEventListener('click', function() {selectPaymetMethod(method, i)})
@@ -16,6 +17,7 @@ function selectPaymetMethod(method, i) {
     else {
         methodBox[1].classList.remove("hidden")
         methodBox[0].classList.add("hidden")
+        kakaoPayBtn.classList.remove("hidden")
         table.classList.add("hidden")
         cardBackInit()
     }
@@ -105,7 +107,7 @@ document.querySelector("#paymentBtn").onclick = function() {
 	let ticketingJson = JSON.stringify(ob)
 	console.log(ticketingJson)
 
-	const url = "kakaoPay/" + ticketingJson + "/"
+	const url = "ticketing/" + ticketingJson + "/"
 	const opt = {
 		method: "POST"
 	}
@@ -113,7 +115,8 @@ document.querySelector("#paymentBtn").onclick = function() {
 	fetch(url, opt)
 	.then(function(resp)  {return resp.text()})
 	.then(function(text)  {
-		console.log(text)
-		open(text)
+		if(text == 1) {
+			location.href = cpath + "/cinemaMovie/ticketingSuccess"
+		}
 	})
 }
