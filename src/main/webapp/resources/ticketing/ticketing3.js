@@ -105,7 +105,6 @@ document.querySelector("#paymentBtn").onclick = function() {
 	
 
 	let ticketingJson = JSON.stringify(ob)
-	console.log(ticketingJson)
 
 	const url = "ticketing/" + ticketingJson + "/"
 	const opt = {
@@ -118,5 +117,35 @@ document.querySelector("#paymentBtn").onclick = function() {
 		if(text == 1) {
 			location.href = cpath + "/cinemaMovie/ticketingSuccess"
 		}
+	})
+}
+
+kakaoPayBtn.onclick = function() {
+	let ob = {}
+	ob.movieName = movieName	// 영화이름
+	ob.ticketingDate = ticketingDate	// 영화 시작 날짜
+	ob.ticketingTime = ticketingTime
+	ob.ticktingHallName = ticktingHallName
+	ob.selectSeats = selectSeats
+	ob.adultCnt = adultCnt
+	ob.studentCnt = studentCnt
+	ob.totalCost = totalCost
+	ob.cardNum = cardNum
+	ob.cardCompany = cardCompany
+	ob.cardPassword = cardPassword
+	ob.scheduleIdx = movieScheduleIdx
+	
+
+	let ticketingJson = JSON.stringify(ob)
+
+	const url = "kakaoPay/" + ticketingJson + "/"
+	const opt = {
+		method: "POST"
+	}
+	
+	fetch(url, opt)
+	.then(function(resp)  {return resp.text()})
+	.then(function(text)  {
+		location.href = text
 	})
 }

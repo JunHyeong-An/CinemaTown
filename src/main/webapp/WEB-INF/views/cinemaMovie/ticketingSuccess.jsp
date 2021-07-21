@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="${cpath }/resources/ticketing/ticketing.css">
 <c:set var="ticketingJson" value="${ticketingJson }"/>
 <input type="hidden" id="ticketingJson" value='${ticketingJson }'>
+<%-- \${ticketingJson } : ${ticketingJson } --%>
 <div id='container'>
         <div id="ticketingMain">
 			<div class="ticketingHeader">
