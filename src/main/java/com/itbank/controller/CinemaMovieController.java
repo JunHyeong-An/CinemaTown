@@ -98,10 +98,10 @@ public class CinemaMovieController {
 		return "cinemaMovie/movieInfo";
 	}
 	
-	@GetMapping(value="/schedule/list",produces="application/json;charset=utf-8")
+	@GetMapping(value="/schedule/list/{tosDateJson}/",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String scheduleList(Model model) throws JsonProcessingException {
-	
+	public String scheduleList(@PathVariable String tosDateJson, Model model) throws JsonProcessingException {
+		System.out.println(tosDateJson);
 		List<HashMap<String, Object>> listMap = new ArrayList<HashMap<String, Object>>();
 		String[] movieNameList = csls.movieNameList();
 	
