@@ -11,38 +11,38 @@ public class CinemaScheduleListService {
 
 	@Autowired private CinemaScheduleListDAO csl_dao;
 
-	public String[] movieNameList() {
+	public String[] movieNameList(String showDay) {
 		
-		return csl_dao.movieNameList();
+		return csl_dao.movieNameList(showDay);
 	}
 
-	public int[] scheduleCountList(String movieName) {
+	public int[] scheduleCountList(String showDay,String movieName) {
 		
-		return csl_dao.scheduleCountList(movieName);
+		return csl_dao.scheduleCountList(showDay,movieName);
 	}
 
-	public String[] hallNameList(String movieName) {
+	public String[] hallNameList(String movieName,String showDay) {
 		
-		return csl_dao.hallNameList(movieName);
+		return csl_dao.hallNameList(movieName,showDay);
 	}
 
-	public String[] start_timeList(String movieName, String hallName) {
+	public String[] start_timeList(String movieName, String showDay,String hallName) {
 		
-		return csl_dao.start_timeList(movieName, hallName);
+		return csl_dao.start_timeList(movieName,showDay, hallName);
 	}
 
-	public String[] end_timeList(String movieName, String hallName) {
+	public String[] end_timeList(String movieName,String showDay ,String hallName) {
 		
-		return csl_dao.end_timeList(movieName, hallName);
+		return csl_dao.end_timeList(movieName, showDay,hallName);
 	}
 	public CinemaMovieDTO runningTimeAgeLimitList(String movieName) {
 		
 		return csl_dao.runningTimeAgeLimitList(movieName);
 	}
 
-	public int[] seatCountRemainList(String movieName,String hallName) {
+	public int[] seatCountRemainList(String showDay,String movieName,String hallName) {
 		
-		return csl_dao.seatCountRemainList(movieName, hallName);
+		return csl_dao.seatCountRemainList(showDay,movieName, hallName);
 	}
 	
 }
