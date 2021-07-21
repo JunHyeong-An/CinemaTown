@@ -86,12 +86,12 @@ public class CinemaMovieController {
 	}
 	
 	// 예매하기
-	@PostMapping("/ticketing/{ticketingJson}")
+	@PostMapping("/ticketing/{ticketingJson}/")
 	@ResponseBody
 		public int ticketingDBInsert(@PathVariable String ticketingJson,CinemaTicketingDTO dto, HttpSession session) throws JsonMappingException, JsonProcessingException {
 
 			HashMap<String, String> map = new HashMap<String, String>();
-			
+			session.setAttribute("ticketingJson", ticketingJson);
 			map = mapper.readValue(ticketingJson, new TypeReference<HashMap<String,String>>() {});
 			
 			// userId받아오기(로그인 세션값으로 들고오기)
