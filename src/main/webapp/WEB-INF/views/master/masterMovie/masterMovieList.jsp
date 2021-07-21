@@ -44,6 +44,7 @@
 	       			</tr>
 	       		</table>
 	       	</div>
+			<div><a href="${cpath }/master/masterMovie/masterMovieList/delete?movieName=${movieInfo.movieName }"><button class="deleteBtn">삭제</button></a></div>
        	</div>
        </c:forEach>
 </div>

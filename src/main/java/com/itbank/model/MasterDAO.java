@@ -2,6 +2,7 @@ package com.itbank.model;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -63,4 +64,7 @@ public interface MasterDAO {
 
 	@Update("update cinemaEventList set eventListTitle=#{eventListTitle}, eventListContent = #{eventListContent}, eventListFileName = #{eventListFileName}, start_time = #{start_time} , end_time = #{end_time} where event_idx = #{event_idx}")
 	int modify(CinemaEventListDTO dto);
+
+	@Delete("delete from cinemaMovie where movieName = #{movieName}")
+	void deleteMovie(String movieName);
 }

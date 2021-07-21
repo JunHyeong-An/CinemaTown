@@ -156,5 +156,8 @@ public class MasterService {
 			return row;
 		
 		}
-	
+
+		public void delete(String movieName) {
+			dao.deleteMovie(movieName);
+		}
 }

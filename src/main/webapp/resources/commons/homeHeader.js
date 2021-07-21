@@ -76,11 +76,13 @@ movieCodeList.forEach(code => {
 		return resp.json()
 	})
 	.then(json => {
+		console.log(movieSeq)
+		console.log(json)
 		let data = json.Data[0].Result[0]
 		let posters = data.posters.split("|")
 		const posterImg = document.createElement("img")
 		const posterA = document.createElement("a")
-		console.log(data)
+//		console.log(data)
 		let releaseDts = "?releaseDts=" + data.repRlsDate
 		let movieNm = "&movieNm=" + data.title
 		posterA.setAttribute("href", cpath + "/cinemaMovie/movieInfo" + releaseDts + movieNm)

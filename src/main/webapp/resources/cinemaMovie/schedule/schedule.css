@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+body {
+	width: 80%;
+	padding-left: 140px;
+}
+
+.title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.head {
+	justify-content: center;
+	align-items: center;
+	border: 1px white;
+	background-color: black;
+	margin-bottom: 80px;
+}
+
+.all {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	font-size: 25px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.dayList {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 15px;
+}
+
+.divDate {
+	color: white;
+	padding-left: 40px;
+	font-size: 20px;
+}
+
+.movieInfo {
+	display: flex;
+	align-items: center;
+	padding-bottom: 20px;
+}
+
+.ageLimit {
+	border-radius: 30px;
+	background-color: #a8e7f8;
+	padding: 1px;
+	color: white;
+}
+
+.movieName {
+	font-size: 25px;
+	color: rgb(112, 107, 112);
+}
+
+.oneSpace, .twoSpace, .threeSpace {
+	display: flex;
+	margin-bottom: 20px;
+}
+
+.movieInfoDetail {
+	border: 1px solid rgb(138, 135, 135);
+	border-radius: 10px;
+	width: 80px;
+	align-items: center;
+	text-align: center;
+	padding: 10px;
+	margin-right: 50px;
+	font-weight: bold;
+}

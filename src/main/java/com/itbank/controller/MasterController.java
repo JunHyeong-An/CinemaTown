@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -105,6 +106,11 @@ public class MasterController {
 	      List<CinemaMovieDTO> list = mse.movieList();
 	      mav.addObject("list", list);
 	      return mav;
+	   }
+	   @GetMapping("/masterMovie/masterMovieList/delete")
+	   public String delete(@RequestParam("movieName") String movieName) {
+		   mse.delete(movieName);
+		   return "redirect:/master/masterMovie/masterMovieList/";
 	   }
 	   
 	   @GetMapping("/masterMovie/masterMovieAdd")
