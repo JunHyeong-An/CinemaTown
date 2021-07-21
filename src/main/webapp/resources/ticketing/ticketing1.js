@@ -167,6 +167,7 @@ function getMovieList() {
 			span1.innerHTML = json[i].SEATCOUNTREMAIN + "석 "
 			span2.innerHTML = " / " + json[i].SEATCOUNTALL + "석 "
 			span3.innerHTML = json[i].HALLNAME
+			console.log(json[i].HALLNAME)
 			input1.value = json[i].END_TIME
 			input2.value = json[i].SCHEDULE_IDX
 			
