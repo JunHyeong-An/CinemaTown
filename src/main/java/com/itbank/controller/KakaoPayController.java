@@ -8,34 +8,54 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.Scanner;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class KakaoPayController {
 
 	private ObjectMapper mapper = new ObjectMapper();
-	
+	String tid = "";
 	@GetMapping("/success")
-	public String success() {
-		return "cinemaMovie/success";
+	public String success(@RequestParam("pg_token") String pgToken, HttpSession session) throws IOException {
+		kakaoPayApprove(pgToken, session);
+		
+		return "redirect:/cinemaMovie/ticketingSuccess";
 	}
 	
-	@GetMapping("/cinemaMovie/kakaoPay")
-	public String kakaoPay() throws IOException {
-	
+	@PostMapping("/cinemaMovie/kakaoPay/{ticketingJson}/")
+	@ResponseBody
+	public String kakaoPay(@PathVariable String ticketingJson, HttpSession session) throws IOException {
+		System.out.println(ticketingJson);
+		HashMap<String, String> map2 = new HashMap<String, String>();
+		
+		map2 = mapper.readValue(ticketingJson, new TypeReference<HashMap<String,String>>() {});
+		session.setAttribute("ticketingJson", ticketingJson);
+		
 		URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("POST");
 		conn.setRequestProperty("Authorization", "KakaoAK d143e83dc154401c679ffe64cae1e360");
 		conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 		conn.setDoOutput(true);
-		String parameter = "cid=TC0ONETIME&" + "partner_order_id=11111&" + "partner_user_id=gildong11&"
-				+ "item_name=랑종&" + "quantity=2&" + "total_amount=28000&" + "tax_free_amount=0&"
+		String userId = (String) session.getAttribute("userId");
+		String movieName = URLEncoder.encode(map2.get("movieName"), "UTF-8");
+
+		String parameter = "cid=TC0ONETIME&" + "partner_order_id=11111&" + "partner_user_id="+userId+"&"
+				+ "item_name="+movieName+"&" + "quantity="+Integer.parseInt(map2.get("adultCnt"))+Integer.parseInt(map2.get("studentCnt"))+"&" + "total_amount="+map2.get("totalCost")+"&" + "tax_free_amount=0&"
 				+ "approval_url=http://localhost:8080/cinematown/success&" + "cancel_url=http://localhost:8080/cinematown/cancle&"
 				+ "fail_url=http://localhost:8080/cinematown/fail";
 		OutputStream out = conn.getOutputStream();
@@ -55,8 +75,46 @@ public class KakaoPayController {
 		BufferedReader buffReader = new BufferedReader(reader);
 	
 		HashMap<String, String> map = mapper.readValue(buffReader.readLine(), HashMap.class);
-
-		return "redirect:"+map.get("next_redirect_pc_url");
+		tid = map.get("tid");
+		return map.get("next_redirect_pc_url");
 	}
 	
+	public String kakaoPayApprove(String pgToken, HttpSession session) throws IOException {
+		URL url = new URL("https://kapi.kakao.com/v1/payment/approve");
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		
+		conn.setDoInput(true);
+		conn.setDoOutput(true);
+		conn.setRequestMethod("POST");
+		conn.setRequestProperty("Authorization", "KakaoAK d143e83dc154401c679ffe64cae1e360");
+		conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+
+		String userId = (String) session.getAttribute("userId");
+		String params = 
+				"cid=TC0ONETIME&"
+				+ "tid=" + tid + "&"
+				+ "partner_order_id=11111&"
+				+ "partner_user_id="+userId+"&"
+				+ "pg_token=" + pgToken;
+		
+		DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
+		
+		dos.writeBytes(params);
+		dos.flush();
+		dos.close();
+		
+		Scanner sc = new Scanner(conn.getInputStream());
+		String json = "";
+		
+		if(conn.getResponseCode() == 200) {
+			while(sc.hasNext()) {
+				json += sc.nextLine();
+			}
+		}
+//		sc.close();
+//		conn.disconnect();
+		System.out.println("json : " +json);
+		
+		return json;
+	}
 }
