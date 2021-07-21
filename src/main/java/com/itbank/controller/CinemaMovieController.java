@@ -59,10 +59,10 @@ public class CinemaMovieController {
 	
 	
 	// 예매하기
-	@GetMapping("/ticketingSuccess")
-	public String ticketing(CinemaTicketingDTO dto, HttpSession session) throws JsonMappingException, JsonProcessingException {
+	@GetMapping("/ticketingDBInsert")
+	public String ticketingDBInsert(CinemaTicketingDTO dto, HttpSession session) throws JsonMappingException, JsonProcessingException {
 		String ticketingJson = (String) session.getAttribute("ticketingJson");
-		System.out.println("1 : "+ticketingJson);
+		
 		HashMap<String, String> map = new HashMap<String, String>();
 		
 		map = mapper.readValue(ticketingJson, new TypeReference<HashMap<String,String>>() {});
@@ -79,8 +79,45 @@ public class CinemaMovieController {
 		dto.setAdultCount(Integer.parseInt(map.get("adultCnt")));
 		dto.setTeenagerCount(Integer.parseInt(map.get("studentCnt")));
 		int result = cms.ticketing(dto);
-		System.out.println(result);
+		if(result ==1 ) { 
+			return "cinemaMovie/ticketingSuccess"; 
+		}
 		return "redirect:/";
+	}
+	
+	// 예매하기
+	@PostMapping("/ticketing/{ticketingJson}")
+	@ResponseBody
+		public int ticketingDBInsert(@PathVariable String ticketingJson,CinemaTicketingDTO dto, HttpSession session) throws JsonMappingException, JsonProcessingException {
+
+			HashMap<String, String> map = new HashMap<String, String>();
+			
+			map = mapper.readValue(ticketingJson, new TypeReference<HashMap<String,String>>() {});
+			
+			// userId받아오기(로그인 세션값으로 들고오기)
+			String userId = (String)session.getAttribute("userId");
+			dto.setUserId(userId);
+
+			// 예매 insert하기
+			int schedule_Idx = Integer.parseInt(map.get("scheduleIdx"));
+			dto.setSchedule_idx(schedule_Idx);
+			
+			dto.setSeatNameAll(map.get("selectSeats"));
+			dto.setAdultCount(Integer.parseInt(map.get("adultCnt")));
+			dto.setTeenagerCount(Integer.parseInt(map.get("studentCnt")));
+			int result = cms.ticketing(dto);
+			if(result ==1 ) { 
+				return 1; 
+			}
+			return 0;
+		}
+	
+	
+	@GetMapping("/ticketingSuccess")
+	public String ticketingSuccess(HttpSession session, Model model) {
+		String ticketingJson = (String) session.getAttribute("ticketingJson");
+		model.addAttribute("ticketingJson", ticketingJson);
+		return "cinemaMovie/ticketingSuccess";
 	}
 	
 	// 예매 취소 시 돌아가는 메서드 ==> 주소 넣어야함
