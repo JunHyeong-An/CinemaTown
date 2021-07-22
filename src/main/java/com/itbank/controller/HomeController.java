@@ -25,8 +25,6 @@ public class HomeController {
 	public String home(Model model) {
 		
 		String[] movieCodeList	= cms.movieCodeList();
-		
-	
 		model.addAttribute("movieCodeList", movieCodeList); 
 		return "home";
 	}
@@ -57,9 +55,7 @@ public class HomeController {
 
 		return jsonData;
 	}
-	@GetMapping("/cinemaUser/tos")
-	public String tospage() {
-		return "/cinemaUser/tos";
-	}
+	
+
 	
 }

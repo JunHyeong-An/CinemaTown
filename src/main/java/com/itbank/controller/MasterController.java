@@ -20,8 +20,8 @@ import com.itbank.model.CinemaMovieDTO;
 import com.itbank.model.CinemaScheduleDTO;
 import com.itbank.model.OneToOneAnswerDTO;
 import com.itbank.model.OneToOneDTO;
-import com.itbank.model.reviewDTO;
-import com.itbank.model.serviceCenterDTO;
+import com.itbank.model.ReviewDTO;
+import com.itbank.model.ServiceCenterDTO;
 import com.itbank.service.MasterService;
 import com.itbank.service.reviewService;
 
@@ -46,8 +46,8 @@ public class MasterController {
 	   //由щ럭 由ъ뒪�듃 遺덈윭�삤湲�
 	   @GetMapping(value="/masterReview/masterReviewList/{movieName}/",produces="application/json;charset=utf-8")
 	   @ResponseBody
-	   public List<reviewDTO> movieReviewList(@PathVariable String movieName, Model model){
-		   List<reviewDTO> reviewList =  rs.reviewList(movieName);
+	   public List<ReviewDTO> movieReviewList(@PathVariable String movieName, Model model){
+		   List<ReviewDTO> reviewList =  rs.reviewList(movieName);
 		  model.addAttribute("reviewList", reviewList);
 	      return reviewList;
 	   }
@@ -61,7 +61,7 @@ public class MasterController {
 	   //문의 정보 리스트 불러오기
 	   @GetMapping("/masterServiceCenter/masterLost")
 	   public String lostList(Model model) {
-		   List<serviceCenterDTO> list = mse.lostList();
+		   List<ServiceCenterDTO> list = mse.lostList();
 		   model.addAttribute("lostList", list);
 		   return "/master/masterServiceCenter/masterLost";
 	   }
@@ -109,8 +109,8 @@ public class MasterController {
 	   }
 	   @GetMapping("/masterMovie/masterMovieList/delete")
 	   public String delete(@RequestParam("movieName") String movieName) {
-		   mse.delete(movieName);
-		   return "redirect:/master/masterMovie/masterMovieList/";
+		   mse.deleteMovie(movieName);
+		   return "redirect:/master/masterMovie/masterMovieList";
 	   }
 	   
 	   @GetMapping("/masterMovie/masterMovieAdd")

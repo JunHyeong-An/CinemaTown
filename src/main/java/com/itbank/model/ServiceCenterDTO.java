@@ -1,6 +1,6 @@
 package com.itbank.model;
 
-public class serviceCenterDTO {
+public class ServiceCenterDTO {
 
 //	CINEMALOST_IDX     NOT NULL NUMBER         
 //	CINEMALOSTDATETIME NOT NULL VARCHAR2(300)  
