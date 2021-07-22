@@ -219,7 +219,7 @@
 					<div id="paymentContainer">
 						<div id="paymentMovieInfoContainer">
 							<div id="movieInfo">
-								<img id="ticketingMoviePoster">
+								<img src="/1.jpg">
 							</div>
 							<div id="paymentInfo">
 								<div id="paymentMovieTitle">
@@ -274,7 +274,7 @@
 									<table id="paymentPersonalInfoTable" class="hidden">
 										<tr>
 											<th>고객이름</th>
-											<td>${login.userName }</td>
+											<td>김진현</td>
 										</tr>
 										<tr>
 											<th id="cardName"></th>

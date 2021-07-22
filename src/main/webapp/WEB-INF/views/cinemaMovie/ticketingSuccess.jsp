@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="${cpath }/resources/ticketing/ticketing.css">
 <c:set var="ticketingJson" value="${ticketingJson }"/>
 <input type="hidden" id="ticketingJson" value='${ticketingJson }'>
-\${ticketingJson } : ${ticketingJson }
+<%-- \${ticketingJson } : ${ticketingJson } --%>
 <div id='container'>
         <div id="ticketingMain">
 			<div class="ticketingHeader">
@@ -49,7 +49,7 @@
                     <div id="paymentContainer">
                         <div id="paymentMovieInfoContainer">
                             <div id="movieInfo">
-                                <img id="ticketingMoviePoster">
+                                <img src="/1.jpg">
                             </div>
                             <div id="paymentInfo">
                                 <div id="paymentMovieTitle">

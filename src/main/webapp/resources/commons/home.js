@@ -51,7 +51,6 @@ fetch(listUrl, listOpt)
 	return resp.json()
 })
 .then(json => {
-	console.log(json)
 	for(i in json) {
 		if(i == 5)
 			break;
@@ -73,8 +72,7 @@ fetch(listUrl, listOpt)
 			const a2 = document.createElement("a")
 			a2.style.color = "black"
 			a2.setAttribute("href", cpath + "/cinemaMovie/ticketing?movieNm=" 
-					+ json[i].movieName + "&hallName=" + json[i].hallName[j] + "&startTime=" + json[i].start_time[j]
-					+ "&resToken=1")
+					+ json[i].movieName + "&hallName=" + json[i].hallName[j] + "&startTime=" + json[i].start_time[j])
 			div2.classList.add("movieSelectBox")
 			
 			a2.innerHTML = json[i].hallName[j] + "<br>" + json[i].start_time[j]

@@ -99,29 +99,23 @@ document.querySelector("#paymentBtn").onclick = function() {
 	ob.studentCnt = studentCnt
 	ob.totalCost = totalCost
 	ob.cardNum = cardNum
-	ob.scheduleIdx = movieScheduleIdx
-	ob.reservationSeat = reservationSeat
-	ob.urlName = urlName
-	ob.ageLimit = ageLimit
 	ob.cardCompany = cardCompany
 	ob.cardPassword = cardPassword
+	ob.scheduleIdx = movieScheduleIdx
 	
 
 	let ticketingJson = JSON.stringify(ob)
 
-	const url = cpath + '/cinemaMovie/ticketing/'
+	const url = "ticketing/" + ticketingJson + "/"
 	const opt = {
-		method: "POST",
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: ticketingJson
+		method: "POST"
 	}
+	
 	fetch(url, opt)
 	.then(function(resp)  {return resp.text()})
 	.then(function(text)  {
 		if(text == 1) {
-			location.href = cpath + "/cinemaMovie/ticketingSuccess/"
+			location.href = cpath + "/cinemaMovie/ticketingSuccess"
 		}
 	})
 }
@@ -140,25 +134,18 @@ kakaoPayBtn.onclick = function() {
 	ob.cardCompany = cardCompany
 	ob.cardPassword = cardPassword
 	ob.scheduleIdx = movieScheduleIdx
-	ob.reservationSeat = reservationSeat
-	ob.urlName = urlName
-	ob.ageLimit = ageLimit
 	
 
 	let ticketingJson = JSON.stringify(ob)
 
-	const url = cpath + "/cinemaMovie/kakaoPay/"
+	const url = "kakaoPay/" + ticketingJson + "/"
 	const opt = {
-		method: "POST",
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: ticketingJson
+		method: "POST"
 	}
+	
 	fetch(url, opt)
 	.then(function(resp)  {return resp.text()})
 	.then(function(text)  {
 		location.href = text
-		
 	})
 }
