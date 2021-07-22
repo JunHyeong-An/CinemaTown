@@ -59,6 +59,21 @@ if(resToken == "1") {
 	t2Date.innerHTML = resDate
 
 	changeElement(changeCnt++)
+	
+	const seatUrl = cpath + "/getSeats/" + scheduleIdx + "/"
+	const opt = {
+		method: "GET"
+	}
+	
+	fetch(seatUrl, opt)
+	.then(resp => {
+		return resp.json()
+	})
+	.then(json => {
+		console.log('seat Arr')
+		console.log(json)
+		remainSeatArr = json
+	})
 }
 
 // 달과 날짜를 출력해줌
@@ -179,6 +194,7 @@ function getMovieList() {
 	.then(resp => resp.json())
 	.then(json => {
 		showTimeList.innerHTML = ''
+		console.log(json)
 		for(i in json) {
 			const div = document.createElement("div")
 			const p1 = document.createElement("p")
@@ -299,6 +315,23 @@ dateDcrBtn.onclick = decreaseDate
 
 // 달력 관련 끝
 function showCoverBox(div, json) {
+	console.log(json)
+	scheduleIdx = json.SCHEDULE_IDX
+	const seatUrl = cpath + "/getSeats/" + json.SCHEDULE_IDX + "/"
+	const opt = {
+		method: "GET"
+	}
+	
+	fetch(seatUrl, opt)
+	.then(resp => {
+		return resp.json()
+	})
+	.then(json => {
+		console.log('seat Arr')
+		console.log(json)
+		remainSeatArr = json
+	})
+	
 	coverBox.style.display = "flex"
 	coverBoxInfo.style.display = "block"
 		
