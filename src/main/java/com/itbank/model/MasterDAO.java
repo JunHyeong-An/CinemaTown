@@ -28,7 +28,7 @@ public interface MasterDAO {
 	@Update("update oneToOneAnswer set answerContent = '#{answerContent}' where oneToOneAnswer_idx = '#{oneToOneAnswer_idx}'")
 	int oneToOneAnswerModify(OneToOneAnswerDTO dto);
 	
-	@Select("select * from cinemaMovie order by movieName desc")
+	@Select("select * from cinemaMovie where deleted='n' order by movieName desc")
 	List<CinemaMovieDTO> movieList();
 	
 	@Insert("insert into cinemaMovie (movieName, ageLimit, runningTime, urlName, movieCode) values (#{movieName}, #{ageLimit}, #{runningTime}, #{urlName}, #{movieCode})")
@@ -65,6 +65,6 @@ public interface MasterDAO {
 	@Update("update cinemaEventList set eventListTitle=#{eventListTitle}, eventListContent = #{eventListContent}, eventListFileName = #{eventListFileName}, start_time = #{start_time} , end_time = #{end_time} where event_idx = #{event_idx}")
 	int modify(CinemaEventListDTO dto);
 
-	@Delete("delete from cinemaMovie where movieName = #{movieName}")
+	@Delete("update cinemaMovie set deleted='y' where movieName = #{movieName}")
 	void deleteMovie(String movieName);
 }

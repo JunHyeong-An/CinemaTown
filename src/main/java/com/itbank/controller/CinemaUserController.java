@@ -26,20 +26,40 @@ public class CinemaUserController {
 
 	@Autowired private CinemaUserService cus;
 
+	// 회원가입 페이지 보여주기
+	@GetMapping("/join")
+	public void join() {}
+	
+	// 회원가입 시 이용약관 보여주기
+	@GetMapping("/tos")
+	public void tosPage() {}
+	
+	// 회원가입 페이지에서 아이디 중복체크하기
+	@GetMapping("/idCheck/{userId}/")
+	@ResponseBody
+	public int idCheck(@PathVariable String userId) {
+		return cus.idCheck(userId);
+	}
+	
+	// 회원가입된 내용 DB에 저장
+	@PostMapping("/join")
+	public String insert(CinemaUserDTO dto) {
+		int row = cus.insert(dto);
+		return "redirect:/cinemaUser/login";
+	}
+	
 	// cinemaUser폴더에 login form부분 띄우기
 	@GetMapping("/login")
 	public void login() {}
 
 
-	// id, pw 입력해서 로그인 구현
+	// id, pw 입력해서 로그인 구현 + 자동로그인 유지
 	@PostMapping("/login")
 	public String login(CinemaUserDTO dto, HttpSession session, String url, HttpServletRequest request, HttpServletResponse response) {      
-		
 		
 		CinemaUserDTO login = cus.login(dto);
 		session.setAttribute("login", login);
 		
-
 		if(login !=  null) {
 			session.setAttribute("userId", login.getUserId());
 			// JSESSION cookie
@@ -63,14 +83,19 @@ public class CinemaUserController {
 		return url == null ? "redirect:/" : "redirect:"+url;
 	}
 
-	// 로그아웃 구현
+	// 로그아웃 
 	@GetMapping("/logout")
 	public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		
 		CinemaUserDTO login = (CinemaUserDTO) session.getAttribute("login");
-
 		session.invalidate();
 
 		Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+		if(login==null) {
+			String sessionId = loginCookie.getValue();
+			login = cus.checkUserWithSessionId(sessionId);
+		}
+		
 		if (loginCookie != null) {
 			loginCookie.setPath("/");
 			loginCookie.setMaxAge(0);
@@ -81,30 +106,12 @@ public class CinemaUserController {
 
 		return "redirect:/";
 	}
-	// 회원가입 페이지에서 아이디 중복체크하기
-	@GetMapping("/idCheck/{userId}/")
-	@ResponseBody
-	public int idCheck(@PathVariable String userId) {
-		return cus.idCheck(userId);
-	}
-	// 회원가입 페이지 보여주기
-	@GetMapping("/join")
-	public String join() {
-		return "cinemaUser/join";
-	}
+	
 
-	// 회원가입된 내용 DB에 저장
-	@PostMapping("/join")
-	public String insert(CinemaUserDTO dto) {
-		int row = cus.insert(dto);
-		return "redirect:/cinemaUser/login";
-	}
 	
 	// 정보 변경 페이지 넘어가기 전에 비밀번호 확인 받는 페이지
 	@GetMapping("/myPage/passwordModifyCheck")
-	public String passwordModifyCheck() {		
-		return "cinemaUser/myPage/passwordModifyCheck";
-	}
+	public void passwordModifyCheck() {}
 
 	// 정보 변경 전에 비밀번호 기입 시 일치, 불일치 확인하기
 	@PostMapping("/myPage/passwordModifyCheck")
@@ -154,10 +161,7 @@ public class CinemaUserController {
 
 	// user의 비밀번호 변경할 페이지 보여주기
 	@GetMapping("/myPage/passwordModify")
-	public String passwordModify() {
-		
-		return "cinemaUser/myPage/passwordModify";
-	}
+	public void passwordModify() {}
 
 	// user의 새 비밀번호 넣어주기
 	@PostMapping("/myPage/passwordModify")
@@ -169,14 +173,14 @@ public class CinemaUserController {
 
 	// user의 탈퇴 페이지 보여주기
 	@GetMapping("/deleteCheck")
-	public String delete() {
-		return "cinemaUser/deleteCheck";
-	}
+	public void delete() {}
 
-	// user의 비밀번호를 기입한 후 탈퇴하기 ==> ajax로 처리할 건지 의논하기★
+	// user의 비밀번호를 기입한 후 탈퇴하기 
 	@PostMapping("/deleteCheck")
-	public int deleteCheck(CinemaUserDTO dto) {
-		return cus.deleteCheck(dto);
+	public String deleteCheck(CinemaUserDTO dto, HttpSession session) {
+		dto.setUserId((String)session.getAttribute("userId"));
+		int row = cus.deleteCheck(dto);
+		return "redirect:/cinemaUser/" + (row == 1 ? "logout" : "deleteCheck");
 	}
 
 

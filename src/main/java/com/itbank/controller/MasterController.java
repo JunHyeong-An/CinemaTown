@@ -109,8 +109,8 @@ public class MasterController {
 	   }
 	   @GetMapping("/masterMovie/masterMovieList/delete")
 	   public String delete(@RequestParam("movieName") String movieName) {
-		   mse.delete(movieName);
-		   return "redirect:/master/masterMovie/masterMovieList/";
+		   mse.deleteMovie(movieName);
+		   return "redirect:/master/masterMovie/masterMovieList";
 	   }
 	   
 	   @GetMapping("/masterMovie/masterMovieAdd")
