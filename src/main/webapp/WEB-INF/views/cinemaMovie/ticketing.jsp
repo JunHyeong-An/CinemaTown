@@ -219,7 +219,7 @@
 					<div id="paymentContainer">
 						<div id="paymentMovieInfoContainer">
 							<div id="movieInfo">
-								<img src="/1.jpg">
+								<img id="ticketingMoviePoster">
 							</div>
 							<div id="paymentInfo">
 								<div id="paymentMovieTitle">

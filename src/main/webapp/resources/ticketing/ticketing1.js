@@ -23,8 +23,44 @@ const showTimeList = document.querySelector("#showTimeList")
 const coverBox = document.querySelector("#coverBox")
 const coverBoxInfo = document.querySelector("#coverBoxInfo")
 
+const ticketingMoviePoster = document.querySelector("#ticketingMoviePoster")
+
 let changeCnt = 0
-	
+let resToken = getParameterByName("resToken")
+
+if(resToken == "1") {
+	let rootDate = new Date()
+	let resYear = rootDate.getFullYear()
+	let resMonth = rootDate.getMonth()
+	resMonth = rootDate.getMonth() < 10 ? '0' + resMonth : resMonth
+	let resDate = rootDate.getDate()
+	resDate = rootDate.getDate() < 10 ? '0' + resDate : resDate
+
+	ticketingDate = String(resYear) + String(resMonth) + String(resDate)
+	console.log(ticketingDate)
+	movieName = getParameterByName("movieNm")
+	ticktingHallName = getParameterByName("hallName")
+	ticketingTime = getParameterByName("startTime").replace(":", "")
+		
+	const selectMovieInfo = document.querySelector("#selectMovieInfo")
+	const t2MovieName = document.querySelector("#t2MovieName")
+	const t2Month = document.querySelector("#t2Month")
+	const t2Date = document.querySelector("#t2Date")
+	const t2StartTime = document.querySelector("#t2StartTime")
+	const t2EndTime = document.querySelector("#t2EndTime")
+	const t2HallName = document.querySelector("#t2HallName")
+		
+//	document.querySelector("#age").appendChild(ageLimitBox)
+	t2MovieName.innerHTML = movieName
+	t2StartTime.innerHTML = ticketingTime.substr(0, 2) + ":" + ticketingTime.substr(2,2)
+	t2EndTime.innerHTML = movieEndTime
+	t2HallName.innerHTML = ticktingHallName
+	t2Month.innerHTML = resMonth
+	t2Date.innerHTML = resDate
+
+	changeElement(changeCnt++)
+}
+
 // 달과 날짜를 출력해줌
 function insertMonthAndDate() {
     selectDateBox.innerHTML = ''
@@ -167,10 +203,10 @@ function getMovieList() {
 			span1.innerHTML = json[i].SEATCOUNTREMAIN + "석 "
 			span2.innerHTML = " / " + json[i].SEATCOUNTALL + "석 "
 			span3.innerHTML = json[i].HALLNAME
-			console.log(json[i].HALLNAME)
 			input1.value = json[i].END_TIME
 			input2.value = json[i].SCHEDULE_IDX
-			
+			urlName = json[i].URLNAME
+			ticketingMoviePoster.setAttribute("src", urlName)
 			
 			p2.appendChild(span1)
 			p2.appendChild(span2)
@@ -304,10 +340,10 @@ function showCoverBox(div, json) {
 		const t2HallName = document.querySelector("#t2HallName")
 		
 		document.querySelector("#age").appendChild(ageLimitBox)
-		t2MovieName.innerHTML = movieName
-		t2StartTime.innerHTML = ticketingTime
-		t2EndTime.innerHTML = movieEndTime
-		t2HallName.innerHTML = ticktingHallName
+		t2MovieName.innerHTML = movieName // o
+		t2StartTime.innerHTML = ticketingTime // o
+		t2EndTime.innerHTML = movieEndTime // x
+		t2HallName.innerHTML = ticktingHallName // o
 		t2Month.innerHTML = document.querySelector("#headerMonth").innerHTML
 		t2Date.innerHTML = document.querySelector("#headerDate").innerHTML
 		
