@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="${cpath }/resources/ticketing/ticketing1.css">
 <link rel="stylesheet" href="${cpath }/resources/ticketing/ticketing2.css">
 <link rel="stylesheet" href="${cpath }/resources/ticketing/ticketing3.css">
-<link rel="stylesheet" href="${cpath }/resources/ticketing/ticketing4.css">
 <link rel="stylesheet" href="${cpath }/resources/ticketing/ticketing.css">
 <div id="coverBox"></div>
 <div class="coverBoxLoc" id="coverBoxInfo">
@@ -220,7 +219,7 @@
 					<div id="paymentContainer">
 						<div id="paymentMovieInfoContainer">
 							<div id="movieInfo">
-								<img src="/1.jpg">
+								<img id="ticketingMoviePoster">
 							</div>
 							<div id="paymentInfo">
 								<div id="paymentMovieTitle">
@@ -268,7 +267,9 @@
 										<div class="card">삼성카드</div>
 									</div>
 								</div>
-								<div id="phonePayment" class="methodBox hidden">휴대폰 결제</div>
+								<div id="phonePayment" class="methodBox hidden">
+									<img id="kakaoPayBtn" src="${cpath }/resources/ticketing/img/payment_icon_yellow_medium.png">
+								</div>
 								<div id="paymentPersonalInfo">
 									<table id="paymentPersonalInfoTable" class="hidden">
 										<tr>
@@ -313,5 +314,4 @@
 <script src="${cpath }/resources/ticketing/ticketing1.js"></script>
 <script src="${cpath }/resources/ticketing/ticketing2.js"></script>
 <script src="${cpath }/resources/ticketing/ticketing3.js"></script>
-<script src="${cpath }/resources/ticketing/ticketing4.js"></script>
 <%@ include file="../footer.jsp"%>

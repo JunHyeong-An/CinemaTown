@@ -1,6 +1,6 @@
 package com.itbank.model;
 
-public class reviewDTO {
+public class ReviewDTO {
 
 //    review_idx      number          default review_seq.nextval primary key,
 //    movieName       varchar2(50)    not null,

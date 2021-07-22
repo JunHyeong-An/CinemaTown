@@ -72,7 +72,8 @@ fetch(listUrl, listOpt)
 			const a2 = document.createElement("a")
 			a2.style.color = "black"
 			a2.setAttribute("href", cpath + "/cinemaMovie/ticketing?movieNm=" 
-					+ json[i].movieName + "&hallName=" + json[i].hallName[j] + "&startTime=" + json[i].start_time[j])
+					+ json[i].movieName + "&hallName=" + json[i].hallName[j] + "&startTime=" + json[i].start_time[j]
+					+ "&resToken=1")
 			div2.classList.add("movieSelectBox")
 			
 			a2.innerHTML = json[i].hallName[j] + "<br>" + json[i].start_time[j]

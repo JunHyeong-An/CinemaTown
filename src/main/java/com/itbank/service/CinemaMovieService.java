@@ -1,27 +1,21 @@
 package com.itbank.service;
 
-import java.util.Date;
+
 import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.itbank.model.CinemaHallDAO;
-import com.itbank.model.CinemaHallDTO;
 import com.itbank.model.CinemaMovieDAO;
 import com.itbank.model.CinemaMovieDTO;
 import com.itbank.model.CinemaPaymentDAO;
 import com.itbank.model.CinemaSalesDAO;
 import com.itbank.model.CinemaScheduleDAO;
-import com.itbank.model.CinemaScheduleDTO;
 import com.itbank.model.CinemaSeatDAO;
 import com.itbank.model.CinemaTicketingDAO;
 import com.itbank.model.CinemaTicketingDTO;
-import com.itbank.model.CinemaUserDTO;
 
 @Service
 public class CinemaMovieService {
@@ -30,17 +24,21 @@ public class CinemaMovieService {
 	@Autowired private CinemaSeatDAO seat_dao;
 	@Autowired private CinemaTicketingDAO ticketing_dao;
 	@Autowired private CinemaScheduleDAO schedule_dao;
-	@Autowired private CinemaHallDAO hall_dao;
 	@Autowired private CinemaPaymentDAO payment_dao;
 	@Autowired private CinemaSalesDAO sales_dao;
 
+//////////////////// CinemaMovieController ////////////////////////////////
+	// 예매 사이트 들어가면 왼쪽에 영화 리스트 목록 불러오기
+	public List<CinemaMovieDTO> movieList() {
 
-	// 예매리스트
+		return movie_dao.movieList();
+	}
+
+	// 예매 사이트에서 선택된 영화와 날짜에 따른 상영일정 보여주기
 	public List<HashMap<String, Object>> ticketingList(String movieName,String showDay ) {
 
 		return movie_dao.ticketingList(movieName, showDay);
 	}
-
 
 
 	// 예매하기, 결제하기, 매출등록 
@@ -92,35 +90,48 @@ public class CinemaMovieService {
 
 	}
 
-	public List<CinemaMovieDTO> movieList() {
-
-		return movie_dao.movieList();
-	}
-
-
 	
+////////////////////////// HomeController ///////////////////////////////	
+	// HomeController 간이 상영시간표에 보여 줄 오늘 '영화이름들'
 	public String[] movieNameList() {
 		return movie_dao.movieNameList();
 		
 	}
 
+	public String[] urlNameList() {
+		
+		return movie_dao.urlNameList();
+	}
+
+	public int[] ageLimitList() {
+	
+		return movie_dao.ageLimitList();
+	}
+	
+	// HomeController 간이 상영시간표에 보여 줄 오늘 '시작시간들'
 	public String[] start_timeList(String movieName) {
 
 		return movie_dao.start_timeList(movieName);
 	}
 
+	public String[] end_timeList(String movieName) {
+		
+		return movie_dao.end_timeList(movieName);
+	}
+	
+	// HomeController 간이 상영시간표에 보여 줄 오늘 '상영관들'
 	public String[] hallNameList(String movieName) {
 
 		return movie_dao.hallNameList(movieName);
 	}
 
+	// HomeController 간이 상영시간표에 for문돌리기 위해 가져 올 '해당 영화의 상영개수'
 	public int[] scheduleCountList() {
 		
 		return movie_dao.scheduleCountList();
 	}
 
-
-
+	// home페이지에 포스터 보여주기 위해 불러 올 영화 code리스트
 	public String[] movieCodeList() {
 		
 		return movie_dao.movieCodeList();
@@ -128,9 +139,6 @@ public class CinemaMovieService {
 
 
 
-	
-
-	// ajax로 결제 취소와 결제완료시 각각 url을 통해 join해서 성인 수+ 청소년 수 값을 구해 계산하기
 		
 	
 	

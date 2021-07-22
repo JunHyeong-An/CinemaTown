@@ -2,6 +2,7 @@ const paymentMethods = Array.from(document.querySelectorAll(".paymentMethod"))
 const methodBox = document.querySelectorAll(".methodBox")
 const cards = document.querySelectorAll(".card")
 const table = document.querySelector("#paymentPersonalInfoTable")
+const kakaoPayBtn = document.querySelector("#kakaoPayBtn")
 
 paymentMethods.forEach((method, i) => {
     method.addEventListener('click', function() {selectPaymetMethod(method, i)})
@@ -16,6 +17,7 @@ function selectPaymetMethod(method, i) {
     else {
         methodBox[1].classList.remove("hidden")
         methodBox[0].classList.add("hidden")
+        kakaoPayBtn.classList.remove("hidden")
         table.classList.add("hidden")
         cardBackInit()
     }
@@ -97,23 +99,65 @@ document.querySelector("#paymentBtn").onclick = function() {
 	ob.studentCnt = studentCnt
 	ob.totalCost = totalCost
 	ob.cardNum = cardNum
+	ob.scheduleIdx = movieScheduleIdx
+	ob.reservationSeat = reservationSeat
+	ob.urlName = urlName
+	ob.ageLimit = ageLimit
 	ob.cardCompany = cardCompany
 	ob.cardPassword = cardPassword
-	ob.scheduleIdx = movieScheduleIdx
 	
 
 	let ticketingJson = JSON.stringify(ob)
-	console.log(ticketingJson)
 
-	const url = "kakaoPay/" + ticketingJson + "/"
+	const url = cpath + '/cinemaMovie/ticketing/'
 	const opt = {
-		method: "POST"
+		method: "POST",
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: ticketingJson
 	}
-	
 	fetch(url, opt)
 	.then(function(resp)  {return resp.text()})
 	.then(function(text)  {
-		console.log(text)
-		open(text)
+		if(text == 1) {
+			location.href = cpath + "/cinemaMovie/ticketingSuccess/"
+		}
+	})
+}
+
+kakaoPayBtn.onclick = function() {
+	let ob = {}
+	ob.movieName = movieName	// 영화이름
+	ob.ticketingDate = ticketingDate	// 영화 시작 날짜
+	ob.ticketingTime = ticketingTime
+	ob.ticktingHallName = ticktingHallName
+	ob.selectSeats = selectSeats
+	ob.adultCnt = adultCnt
+	ob.studentCnt = studentCnt
+	ob.totalCost = totalCost
+	ob.cardNum = cardNum
+	ob.cardCompany = cardCompany
+	ob.cardPassword = cardPassword
+	ob.scheduleIdx = movieScheduleIdx
+	ob.reservationSeat = reservationSeat
+	ob.urlName = urlName
+	ob.ageLimit = ageLimit
+	
+	let ticketingJson = JSON.stringify(ob)
+
+	const url = cpath + "/cinemaMovie/kakaoPay/"
+	const opt = {
+		method: "POST",
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: ticketingJson
+	}
+	fetch(url, opt)
+	.then(function(resp)  {return resp.text()})
+	.then(function(text)  {
+		location.href = text
+		
 	})
 }

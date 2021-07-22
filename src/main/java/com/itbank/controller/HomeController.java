@@ -25,8 +25,6 @@ public class HomeController {
 	public String home(Model model) {
 		
 		String[] movieCodeList	= cms.movieCodeList();
-		
-	
 		model.addAttribute("movieCodeList", movieCodeList); 
 		return "home";
 	}
@@ -39,17 +37,24 @@ public class HomeController {
 		List<CinemaScheduleHomeDTO> listMap = new ArrayList<CinemaScheduleHomeDTO>();
 
 		String[] movieNameList = cms.movieNameList();
+		String[] urlNameList = cms.urlNameList();
+		int[] ageLimitList = cms.ageLimitList();
 		int[] scheduleCountList = cms.scheduleCountList();
 		
 		for(int i=0;i<movieNameList.length;i++) {
 			CinemaScheduleHomeDTO dto = new CinemaScheduleHomeDTO();
 				dto.setMovieName(movieNameList[i]);
+				dto.setUrlName(urlNameList[i]);
+				dto.setAgeLimit(ageLimitList[i]);
 				dto.setSchedule_allCount(scheduleCountList[i]);
 				String[] start_timeList = cms.start_timeList(movieNameList[i]);
+				String[] end_timeList = cms.end_timeList(movieNameList[i]);
 				String[] hallNameList = cms.hallNameList(movieNameList[i]);
 				dto.setStart_time(start_timeList);
+				dto.setEnd_time(end_timeList);
 				dto.setHallName(hallNameList);
 				listMap.add(dto);
+				System.out.println(dto);
 		
 		}
 		
@@ -57,9 +62,7 @@ public class HomeController {
 
 		return jsonData;
 	}
-	@GetMapping("/cinemaUser/tos")
-	public String tospage() {
-		return "/cinemaUser/tos";
-	}
+	
+
 	
 }

@@ -5,9 +5,12 @@ import java.util.Arrays;
 public class CinemaScheduleHomeDTO {
 
 	private String movieName;
-	private String[] start_time;
-	private String[] hallName;
+	private String urlName;
 	private int schedule_allCount;
+	private String[] start_time;
+	private String[] end_time;
+	private String[] hallName;
+	private int ageLimit;
 	public String getMovieName() {
 		return movieName;
 	}
@@ -32,11 +35,32 @@ public class CinemaScheduleHomeDTO {
 	public void setSchedule_allCount(int schedule_allCount) {
 		this.schedule_allCount = schedule_allCount;
 	}
+	public String[] getEnd_time() {
+		return end_time;
+	}
+	public void setEnd_time(String[] end_time) {
+		this.end_time = end_time;
+	}
+	public String getUrlName() {
+		return urlName;
+	}
+	public void setUrlName(String urlName) {
+		this.urlName = urlName;
+	}
+	public int getAgeLimit() {
+		return ageLimit;
+	}
+	public void setAgeLimit(int ageLimit) {
+		this.ageLimit = ageLimit;
+	}
 	@Override
 	public String toString() {
-		return "movieName=" + movieName + ", start_time=" + Arrays.toString(start_time)
-				+ ", hallName=" + Arrays.toString(hallName) + ", schedule_allCount=" + schedule_allCount;
+		return "movieName=" + movieName + ", urlName=" + urlName + ", schedule_allCount="
+				+ schedule_allCount + ", start_time=" + Arrays.toString(start_time) + ", end_time="
+				+ Arrays.toString(end_time) + ", hallName=" + Arrays.toString(hallName) + ", ageLimit=" + ageLimit;
 	}
+
+	
 	
 	
 

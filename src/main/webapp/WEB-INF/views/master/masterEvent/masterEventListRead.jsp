@@ -87,6 +87,7 @@
         <div class="smallTitle">이벤트 기간</div>
         <div class="eventDate">${dto.start_time } ~ ${dto.end_time }</div>
         <a href="${cpath }/master/masterEvent/masterEventModify/${dto.event_idx}"><div class="modifyButton">이벤트 수정하기</div></a>
+        <a href="${cpath }/master/masterEvent/masterEventDelete/${dto.event_idx}"><div class="modifyButton">이벤트 삭제하기</div></a>
  		</c:forEach>
     </div>
 
