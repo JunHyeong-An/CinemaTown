@@ -20,13 +20,19 @@ let movieName = ""
 let ticketingDate = ""
 let ticketingTime = ""
 let ticktingHallName = ""
+// endTime, ageLimit, urlName까지 받아야함
+// 1 변수 끝
 let selectSeats = ""
 let adultCnt = ""
 let studentCnt = ""
 let totalCost = ""
+// 2 변수 끝
 let cardNum = ""
 let cardCompany = ""
 let cardPassword = ""
+let urlName = ""
+let ageLimit = ""
+let reservationSeat = ""
 	
 // ticketing2로 보내는 변수들
 let movieEndTime = ""
