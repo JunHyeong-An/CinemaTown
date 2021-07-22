@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itbank.model.CinemaMovieDTO;
 import com.itbank.model.CinemaScheduleListDTO;
 import com.itbank.model.CinemaTicketingDTO;
+import com.itbank.model.ReviewDTO;
 import com.itbank.service.CinemaMovieService;
 import com.itbank.service.CinemaScheduleListService;
 import com.itbank.service.KakaoPayService;
@@ -42,6 +43,25 @@ public class CinemaMovieController {
 	// 영화 정보 페이지 보여주기
 	@GetMapping("/movieInfo")
 	public void movieInfo() {}
+	
+	// 영화 리뷰 등록하기
+	@PostMapping(value="/movieInfo/reviewAdd",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public int reviewAdd(@RequestBody HashMap<String, String>map) {
+		
+		System.out.println(map);
+		return cms.reviewAdd(map);
+	}
+	
+	//리스트 불러오기
+	@GetMapping("/movieInfo/list")
+	@ResponseBody
+	public List<ReviewDTO> reviewList(@RequestParam String rowMin, String rowMax ){
+		return cms.reviewList(rowMin,rowMax);
+	}
+	
+	
+	
 	
 	// 상영시간표 사이트 보여주기
 	@GetMapping("/schedule")	
