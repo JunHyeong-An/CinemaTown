@@ -13,16 +13,16 @@ public class reviewService {
 
 	@Autowired private ReviewDAO dao;
 
-	public List<ReviewDTO> reviewList(String movieName1) {
-		return dao.reviewList(movieName1);
-	}
-
 	public String[] movieNameList() {
 		return dao.movieNameList();
 	}
 
 	public int reviewDelete(int review_idx) {
 		return dao.reviewDelete(review_idx);
+	}
+
+	public List<ReviewDTO> movieReviewList(String movieNm) {
+		return dao.movieReviewList(movieNm);
 	}
 
 //	public int reviewDelete(String movieName) {

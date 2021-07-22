@@ -16,6 +16,8 @@ import com.itbank.model.CinemaScheduleDAO;
 import com.itbank.model.CinemaSeatDAO;
 import com.itbank.model.CinemaTicketingDAO;
 import com.itbank.model.CinemaTicketingDTO;
+import com.itbank.model.ReviewDAO;
+import com.itbank.model.ReviewDTO;
 
 @Service
 public class CinemaMovieService {
@@ -26,7 +28,7 @@ public class CinemaMovieService {
 	@Autowired private CinemaScheduleDAO schedule_dao;
 	@Autowired private CinemaPaymentDAO payment_dao;
 	@Autowired private CinemaSalesDAO sales_dao;
-
+	@Autowired private ReviewDAO	review_dao;
 //////////////////// CinemaMovieController ////////////////////////////////
 	// 예매 사이트 들어가면 왼쪽에 영화 리스트 목록 불러오기
 	public List<CinemaMovieDTO> movieList() {
@@ -138,6 +140,16 @@ public class CinemaMovieService {
 	}
 
 
+	
+	
+	// 영화 리뷰 등록 하는 것
+	public int reviewAdd(HashMap<String, String> map) {
+		return review_dao.reviewAdd(map);
+	}
+
+	public List<ReviewDTO> reviewList(String rowMin, String rowMax) {
+		return review_dao.reviewList(rowMin,rowMax);
+	}
 
 		
 	
