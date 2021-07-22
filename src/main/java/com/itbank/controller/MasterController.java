@@ -32,18 +32,18 @@ public class MasterController {
 	@Autowired private reviewService rs;
 	@Autowired private MasterService mse;
 	   
-	// master �솃
+	// 관리자 페이지
 	   @GetMapping("/master/masterHome")
 	   public void masterHome() {}
 	   
-	   //留덉뒪�꽣 由щ럭�뿉�꽌 �쁺�솕瑜� �겢由��빐�꽌 洹� �쁺�솕�뿉 愿��젴�맂 由щ럭留� 遺덈윭�삤湲�
+	   // 관리자 페이지 리뷰 리스트 관리
 	   @GetMapping("/masterReview/masterReviewList/")
 	   public void movieDelete(Model model) {
 	      String[] movieNameList = rs.movieNameList();
 	      model.addAttribute("movieNameList", movieNameList);
 	      System.out.println(movieNameList);
 	   }
-	   //由щ럭 由ъ뒪�듃 遺덈윭�삤湲�
+	   // 관리자 리뷰 리스트 영화이름으로 분류
 	   @GetMapping(value="/masterReview/masterReviewList/{movieName}/",produces="application/json;charset=utf-8")
 	   @ResponseBody
 	   public List<ReviewDTO> movieReviewList(@PathVariable String movieName, Model model){
@@ -51,7 +51,7 @@ public class MasterController {
 		  model.addAttribute("reviewList", reviewList);
 	      return reviewList;
 	   }
-	   //由щ럭�궘�젣
+	   // 관리자 리뷰 리스트 중 한개 삭제
 	   @DeleteMapping("/masterReview/masterReviewList/{review_idx}/")
 	   @ResponseBody
 		public int reviewDelete(@PathVariable int review_idx) {
@@ -99,7 +99,7 @@ public class MasterController {
 		   return "/master/masterServiceCenter/masterOneToOne";
 	   }
 	   
-	   //�쁺�솕 紐⑸줉 �쓣�슦湲�(愿�由ъ옄)
+	   // 영화 리스트 페이지
 	   @GetMapping("/masterMovie/masterMovieList")
 	   public ModelAndView listType() {
 	      ModelAndView mav = new ModelAndView("master/masterMovie/masterMovieList");
@@ -113,10 +113,11 @@ public class MasterController {
 		   return "redirect:/master/masterMovie/masterMovieList";
 	   }
 	   
+	   // 영화 추가 페이지
 	   @GetMapping("/masterMovie/masterMovieAdd")
 	   public void movieadd2() {}
 
-		// �쁺�솕 異붽��븯湲�(愿�由ъ옄)
+		// 영화 추가 하기
 		@PostMapping("/masterMovie/masterMovieAdd")
 		public String movieadd(CinemaMovieDTO dto) {
 			int row = mse.insert(dto);
@@ -124,7 +125,7 @@ public class MasterController {
 			return "redirect:/master/masterMovie/masterMovieList";
 		}
 		
-		// �쁺�솕 or �긽�쁺愿� �씪�젙 異붽��븯�뒗 �럹�씠吏� (愿�由ъ옄)
+		// 상영 일정 페이지
 		@GetMapping("/masterMovie/cinemaSchedule")
 		public ModelAndView addMovieClick(){
 			ModelAndView mav = new ModelAndView("master/masterMovie/cinemaSchedule");
@@ -135,18 +136,18 @@ public class MasterController {
 			return mav;
 		}
 		
-		// �긽�쁺愿� �씪�젙 異붽��븯湲�(愿�由ъ옄)
+		// 상영 일정에 영화, 상영관 추가하기
 		@PostMapping("/masterMovie/cinemaSchedule")
 		public String insertMovie(CinemaScheduleDTO dto, String hallName) {
 			int row = mse.insertMovie(dto, hallName);
 			return "redirect:/master/masterMovie/masterMovieList";
 		}
 	   
-	   // �씠踰ㅽ듃 異붽��븯�뒗 愿�由ъ옄 �럹�씠吏�(愿�由ъ옄)
+	   // 관리자 이벤트 추가 페이지
 	   @GetMapping("/masterEvent/masterEventAdd")
 	   public void add() {}
 		
-	   // �씠踰ㅽ듃 異붽��븯湲�(愿�由ъ옄)
+	   // 관리자 이벤트 추가
 	   @PostMapping("/masterEvent/masterEventAdd")
 	   public String writeEvent(CinemaEventListDTO dto){
 		   System.out.println(dto);
@@ -155,15 +156,15 @@ public class MasterController {
 	   return "redirect:/master/masterEvent/masterEventList/";
 	   }
 
-	   // �씠踰ㅽ듃 由ъ뒪�듃(愿�由ъ옄)
+	   // 관리자 이벤트 리스트
 	   @GetMapping("/masterEvent/masterEventList")
 	   public ModelAndView eventList() {
 	   ModelAndView mav = new ModelAndView("master/masterEvent/masterEventList");
 			
-	   // �쁽�옱 吏꾪뻾以묒씤 �씠踰ㅽ듃 由ъ뒪�듃
+	   // 진행 중 이벤트 리스트
 	   List<CinemaEventListDTO> list = mse.selectList();
 			
-	   // 醫낅즺�맂 �씠踰ㅽ듃 由ъ뒪�듃
+	   // 종료된 이벤트 리스트
 	   List<CinemaEventListDTO> list2 = mse.selectList2();
 			
 	   mav.addObject("list", list);
@@ -171,7 +172,7 @@ public class MasterController {
 	   return mav;	
 	   }
 		
-	   // �씠踰ㅽ듃 由ъ뒪�듃以� �븳媛쒕�� �걣�뼱���꽌 洹� 由ъ뒪�듃�뿉 ���븳 �궡�슜 �걣�뼱�삤湲�
+	   // 관리자 이벤트 페이지 리스트 중 한개 정보
 	   @GetMapping("/masterEvent/masterEventListRead/{event_idx}")
 	   public ModelAndView read(@PathVariable int event_idx) {
 	   ModelAndView mav = new ModelAndView("master/masterEvent/masterEventListRead");
@@ -180,21 +181,26 @@ public class MasterController {
 	   return mav;
 	   }
 		
-	   // �씠踰ㅽ듃 �븳媛쒖뿉 ���븳 �궡�슜 �닔�젙 �럹�씠吏� �걣�뼱�삤湲�
+	   // 관리자 이벤트 페이지 수정
 	   @GetMapping("/masterEvent/masterEventModify/{event_idx}")
 	   public ModelAndView readmodify(@PathVariable int event_idx) {
-		   ModelAndView mav = new ModelAndView("master//masterEvent/masterEventModify");
+		   ModelAndView mav = new ModelAndView("master/masterEvent/masterEventModify");
 		   List<CinemaEventListDTO> list = mse.selectOneList(event_idx);
 		   mav.addObject("list", list);
 		   return mav;
 	   }
 		
-	   // �씠踰ㅽ듃 �븳媛쒖뿉 ���븳 �궡�슜 �닔�젙�븯湲�
+	   // 관리자 이벤트 페이지 수정한 후 리스트로 이동
 	   @PostMapping("/masterEvent/masterEventModify/{event_idx}")
 	   public String modify(CinemaEventListDTO dto) {
 		   int row = mse.modify(dto);
 		   return "redirect:/master/masterEvent/masterEventList/";
 	   }
 	   
-	   
+	   // 관리자 이벤트 리스트 중 한개 삭제
+	   @GetMapping("/masterEvent/masterEventDelete/{event_idx}")
+	   public String eventDelete(@PathVariable int event_idx) {
+		   int row = mse.eventDelete(event_idx);
+		   return "redirect:/master/masterEvent/masterEventList";
+	   }
 }

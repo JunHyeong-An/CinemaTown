@@ -67,4 +67,9 @@ public interface MasterDAO {
 
 	@Delete("update cinemaMovie set deleted='y' where movieName = #{movieName}")
 	void deleteMovie(String movieName);
+
+	@Delete("delete from cinemaEventList where event_idx = #{event_idx}")
+	int eventDelete(int event_idx);
+
+	
 }

@@ -160,4 +160,8 @@ public class MasterService {
 		public void deleteMovie(String movieName) {
 			dao.deleteMovie(movieName);
 		}
+
+		public int eventDelete(int event_idx) {
+			return dao.eventDelete(event_idx);
+		}
 }
