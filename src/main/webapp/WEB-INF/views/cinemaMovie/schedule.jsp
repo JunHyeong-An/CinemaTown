@@ -12,29 +12,23 @@
 			<!-- <div class="day">20</div> -->
 		</div>
 	</div>
-	<div>
-		<div class="movieInfo">
-			<div class="ageLimit">12</div>
-			<div class="movieName">블랙위도우 (134분)</div>
-		</div>
-		<div>
-			<div class="oneSpace">
-				<div class="movieInfoDetail">09:30 11:44 64/72 1관</div>
-				<div class="movieInfoDetail">09:30 11:44 64/72 1관</div>
-				<div class="movieInfoDetail">09:30 11:44 64/72 1관</div>
-				<div class="movieInfoDetail">09:30 11:44 64/72 1관</div>
-				<div class="movieInfoDetail">09:30 11:44 64/72 1관</div>
-			</div>
-			<div class="twoSpace">
-				<div class="movieInfoDetail">09:30 11:44 64/72 2관</div>
-				<div class="movieInfoDetail">09:30 11:44 64/72 2관</div>
-			</div>
-			<div class="threeSpace">
-				<div class="movieInfoDetail">09:30 11:44 64/72 3관</div>
-				<div class="movieInfoDetail">09:30 11:44 64/72 3관</div>
-				<div class="movieInfoDetail">09:30 11:44 64/72 3관</div>
-			</div>
-		</div>
+	<div class="Alltable">
+<!-- 		<div class="movieInfo"> -->
+<!-- 			<div class="ageLimit">12</div> -->
+<!-- 			<div class="movieName">블랙위도우 (134분)</div> -->
+<!-- 		</div> -->
+<!-- 			<div class="oneSpace">시작시간 끝나는 시간 남은좌석/전체좌석 몇관 -->
+<!-- 				<div class="movieInfoDetail">09:30 11:44 64/72 1관</div> -->
+<!-- 				<div class="movieInfoDetail">09:30 11:44 64/72 1관</div> -->
+<!-- 				<div class="movieInfoDetail">09:30 11:44 64/72 1관</div> -->
+<!-- 				<div class="movieInfoDetail">09:30 11:44 64/72 1관</div> -->
+<!-- 				<div class="movieInfoDetail">09:30 11:44 64/72 1관</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="twoSpace"></div> -->
+<!-- 			<div class="threeSpace"></div> -->
+<!-- 			<div class="fourSpace"></div> -->
+<!-- 			<div class="fiveSpace"></div> -->
+<!-- 			<div class="sixSpace"></div> -->
 	</div>
 	<hr>
 <script src="${cpath }/resources/cinemaMovie/schedule/schedule.js"></script>

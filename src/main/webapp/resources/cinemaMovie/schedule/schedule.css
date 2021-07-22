@@ -40,6 +40,10 @@ body {
 	color: white;
 	padding-left: 40px;
 	font-size: 20px;
+	cursor: pointer;
+}
+.divDate:active {
+	color:red;
 }
 
 .movieInfo {
@@ -60,7 +64,7 @@ body {
 	color: rgb(112, 107, 112);
 }
 
-.oneSpace, .twoSpace, .threeSpace {
+.oneSpace, .twoSpace, .threeSpace,.fourSpace,.fiveSpace,.sixSpace{
 	display: flex;
 	margin-bottom: 20px;
 }
@@ -74,4 +78,8 @@ body {
 	padding: 10px;
 	margin-right: 50px;
 	font-weight: bold;
+}
+.noDiv {
+	font-size: 20px;
+	color:rgb(112, 107, 112);
 }
