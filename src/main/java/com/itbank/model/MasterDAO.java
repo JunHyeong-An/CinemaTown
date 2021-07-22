@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Update;
 public interface MasterDAO {
 
 	@Select("select * from cinemaLost")
-	List<serviceCenterDTO> lostList();
+	List<ServiceCenterDTO> lostList();
 
 	@Select("select * from oneToOne order by otoWriteDay desc")
 	List<OneToOneDTO> oneToOneList();

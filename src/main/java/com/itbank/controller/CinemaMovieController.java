@@ -1,10 +1,10 @@
 package com.itbank.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -21,11 +22,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itbank.model.CinemaMovieDTO;
-import com.itbank.model.CinemaScheduleDTO;
 import com.itbank.model.CinemaScheduleListDTO;
 import com.itbank.model.CinemaTicketingDTO;
 import com.itbank.service.CinemaMovieService;
 import com.itbank.service.CinemaScheduleListService;
+import com.itbank.service.KakaoPayService;
 
 
 @Controller
@@ -34,106 +35,18 @@ public class CinemaMovieController {
 
 	@Autowired private CinemaMovieService cms;
 	@Autowired private CinemaScheduleListService csls;
+	@Autowired private KakaoPayService kps;
 	private ObjectMapper mapper = new ObjectMapper();
 	
-	@GetMapping("/ticketing")
-	public String ticketing(Model model) {
-		List<CinemaMovieDTO> movieList	=	cms.movieList();   
-		model.addAttribute("movieList", movieList);
-		
-		return "cinemaMovie/ticketing";
-	}
-	
-	@GetMapping(value="/ticketing/{movieName}/{showDay}/", produces="application/json;charset=utf-8")
-	@ResponseBody
-	public List<HashMap<String, Object>> ticketing(@PathVariable String movieName, @PathVariable String showDay){
-		
-		return cms.ticketingList(movieName, showDay);
-	} 
-
-	@GetMapping("/schedule")	
-	public String schedule(Model model) {	
-	
-		return "cinemaMovie/schedule";
-	}
-	
-	
-	
-	// 예매하기
-	@GetMapping("/ticketingDBInsert")
-	public String ticketingDBInsert(CinemaTicketingDTO dto, HttpSession session) throws JsonMappingException, JsonProcessingException {
-		String ticketingJson = (String) session.getAttribute("ticketingJson");
-		
-		HashMap<String, String> map = new HashMap<String, String>();
-		
-		map = mapper.readValue(ticketingJson, new TypeReference<HashMap<String,String>>() {});
-		
-		// userId받아오기(로그인 세션값으로 들고오기)
-		String userId = (String)session.getAttribute("userId");
-		dto.setUserId(userId);
-
-		// 예매 insert하기
-		int schedule_Idx = Integer.parseInt(map.get("scheduleIdx"));
-		dto.setSchedule_idx(schedule_Idx);
-		
-		dto.setSeatNameAll(map.get("selectSeats"));
-		dto.setAdultCount(Integer.parseInt(map.get("adultCnt")));
-		dto.setTeenagerCount(Integer.parseInt(map.get("studentCnt")));
-		int result = cms.ticketing(dto);
-		if(result ==1 ) { 
-			return "redirect:/cinemaMovie/ticketingSuccess"; 
-		}
-		return "redirect:/";
-	}
-	
-	// 예매하기
-	@PostMapping("/ticketing/{ticketingJson}/")
-	@ResponseBody
-		public int ticketingDBInsert(@PathVariable String ticketingJson,CinemaTicketingDTO dto, HttpSession session) throws JsonMappingException, JsonProcessingException {
-
-			HashMap<String, String> map = new HashMap<String, String>();
-			session.setAttribute("ticketingJson", ticketingJson);
-			map = mapper.readValue(ticketingJson, new TypeReference<HashMap<String,String>>() {});
-			
-			// userId받아오기(로그인 세션값으로 들고오기)
-			String userId = (String)session.getAttribute("userId");
-			dto.setUserId(userId);
-
-			// 예매 insert하기
-			int schedule_Idx = Integer.parseInt(map.get("scheduleIdx"));
-			dto.setSchedule_idx(schedule_Idx);
-			
-			dto.setSeatNameAll(map.get("selectSeats"));
-			dto.setAdultCount(Integer.parseInt(map.get("adultCnt")));
-			dto.setTeenagerCount(Integer.parseInt(map.get("studentCnt")));
-			int result = cms.ticketing(dto);
-			if(result ==1 ) { 
-				return 1; 
-			}
-			return 0;
-		}
-	
-	
-	@GetMapping("/ticketingSuccess")
-	public String ticketingSuccess(HttpSession session, Model model) {
-		
-		String ticketingJson = (String) session.getAttribute("ticketingJson");
-		model.addAttribute("ticketingJson", ticketingJson);
-		return "cinemaMovie/ticketingSuccess";
-	}
-	
-	// 예매 취소 시 돌아가는 메서드 ==> 주소 넣어야함
-	@PostMapping("")
-	public String ticketingCancel(int ticketing_idx) {	// hidden으로 받아오자
-		cms.ticketingCancel(ticketing_idx);
-		return "redirect:/";
-	}
-	
+	// 영화 정보 페이지 보여주기
 	@GetMapping("/movieInfo")
-	public String movieInfo() {
-		return "cinemaMovie/movieInfo";
-	}
+	public void movieInfo() {}
 	
+	// 상영시간표 사이트 보여주기
+	@GetMapping("/schedule")	
+	public void schedule() {}
+	
+	// 상영시간표 사이트에서 해당 날짜 클릭 시 그 날짜마다의 상영일정 내용 보여주기
 	@GetMapping(value="/schedule/list/{tosDateJson}/",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String scheduleList(@PathVariable String tosDateJson, Model model) throws JsonProcessingException {
@@ -175,6 +88,114 @@ public class CinemaMovieController {
 		
 		return jsonData;
 	}		
+	
+	// 예매 시 사이트 보여주기
+	@GetMapping("/ticketing")
+	public String ticketing(Model model) {
+		List<CinemaMovieDTO> movieList	=	cms.movieList();   
+		model.addAttribute("movieList", movieList);
+		
+		return "cinemaMovie/ticketing";
+	}
+	
+	// 예매 사이트에서 선택된 영화와 날짜에 따른 상영일정 보여주기
+	@GetMapping(value="/ticketing/{movieName}/{showDay}/", produces="application/json;charset=utf-8")
+	@ResponseBody
+	public List<HashMap<String, Object>> ticketing(@PathVariable String movieName, @PathVariable String showDay){
+		
+		return cms.ticketingList(movieName, showDay);
+	} 
+	
+	// 카카오페이 성공
+	@GetMapping("/success")
+	public String success(@RequestParam("pg_token") String pgToken, HttpSession session) throws IOException {
+		String userId = (String) session.getAttribute("userId");
+		kps.kakaoPayApprove(pgToken, userId);
+		
+		return "redirect:/cinemaMovie/ticketingDBInsert";
+	}
+	
+	// 카카오페이 결제 준비 단계
+	@PostMapping(value="/kakaoPay/{ticketingJson}/", produces="application/text;charset=utf-8")
+	@ResponseBody
+	public String kakaoPay(@PathVariable String ticketingJson, HttpSession session) throws IOException {
+		session.setAttribute("ticketingJson", ticketingJson);
+		String userId = (String) session.getAttribute("userId");
+		String next_redirect_pc_url = kps.kakaoPayReady(ticketingJson, userId);
+		return next_redirect_pc_url;
+	}
+
+	// 예매 진행 후 카카오페이로 결제 시 예매 내역 ~ 매출 등록까지 DB에 Insert하기
+	@GetMapping("/ticketingDBInsert")
+	public String ticketingDBInsert(CinemaTicketingDTO dto, HttpSession session) throws JsonMappingException, JsonProcessingException {
+		String ticketingJson = (String) session.getAttribute("ticketingJson");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		map = mapper.readValue(ticketingJson, new TypeReference<HashMap<String,String>>() {});
+		
+		// userId받아오기(로그인 세션값으로 들고오기)
+		String userId = (String)session.getAttribute("userId");
+		dto.setUserId(userId);
+
+		// 예매 insert하기
+		int schedule_Idx = Integer.parseInt(map.get("scheduleIdx"));
+		dto.setSchedule_idx(schedule_Idx);
+		
+		dto.setSeatNameAll(map.get("selectSeats"));
+		dto.setAdultCount(Integer.parseInt(map.get("adultCnt")));
+		dto.setTeenagerCount(Integer.parseInt(map.get("studentCnt")));
+		int result = cms.ticketing(dto);
+		
+		if(result ==1 ) { return "redirect:/cinemaMovie/ticketingSuccess"; }
+	
+		return "redirect:/cinemaMovie/ticketing";
+	}
+	
+	// 예매 진행 후 일반 카드로 결제 시 예매 내역 ~ 매출 등록까지 DB에 Insert하기
+	@PostMapping("/ticketing/{ticketingJson}/")
+	@ResponseBody
+	public int ticketingDBInsert(@PathVariable String ticketingJson, CinemaTicketingDTO dto, HttpSession session) throws JsonMappingException, JsonProcessingException {
+
+		HashMap<String, String> map = new HashMap<String, String>();
+		session.setAttribute("ticketingJson", ticketingJson);
+		map = mapper.readValue(ticketingJson, new TypeReference<HashMap<String, String>>() {});
+
+		// userId받아오기(로그인 세션값으로 들고오기)
+		String userId = (String) session.getAttribute("userId");
+		dto.setUserId(userId);
+
+		// 예매 insert하기
+		int schedule_Idx = Integer.parseInt(map.get("scheduleIdx"));
+		dto.setSchedule_idx(schedule_Idx);
+
+		dto.setSeatNameAll(map.get("selectSeats"));
+		dto.setAdultCount(Integer.parseInt(map.get("adultCnt")));
+		dto.setTeenagerCount(Integer.parseInt(map.get("studentCnt")));
+		int result = cms.ticketing(dto);
+		
+		if (result == 1) {return 1;}
+		
+		return 0;
+	}
+	
+	// 결제수단 상관없이 결제 성공이 되면 나오는 페이지
+	@GetMapping("/ticketingSuccess")
+	public String ticketingSuccess(HttpSession session, Model model) {
+		
+		String ticketingJson = (String) session.getAttribute("ticketingJson");
+		model.addAttribute("ticketingJson", ticketingJson);
+		return "cinemaMovie/ticketingSuccess";
+	}
+	
+	// 예매 취소 시 돌아가는 메서드 ==> 주소 넣어야함
+	@PostMapping("")
+	public String ticketingCancel(int ticketing_idx) {	// hidden으로 받아오자
+		cms.ticketingCancel(ticketing_idx);
+		return "redirect:/";
+	}
+	
+
 	
 
 	

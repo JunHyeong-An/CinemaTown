@@ -4,15 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itbank.model.OneToOneDTO;
-import com.itbank.model.serviceCenterDAO;
-import com.itbank.model.serviceCenterDTO;
+import com.itbank.model.ServiceCenterDAO;
+import com.itbank.model.ServiceCenterDTO;
 
 @Service
 public class seviceCenterService {
 
-	@Autowired private serviceCenterDAO dao;
+	@Autowired private ServiceCenterDAO dao;
 
-	public int addlostList(serviceCenterDTO dto) {
+	public int addlostList(ServiceCenterDTO dto) {
 		return dao.addlostList(dto);
 	}
 

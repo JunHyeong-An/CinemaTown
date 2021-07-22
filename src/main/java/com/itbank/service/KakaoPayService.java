@@ -1,4 +1,4 @@
-package com.itbank.controller;
+package com.itbank.service;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -12,38 +12,21 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import javax.servlet.http.HttpSession;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Controller
-public class KakaoPayController {
+@Service
+public class KakaoPayService {
 
 	private ObjectMapper mapper = new ObjectMapper();
 	String tid = "";
-	@GetMapping("/success")
-	public String success(@RequestParam("pg_token") String pgToken, HttpSession session) throws IOException {
-		kakaoPayApprove(pgToken, session);
-		
-		return "redirect:/cinemaMovie/ticketingDBInsert";
-	}
 	
-	@PostMapping("/cinemaMovie/kakaoPay/{ticketingJson}/")
-	@ResponseBody
-	public String kakaoPay(@PathVariable String ticketingJson, HttpSession session) throws IOException {
-		System.out.println(ticketingJson);
+	public String kakaoPayReady(String ticketingJson, String userId) throws IOException {
 		HashMap<String, String> kakaoPay = new HashMap<String, String>();
 		
 		kakaoPay = mapper.readValue(ticketingJson, new TypeReference<HashMap<String,String>>() {});
-		session.setAttribute("ticketingJson", ticketingJson);
 		
 		URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -51,18 +34,20 @@ public class KakaoPayController {
 		conn.setRequestProperty("Authorization", "KakaoAK d143e83dc154401c679ffe64cae1e360");
 		conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 		conn.setDoOutput(true);
-		String userId = (String) session.getAttribute("userId");
+		
 		String movieName = URLEncoder.encode(kakaoPay.get("movieName"), "UTF-8");
+		int peopleCount = Integer.parseInt(kakaoPay.get("adultCnt"))+Integer.parseInt(kakaoPay.get("studentCnt"));
 
 		String parameter = "cid=TC0ONETIME&" + "partner_order_id=11111&" + "partner_user_id="+userId+"&"
-				+ "item_name="+movieName+"&" + "quantity="+Integer.parseInt(kakaoPay.get("adultCnt"))+Integer.parseInt(kakaoPay.get("studentCnt"))+"&" + "total_amount="+kakaoPay.get("totalCost")+"&" + "tax_free_amount=0&"
-				+ "approval_url=http://localhost:8080/cinematown/success&" + "cancel_url=http://localhost:8080/cinematown/cancle&"
+				+ "item_name="+movieName+"&" + "quantity="+peopleCount+"&" + "total_amount="+kakaoPay.get("totalCost")+"&" + "tax_free_amount=0&"
+				+ "approval_url=http://localhost:8080/cinematown/cinemaMovie/success&" + "cancel_url=http://localhost:8080/cinematown/cancle&"
 				+ "fail_url=http://localhost:8080/cinematown/fail";
 		OutputStream out = conn.getOutputStream();
 		DataOutputStream dos = new DataOutputStream(out);
 		dos.writeBytes(parameter);
 		dos.close();
 
+		
 		int result = conn.getResponseCode();
 
 		InputStream input;
@@ -73,24 +58,26 @@ public class KakaoPayController {
 		}
 		InputStreamReader reader = new InputStreamReader(input);
 		BufferedReader buffReader = new BufferedReader(reader);
-	
-		HashMap<String, String> map = mapper.readValue(buffReader.readLine(), HashMap.class);
-		tid = map.get("tid");
-		return map.get("next_redirect_pc_url");
+		String kakaoPayInfo = buffReader.readLine();
+		conn.disconnect();
+		
+		HashMap<String, String> Info = mapper.readValue(kakaoPayInfo, HashMap.class);
+		tid = Info.get("tid");
+		return Info.get("next_redirect_pc_url");
+		
 	}
-	
-	public String kakaoPayApprove(String pgToken, HttpSession session) throws IOException {
+
+	public void kakaoPayApprove(String pgToken, String userId) throws IOException {
 		URL url = new URL("https://kapi.kakao.com/v1/payment/approve");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		
-		conn.setDoInput(true);
-		conn.setDoOutput(true);
 		conn.setRequestMethod("POST");
 		conn.setRequestProperty("Authorization", "KakaoAK d143e83dc154401c679ffe64cae1e360");
 		conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-
-		String userId = (String) session.getAttribute("userId");
-		String params = 
+		conn.setDoOutput(true);
+		conn.setDoInput(true);
+		
+		String parameter = 
 				"cid=TC0ONETIME&"
 				+ "tid=" + tid + "&"
 				+ "partner_order_id=11111&"
@@ -98,23 +85,27 @@ public class KakaoPayController {
 				+ "pg_token=" + pgToken;
 		
 		DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-		
-		dos.writeBytes(params);
-		dos.flush();
+		dos.writeBytes(parameter);
 		dos.close();
 		
-		Scanner sc = new Scanner(conn.getInputStream());
-		String json = "";
-		
-		if(conn.getResponseCode() == 200) {
-			while(sc.hasNext()) {
-				json += sc.nextLine();
-			}
+		int result = conn.getResponseCode();
+
+		InputStream input;
+		if (result == 200) {
+			input = conn.getInputStream();
+		} else {
+			input = conn.getErrorStream();
 		}
-//		sc.close();
-//		conn.disconnect();
-		System.out.println("json : " +json);
 		
-		return json;
+		InputStreamReader reader = new InputStreamReader(input);
+		BufferedReader buffReader = new BufferedReader(reader);
+		String kakaoSuccessInfo = buffReader.readLine();
+		conn.disconnect();
+		System.out.println(kakaoSuccessInfo);
+
 	}
+	
+	
+	
+	
 }

@@ -5,15 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.itbank.model.reviewDAO;
-import com.itbank.model.reviewDTO;
+import com.itbank.model.ReviewDAO;
+import com.itbank.model.ReviewDTO;
 
 @Service
 public class reviewService {
 
-	@Autowired private reviewDAO dao;
+	@Autowired private ReviewDAO dao;
 
-	public List<reviewDTO> reviewList(String movieName1) {
+	public List<ReviewDTO> reviewList(String movieName1) {
 		return dao.reviewList(movieName1);
 	}
 

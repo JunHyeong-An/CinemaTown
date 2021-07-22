@@ -8,19 +8,19 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-public interface reviewDAO {
+public interface ReviewDAO {
 
 	@Select("select * from review where movieName=#{movieName} and rownum >=#{rowMin} and row <=#{rowMax} order by reviewDay desc")
-	List<reviewDTO> reviewList(@Param("movieName")String movieName1);
+	List<ReviewDTO> reviewList(@Param("movieName")String movieName1);
 
 	@Insert("insert into review(movieName, userId, reviewContent)values(#{movieName},#{userId},#{reviewContent})")
-	int reviewAdd(reviewDTO dto);
+	int reviewAdd(ReviewDTO dto);
 
 	@Select("select * from review where review_idx=#{reivew_idx}")
-	List<reviewDTO> selectOne(int review_idx);
+	List<ReviewDTO> selectOne(int review_idx);
 
 	@Update("update review set reviewContent=#{reviewContent} where review_idx=#{review_idx}")
-	int reviewModify(reviewDTO dto);
+	int reviewModify(ReviewDTO dto);
 
 	@Select("select movieName from cinemaMovie")
 	String[] movieNameList();

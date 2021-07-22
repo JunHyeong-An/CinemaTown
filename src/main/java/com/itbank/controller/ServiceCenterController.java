@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.itbank.model.OneToOneDTO;
-import com.itbank.model.serviceCenterDTO;
+import com.itbank.model.ServiceCenterDTO;
 import com.itbank.service.seviceCenterService;
 
 @Controller
@@ -16,13 +16,13 @@ public class ServiceCenterController {
 	
 	// 분실물문의 페이지 띄워주는 문구
 	@GetMapping("/serviceCenter/lost")
-	public String lost(serviceCenterDTO dto) {
+	public String lost(ServiceCenterDTO dto) {
 		return "serviceCenter/lost";
 	}
 	
 	// 분실물 문의 페이지에서 작성한거 받아오는 문구 
 	@PostMapping("/serviceCenter/lost")
-	public String addlostList(serviceCenterDTO dto) {
+	public String addlostList(ServiceCenterDTO dto) {
 		System.out.println(dto);
 		int row = scs.addlostList(dto);
 		return "redirect:/";

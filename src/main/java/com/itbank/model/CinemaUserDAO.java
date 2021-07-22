@@ -22,9 +22,13 @@ public interface CinemaUserDAO {
 	@Select("select * from cinemaUser where userid = #{userId} and userpw = #{userPw}")
 	CinemaUserDTO login(CinemaUserDTO dto);
 		
-	// 로그인 유지 처리
+	// 자동로그인 유지 처리
 	@Update("update cinemaUser set sessionId=#{sessionId}, sessionLimit=#{sessionLimit} where userId=#{userId}")
 	void keepLogin(@Param("userId")String userId, @Param("sessionId")String sessionId, @Param("sessionLimit")Date sessionLimit);
+	
+	// 자동로그인유지를 위해 Interceptor에서 sessionId가 저장되어있는 지를 확인하기
+	@Select("select * from cinemaUser where sessionId=#{sessionId} and sessionLimit > sysdate")
+	CinemaUserDTO checkUserWithSessionId(@Param("sessionId")String sessionId);
 
 	// 정보 변경 전에 비밀번호 기입 시 일치, 불일치 확인하기
 	@Select("select * from cinemaUser where userId=#{userId} and userPw=#{userPw}")
@@ -42,9 +46,7 @@ public interface CinemaUserDAO {
 	@Delete("delete from cinemaUser where userId=#{userId} and userPw=#{userPw}")
 	int deleteCheck(CinemaUserDTO dto);
 
-	// 자동로그인유지를 위해 Interceptor에서 sessionId가 저장되어있는 지를 확인하기
-	@Select("select * from cinemaUser where sessionId=#{sessionId} and sessionLimit > sysdate")
-	CinemaUserDTO checkUserWithSessionId(@Param("sessionId")String sessionId);
+
 	
 
 	
