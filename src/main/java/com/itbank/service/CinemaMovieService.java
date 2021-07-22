@@ -98,12 +98,27 @@ public class CinemaMovieService {
 		
 	}
 
+	public String[] urlNameList() {
+		
+		return movie_dao.urlNameList();
+	}
+
+	public int[] ageLimitList() {
+	
+		return movie_dao.ageLimitList();
+	}
+	
 	// HomeController 간이 상영시간표에 보여 줄 오늘 '시작시간들'
 	public String[] start_timeList(String movieName) {
 
 		return movie_dao.start_timeList(movieName);
 	}
 
+	public String[] end_timeList(String movieName) {
+		
+		return movie_dao.end_timeList(movieName);
+	}
+	
 	// HomeController 간이 상영시간표에 보여 줄 오늘 '상영관들'
 	public String[] hallNameList(String movieName) {
 
@@ -124,9 +139,6 @@ public class CinemaMovieService {
 
 
 
-	
-
-	// ajax로 결제 취소와 결제완료시 각각 url을 통해 join해서 성인 수+ 청소년 수 값을 구해 계산하기
 		
 	
 	

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -116,10 +117,11 @@ public class CinemaMovieController {
 	}
 	
 	// 카카오페이 결제 준비 단계
-	@PostMapping(value="/kakaoPay/{ticketingJson}/", produces="application/text;charset=utf-8")
+	@PostMapping(value="/kakaoPay/", produces="application/text;charset=utf-8")
 	@ResponseBody
-	public String kakaoPay(@PathVariable String ticketingJson, HttpSession session) throws IOException {
+	public String kakaoPay(@RequestBody HashMap<String, String> ticketingJson , HttpSession session) throws IOException {
 		session.setAttribute("ticketingJson", ticketingJson);
+		
 		String userId = (String) session.getAttribute("userId");
 		String next_redirect_pc_url = kps.kakaoPayReady(ticketingJson, userId);
 		return next_redirect_pc_url;
@@ -128,12 +130,9 @@ public class CinemaMovieController {
 	// 예매 진행 후 카카오페이로 결제 시 예매 내역 ~ 매출 등록까지 DB에 Insert하기
 	@GetMapping("/ticketingDBInsert")
 	public String ticketingDBInsert(CinemaTicketingDTO dto, HttpSession session) throws JsonMappingException, JsonProcessingException {
-		String ticketingJson = (String) session.getAttribute("ticketingJson");
+		HashMap<String, String> map =  (HashMap<String, String>) session.getAttribute("ticketingJson");
 		
-		HashMap<String, String> map = new HashMap<String, String>();
-		
-		map = mapper.readValue(ticketingJson, new TypeReference<HashMap<String,String>>() {});
-		
+
 		// userId받아오기(로그인 세션값으로 들고오기)
 		String userId = (String)session.getAttribute("userId");
 		dto.setUserId(userId);
@@ -153,13 +152,12 @@ public class CinemaMovieController {
 	}
 	
 	// 예매 진행 후 일반 카드로 결제 시 예매 내역 ~ 매출 등록까지 DB에 Insert하기
-	@PostMapping("/ticketing/{ticketingJson}/")
+	@PostMapping("/ticketing/")
 	@ResponseBody
-	public int ticketingDBInsert(@PathVariable String ticketingJson, CinemaTicketingDTO dto, HttpSession session) throws JsonMappingException, JsonProcessingException {
+	public int ticketingDBInsert(@RequestBody HashMap<String, String> map, CinemaTicketingDTO dto, HttpSession session) throws JsonMappingException, JsonProcessingException {
 
-		HashMap<String, String> map = new HashMap<String, String>();
-		session.setAttribute("ticketingJson", ticketingJson);
-		map = mapper.readValue(ticketingJson, new TypeReference<HashMap<String, String>>() {});
+		
+		session.setAttribute("ticketingJson", map);
 
 		// userId받아오기(로그인 세션값으로 들고오기)
 		String userId = (String) session.getAttribute("userId");
@@ -182,9 +180,8 @@ public class CinemaMovieController {
 	// 결제수단 상관없이 결제 성공이 되면 나오는 페이지
 	@GetMapping("/ticketingSuccess")
 	public String ticketingSuccess(HttpSession session, Model model) {
-		
-		String ticketingJson = (String) session.getAttribute("ticketingJson");
-		model.addAttribute("ticketingJson", ticketingJson);
+
+		model.addAttribute("ticketingJson", session.getAttribute("ticketingJson").toString());
 		return "cinemaMovie/ticketingSuccess";
 	}
 	

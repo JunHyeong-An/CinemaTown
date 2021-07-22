@@ -39,6 +39,26 @@ public interface CinemaMovieDAO {
 			"    group by cinemaMovie.movieName")
 	String[] movieNameList();
 
+	@Select("select cinemaMovie.urlName" + 
+			"    from cinemaMovie " + 
+			"    full outer join cinemaSchedule" + 
+			"    on cinemaMovie.movieName = cinemaSchedule.movieName" + 
+			"    full outer join cinemaHall" + 
+			"    on cinemaSchedule.hall_idx = cinemaHall.hall_idx " + 
+			"    where cinemaSchedule.showDay = to_char(sysdate,'yyyyMMdd') " + 
+			"    group by cinemaMovie.movieName, cinemaMovie.urlName")
+	String[] urlNameList();
+
+	@Select("select cinemaMovie.ageLimit" + 
+			"    from cinemaMovie " + 
+			"    full outer join cinemaSchedule" + 
+			"    on cinemaMovie.movieName = cinemaSchedule.movieName" + 
+			"    full outer join cinemaHall" + 
+			"    on cinemaSchedule.hall_idx = cinemaHall.hall_idx " + 
+			"    where cinemaSchedule.showDay = to_char(sysdate,'yyyyMMdd') " + 
+			"    group by cinemaMovie.movieName, cinemaMovie.ageLimit")
+	int[] ageLimitList();
+	
 	// HomeController 간이 상영시간표에 보여 줄 오늘 '시작시간들'
 	@Select("select to_char(cinemaSchedule.startTime,'HH24:mi') as start_time" + 
 			"    from cinemaSchedule" + 
@@ -47,6 +67,14 @@ public interface CinemaMovieDAO {
 			"    where cinemaschedule.moviename = #{movieName} and cinemaschedule.showday = to_char(sysdate,'yyyyMMdd') order by to_char(cinemaSchedule.startTime,'HH24:mi')")
 	String[] start_timeList(@Param("movieName") String movieName);
 
+	// HomeController 간이 상영시간표에 보여 줄 오늘 '종료시간들'
+	@Select("select to_char(cinemaSchedule.endTime,'HH24:mi') as end_time" + 
+			"    from cinemaSchedule" + 
+			"    full outer join cinemaHall" + 
+			"    on cinemaSchedule.hall_idx = cinemaHall.hall_idx" + 
+			"    where cinemaschedule.moviename = #{movieName} and cinemaschedule.showday = to_char(sysdate,'yyyyMMdd') order by to_char(cinemaSchedule.endTime,'HH24:mi')")
+	String[] end_timeList(String movieName);
+	
 	// HomeController 간이 상영시간표에 보여 줄 오늘 '상영관들'
 	@Select("select cinemaHall.hallName" + 
 			"    from cinemaSchedule" + 
@@ -70,5 +98,9 @@ public interface CinemaMovieDAO {
 	// home페이지에 포스터 보여주기 위해 불러 올 영화 code리스트
 	@Select("select movieCode from cinemaMovie")
 	String[] movieCodeList();
+
+
+
+
 	
 }

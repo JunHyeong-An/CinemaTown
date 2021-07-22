@@ -23,10 +23,8 @@ public class KakaoPayService {
 	private ObjectMapper mapper = new ObjectMapper();
 	String tid = "";
 	
-	public String kakaoPayReady(String ticketingJson, String userId) throws IOException {
-		HashMap<String, String> kakaoPay = new HashMap<String, String>();
+	public String kakaoPayReady(HashMap<String, String> kakaoPay, String userId) throws IOException {
 		
-		kakaoPay = mapper.readValue(ticketingJson, new TypeReference<HashMap<String,String>>() {});
 		
 		URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
