@@ -60,7 +60,7 @@ if(resToken == "1") {
 
 	changeElement(changeCnt++)
 	
-	const seatUrl = cpath + "/getSeats/" + scheduleIdx + "/"
+	const seatUrl = cpath + "/cinemaMovie/getSeats/" + scheduleIdx + "/"
 	const opt = {
 		method: "GET"
 	}
@@ -317,7 +317,7 @@ dateDcrBtn.onclick = decreaseDate
 function showCoverBox(div, json) {
 	console.log(json)
 	scheduleIdx = json.SCHEDULE_IDX
-	const seatUrl = cpath + "/getSeats/" + json.SCHEDULE_IDX + "/"
+	const seatUrl = cpath + "/cinemaMovie/getSeats/" + json.SCHEDULE_IDX + "/"
 	const opt = {
 		method: "GET"
 	}

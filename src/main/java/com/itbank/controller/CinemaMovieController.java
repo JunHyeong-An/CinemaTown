@@ -47,21 +47,16 @@ public class CinemaMovieController {
 	// 영화 리뷰 등록하기
 	@PostMapping(value="/movieInfo/reviewAdd",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public int reviewAdd(@RequestBody HashMap<String, String>map) {
-		
-		System.out.println(map);
+	public int reviewAdd(@RequestBody HashMap<String, String>map) {		
 		return cms.reviewAdd(map);
 	}
 	
-	//리스트 불러오기
+	// 영화 리뷰 리스트 불러오기
 	@GetMapping("/movieInfo/list")
 	@ResponseBody
 	public List<ReviewDTO> reviewList(@RequestParam String rowMin, String rowMax ){
 		return cms.reviewList(rowMin,rowMax);
 	}
-	
-	
-	
 	
 	// 상영시간표 사이트 보여주기
 	@GetMapping("/schedule")	
@@ -110,6 +105,7 @@ public class CinemaMovieController {
 		return jsonData;
 	}		
 	
+	
 	// 예매 시 사이트 보여주기
 	@GetMapping("/ticketing")
 	public String ticketing(Model model) {
@@ -126,6 +122,15 @@ public class CinemaMovieController {
 		
 		return cms.ticketingList(movieName, showDay);
 	} 
+	
+	// 예매된 좌석 비활성화
+	@GetMapping("/getSeats/{scheduleIdx}/")
+	@ResponseBody
+	public String[] reservedSeats(@PathVariable int scheduleIdx) {
+		String[] seats = cms.reservedSeats(scheduleIdx);
+		return seats;
+	}
+	
 	
 	// 카카오페이 성공
 	@GetMapping("/success")

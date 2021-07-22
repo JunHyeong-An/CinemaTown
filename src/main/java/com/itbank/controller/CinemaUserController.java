@@ -1,5 +1,8 @@
 package com.itbank.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 
@@ -57,11 +60,11 @@ public class CinemaUserController {
 
 	// id, pw 입력해서 로그인 구현 + 자동로그인 유지
 	@PostMapping("/login")
-	public String login(CinemaUserDTO dto, HttpSession session, String url, HttpServletRequest request, HttpServletResponse response) {      
+	public String login(CinemaUserDTO dto, HttpSession session, HttpServletRequest request, HttpServletResponse response) {      
 		
+		String url = (String)session.getAttribute("url");
 		CinemaUserDTO login = cus.login(dto);
 		session.setAttribute("login", login);
-		
 		if(login !=  null) {
 			session.setAttribute("userId", login.getUserId());
 			// JSESSION cookie
@@ -189,7 +192,6 @@ public class CinemaUserController {
 	@GetMapping("/myPage/myPageHome")
 	public void pageHome(Model model,HttpSession session) {
 		CinemaUserDTO dto = (CinemaUserDTO)session.getAttribute("login");
-//		List<CinemaUserDTO> list = cus.myPageInfo((String) session.getAttribute("userId"));
 		model.addAttribute("dto", dto);
 	}
 

@@ -100,9 +100,9 @@ document.querySelector("#paymentBtn").onclick = function() {
 	ob.totalCost = totalCost
 	ob.cardNum = cardNum
 	ob.scheduleIdx = movieScheduleIdx
-	ob.reservationSeat = reservationSeat
-	ob.urlName = urlName
-	ob.ageLimit = ageLimit
+//	ob.reservationSeat = reservationSeat
+//	ob.urlName = urlName
+//	ob.ageLimit = ageLimit
 	ob.cardCompany = cardCompany
 	ob.cardPassword = cardPassword
 	

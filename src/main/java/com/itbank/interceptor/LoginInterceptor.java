@@ -1,6 +1,8 @@
 package com.itbank.interceptor;
 
 
+import java.net.URLEncoder;
+
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +25,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
+		
 		String requestURL = request.getRequestURL().toString();
+		System.out.println(requestURL);
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("login")==null) {
@@ -41,7 +45,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 				}
 			}
 			
-			response.sendRedirect(request.getContextPath()+"/cinemaUser/login?url="+requestURL); 
+		
+			response.sendRedirect(request.getContextPath()+"/cinemaUser/login"); 
+			session.setAttribute("url", request.getQueryString() != null ? requestURL+"?"+request.getQueryString() : requestURL );
 			return false;
 		}
 		return true;
