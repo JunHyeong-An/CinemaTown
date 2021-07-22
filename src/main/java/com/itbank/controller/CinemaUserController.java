@@ -1,6 +1,7 @@
 package com.itbank.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -181,6 +183,14 @@ public class CinemaUserController {
 		dto.setUserId((String)session.getAttribute("userId"));
 		int row = cus.deleteCheck(dto);
 		return "redirect:/cinemaUser/" + (row == 1 ? "logout" : "deleteCheck");
+	}
+	
+	// user의 마이페이지 정보창
+	@GetMapping("/myPage/myPageHome")
+	public void pageHome(Model model,HttpSession session) {
+		CinemaUserDTO dto = (CinemaUserDTO)session.getAttribute("login");
+//		List<CinemaUserDTO> list = cus.myPageInfo((String) session.getAttribute("userId"));
+		model.addAttribute("dto", dto);
 	}
 
 

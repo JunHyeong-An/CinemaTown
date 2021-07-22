@@ -34,7 +34,7 @@
             	</c:if>
             	<c:if test="${not empty login or not empty cookie.loginCookie }">
             		<li><a href="${cpath }/cinemaUser/logout">로그아웃</a></li>
-                	<li><a href="${cpath }/cinemaUser/mypage">마이페이지</a></li>
+                	<li><a href="${cpath }/cinemaUser/myPage/myPageHome">마이페이지</a></li>
             	</c:if>
             </ul>
         </div>
