@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -31,6 +32,7 @@ import com.itbank.model.ReviewDTO;
 import com.itbank.service.CinemaMovieService;
 import com.itbank.service.CinemaScheduleListService;
 import com.itbank.service.KakaoPayService;
+import com.itbank.service.MovieVodUrlService;
 
 
 @Controller
@@ -40,11 +42,16 @@ public class CinemaMovieController {
 	@Autowired private CinemaMovieService cms;
 	@Autowired private CinemaScheduleListService csls;
 	@Autowired private KakaoPayService kps;
+	@Autowired private MovieVodUrlService mvs;
 	private ObjectMapper mapper = new ObjectMapper();
 	
 	// 영화 정보 페이지 보여주기
 	@GetMapping("/movieInfo")
-	public void movieInfo() {}
+	public String movieInfo(ModelAndView model, String movieNm) throws IOException {
+		String vodUrl = mvs.vodUrl(movieNm.trim());
+		model.addObject("vodUrl", vodUrl);
+		return "cinemaMovie/movieInfo";
+	}
 	
 	// 영화 리뷰 등록하기
 	@PostMapping(value="/movieInfo/reviewAdd",produces="application/json;charset=utf-8")
