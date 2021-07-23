@@ -162,7 +162,7 @@ public class CinemaUserController {
 	// user의 비밀번호 변경할 페이지 보여주기
 	@GetMapping("/myPage/passwordModify")
 	public void passwordModify() {}
-
+	
 	// user의 새 비밀번호 넣어주기
 	@PostMapping("/myPage/passwordModify")
 	public String passwordModify(CinemaUserDTO dto) {

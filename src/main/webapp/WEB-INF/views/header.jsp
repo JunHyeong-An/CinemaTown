@@ -37,7 +37,7 @@
         <div id="headerListBox">
             <!-- 실질적인 메뉴 headerList에 css로 display:flex를 줘서 전부 가로로 정렬 시킴-->
             <ul id="headerList">
-                <li><div class="menuText">영화</div><div class="dropDownMenu hidden"><a>상영시간표</a></div></li>
+                <li><div class="menuText">영화</div><div class="dropDownMenu hidden"><a href="${cpath }/cinemaMovie/schedule">상영시간표</a></div></li>
                 <li><div class="menuText">예매</div><div class="dropDownMenu hidden"><a href="${cpath }/cinemaMovie/ticketing">예매</a></div></li>
                 <li><div class="menuText">이벤트</div><div class="dropDownMenu hidden"><a>이벤트</a></div></li>
                 <li><div class="menuText">고객센터</div>
