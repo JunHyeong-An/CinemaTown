@@ -85,23 +85,37 @@ fetch(listUrl, listOpt)
 		console.log(json)
 		// 
 		for(j in json[i].hallName) {
+			let sCurrDate = new Date()
+			let currHour = sCurrDate.getHours()
+			let currMin = sCurrDate.getMinutes()
+			let currTime = currHour + "" + currMin
+			let startTime = json[i].start_time[j].replace(":", "")
+			console.log(startTime[j])
 			if(j == 5)
 				break;
 			const div2 = document.createElement("div")
-			const a2 = document.createElement("a")
-			a2.style.color = "black"
-			a2.setAttribute("href", cpath + "/cinemaMovie/ticketing?movieNm=" 
-					+ json[i].movieName + "&hallName=" + json[i].hallName[j] 
-					+ "&startTime=" + json[i].start_time[j]
-					+ "&endTime=" + json[i].end_time[j] 
-					+ "&schedule=" + json[i].schedule_allCount
-					+ "&urlName=" + json[i].urlName
-					+ "&ageNum=" + json[i].ageLimit
-					+ "&resToken=1")
-			div2.classList.add("movieSelectBox")
 			
-			a2.innerHTML = json[i].hallName[j] + "<br>" + json[i].start_time[j]
-			div2.appendChild(a2)
+			if(startTime > currTime) {
+				const a2 = document.createElement("a")
+				a2.style.color = "black"
+				a2.setAttribute("href", cpath + "/cinemaMovie/ticketing?movieNm=" 
+						+ json[i].movieName + "&hallName=" + json[i].hallName[j] 
+						+ "&startTime=" + json[i].start_time[j]
+						+ "&endTime=" + json[i].end_time[j] 
+						+ "&schedule=" + json[i].schedule_idx
+						+ "&urlName=" + json[i].urlName
+						+ "&ageNum=" + json[i].ageLimit
+						+ "&resToken=1")
+				
+				a2.innerHTML = json[i].hallName[j] + "<br>" + json[i].start_time[j]
+				div2.appendChild(a2)
+			}
+			else {
+				div2.innerHTML = json[i].hallName[j] + "<br>" + json[i].start_time[j]
+				div2.style.backgroundColor = "gray"
+			}
+			
+			div2.classList.add("movieSelectBox")
 			movieSelect.appendChild(div2)
 		}
 		movieSchedule.appendChild(movieSelect)

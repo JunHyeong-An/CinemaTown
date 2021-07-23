@@ -274,7 +274,7 @@
 									<table id="paymentPersonalInfoTable" class="hidden">
 										<tr>
 											<th>고객이름</th>
-											<td>김진현</td>
+											<td>${userId }</td>
 										</tr>
 										<tr>
 											<th id="cardName"></th>

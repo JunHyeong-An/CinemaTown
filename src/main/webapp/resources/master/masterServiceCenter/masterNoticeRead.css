@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+ #boardContainer {
+            width: 100%;
+            height: 690px;
+        /*  border: 1px solid black;   */
+            text-align: center;
+            margin-top: 100px;
+        }
+        #boardMenu {
+            width: 300px;
+            height: 30px;
+            border-bottom: 1px solid gray;
+            display: flex;
+            margin: 0 auto;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        
+        .boardForm {
+      /*    border: 1px solid black;    */
+            width: 100%;
+            height: 1300px;
+        }
+        .boardTitle {
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgb(216, 216, 216);
+            width: 1000px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            margin: 0 auto;
+            font-size: 20pt;
+            margin-top: 200px;
+        }
+        .miniContainer {
+            width: 1000px;
+            height: 30px;
+            margin: 0 auto;
+    /*      border: 1px solid orange;   */
+            margin-top: 20px;  
+        }
+        .wdate {
+            width: 200px;
+            float: right;
+            font-size: 10pt;
+            text-align: right;
+        }
+        .contentImg {
+        /*  border: 1px solid purple;  */
+            width: 1000px;
+            height: fit-content;    
+            margin: 0 auto;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        .contentImg > img {
+            width: 300px;
+            height: auto;
+        }
+        .content {
+    /*      border: 1px solid rgb(187, 187, 187);     */
+            width: 1000px;
+            height: 200px;
+            margin: 0 auto;
+            margin-top: 20px;
+            text-align: left;
+            padding: 20px 20px 20px 20px;
+            font-family: 'gmarketLight';
+            font-weight: 600;
+            font-size: 12pt;
+            border-bottom: 1px solid rgb(216, 216, 216);
+        }
+        .buttonContainer {
+    /*      border: 1px solid black;  */
+            width: 220px;
+            height: 40px;
+            margin: 0 auto;
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .button {
+            width: 100px;
+            height: 30px;
+            border: 1px solid black;
+            background-color: black;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            color: white;
+        }

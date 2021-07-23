@@ -36,10 +36,9 @@ let movieScheduleIdx = ""
 let ageLimitBox = null
 
 // 남은 좌석 배열
-let remainSeatArr
+let remainSeatArr = null
 
 let endTime = ""
-let scheduleNum = ""
 let urlName = ""
 let ageNum = ""
 

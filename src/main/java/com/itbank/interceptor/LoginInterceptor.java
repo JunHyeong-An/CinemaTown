@@ -24,7 +24,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		
 		
 		String requestURL = request.getRequestURL().toString();
-
+		System.out.println(requestURL);
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("login")==null) {

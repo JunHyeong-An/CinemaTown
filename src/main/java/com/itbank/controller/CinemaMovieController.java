@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.mail.Session;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -30,7 +34,9 @@ import com.itbank.model.CinemaUserDTO;
 import com.itbank.model.ReviewDTO;
 import com.itbank.service.CinemaMovieService;
 import com.itbank.service.CinemaScheduleListService;
+import com.itbank.service.CinemaUserService;
 import com.itbank.service.KakaoPayService;
+import com.itbank.service.MovieVodUrlService;
 
 
 @Controller
@@ -38,21 +44,33 @@ import com.itbank.service.KakaoPayService;
 public class CinemaMovieController {
 
 	@Autowired private CinemaMovieService cms;
+	@Autowired private CinemaUserService cus;
 	@Autowired private CinemaScheduleListService csls;
 	@Autowired private KakaoPayService kps;
+	@Autowired private MovieVodUrlService mvs;
 	private ObjectMapper mapper = new ObjectMapper();
 	
 	// 영화 정보 페이지 보여주기
 	@GetMapping("/movieInfo")
-	public void movieInfo() {}
+	public String movieInfo(ModelAndView model, String movieNm) throws IOException {
+		String vodUrl = mvs.vodUrl(movieNm.trim());
+		model.addObject("vodUrl", vodUrl);
+		return "cinemaMovie/movieInfo";
+	}
 	
 	// 영화 리뷰 등록하기
 	@PostMapping(value="/movieInfo/reviewAdd",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public int reviewAdd(@RequestBody HashMap<String, String>map, HttpSession session) {
+	public int reviewAdd(@RequestBody HashMap<String, String>map, HttpSession session, HttpServletRequest request) {
+		Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
 		String userId = (String)session.getAttribute("userId");
+		if(userId==null) {
+			String sessionId = loginCookie.getValue();
+			CinemaUserDTO login = cus.checkUserWithSessionId(sessionId);
+			userId = login.getUserId();
+		}
 		map.put("userId", userId);
-		System.out.println(map);
+
 		return cms.reviewAdd(map);
 	}
 	

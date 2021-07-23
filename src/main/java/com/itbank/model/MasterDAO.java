@@ -11,6 +11,18 @@ import org.apache.ibatis.annotations.Update;
 
 public interface MasterDAO {
 
+	@Select("select sum(price) as sum, cinemaMovie.movieName, cinemaMovie.urlName " + 
+			"    from cinemasales " + 
+			"    join cinemaMovie" + 
+			"    on cinemaMovie.movieName = cinemaSales.movieName" + 
+			"    GROUP BY cinemaMovie.movieName, cinemaMovie.urlName")
+	List<HashMap<String, Object>> movieSales();
+
+	@Select("select salesday, sum(price) as sum  " + 
+			"    from cinemasales  " + 
+			"    group by salesday")
+	List<HashMap<String, Object>> monthSales();
+	
 	@Select("select * from cinemaLost")
 	List<ServiceCenterDTO> lostList();
 
@@ -78,6 +90,7 @@ public interface MasterDAO {
 
 	@Delete("delete from cinemaEventList where event_idx = #{event_idx}")
 	int eventDelete(int event_idx);
+
 
 
 

@@ -99,15 +99,15 @@ document.querySelector("#paymentBtn").onclick = function() {
 	ob.studentCnt = studentCnt
 	ob.totalCost = totalCost
 	ob.cardNum = cardNum
-	ob.scheduleIdx = movieScheduleIdx
+	ob.scheduleIdx = scheduleIdx
 	ob.reservationSeat = reservationSeat
 	ob.urlName = urlName
 	ob.ageLimit = ageNum
 	ob.cardCompany = cardCompany
 	ob.cardPassword = cardPassword
-	
 
 	let ticketingJson = JSON.stringify(ob)
+	console.log(ob)
 
 	const url = cpath + '/cinemaMovie/ticketing/'
 	const opt = {
@@ -117,6 +117,8 @@ document.querySelector("#paymentBtn").onclick = function() {
 		},
 		body: ticketingJson
 	}
+	
+	console.log(ob)
 	fetch(url, opt)
 	.then(function(resp)  {return resp.text()})
 	.then(function(text)  {
@@ -137,12 +139,12 @@ kakaoPayBtn.onclick = function() {
 	ob.studentCnt = studentCnt
 	ob.totalCost = totalCost
 	ob.cardNum = cardNum
-	ob.cardCompany = cardCompany
-	ob.cardPassword = cardPassword
-	ob.scheduleIdx = movieScheduleIdx
+	ob.scheduleIdx = scheduleIdx
 	ob.reservationSeat = reservationSeat
 	ob.urlName = urlName
-	ob.ageLimit = ageLimit
+	ob.ageLimit = ageNum
+	ob.cardCompany = cardCompany
+	ob.cardPassword = cardPassword
 	
 	let ticketingJson = JSON.stringify(ob)
 

@@ -1,6 +1,9 @@
 package com.itbank.controller;
 
+import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,12 +21,15 @@ import com.itbank.model.CinemaEventListDTO;
 import com.itbank.model.CinemaHallDTO;
 import com.itbank.model.CinemaMovieDTO;
 import com.itbank.model.CinemaScheduleDTO;
+import com.itbank.model.MasterNoticeDTO;
 import com.itbank.model.OneToOneAnswerDTO;
 import com.itbank.model.OneToOneDTO;
+import com.itbank.model.Paging;
 import com.itbank.model.ReviewDTO;
 import com.itbank.model.ServiceCenterDTO;
 import com.itbank.service.MasterService;
 import com.itbank.service.reviewService;
+import com.itbank.service.seviceCenterService;
 
 @Controller
 @RequestMapping("/master")
@@ -33,9 +39,20 @@ public class MasterController {
 	@Autowired private MasterService mse;
 	
 	
-	// 관리자 페이지
-	   @GetMapping("/master/masterHome")
-	   public void masterHome() {}
+		// 관리자 페이지 및 매출 페이지
+		@GetMapping("/master/masterHome")
+		public String masterHome(Model model) {
+	
+			// 영화 별로 매출
+			List<HashMap<String, Object>> movieSales = mse.movieSales();
+			System.out.println(movieSales.toString());
+			model.addAttribute("movieSales", movieSales);
+			// 달별로 매출
+			List<HashMap<String, Object>> monthSales = mse.monthSales();
+			model.addAttribute("monthSales", monthSales);
+	
+			return "master/masterHome";
+		}
 	   
 	   // 관리자 페이지 리뷰 리스트 관리
 	   @GetMapping("/masterReview/masterReviewList/")
@@ -213,4 +230,6 @@ public class MasterController {
 		   int row = mse.eventDelete(event_idx);
 		   return "redirect:/master/masterEvent/masterEventList";
 	   }
+	   
+	   
 }

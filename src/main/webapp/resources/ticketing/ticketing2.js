@@ -23,12 +23,14 @@ function printCount() {
 }
 
 function increaseCount(targetCount) {
+	console.log(1)
     targetCount.innerHTML = ++targetCount.innerHTML
     getTotalCount()
     selectSeatInit()
 }
 
 function decreaseCount(targetCount) {
+	console.log(2)
     if (targetCount.innerHTML != 0)
         targetCount.innerHTML = --targetCount.innerHTML
     getTotalCount()
@@ -39,59 +41,9 @@ function getTotalCount() {
     totalCount = Number(adultCount.innerHTML) + Number(studentCount.innerHTML)
 }
 
-// 좌석 출력
-
-const seatsSection = document.querySelectorAll(".seatsSection")
-
-// 좌석 출력 함수
-function printSeatlayout(seatCnt, target, section) {
-    const rowOfSeats = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-    let rowCnt = 0
-    let seatNumCnt = 0;
-
-    // 좌석 번호 출력
-    for (let i = 0; i < seatCnt; i++) {
-        const div = document.createElement("div")
-        div.setAttribute("class", "seat")
-
-        if (section == 0) {
-            let seatNum = i % 2 == 0 ? 1 : 2
-            rowCnt = (i % 2 == 0) ? rowCnt + 1 : rowCnt
-            div.innerHTML = rowOfSeats[rowCnt] + seatNum
-
-        }
-
-        else if (section == 1) {
-            const seatNum = [3, 4, 5, 6, 7]
-            rowCnt = (i % 5 == 0) ? rowCnt + 1 : rowCnt
-            div.innerHTML = rowOfSeats[rowCnt] + seatNum[seatNumCnt]
-            seatNumCnt++
-
-            if (seatNumCnt == seatNum.length) seatNumCnt = 0
-
-        }
-
-        else {
-            let seatNum = i % 2 == 0 ? 8 : 9
-            rowCnt = (i % 2 == 0) ? rowCnt + 1 : rowCnt
-            div.innerHTML = rowOfSeats[rowCnt] + seatNum
-        }
-        target.appendChild(div)
-    }
-}
-
-seatsSection.forEach((seatSection, section) => {
-    if (section == 0 || section == 2) printSeatlayout(16, seatSection, section)
-    else printSeatlayout(40, seatSection, section)
-})
-
-const seats = Array.from(document.querySelectorAll(".seat"))
-
-seats.forEach(seat => {
-    seat.addEventListener("click", function() {selectSeat(seat)}, true)
-})
-
 function selectSeat(seat) {
+	const seats = Array.from(document.querySelectorAll(".seat"))
+	
     if(totalCount != selectCnt) {
         if(seat.classList.contains('seatSelect')) {
             seat.classList.remove('seatSelect')
@@ -109,9 +61,10 @@ function selectSeat(seat) {
 
     if(selectCnt == totalCount && totalCount != 0) {
     	let arr = []
+    	console.log(seat)
     	seats.forEach(seat => {
     		if(seat.classList.contains("seatSelect")){
-    			arr.push(seat.innerHTML) 
+    			arr.push(seat.innerHTML)
     		}
     	})
     	
@@ -126,7 +79,7 @@ function selectSeat(seat) {
     	}
     	
     	document.querySelector("#toPayment").onclick = function() {
-    		changeElement(changeCnt++)
+    		changeElement(changeCnt)
     		document.querySelector("#coverBoxInfo2").style.display = "none"
     		coverBox.style.display = "none"
     		
@@ -151,7 +104,9 @@ function selectSeat(seat) {
 }
 
 function selectSeatInit() {
+	const seats = Array.from(document.querySelectorAll(".seat"))
     selectCnt = 0
+    console.log(seats)
     seats.forEach(seat => {
         seat.classList.remove('seatSelect')
     })
