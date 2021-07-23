@@ -4,11 +4,15 @@ package com.itbank.service;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itbank.model.CinemaUserDAO;
 import com.itbank.model.CinemaUserDTO;
+import com.itbank.model.OneToOneAnswerDTO;
+import com.itbank.model.OneToOneDTO;
 
 @Service
 public class CinemaUserService {
@@ -81,11 +85,32 @@ public class CinemaUserService {
 		
 	}
 
+	// 자신의 문의한 1:1문의 리스트 불러오기 
+	public List<OneToOneDTO> inquiryList(HttpSession session) {
+		String userId = (String)session.getAttribute("userId");
+		return user_dao.inquiryList(userId);
+	}
+
+	// 1:1문의 리스트 개개인 답변리스트
+	public List<OneToOneAnswerDTO> replyList() {
+		return user_dao.replyList();
+	}
+
+	// 1:1 문의 내역 (세부내용)
+	public OneToOneDTO inquiryRead(int oneToOne_idx) {
+		return user_dao.inquiryRead(oneToOne_idx);
+	}
+	
+	
+	
+
 	// myPage 정보 불러오기(List로처리하는방법)
 //	public List<CinemaUserDTO> myPageInfo(String userId) {
 //		return user_dao.myPageInfo(userId);
 //	}
 
+	
+	
 	
 	
 	

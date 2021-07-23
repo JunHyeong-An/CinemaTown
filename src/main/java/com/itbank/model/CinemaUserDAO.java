@@ -3,6 +3,8 @@ package com.itbank.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -46,6 +48,18 @@ public interface CinemaUserDAO {
 	// user의 비밀번호를 기입한 후 탈퇴하기
 	@Delete("delete from cinemaUser where userId=#{userId} and userPw=#{userPw}")
 	int deleteCheck(CinemaUserDTO dto);
+
+	// 자신의 문의한 1:1문의 리스트 불러오기 
+	@Select("select * from oneToOne where userId=#{userId} order by otoWriteDay desc")
+	List<OneToOneDTO> inquiryList(String userId);
+
+	// 1:1문의 리스트 개개인 답변리스트
+	@Select("select * from oneToOneAnswer")
+	List<OneToOneAnswerDTO> replyList();
+
+	// 1:1 문의 내역 (세부내용)
+	@Select("select * from oneToOne where oneToOne_idx=#{oneToOne_idx}")
+	OneToOneDTO inquiryRead(int oneToOne_idx);
 
 	// myPage 정보 불러오기(List로처리하는방법)
 //	@Select("select userName, userId, userBirth, userPh, userEmail from cinemaUser where userId = #{userId}")
