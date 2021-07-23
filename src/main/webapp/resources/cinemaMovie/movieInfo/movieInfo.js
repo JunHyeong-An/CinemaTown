@@ -118,7 +118,7 @@ document.onscroll = function() {
 	
 	console.log('d : ' + documentHeight)
 	console.log('s : ' + scrollHeight)
-	if(documentHeight < scrollHeight) {
+	if(documentHeight <= scrollHeight) {
 		fetch(reviewUrl, opt)
 		.then(resp => {
 			return resp.json()
