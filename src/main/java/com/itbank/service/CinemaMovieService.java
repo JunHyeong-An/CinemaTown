@@ -158,14 +158,8 @@ public class CinemaMovieService {
 		return review_dao.reviewAdd(map);
 	}
 
-<<<<<<< HEAD
 	public List<ReviewDTO> reviewList(String movieNm,String rowMin, String rowMax) {
 		return review_dao.reviewList(movieNm,rowMin,rowMax);
-=======
-	// 영화 리뷰 리스트 보여주는 것
-	public List<ReviewDTO> reviewList(String rowMin, String rowMax) {
-		return review_dao.reviewList(rowMin,rowMax);
->>>>>>> e781e4a49bbc894213a8e946259129b2b105d569
 	}
 
 
