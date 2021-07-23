@@ -7,35 +7,37 @@
 	<div class="main">
 		<div class="peopleInfo">
 			<div class="peopleImg">
-				<a href=""><img src="myPageImg1.png" width="100px"
+				<img src="https://media.discordapp.net/attachments/856752011814895645/867672165084299264/myPageImg1.png" width="100px"
 					height="100px"></a>
 			</div>
 			<!--for문 해주세요-->
+<%-- 			<c:forEach var="dto" items="${list }"> --%>
 			<div class="info">
 				<table>
 					<tbody>
 						<tr>
-							<th class="name">허용승</th>
+							<th class="name">${dto.userName }</th>
 						</tr>
 						<tr>
 							<td>User ID</td>
-							<td>123123123</td>
+							<td>${dto.userId }</td>
 						</tr>
 						<tr>
 							<td>생년월일</td>
-							<td>123123123</td>
+							<td>${dto.userBirth }</td>
 						</tr>
 						<tr>
 							<td>PHONE</td>
-							<td>123123123</td>
+							<td>${dto.userPh }</td>
 						</tr>
 						<tr>
 							<td>EMAIL</td>
-							<td>123123123</td>
+							<td>${dto.userEmail }</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
+<%-- 			</c:forEach> --%>
 		</div>
 		<div class="goLink">
 			<div class="ticketList">
@@ -51,7 +53,7 @@
 			</div>
 			<div class="bear"></div>
 			<div class="myInfoModify">
-				<a href=""><img
+				<a href="${cpath }/cinemaUser/myPage/infoModify"><img
 					src="https://media.discordapp.net/attachments/856752011814895645/867672225221050378/myPageModify.png"
 					width="140px" height="80px"></a>
 			</div>

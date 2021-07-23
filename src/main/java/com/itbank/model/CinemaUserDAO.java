@@ -1,6 +1,7 @@
 package com.itbank.model;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -45,6 +46,10 @@ public interface CinemaUserDAO {
 	// user의 비밀번호를 기입한 후 탈퇴하기
 	@Delete("delete from cinemaUser where userId=#{userId} and userPw=#{userPw}")
 	int deleteCheck(CinemaUserDTO dto);
+
+	// myPage 정보 불러오기(List로처리하는방법)
+//	@Select("select userName, userId, userBirth, userPh, userEmail from cinemaUser where userId = #{userId}")
+//	List<CinemaUserDTO> myPageInfo(String userId);
 
 
 	

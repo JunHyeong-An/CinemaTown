@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,15 @@ public class MasterService {
 	
 	public List<CinemaHallDTO> hallList() {
 		return dao.hallList();
+	}
+	
+	// 상영 일정 추가 시 같은 상영관에 시간 겹치지 않도록 해주기
+	public int scheduleCheck(String scheduleTime, String hallName) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("scheduleTime", scheduleTime);
+		map.put("hallName", hallName);
+
+		return dao.scheduleCheck(map);
 	}
 	
 	public int insertMovie(CinemaScheduleDTO dto, String hallName) {
@@ -164,4 +174,6 @@ public class MasterService {
 		public int eventDelete(int event_idx) {
 			return dao.eventDelete(event_idx);
 		}
+
+		
 }

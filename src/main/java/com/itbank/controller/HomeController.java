@@ -50,12 +50,13 @@ public class HomeController {
 				String[] start_timeList = cms.start_timeList(movieNameList[i]);
 				String[] end_timeList = cms.end_timeList(movieNameList[i]);
 				String[] hallNameList = cms.hallNameList(movieNameList[i]);
+				int[] schedule_idxList = cms.Schedule_idxList(movieNameList[i]);
 				dto.setStart_time(start_timeList);
 				dto.setEnd_time(end_timeList);
+				dto.setSchedule_idx(schedule_idxList);
 				dto.setHallName(hallNameList);
 				listMap.add(dto);
-				System.out.println(dto);
-		
+	
 		}
 		
 		String jsonData = mapper.writeValueAsString(listMap);

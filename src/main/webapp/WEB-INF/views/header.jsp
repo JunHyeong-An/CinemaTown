@@ -17,19 +17,7 @@
 	const cpath = "${cpath}"
 </script>
  <header>
-        <!-- header안에 맨위에있는 로그인 박스 -->
-        <div id="loginStatusBox">
-            <ul id="loginStatus">
-                <c:if test="${empty login }">
-                	<li><a href="${cpath }/cinemaUser/login">로그인</a></li>
-                	<li><a href="${cpath }/cinemaUser/tos">회원가입</a></li>
-            	</c:if>
-            	<c:if test="${not empty login }">
-            		<li><a href="${cpath }/cinemaUser/logout">로그아웃</a></li>
-                	<li><a href="${cpath }/cinemaUser/mypage">마이페이지</a></li>
-            	</c:if>
-            </ul>
-        </div>
+
         <!-- 로고 -->
         <h1 id="logo"><a href="${cpath }/">CINEMA TOWN</a></h1>
 

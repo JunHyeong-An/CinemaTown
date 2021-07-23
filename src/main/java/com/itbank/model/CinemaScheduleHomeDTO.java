@@ -10,6 +10,7 @@ public class CinemaScheduleHomeDTO {
 	private String[] start_time;
 	private String[] end_time;
 	private String[] hallName;
+	private int[] Schedule_idx;
 	private int ageLimit;
 	public String getMovieName() {
 		return movieName;
@@ -53,13 +54,20 @@ public class CinemaScheduleHomeDTO {
 	public void setAgeLimit(int ageLimit) {
 		this.ageLimit = ageLimit;
 	}
+	public int[] getSchedule_idx() {
+		return Schedule_idx;
+	}
+	public void setSchedule_idx(int[] schedule_idx) {
+		Schedule_idx = schedule_idx;
+	}
 	@Override
 	public String toString() {
 		return "movieName=" + movieName + ", urlName=" + urlName + ", schedule_allCount="
 				+ schedule_allCount + ", start_time=" + Arrays.toString(start_time) + ", end_time="
-				+ Arrays.toString(end_time) + ", hallName=" + Arrays.toString(hallName) + ", ageLimit=" + ageLimit;
+				+ Arrays.toString(end_time) + ", hallName=" + Arrays.toString(hallName) + ", Schedule_idx="
+				+ Arrays.toString(Schedule_idx) + ", ageLimit=" + ageLimit;
 	}
-
+	
 	
 	
 	
