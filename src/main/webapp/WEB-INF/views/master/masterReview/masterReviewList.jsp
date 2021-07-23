@@ -19,29 +19,54 @@
             </select>
         </div>
         <div><input type="button" value="선택" id="movieNameButton"></div>
-        <div class="main"> 
-        </div>
-<!--         <div class="paging-number"> -->
-<%-- 			<c:if test="${paging.prev }"> --%>
-<%-- 				<a href="${cpath }?page=${paging.begin - 1}"> --%>
-<!-- 					◁ -->
-<!-- 				</a> -->
-<%-- 			</c:if> --%>
-		
-<%-- 			<c:forEach var="i" begin="${paging.begin }" end="${paging.end }"> --%>
-<%-- 				<a href="${cpath }?page=${i}"> --%>
-<%-- 					${i == param.page ? '<strong>' : ''} --%>
-<%-- 						&nbsp;&nbsp;${i }&nbsp;&nbsp; --%>
-<%-- 					${i == param.page ? '</strong>' : ''} --%>
-<!-- 				</a> -->
-<%-- 			</c:forEach> --%>
-			
-<%-- 			<c:if test="${paging.next }"> --%>
-<%-- 				<a href="${cpath }?page=${paging.end + 1}"> --%>
-<!-- 					▷ -->
-<!-- 				</a> -->
-<%-- 			</c:if> --%>
-<!-- 		</div> -->
+        <div class="main">
+			<div class="paging">
+				<div id="number">
+					<c:if test="${paging.prev }">
+						<a href="${cpath }/master/masterServiceCenter/masterNotice">
+							[처음] </a>
+					</c:if>
+
+					<c:if test="${paging.prev }">
+						<a href="${cpath }/master/masterNotice?page=${paging.begin-1}">[이전]
+						</a>
+					</c:if>
+
+					<c:if test="${empty param.page}">
+						<a href="${cpath }/master/masterServiceCenter/masterNotice"><strong>1</strong></a>
+					</c:if>
+
+					<c:forEach var="i"
+						begin="${empty param.page ? paging.begin + 1 : paging.begin}"
+						end="${paging.end }">
+						<span> ${i == param.page ? '<strong>' : '' } <c:if
+								test="${i ==1 }">
+								<a href="${cpath }/master/masterServiceCenter/masterNotice">${i }</a>
+							</c:if> <c:if test="${i != 1}">
+								<a
+									href="${cpath }/master/masterServiceCenter/masterNotice?page=${i}">${i }</a>
+							</c:if> ${i == param.page ? '</strong>' : '' }
+						</span>
+					</c:forEach>
+
+					<c:if test="${paging.next }">
+						<a
+							href="${cpath }/master/masterServiceCenter/masterNotice?page=${paging.end+1}">[다음]
+						</a>
+					</c:if>
+
+					<c:if test="${paging.next }">
+						<a
+							href="${cpath }/master/masterServiceCenter/masterNotice?page=${paging.pageCount}">[맨끝]
+						</a>
+					</c:if>
+
+				</div>
+				<a href="${cpath }/master/masterServiceCenter/masterNoticeAdd"><button>공지사항
+						추가</button></a>
+			</div>
+		</div>
+
     </div>
 <script src="${cpath }/resources/master/masterReview/masterReviewList.js"></script>
 </body>

@@ -290,7 +290,26 @@ create table oneToOneAnswer(
     constraint oneToOne_idx_oneToOneAnswer_fk foreign key(oneToOne_idx)
         references oneToOne(oneToOne_idx) on delete cascade
 );
+---------------------------------------------------------------
+--  14.공지사항 
 
+drop sequence masterNotice_seq;
+drop table masterNotice;
+
+create sequence masterNotice_seq
+    start with 1
+    maxvalue 999999999
+    increment by 1
+    nocache;
+    
+create table masterNotice(
+    notice_idx          number          default MasterNotice_seq.nextval primary key,
+    noticeTitle         varchar2(100)   not null,
+    noticeContent       varchar2(1000)  not null,
+    noticeFileName      varchar2(255)   ,
+    noticeDate          varchar2(50)    default to_char(sysdate,'yyyy-MM-dd HH24:mi'),
+    deleted             char(1)         default 'n' check(deleted in('y','n'))
+);
 commit;
 
 
