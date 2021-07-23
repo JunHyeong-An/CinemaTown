@@ -7,6 +7,7 @@ const ticketing4TotalCost = document.querySelector("#ticketing4TotalCost")
 let ageLimits = document.querySelectorAll(".ageLimit")
 
 const jsonData = document.querySelector("#ticketingJson").value
+console.log(jsonData)
 let json = JSON.parse(jsonData)
 console.log(json)
 

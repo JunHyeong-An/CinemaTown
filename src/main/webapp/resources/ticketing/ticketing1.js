@@ -24,6 +24,7 @@ const coverBox = document.querySelector("#coverBox")
 const coverBoxInfo = document.querySelector("#coverBoxInfo")
 
 const ticketingMoviePoster = document.querySelector("#ticketingMoviePoster")
+const seats = Array.from(document.querySelectorAll(".seat"))
 
 let changeCnt = 0
 let resToken = getParameterByName("resToken")
@@ -37,7 +38,6 @@ if(resToken == "1") {
 	resDate = rootDate.getDate() < 10 ? '0' + resDate : resDate
 
 	ticketingDate = String(resYear) + String(resMonth) + String(resDate)
-	console.log(ticketingDate)
 	movieName = getParameterByName("movieNm")
 	ticktingHallName = getParameterByName("hallName")
 	ticketingTime = getParameterByName("startTime").replace(":", "")
@@ -87,9 +87,26 @@ if(resToken == "1") {
 		return resp.json()
 	})
 	.then(json => {
-		console.log('seat Arr')
 		console.log(json)
+		const seatsSection = document.querySelectorAll(".seatsSection")
+		seatsSection.forEach((seatSection, section) => {
+		    if (section == 0 || section == 2) printSeatlayout(16, seatSection, section)
+		    else printSeatlayout(40, seatSection, section)
+		})
 		remainSeatArr = json
+		const seats2 = Array.from(document.querySelectorAll(".seat"))
+		
+		for(i in json) {
+			seats2.forEach(seat => {
+				if(remainSeatArr.includes(seat.innerHTML)) 
+					seat.style.backgroundColor = "gray"
+					
+				seat.onclick = function() {
+					if(!remainSeatArr.includes(seat.innerHTML))
+						selectSeat(seat)
+				}
+			})	
+		}
 	})
 }
 
@@ -211,7 +228,6 @@ function getMovieList() {
 	.then(resp => resp.json())
 	.then(json => {
 		showTimeList.innerHTML = ''
-		console.log(json)
 		for(i in json) {
 			const div = document.createElement("div")
 			const p1 = document.createElement("p")
@@ -220,10 +236,6 @@ function getMovieList() {
 			const span2 = document.createElement("span")
 			const span3 = document.createElement("span")
 			
-			input1.setAttribute("type", "hidden")
-			input2.setAttribute("type", "hidden")
-			input1.classList.add("movieEndTime")
-			input2.classList.add("movieScheduleIdx")
 			div.setAttribute("class", "timeNode")
 			p1.setAttribute("class", "nodeTime")
 			p2.setAttribute("class", "nodeInfo")
@@ -243,8 +255,6 @@ function getMovieList() {
 			
 			div.appendChild(p1)
 			div.appendChild(p2)
-			div.appendChild(input1)
-			div.appendChild(input2)
 			div.addEventListener("click", function(){showCoverBox(div, json[i])})
 			
 			showTimeList.appendChild(div)
@@ -327,23 +337,75 @@ dateIncBtn.onclick = increaseDate
 dateDcrBtn.onclick = decreaseDate
 
 // 달력 관련 끝
+function printSeatlayout(seatCnt, target, section) {
+    const rowOfSeats = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    let rowCnt = 0
+    let seatNumCnt = 0;
+
+    // 좌석 번호 출력
+    for (let i = 0; i < seatCnt; i++) {
+        const div = document.createElement("div")
+        div.setAttribute("class", "seat")
+
+        if (section == 0) {
+            let seatNum = i % 2 == 0 ? 1 : 2
+            rowCnt = (i % 2 == 0) ? rowCnt + 1 : rowCnt
+            div.innerHTML = rowOfSeats[rowCnt] + seatNum
+
+        }
+
+        else if (section == 1) {
+            const seatNum = [3, 4, 5, 6, 7]
+            rowCnt = (i % 5 == 0) ? rowCnt + 1 : rowCnt
+            div.innerHTML = rowOfSeats[rowCnt] + seatNum[seatNumCnt]
+            seatNumCnt++
+
+            if (seatNumCnt == seatNum.length) seatNumCnt = 0
+
+        }
+
+        else {
+            let seatNum = i % 2 == 0 ? 8 : 9
+            rowCnt = (i % 2 == 0) ? rowCnt + 1 : rowCnt
+            div.innerHTML = rowOfSeats[rowCnt] + seatNum
+        }
+        target.appendChild(div)
+    }
+}
+
 function showCoverBox(div, json) {
-	console.log(json)
-	scheduleIdx = json.SCHEDULE_IDX
-	console.log(scheduleIdx)
-	const seatUrl = cpath + "/getSeats/" + json.SCHEDULE_IDX + "/"
+	scheduleNum = json.SCHEDULE_IDX
+	const seatUrl = cpath + "/cinemaMovie/getSeats/" + json.SCHEDULE_IDX + "/"
 	const opt = {
 		method: "GET"
 	}
+	console.log(seatUrl)
 	
 	fetch(seatUrl, opt)
 	.then(resp => {
 		return resp.json()
 	})
 	.then(json => {
-		console.log('seat Arr')
-		console.log(json)
+		const seatsSection = document.querySelectorAll(".seatsSection")
+		seatsSection.forEach((seatSection, section) => {
+		    if (section == 0 || section == 2) printSeatlayout(16, seatSection, section)
+		    else printSeatlayout(40, seatSection, section)
+		})
 		remainSeatArr = json
+		const seats2 = Array.from(document.querySelectorAll(".seat"))
+		
+		for(i in json) {
+			seats2.forEach(seat => {
+//				seat.addEventListener("click", function() {selectSeat(seat)}, true)	
+				if(remainSeatArr.includes(seat.innerHTML)) 
+					seat.style.backgroundColor = "gray"
+					
+				seat.onclick = function() {
+					if(!remainSeatArr.includes(seat.innerHTML))
+						selectSeat(seat)
+				}
+			})	
+		}
 	})
 	
 	coverBox.style.display = "flex"
@@ -358,11 +420,6 @@ function showCoverBox(div, json) {
 	coverBoxMovieName.innerHTML = json.MOVIENAME
 	coverBoxStartTime.innerHTML = div.querySelector(".nodeTime").innerHTML
 	coverBoxHallName.innerHTML = div.querySelectorAll("span")[2].innerHTML
-	
-	document.querySelector("#movieScheduleIdx")
-	
-	movieEndTime = div.querySelector(".movieEndTime").value
-	movieScheduleIdx = div.querySelector(".movieScheduleIdx").value
 	
 	coverBoxExit.onclick = function() {
 		coverBox.style.display = "none"
@@ -395,6 +452,7 @@ function showCoverBox(div, json) {
 		t2Date.innerHTML = document.querySelector("#headerDate").innerHTML
 		
 		changeElement(changeCnt++)
+		console.log(changeCnt)
 	}
 }
 

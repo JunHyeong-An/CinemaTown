@@ -21,6 +21,10 @@ const video = document.querySelector("#video")
 const stillCutMoveLeftBtn = document.querySelector("#stillCutMoveLeft")
 const stillCutMoveRightBtn = document.querySelector("#stillCutMoveRight")
 
+const reviewContainer = document.querySelector("#reviewContainer")
+let reviewMin = 1
+let reviewMax = 3
+
 fetch(kmdbUrl, opt)
 .then(resp => {
     return resp.json()
@@ -92,6 +96,8 @@ fetch(kmdbUrl, opt)
 
 // 리뷰
 let movieNm = getParameterByName("movieNm")
+movieNm = movieNm.replace(" ", "")
+console.log(movieNm)
 
 document.onscroll = function() {
 	let documentHeight = Math.max(
@@ -101,21 +107,17 @@ document.onscroll = function() {
 	)
 	let scrollY	 = Math.round(window.pageYOffset)
 	let scrollHeight = window.innerHeight + scrollY
-	let reviewMin = 1
-	let reviewMax = 3
 	
 	let movieNmParam = "movieNm=" + movieNm
-	let minParam = "&rowMin=" + reviewMin
 	let maxParam = "&rowMax=" + reviewMax
-	
-	const reviewUrl = cpath + "/cinemaMovie/movieInfo/list?" + movieNmParam + minParam + maxParam
+
+	const reviewUrl = cpath + "/cinemaMovie/movieInfo/list?" + movieNmParam + maxParam
 	const method = {
 		method: "GET"
 	}
 	
 	console.log(documentHeight)
 	console.log(scrollHeight)
-	
 	if(documentHeight < scrollHeight) {
 		fetch(reviewUrl, opt)
 		.then(resp => {
@@ -123,8 +125,30 @@ document.onscroll = function() {
 		})
 		.then(json => {
 			console.log(json)
-			reviewMin += 3
-			reviewMax += 3
+			const div1 = document.querySelector("#reviewList")
+			div1.innerHTML = ""
+			
+			for(i in json) {
+				const div2 = document.createElement("div")
+				const p = document.createElement("p")
+				const div3 = document.createElement("div")
+				
+				div2.setAttribute("class", "review")
+				p.setAttribute("class", "reviewUserId")
+				div3.setAttribute("class", "reviewValue")
+				
+				p.innerHTML = json[i].userId
+				div3.innerHTML = json[i].reviewContent
+				
+				div2.appendChild(p)
+				div2.appendChild(div3)
+				div1.appendChild(div2)
+				
+				reviewContainer.appendChild(div1)
+			}
+			if(json != '') {
+				reviewMax += 3					
+			}
 		})
 	}
 }
@@ -136,7 +160,6 @@ reviewBtn.onclick = function(event) {
 	let ob = {}
 	ob.reviewContent = reviewText.value
 	ob.movieNm = movieNm
-	console.log(movieNm)
 
 	const reviewAddUrl = cpath + "/cinemaMovie/movieInfo/reviewAdd"
 	const opt = {
@@ -154,6 +177,8 @@ reviewBtn.onclick = function(event) {
 		})
 		.then(json => {
 			console.log(json)
+			reviewText.value = ''
+			location.reload()
 		})
 	}
 }

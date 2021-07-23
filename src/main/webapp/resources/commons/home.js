@@ -94,7 +94,7 @@ fetch(listUrl, listOpt)
 					+ json[i].movieName + "&hallName=" + json[i].hallName[j] 
 					+ "&startTime=" + json[i].start_time[j]
 					+ "&endTime=" + json[i].end_time[j] 
-					+ "&schedule=" + json[i].schedule_allCount
+					+ "&schedule=" + json[i].schedule_idx
 					+ "&urlName=" + json[i].urlName
 					+ "&ageNum=" + json[i].ageLimit
 					+ "&resToken=1")

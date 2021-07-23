@@ -99,13 +99,15 @@ document.querySelector("#paymentBtn").onclick = function() {
 	ob.studentCnt = studentCnt
 	ob.totalCost = totalCost
 	ob.cardNum = cardNum
-	ob.scheduleIdx = movieScheduleIdx
+	ob.scheduleIdx = scheduleNum
 	ob.reservationSeat = reservationSeat
 	ob.urlName = urlName
 	ob.ageLimit = ageNum
 	ob.cardCompany = cardCompany
 	ob.cardPassword = cardPassword
 	
+	console.log('snum')
+	console.log(scheduleNum)
 
 	let ticketingJson = JSON.stringify(ob)
 
@@ -137,12 +139,12 @@ kakaoPayBtn.onclick = function() {
 	ob.studentCnt = studentCnt
 	ob.totalCost = totalCost
 	ob.cardNum = cardNum
-	ob.cardCompany = cardCompany
-	ob.cardPassword = cardPassword
-	ob.scheduleIdx = movieScheduleIdx
+	ob.scheduleIdx = scheduleNum
 	ob.reservationSeat = reservationSeat
 	ob.urlName = urlName
-	ob.ageLimit = ageLimit
+	ob.ageLimit = ageNum
+	ob.cardCompany = cardCompany
+	ob.cardPassword = cardPassword
 	
 	let ticketingJson = JSON.stringify(ob)
 

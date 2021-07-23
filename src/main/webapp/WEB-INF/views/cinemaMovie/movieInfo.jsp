@@ -65,12 +65,12 @@
 			<input type="button" id="reviewBtn" value="관람평 쓰기">
 		</div>
 		
-<!-- 		<div id="reviewList"> -->
+		<div id="reviewList">
 <!-- 			<div class="review"> -->
 <!-- 				<p class="reviewUserId">jsodm12</p> -->
 <!-- 				<div class="reviewValue">꿀잼</div> -->
 <!-- 			</div> -->
-<!-- 		</div> -->
+		</div>
 	</div>
 </div>
 
