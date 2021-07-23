@@ -31,7 +31,8 @@ public class MasterController {
 	
 	@Autowired private reviewService rs;
 	@Autowired private MasterService mse;
-	   
+	
+	
 	// 관리자 페이지
 	   @GetMapping("/master/masterHome")
 	   public void masterHome() {}
@@ -136,9 +137,18 @@ public class MasterController {
 			return mav;
 		}
 		
+		// 상영 일정 추가 시 같은 상영관에 시간 겹치지 않도록 해주기
+		@GetMapping("/masterMovie/cinemaSchedule/check/{scheduleTime}/{hallName}/")
+		@ResponseBody
+		public int scheduleCheck(@PathVariable String scheduleTime, @PathVariable String hallName) {
+
+			return mse.scheduleCheck(scheduleTime, hallName);
+		}
+		
 		// 상영 일정에 영화, 상영관 추가하기
 		@PostMapping("/masterMovie/cinemaSchedule")
 		public String insertMovie(CinemaScheduleDTO dto, String hallName) {
+			
 			int row = mse.insertMovie(dto, hallName);
 			return "redirect:/master/masterMovie/masterMovieList";
 		}
