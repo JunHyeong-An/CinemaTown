@@ -2,6 +2,8 @@ package com.itbank.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +20,15 @@ import com.itbank.model.CinemaEventListDTO;
 import com.itbank.model.CinemaHallDTO;
 import com.itbank.model.CinemaMovieDTO;
 import com.itbank.model.CinemaScheduleDTO;
+import com.itbank.model.MasterNoticeDTO;
 import com.itbank.model.OneToOneAnswerDTO;
 import com.itbank.model.OneToOneDTO;
+import com.itbank.model.Paging;
 import com.itbank.model.ReviewDTO;
 import com.itbank.model.ServiceCenterDTO;
 import com.itbank.service.MasterService;
 import com.itbank.service.reviewService;
+import com.itbank.service.seviceCenterService;
 
 @Controller
 @RequestMapping("/master")
@@ -213,4 +218,6 @@ public class MasterController {
 		   int row = mse.eventDelete(event_idx);
 		   return "redirect:/master/masterEvent/masterEventList";
 	   }
+	   
+	   
 }
