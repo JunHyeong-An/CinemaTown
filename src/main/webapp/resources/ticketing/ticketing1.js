@@ -24,7 +24,6 @@ const coverBox = document.querySelector("#coverBox")
 const coverBoxInfo = document.querySelector("#coverBoxInfo")
 
 const ticketingMoviePoster = document.querySelector("#ticketingMoviePoster")
-const seats = Array.from(document.querySelectorAll(".seat"))
 
 let changeCnt = 0
 let resToken = getParameterByName("resToken")
@@ -42,7 +41,7 @@ if(resToken == "1") {
 	ticktingHallName = getParameterByName("hallName")
 	ticketingTime = getParameterByName("startTime").replace(":", "")
 	endTime = getParameterByName("endTime")
-	scheduleNum = getParameterByName("schedule")
+	scheduleIdx = getParameterByName("schedule")
 	urlName = getParameterByName("urlName")
 	ageNum = getParameterByName("ageNum")
 		
@@ -77,7 +76,7 @@ if(resToken == "1") {
 	t2Date.innerHTML = resDate
 
 	changeElement(changeCnt++)
-	const seatUrl = cpath + "/cinemaMovie/getSeats/" + scheduleNum + "/"
+	const seatUrl = cpath + "/cinemaMovie/getSeats/" + scheduleIdx + "/"
 	const opt = {
 		method: "GET"
 	}
@@ -90,17 +89,17 @@ if(resToken == "1") {
 		console.log(json)
 		const seatsSection = document.querySelectorAll(".seatsSection")
 		seatsSection.forEach((seatSection, section) => {
-		    if (section == 0 || section == 2) printSeatlayout(16, seatSection, section)
-		    else printSeatlayout(40, seatSection, section)
+			if (section == 0 || section == 2) printSeatlayout(16, seatSection, section)
+			else printSeatlayout(40, seatSection, section)
 		})
 		remainSeatArr = json
 		const seats2 = Array.from(document.querySelectorAll(".seat"))
-		
+
 		for(i in json) {
 			seats2.forEach(seat => {
 				if(remainSeatArr.includes(seat.innerHTML)) 
 					seat.style.backgroundColor = "gray"
-					
+
 				seat.onclick = function() {
 					if(!remainSeatArr.includes(seat.innerHTML))
 						selectSeat(seat)
@@ -374,7 +373,7 @@ function printSeatlayout(seatCnt, target, section) {
 }
 
 function showCoverBox(div, json) {
-	scheduleNum = json.SCHEDULE_IDX
+	scheduleIdx = json.SCHEDULE_IDX
 	const seatUrl = cpath + "/cinemaMovie/getSeats/" + json.SCHEDULE_IDX + "/"
 	const opt = {
 		method: "GET"

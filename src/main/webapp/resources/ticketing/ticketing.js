@@ -39,7 +39,6 @@ let ageLimitBox = null
 let remainSeatArr = null
 
 let endTime = ""
-let scheduleNum = ""
 let urlName = ""
 let ageNum = ""
 

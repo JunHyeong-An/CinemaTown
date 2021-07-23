@@ -99,7 +99,7 @@ document.querySelector("#paymentBtn").onclick = function() {
 	ob.studentCnt = studentCnt
 	ob.totalCost = totalCost
 	ob.cardNum = cardNum
-	ob.scheduleIdx = scheduleNum
+	ob.scheduleIdx = scheduleIdx
 	ob.reservationSeat = reservationSeat
 	ob.urlName = urlName
 	ob.ageLimit = ageNum
@@ -107,7 +107,10 @@ document.querySelector("#paymentBtn").onclick = function() {
 	ob.cardPassword = cardPassword
 	
 	console.log('snum')
-	console.log(scheduleNum)
+	console.log(scheduleIdx)
+	
+	console.log('selectSeats')
+	console.log(selectSeats)
 
 	let ticketingJson = JSON.stringify(ob)
 
@@ -119,6 +122,8 @@ document.querySelector("#paymentBtn").onclick = function() {
 		},
 		body: ticketingJson
 	}
+	
+	console.log(ob)
 	fetch(url, opt)
 	.then(function(resp)  {return resp.text()})
 	.then(function(text)  {
@@ -139,7 +144,7 @@ kakaoPayBtn.onclick = function() {
 	ob.studentCnt = studentCnt
 	ob.totalCost = totalCost
 	ob.cardNum = cardNum
-	ob.scheduleIdx = scheduleNum
+	ob.scheduleIdx = scheduleIdx
 	ob.reservationSeat = reservationSeat
 	ob.urlName = urlName
 	ob.ageLimit = ageNum
