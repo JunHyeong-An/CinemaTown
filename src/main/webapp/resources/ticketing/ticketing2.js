@@ -23,14 +23,12 @@ function printCount() {
 }
 
 function increaseCount(targetCount) {
-	console.log(1)
     targetCount.innerHTML = ++targetCount.innerHTML
     getTotalCount()
     selectSeatInit()
 }
 
 function decreaseCount(targetCount) {
-	console.log(2)
     if (targetCount.innerHTML != 0)
         targetCount.innerHTML = --targetCount.innerHTML
     getTotalCount()
@@ -43,7 +41,8 @@ function getTotalCount() {
 
 function selectSeat(seat) {
 	const seats = Array.from(document.querySelectorAll(".seat"))
-	
+	console.log(totalCount)
+	console.log(selectCnt)
     if(totalCount != selectCnt) {
         if(seat.classList.contains('seatSelect')) {
             seat.classList.remove('seatSelect')
@@ -106,7 +105,6 @@ function selectSeat(seat) {
 function selectSeatInit() {
 	const seats = Array.from(document.querySelectorAll(".seat"))
     selectCnt = 0
-    console.log(seats)
     seats.forEach(seat => {
         seat.classList.remove('seatSelect')
     })
