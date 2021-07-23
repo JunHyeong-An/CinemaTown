@@ -210,9 +210,8 @@ public class CinemaMovieController {
 	
 	// 결제수단 상관없이 결제 성공이 되면 나오는 페이지
 	@GetMapping("/ticketingSuccess")
-	public String ticketingSuccess(HttpSession session, Model model) {
-
-		model.addAttribute("ticketingJson", session.getAttribute("ticketingJson").toString());
+	public String ticketingSuccess(HttpSession session, Model model) throws JsonProcessingException {
+		model.addAttribute("ticketingJson", mapper.writeValueAsString(session.getAttribute("ticketingJson")));
 		return "cinemaMovie/ticketingSuccess";
 	}
 	
