@@ -25,6 +25,16 @@ public class MasterService {
 
 	@Autowired private MasterDAO dao;
 	
+	public List<HashMap<String, Object>> movieSales() {
+		return dao.movieSales();
+		
+	}
+	
+	public List<HashMap<String, Object>> monthSales() {
+		
+		return dao.monthSales();
+	}
+	
 	// C에 uploadimage파일 생성하기
 		private final String uploadPath = "C:\\uploadimage";
 		

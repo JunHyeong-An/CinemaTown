@@ -1,5 +1,6 @@
 package com.itbank.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,9 +39,20 @@ public class MasterController {
 	@Autowired private MasterService mse;
 	
 	
-	// 관리자 페이지
-	   @GetMapping("/master/masterHome")
-	   public void masterHome() {}
+		// 관리자 페이지 및 매출 페이지
+		@GetMapping("/master/masterHome")
+		public String masterHome(Model model) {
+	
+			// 영화 별로 매출
+			List<HashMap<String, Object>> movieSales = mse.movieSales();
+			System.out.println(movieSales.toString());
+			model.addAttribute("movieSales", movieSales);
+			// 달별로 매출
+			List<HashMap<String, Object>> monthSales = mse.monthSales();
+			model.addAttribute("monthSales", monthSales);
+	
+			return "master/masterHome";
+		}
 	   
 	   // 관리자 페이지 리뷰 리스트 관리
 	   @GetMapping("/masterReview/masterReviewList/")

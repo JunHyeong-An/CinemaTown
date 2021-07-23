@@ -101,7 +101,7 @@ create table cinemaTicketing(
     teenagerCount   number          default 0 check(teenagerCount<=4),
     deleted         char(1)         default 'n' check(deleted in('y','n')),
     constraint userId_ticketing_fk foreign key(userId)
-        references cinemaUser(userId) on delete cascade, 
+        references cinemaUser(userId) on delete set null, 
     constraint schedule_idx_ticketing_fk foreign key(schedule_idx)
         references cinemaSchedule(schedule_idx) on delete cascade,
     constraint hall_idx_ticketing_fk foreign key(hall_idx)
@@ -155,7 +155,7 @@ create table cinemaPayment(
     constraint ticketing_idx_payment_fk foreign key(ticketing_idx)
         references cinemaTicketing(ticketing_idx) on delete cascade,
     constraint userId_payment_fk foreign key(userId)
-        references cinemaUser(userId) on delete cascade
+        references cinemaUser(userId) on delete set null
 );
 ---------------------------------------------------------------------------------------------
 -- 8. 매출 테이블
@@ -172,7 +172,7 @@ create table cinemaSales(
     sales_idx       number             default cinemaSales_seq.nextval primary key,
     payment_idx     number             not null,
     movieName       varchar2(500)      not null,
-    salesDay        varchar2(50)       default to_char(sysdate,'yyyy-MM-dd'),
+    salesDay        varchar2(50)       default to_char(sysdate,'yyyy-MM'),
     price           number             not null,
     constraint payment_idx_sales_fk foreign key(payment_idx)
         references cinemaPayment(payment_idx) on delete cascade,
