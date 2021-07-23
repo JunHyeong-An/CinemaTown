@@ -3,7 +3,8 @@
 <%@ include file="../header.jsp"%>
 
 <link rel="stylesheet" href="${cpath }/resources/cinemaMovie/movieInfo/movieInfo.css">
-
+<c:set var="userId" value="${userId }"/>
+<input type="hidden" value="${userId }">
 <div id="movieInfoContainer">
 	<div id="movieInfoPosterAndTitle">
 		<img id="movieInfoPoster">

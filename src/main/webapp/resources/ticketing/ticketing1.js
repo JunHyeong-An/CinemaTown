@@ -87,7 +87,6 @@ if(resToken == "1") {
 		return resp.json()
 	})
 	.then(json => {
-		console.log(json)
 		const seatsSection = document.querySelectorAll(".seatsSection")
 		seatsSection.forEach((seatSection, section) => {
 			if (section == 0 || section == 2) printSeatlayout(16, seatSection, section)
@@ -95,15 +94,29 @@ if(resToken == "1") {
 		})
 		remainSeatArr = json
 		const seats2 = Array.from(document.querySelectorAll(".seat"))
+		console.log(seats2)
 
 		for(i in json) {
 			seats2.forEach(seat => {
 				if(remainSeatArr.includes(seat.innerHTML)) 
 					seat.style.backgroundColor = "gray"
-
-				seat.onclick = function() {
-					if(!remainSeatArr.includes(seat.innerHTML))
+				
+				else {
+					seat.onclick = function() {
 						selectSeat(seat)
+					}						
+				}
+			})	
+		}
+		if(json == '') {
+			seats2.forEach(seat => {
+				if(remainSeatArr.includes(seat.innerHTML)) 
+					seat.style.backgroundColor = "gray"
+				
+				else {
+					seat.onclick = function() {
+						selectSeat(seat)
+					}						
 				}
 			})	
 		}
