@@ -67,8 +67,6 @@ if(resToken == "1") {
 	else if(ageNum == '18') div.style.backgroundColor = "#CA1212"
 		
 	ageLimitBox = div
-	console.log(ageNum == '0')
-	console.log(ageLimitBox)
 	
 	document.querySelector("#age").appendChild(ageLimitBox)
 	t2MovieName.innerHTML = movieName
@@ -229,6 +227,7 @@ function getMovieList() {
 	fetch(url, opt)
 	.then(resp => resp.json())
 	.then(json => {
+		console.log(json)
 		showTimeList.innerHTML = ''
 		for(i in json) {
 			const div = document.createElement("div")
@@ -249,6 +248,7 @@ function getMovieList() {
 			span2.innerHTML = " / " + json[i].SEATCOUNTALL + "석 "
 			span3.innerHTML = json[i].HALLNAME
 			urlName = json[i].URLNAME
+			ageNum = json[i].AGELIMIT
 			ticketingMoviePoster.setAttribute("src", urlName)
 			
 			p2.appendChild(span1)

@@ -105,14 +105,9 @@ document.querySelector("#paymentBtn").onclick = function() {
 	ob.ageLimit = ageNum
 	ob.cardCompany = cardCompany
 	ob.cardPassword = cardPassword
-	
-	console.log('snum')
-	console.log(scheduleIdx)
-	
-	console.log('selectSeats')
-	console.log(selectSeats)
 
 	let ticketingJson = JSON.stringify(ob)
+	console.log(ob)
 
 	const url = cpath + '/cinemaMovie/ticketing/'
 	const opt = {

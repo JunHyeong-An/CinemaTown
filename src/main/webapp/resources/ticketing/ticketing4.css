@@ -75,6 +75,11 @@ p {
     border-bottom: 1px solid black;
 }
 
+#ticketingSideList li:last-child {
+	background-color: red;
+	color: white;
+}
+
 #ticketingSideList p {
     font-size: 20pt;
 }
@@ -88,15 +93,14 @@ p {
 }
 
 .ageLimit {
-    display: flex;
+   display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid blue;
-    background-color: blue;
     color: white;
-    font-weight: bold;
-    width: 20px;
-    height: 20px;
+    font-size: 9pt;
+    font-weight: 900;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     margin-right: 15px;
 }
