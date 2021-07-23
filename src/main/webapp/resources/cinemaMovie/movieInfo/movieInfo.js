@@ -116,15 +116,14 @@ document.onscroll = function() {
 		method: "GET"
 	}
 	
-	console.log(documentHeight)
-	console.log(scrollHeight)
+	console.log('d : ' + documentHeight)
+	console.log('s : ' + scrollHeight)
 	if(documentHeight < scrollHeight) {
 		fetch(reviewUrl, opt)
 		.then(resp => {
 			return resp.json()
 		})
 		.then(json => {
-			console.log(json)
 			const div1 = document.querySelector("#reviewList")
 			div1.innerHTML = ""
 			
