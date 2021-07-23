@@ -227,9 +227,20 @@ function getMovieList() {
 	fetch(url, opt)
 	.then(resp => resp.json())
 	.then(json => {
+		let sCurrDate = new Date()
+		let currHour = sCurrDate.getHours()
+		let currMin = sCurrDate.getMinutes()
+		let currTime = currHour + "" + currMin
+		console.log(currTime)
+		
 		console.log(json)
 		showTimeList.innerHTML = ''
 		for(i in json) {
+			console.log(json)
+			let startTime = json[i].START_TIME
+			startTime = startTime.replace(":", "")
+			console.log(startTime)
+			
 			const div = document.createElement("div")
 			const p1 = document.createElement("p")
 			const p2 = document.createElement("p")
@@ -257,8 +268,10 @@ function getMovieList() {
 			
 			div.appendChild(p1)
 			div.appendChild(p2)
-			div.addEventListener("click", function(){showCoverBox(div, json[i])})
-			
+			if(startTime > currTime)
+				div.addEventListener("click", function(){showCoverBox(div, json[i])})
+			else 
+				div.style.backgroundColor = "gray"
 			showTimeList.appendChild(div)
 		}
 	})
