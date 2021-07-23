@@ -26,7 +26,7 @@
                             <span>상영시간</span>
                         </div> 
                     </li>
-                    <li style="background-color: red; color: white;">
+                    <li>
                         <div class="ticketingSideListLocation">
                             <p>2</p>
                             <span>인원 | 좌석</span>
