@@ -23,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
 import com.itbank.model.CinemaUserDTO;
+import com.itbank.model.OneToOneAnswerDTO;
+import com.itbank.model.OneToOneDTO;
 import com.itbank.service.CinemaUserService;
 
 @Controller
@@ -194,6 +196,29 @@ public class CinemaUserController {
 		CinemaUserDTO dto = (CinemaUserDTO)session.getAttribute("login");
 		model.addAttribute("dto", dto);
 	}
+	
+	// 자신의 문의한 1:1문의 리스트 불러오기 
+	@GetMapping("/myPage/inquiry")
+	public String inquiryList(Model model, HttpSession userId) {
+		List<OneToOneDTO> list = cus.inquiryList(userId);
+		model.addAttribute("inquiryList", list);
+		return "/cinemaUser/myPage/inquiry";
+	}
+	
+	// 1:1 문의 내역 (세부내용) 관리자 답변 포함
+	// 1:1문의 리스트 개개인 답변리스트
+	@GetMapping("/myPage/inquiryRead/{oneToOne_idx}")
+	public ModelAndView inquiryRead(@PathVariable int oneToOne_idx) {
+		ModelAndView mav = new ModelAndView("cinemaUser/myPage/inquiryRead");
+		List<OneToOneAnswerDTO> list = cus.replyList();
+		OneToOneDTO dto = cus.inquiryRead(oneToOne_idx);
+		mav.addObject("dto", dto);
+		mav.addObject("replyList", list);
+		
+		return mav;
+	}
+	
+	
 
 
 
