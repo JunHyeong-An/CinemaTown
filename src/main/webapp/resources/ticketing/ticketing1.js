@@ -55,17 +55,20 @@ if(resToken == "1") {
 	
 	const div = document.createElement("div")
 	div.setAttribute("class", "ageLimit")
+	div.innerHTML = ageNum
 	
-	if(ageNum == 0) {
+	if(ageNum == '0') {
 		div.innerHTML = "전체"
 		div.style.fontSize = "5pt"
 		div.style.backgroundColor = "#55C155"
 	}
-	else if(ageNum == 12) div.style.backgroundColor = "#45B9F3"
-	else if(ageNum == 15) div.style.backgroundColor = "#EFBB11"
-	else if(ageNum == 18) div.style.backgroundColor = "#CA1212"
+	else if(ageNum == '12') div.style.backgroundColor = "#45B9F3"
+	else if(ageNum == '15') div.style.backgroundColor = "#EFBB11"
+	else if(ageNum == '18') div.style.backgroundColor = "#CA1212"
 		
 	ageLimitBox = div
+	console.log(ageNum == '0')
+	console.log(ageLimitBox)
 	
 	document.querySelector("#age").appendChild(ageLimitBox)
 	t2MovieName.innerHTML = movieName
