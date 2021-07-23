@@ -59,9 +59,9 @@ public class CinemaMovieController {
 	// 영화 리뷰 리스트 불러오기
 	@GetMapping("/movieInfo/list")
 	@ResponseBody
-	public List<ReviewDTO> reviewList(@RequestParam("movieNm")String movieNm, @RequestParam("rowMin") String rowMin, @RequestParam("rowMax")String rowMax ){
+	public List<ReviewDTO> reviewList(@RequestParam("movieNm")String movieNm, @RequestParam("rowMax")String rowMax ){
 		System.out.println(movieNm);
-		return cms.reviewList(movieNm,rowMin,rowMax);
+		return cms.reviewList(movieNm,rowMax);
 	}
 	
 	// 상영시간표 사이트 보여주기
