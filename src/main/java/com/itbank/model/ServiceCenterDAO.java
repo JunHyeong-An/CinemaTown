@@ -26,7 +26,7 @@ public interface ServiceCenterDAO {
 
 	// 공지사항 집어넣기
 	@Insert("insert into masterNotice (noticeTitle, noticeContent, noticeFileName) values (#{noticeTitle}, #{noticeContent}, #{noticeFileName})")
-	int noticeWrite(MasterNoticeDTO dto);
+	int noticeWrite (MasterNoticeDTO dto);
 
 	// 공지사항 리스트 한개 불러오기
 	@Select("select * from masterNotice where notice_idx = #{notice_idx}")
