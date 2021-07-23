@@ -13,7 +13,7 @@ public interface ReviewDAO {
 
 	// 리뷰리스트 더불러오기
 	@Select("select * from review where movieName=#{movieName} and rownum >=#{rowMin} and rownum <=#{rowMax} order by reviewDay desc")
-	List<ReviewDTO> reviewList(String rowMin, String rowMax);
+	List<ReviewDTO> reviewList(@Param("movieName")String movieNm, @Param("rowMin")String rowMin, @Param("rowMax")String rowMax);
 
 	// 리뷰 등록
 	@Insert("insert into review(movieName, userId, reviewContent)values(#{movieNm},#{userId},#{reviewContent})")

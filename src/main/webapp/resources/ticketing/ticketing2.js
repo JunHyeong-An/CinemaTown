@@ -139,10 +139,10 @@ function selectSeat(seat) {
     			ticketingTime.substring(0, 2) + "시 " + ticketingTime.substring(2, 4) + "분"
     		document.querySelector("#t3TicketingHallName").innerHTML = ticktingHallName
     		document.querySelector("#t3MovieName").innerHTML = movieName
-//    		document.querySelector("#t3Age").appendChild(ageLimitBox)
+    		document.querySelector("#t3Age").appendChild(ageLimitBox)
     		document.querySelector("#t3TotalCost").innerHTML = 
     			(adultCnt * adultCost + studentCnt * studentCost) + "원"
-    			
+    		document.querySelector("#ticketingMoviePoster").setAttribute("src", urlName)
     		totalCost = adultCnt * adultCost + studentCnt * studentCost
     		console.log('totalCost : ' + totalCost)
     	}

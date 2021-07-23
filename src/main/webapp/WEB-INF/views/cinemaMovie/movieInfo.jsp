@@ -60,17 +60,17 @@
 	</div>
 	
 	<div id="reviewContainer">
-		<form method="post" id="reviewForm">
+		<div id="reviewForm">
 			<textarea id="reviewText"></textarea>
-			<input type="submit" id="reviewBtn" value="관람평 쓰기">
-		</form>
-		
-		<div id="reviewList">
-			<div class="review">
-				<p class="reviewUserId">jsodm12</p>
-				<div class="reviewValue">꿀잼</div>
-			</div>
+			<input type="button" id="reviewBtn" value="관람평 쓰기">
 		</div>
+		
+<!-- 		<div id="reviewList"> -->
+<!-- 			<div class="review"> -->
+<!-- 				<p class="reviewUserId">jsodm12</p> -->
+<!-- 				<div class="reviewValue">꿀잼</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 	</div>
 </div>
 

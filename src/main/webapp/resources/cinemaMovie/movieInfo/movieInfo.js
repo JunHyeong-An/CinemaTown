@@ -89,3 +89,72 @@ fetch(kmdbUrl, opt)
 		stillCutBox.style.transition = 800 + "ms"
 	}
 })
+
+// 리뷰
+let movieNm = getParameterByName("movieNm")
+
+document.onscroll = function() {
+	let documentHeight = Math.max(
+		document.body.scrollHeight, document.documentElement.scrollHeight,
+		document.body.offsetHeight, document.documentElement.offsetHeight,
+		document.body.clientHeight, document.documentElement.clientHeight
+	)
+	let scrollY	 = Math.round(window.pageYOffset)
+	let scrollHeight = window.innerHeight + scrollY
+	let reviewMin = 1
+	let reviewMax = 3
+	
+	let movieNmParam = "movieNm=" + movieNm
+	let minParam = "&rowMin=" + reviewMin
+	let maxParam = "&rowMax=" + reviewMax
+	
+	const reviewUrl = cpath + "/cinemaMovie/movieInfo/list?" + movieNmParam + minParam + maxParam
+	const method = {
+		method: "GET"
+	}
+	
+	console.log(documentHeight)
+	console.log(scrollHeight)
+	
+	if(documentHeight < scrollHeight) {
+		fetch(reviewUrl, opt)
+		.then(resp => {
+			return resp.json()
+		})
+		.then(json => {
+			console.log(json)
+			reviewMin += 3
+			reviewMax += 3
+		})
+	}
+}
+
+const reviewBtn = document.querySelector("#reviewBtn")
+const reviewText = document.querySelector("#reviewText")
+
+reviewBtn.onclick = function(event) {
+	let ob = {}
+	ob.reviewContent = reviewText.value
+	ob.movieNm = movieNm
+	console.log(movieNm)
+
+	const reviewAddUrl = cpath + "/cinemaMovie/movieInfo/reviewAdd"
+	const opt = {
+		method: "POST",
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body : 	JSON.stringify(ob)
+	}
+	
+	if(!reviewText.value == '') {
+		fetch(reviewAddUrl, opt)
+		.then(resp => {
+			return resp.json()
+		})
+		.then(json => {
+			console.log(json)
+		})
+	}
+}
+

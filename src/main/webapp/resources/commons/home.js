@@ -59,11 +59,30 @@ fetch(listUrl, listOpt)
 		movieSelect.classList.add("movieSelect")
 		const li = document.createElement("li")
 		const div = document.createElement("div")
+		const ageLimitInput = document.createElement("input")
+		const endTimeInput = document.createElement("input")
+		const urlNameInput = document.createElement("input")
+		const scheduleInput = document.createElement("input")
+		
+		ageLimitInput.setAttribute("type", "hidden")
+		ageLimitInput.value = json[i].ageLimit
+		console.log(json[i].ageLimit)
+		
+		endTimeInput.setAttribute("type", "hidden")
+		endTimeInput.value = json[i].endTime
+		
+		urlNameInput.setAttribute("type", "hidden")
+		urlNameInput.value = json[i].urlName
+		
+		scheduleInput.setAttribute("type", "hidden")
+		scheduleInput.value = json[i].scheduleIdx
+		
 		div.classList.add("movieName")
 		div.innerHTML = json[i].movieName
 		li.appendChild(div)
 		movieNameList.appendChild(li)
 		
+		console.log(json)
 		// 
 		for(j in json[i].hallName) {
 			if(j == 5)
@@ -72,7 +91,12 @@ fetch(listUrl, listOpt)
 			const a2 = document.createElement("a")
 			a2.style.color = "black"
 			a2.setAttribute("href", cpath + "/cinemaMovie/ticketing?movieNm=" 
-					+ json[i].movieName + "&hallName=" + json[i].hallName[j] + "&startTime=" + json[i].start_time[j]
+					+ json[i].movieName + "&hallName=" + json[i].hallName[j] 
+					+ "&startTime=" + json[i].start_time[j]
+					+ "&endTime=" + json[i].end_time[j] 
+					+ "&schedule=" + json[i].schedule_allCount
+					+ "&urlName=" + json[i].urlName
+					+ "&ageNum=" + json[i].ageLimit
 					+ "&resToken=1")
 			div2.classList.add("movieSelectBox")
 			

@@ -147,8 +147,8 @@ public class CinemaMovieService {
 		return review_dao.reviewAdd(map);
 	}
 
-	public List<ReviewDTO> reviewList(String rowMin, String rowMax) {
-		return review_dao.reviewList(rowMin,rowMax);
+	public List<ReviewDTO> reviewList(String movieNm,String rowMin, String rowMax) {
+		return review_dao.reviewList(movieNm,rowMin,rowMax);
 	}
 
 		

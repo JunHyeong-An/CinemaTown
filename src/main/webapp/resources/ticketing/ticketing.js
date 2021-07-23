@@ -28,6 +28,7 @@ let cardNum = ""
 let cardCompany = ""
 let cardPassword = ""
 let scheduleIdx = ""
+let reservationSeat =""
 	
 // ticketing2로 보내는 변수들
 let movieEndTime = ""
@@ -36,6 +37,11 @@ let ageLimitBox = null
 
 // 남은 좌석 배열
 let remainSeatArr
+
+let endTime = ""
+let scheduleNum = ""
+let urlName = ""
+let ageNum = ""
 
 changeElements[0].classList.add("insertFlex")
 elementsHeader[0].classList.remove("hidden")
