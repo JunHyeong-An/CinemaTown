@@ -72,6 +72,24 @@ public interface CinemaScheduleDAO {
 			"    where cinemaSchedule.showDay = #{showDay} and cinemaMovie.movieName=#{movieName} and cinemaHall.hallName=#{hallName} order by cinemaMovie.movieName, cinemaHall.hallName")
 	int[] seatCountRemainList(@Param("showDay") String showDay,@Param("movieName")String movieName,@Param("hallName")String hallName);
 
+	@Select("select cinemaMovie.urlName" + 
+			"    from cinemaMovie" + 
+			"    full outer join cinemaSchedule" + 
+			"    on cinemaMovie.movieName = cinemaSchedule.movieName" + 
+			"    full outer join cinemaHall" + 
+			"    on cinemaSchedule.hall_idx = cinemaHall.hall_idx" + 
+			"    where cinemaSchedule.showDay = #{showDay}" + 
+			"    group by cinemaMovie.movieName,cinemaMovie.urlName order by cinemaMovie.movieName")
+	String[] urlNameList(String showDay);
+
+	@Select("select cinemaSchedule.schedule_idx" + 
+			"		from cinemaSchedule" + 
+			"		full outer join cinemaHall" + 
+			"		on cinemaSchedule.hall_idx = cinemaHall.hall_idx" + 
+			"		where cinemaschedule.moviename = #{movieName} " + 
+			"       and cinemaschedule.showday = #{showDay} and cinemahall.hallName = #{hallName} order by startTime")
+	int[] schedule_idxList(@Param("movieName")String movieName,@Param("showDay")String showDay, @Param("hallName")String hallName);
+
 	
 	
 }

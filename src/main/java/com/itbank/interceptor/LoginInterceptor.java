@@ -1,15 +1,12 @@
 package com.itbank.interceptor;
 
 
-import java.net.URLEncoder;
-
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
 
@@ -27,7 +24,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		
 		
 		String requestURL = request.getRequestURL().toString();
-		System.out.println(requestURL);
+
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("login")==null) {

@@ -77,11 +77,13 @@ public class CinemaMovieController {
 		
 		List<HashMap<String, Object>> listMap = new ArrayList<HashMap<String, Object>>();
 		String[] movieNameList = csls.movieNameList(showDay);
+		String[] urlNameList = csls.urlNameList(showDay);
 	
 		for(int i=0;i<movieNameList.length;i++) {
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				CinemaMovieDTO movie_dto = csls.runningTimeAgeLimitList(movieNameList[i]);
 				map.put("movieName", movieNameList[i]);
+				map.put("urlName", urlNameList[i]);
 				map.put("runningTime", movie_dto.getRunningTime());
 				map.put("ageLimit", movie_dto.getAgeLimit());
 				int[] scheduleCountList = csls.scheduleCountList(showDay,movieNameList[i]);
@@ -95,8 +97,10 @@ public class CinemaMovieController {
 					String[] start_timeList = csls.start_timeList(movieNameList[i],showDay ,hallNameList[j]);
 					String[] end_timeList = csls.end_timeList(movieNameList[i],showDay,hallNameList[j]);
 					int[] seatCountRemainList = csls.seatCountRemainList(showDay,movieNameList[i],hallNameList[j]);
+					int[] schedule_idxList = csls.schedule_idxList(movieNameList[i],showDay,hallNameList[j]);
 					dto.setStart_time(start_timeList);
 					dto.setEnd_time(end_timeList);
+					dto.setSchedule_idx(schedule_idxList);
 					dto.setSeatCountRemain(seatCountRemainList);
 					
 					map.put(Integer.toString(j), dto);
@@ -104,7 +108,6 @@ public class CinemaMovieController {
 				}
 				listMap.add(map);
 		}
-
 		
 		String jsonData = mapper.writeValueAsString(listMap);
 		

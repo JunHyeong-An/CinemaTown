@@ -44,5 +44,15 @@ public class CinemaScheduleListService {
 		
 		return schedule_dao.seatCountRemainList(showDay,movieName, hallName);
 	}
+
+	public String[] urlNameList(String showDay) {
+
+		return schedule_dao.urlNameList(showDay);
+	}
+
+	public int[] schedule_idxList( String movieName, String showDay, String hallName) {
+
+		return schedule_dao.schedule_idxList(movieName,showDay,hallName);
+	}
 	
 }
