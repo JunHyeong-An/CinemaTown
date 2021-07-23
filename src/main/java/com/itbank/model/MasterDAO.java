@@ -1,5 +1,6 @@
 package com.itbank.model;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
@@ -38,6 +39,13 @@ public interface MasterDAO {
 	@Select("select * from cinemaHall order by hall_idx")
 	List<CinemaHallDTO> hallList();
 	
+	@Select("select count(*) " + 
+			"from cinemaSchedule " + 
+			"full outer join cinemaHall " + 
+			"on cinemaSchedule.hall_idx = cinemaHall.hall_idx " + 
+			"where cinemaHall.hallName=#{hallName} and to_char(startTime,'yyyymmddHH24mi') < #{scheduleTime} and #{scheduleTime} < to_char(endTime,'yyyymmddHH24mi')")
+	int scheduleCheck(HashMap<String, String> map);
+	
 	@Insert("insert into cinemaSchedule(movieName, hall_idx, showDay, startTime, endTime, seatCountRemain) values(#{movieName},#{hall_idx},#{showDay},#{startTime},#{endTime},#{seatCountRemain})")
 	int insertMovie(CinemaScheduleDTO dto);
 
@@ -70,6 +78,8 @@ public interface MasterDAO {
 
 	@Delete("delete from cinemaEventList where event_idx = #{event_idx}")
 	int eventDelete(int event_idx);
+
+
 
 	
 }

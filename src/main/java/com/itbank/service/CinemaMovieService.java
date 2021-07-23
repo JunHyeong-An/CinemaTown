@@ -16,6 +16,8 @@ import com.itbank.model.CinemaScheduleDAO;
 import com.itbank.model.CinemaSeatDAO;
 import com.itbank.model.CinemaTicketingDAO;
 import com.itbank.model.CinemaTicketingDTO;
+import com.itbank.model.ReviewDAO;
+import com.itbank.model.ReviewDTO;
 
 @Service
 public class CinemaMovieService {
@@ -26,6 +28,7 @@ public class CinemaMovieService {
 	@Autowired private CinemaScheduleDAO schedule_dao;
 	@Autowired private CinemaPaymentDAO payment_dao;
 	@Autowired private CinemaSalesDAO sales_dao;
+	@Autowired private ReviewDAO review_dao;
 
 //////////////////// CinemaMovieController ////////////////////////////////
 	// 예매 사이트 들어가면 왼쪽에 영화 리스트 목록 불러오기
@@ -40,7 +43,12 @@ public class CinemaMovieService {
 		return movie_dao.ticketingList(movieName, showDay);
 	}
 
+	// 예매된 좌석 비활성화
+	public String[] reservedSeats(int schedule_idx) {
 
+		return seat_dao.reservedSeats(schedule_idx);
+	}
+	
 	// 예매하기, 결제하기, 매출등록 
 	@Transactional
 	public int ticketing(CinemaTicketingDTO dto) {
@@ -98,11 +106,13 @@ public class CinemaMovieService {
 		
 	}
 
+	// HomeController 간이 상영시간표에 보여 줄 오늘 'URl'
 	public String[] urlNameList() {
 		
 		return movie_dao.urlNameList();
 	}
 
+	// HomeController 간이 상영시간표에 보여 줄 오늘 '연령등급'
 	public int[] ageLimitList() {
 	
 		return movie_dao.ageLimitList();
@@ -125,6 +135,12 @@ public class CinemaMovieService {
 		return movie_dao.hallNameList(movieName);
 	}
 
+	// HomeController 간이 상영시간표에 보낼 schedule_idx
+	public int[] Schedule_idxList(String movieName) {
+	
+		return movie_dao.Schedule_idxList(movieName);
+	}
+	
 	// HomeController 간이 상영시간표에 for문돌리기 위해 가져 올 '해당 영화의 상영개수'
 	public int[] scheduleCountList() {
 		
@@ -136,6 +152,18 @@ public class CinemaMovieService {
 		
 		return movie_dao.movieCodeList();
 	}
+
+	// 영화 리뷰 등록 하는 것
+	public int reviewAdd(HashMap<String, String> map) {
+		return review_dao.reviewAdd(map);
+	}
+
+	public List<ReviewDTO> reviewList(String movieNm, String rowMax) {
+		return review_dao.reviewList(movieNm,rowMax);
+	}
+
+
+
 
 
 

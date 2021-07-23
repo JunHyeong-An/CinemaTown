@@ -41,6 +41,10 @@ if(resToken == "1") {
 	movieName = getParameterByName("movieNm")
 	ticktingHallName = getParameterByName("hallName")
 	ticketingTime = getParameterByName("startTime").replace(":", "")
+	endTime = getParameterByName("endTime")
+	scheduleNum = getParameterByName("schedule")
+	urlName = getParameterByName("urlName")
+	ageNum = getParameterByName("ageNum")
 		
 	const selectMovieInfo = document.querySelector("#selectMovieInfo")
 	const t2MovieName = document.querySelector("#t2MovieName")
@@ -49,18 +53,31 @@ if(resToken == "1") {
 	const t2StartTime = document.querySelector("#t2StartTime")
 	const t2EndTime = document.querySelector("#t2EndTime")
 	const t2HallName = document.querySelector("#t2HallName")
+	
+	const div = document.createElement("div")
+	div.setAttribute("class", "ageLimit")
+	
+	if(ageNum == 0) {
+		div.innerHTML = "전체"
+		div.style.fontSize = "5pt"
+		div.style.backgroundColor = "#55C155"
+	}
+	else if(ageNum == 12) div.style.backgroundColor = "#45B9F3"
+	else if(ageNum == 15) div.style.backgroundColor = "#EFBB11"
+	else if(ageNum == 18) div.style.backgroundColor = "#CA1212"
 		
-//	document.querySelector("#age").appendChild(ageLimitBox)
+	ageLimitBox = div
+	
+	document.querySelector("#age").appendChild(ageLimitBox)
 	t2MovieName.innerHTML = movieName
 	t2StartTime.innerHTML = ticketingTime.substr(0, 2) + ":" + ticketingTime.substr(2,2)
-	t2EndTime.innerHTML = movieEndTime
+	t2EndTime.innerHTML = endTime
 	t2HallName.innerHTML = ticktingHallName
 	t2Month.innerHTML = resMonth
 	t2Date.innerHTML = resDate
 
 	changeElement(changeCnt++)
-	
-	const seatUrl = cpath + "/getSeats/" + scheduleIdx + "/"
+	const seatUrl = cpath + "/cinemaMovie/getSeats/" + scheduleNum + "/"
 	const opt = {
 		method: "GET"
 	}
@@ -202,8 +219,6 @@ function getMovieList() {
 			const span1 = document.createElement("span")
 			const span2 = document.createElement("span")
 			const span3 = document.createElement("span")
-			const input1 = document.createElement("input")
-			const input2 = document.createElement("input")
 			
 			input1.setAttribute("type", "hidden")
 			input2.setAttribute("type", "hidden")
@@ -219,8 +234,6 @@ function getMovieList() {
 			span1.innerHTML = json[i].SEATCOUNTREMAIN + "석 "
 			span2.innerHTML = " / " + json[i].SEATCOUNTALL + "석 "
 			span3.innerHTML = json[i].HALLNAME
-			input1.value = json[i].END_TIME
-			input2.value = json[i].SCHEDULE_IDX
 			urlName = json[i].URLNAME
 			ticketingMoviePoster.setAttribute("src", urlName)
 			
@@ -317,6 +330,7 @@ dateDcrBtn.onclick = decreaseDate
 function showCoverBox(div, json) {
 	console.log(json)
 	scheduleIdx = json.SCHEDULE_IDX
+	console.log(scheduleIdx)
 	const seatUrl = cpath + "/getSeats/" + json.SCHEDULE_IDX + "/"
 	const opt = {
 		method: "GET"

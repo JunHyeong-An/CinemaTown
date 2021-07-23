@@ -2,6 +2,7 @@ package com.itbank.service;
 
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,6 +80,13 @@ public class CinemaUserService {
 		return user_dao.checkUserWithSessionId(sessionId);
 		
 	}
+
+	// myPage 정보 불러오기(List로처리하는방법)
+//	public List<CinemaUserDTO> myPageInfo(String userId) {
+//		return user_dao.myPageInfo(userId);
+//	}
+
+	
 	
 	
 	

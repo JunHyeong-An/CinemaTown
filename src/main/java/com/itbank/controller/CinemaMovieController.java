@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itbank.model.CinemaMovieDTO;
 import com.itbank.model.CinemaScheduleListDTO;
 import com.itbank.model.CinemaTicketingDTO;
+import com.itbank.model.CinemaUserDTO;
+import com.itbank.model.ReviewDTO;
 import com.itbank.service.CinemaMovieService;
 import com.itbank.service.CinemaScheduleListService;
 import com.itbank.service.KakaoPayService;
@@ -42,6 +45,24 @@ public class CinemaMovieController {
 	// 영화 정보 페이지 보여주기
 	@GetMapping("/movieInfo")
 	public void movieInfo() {}
+	
+	// 영화 리뷰 등록하기
+	@PostMapping(value="/movieInfo/reviewAdd",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public int reviewAdd(@RequestBody HashMap<String, String>map, HttpSession session) {
+		String userId = (String)session.getAttribute("userId");
+		map.put("userId", userId);
+		System.out.println(map);
+		return cms.reviewAdd(map);
+	}
+	
+	// 영화 리뷰 리스트 불러오기
+	@GetMapping("/movieInfo/list")
+	@ResponseBody
+	public List<ReviewDTO> reviewList(@RequestParam("movieNm")String movieNm, @RequestParam("rowMax")String rowMax ){
+		System.out.println(movieNm);
+		return cms.reviewList(movieNm,rowMax);
+	}
 	
 	// 상영시간표 사이트 보여주기
 	@GetMapping("/schedule")	
@@ -90,6 +111,7 @@ public class CinemaMovieController {
 		return jsonData;
 	}		
 	
+	
 	// 예매 시 사이트 보여주기
 	@GetMapping("/ticketing")
 	public String ticketing(Model model) {
@@ -106,6 +128,15 @@ public class CinemaMovieController {
 		
 		return cms.ticketingList(movieName, showDay);
 	} 
+	
+	// 예매된 좌석 비활성화
+	@GetMapping("/getSeats/{scheduleIdx}/")
+	@ResponseBody
+	public String[] reservedSeats(@PathVariable int scheduleIdx) {
+		String[] seats = cms.reservedSeats(scheduleIdx);
+		return seats;
+	}
+	
 	
 	// 카카오페이 성공
 	@GetMapping("/success")

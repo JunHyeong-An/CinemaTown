@@ -33,6 +33,7 @@
 			<mapping path="/cinemaMovie/ticketing"/>
 			<mapping path="/serviceCenter/oneToOne"/>
 			<mapping path="/cinemaUser/myPage/**"/>
+
 			
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>

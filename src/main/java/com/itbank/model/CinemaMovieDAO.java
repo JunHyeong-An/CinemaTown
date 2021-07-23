@@ -72,8 +72,8 @@ public interface CinemaMovieDAO {
 			"    from cinemaSchedule" + 
 			"    full outer join cinemaHall" + 
 			"    on cinemaSchedule.hall_idx = cinemaHall.hall_idx" + 
-			"    where cinemaschedule.moviename = #{movieName} and cinemaschedule.showday = to_char(sysdate,'yyyyMMdd') order by to_char(cinemaSchedule.endTime,'HH24:mi')")
-	String[] end_timeList(String movieName);
+			"    where cinemaschedule.moviename = #{movieName} and cinemaschedule.showday = to_char(sysdate,'yyyyMMdd') order by to_char(cinemaSchedule.startTime,'HH24:mi')")
+	String[] end_timeList(@Param("movieName")String movieName);
 	
 	// HomeController 간이 상영시간표에 보여 줄 오늘 '상영관들'
 	@Select("select cinemaHall.hallName" + 
@@ -82,6 +82,14 @@ public interface CinemaMovieDAO {
 			"    on cinemaSchedule.hall_idx = cinemaHall.hall_idx" + 
 			"    where cinemaschedule.moviename = #{movieName} and cinemaschedule.showday = to_char(sysdate,'yyyyMMdd') order by to_char(cinemaSchedule.startTime,'HH24:mi')")
 	String[] hallNameList(@Param("movieName") String movieName);
+
+	// HomeController 간이 상영시간표에 보내 줄 각 상영마다 상영일정_idx
+	@Select("select cinemaSchedule.schedule_idx" + 
+			"    from cinemaSchedule" + 
+			"    full outer join cinemaHall" + 
+			"    on cinemaSchedule.hall_idx = cinemaHall.hall_idx" + 
+			"    where cinemaschedule.moviename = #{movieName} and cinemaschedule.showday = to_char(sysdate,'yyyyMMdd') order by to_char(cinemaSchedule.startTime,'HH24:mi')")
+	int[] Schedule_idxList(@Param("movieName")String movieName);
 
 	// HomeController 간이 상영시간표에 for문돌리기 위해 가져 올 '해당 영화의 상영개수'
 	@Select("select count(cinemaSchedule.startTime) as schedule_allCount" + 
@@ -94,10 +102,11 @@ public interface CinemaMovieDAO {
 			"    group by cinemaMovie.movieName")
 	int[] scheduleCountList();
 
-
 	// home페이지에 포스터 보여주기 위해 불러 올 영화 code리스트
 	@Select("select movieCode from cinemaMovie")
 	String[] movieCodeList();
+
+
 
 
 

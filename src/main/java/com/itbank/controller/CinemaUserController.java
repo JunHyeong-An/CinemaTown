@@ -1,6 +1,10 @@
 package com.itbank.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,11 +60,11 @@ public class CinemaUserController {
 
 	// id, pw 입력해서 로그인 구현 + 자동로그인 유지
 	@PostMapping("/login")
-	public String login(CinemaUserDTO dto, HttpSession session, String url, HttpServletRequest request, HttpServletResponse response) {      
+	public String login(CinemaUserDTO dto, HttpSession session, HttpServletRequest request, HttpServletResponse response) {      
 		
+		String url = (String)session.getAttribute("url");
 		CinemaUserDTO login = cus.login(dto);
 		session.setAttribute("login", login);
-		
 		if(login !=  null) {
 			session.setAttribute("userId", login.getUserId());
 			// JSESSION cookie
@@ -181,6 +186,13 @@ public class CinemaUserController {
 		dto.setUserId((String)session.getAttribute("userId"));
 		int row = cus.deleteCheck(dto);
 		return "redirect:/cinemaUser/" + (row == 1 ? "logout" : "deleteCheck");
+	}
+	
+	// user의 마이페이지 정보창
+	@GetMapping("/myPage/myPageHome")
+	public void pageHome(Model model,HttpSession session) {
+		CinemaUserDTO dto = (CinemaUserDTO)session.getAttribute("login");
+		model.addAttribute("dto", dto);
 	}
 
 
