@@ -34,6 +34,10 @@ public interface ReviewDAO {
 	@Select("select * from review where movieName=#{movieNm} order by reviewDay desc")
 	List<ReviewDTO> movieReviewList(String movieNm);
 
+	// 리뷰 한개 페이징
+	@Select("select count(*) from review")
+	int selectCount();
+
 	
 
 	

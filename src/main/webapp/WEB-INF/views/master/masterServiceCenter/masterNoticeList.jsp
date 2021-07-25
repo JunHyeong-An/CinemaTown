@@ -28,7 +28,7 @@
                </c:if>
                
                <c:if test="${paging.prev }">
-                  <a href="${cpath }/master/masterNotice?page=${paging.begin-1}">[이전] </a>
+                  <a href="${cpath }/master/masterServiceCenter/masterNotice?page=${paging.begin-1}">[이전] </a>
                </c:if>
 
                <c:if test="${empty param.page}">

@@ -64,8 +64,8 @@ public class MasterController {
 	   // 관리자 리뷰 리스트 영화이름으로 분류
 	   @GetMapping(value="/masterReview/masterReviewList/{movieName}/",produces="application/json;charset=utf-8")
 	   @ResponseBody
-	   public List<ReviewDTO> movieReviewList(@PathVariable String movieNm, Model model){
-		   List<ReviewDTO> reviewList =  rs.movieReviewList(movieNm);
+	   public List<ReviewDTO> movieReviewList(@PathVariable String movieName, Model model){
+		   List<ReviewDTO> reviewList =  rs.movieReviewList(movieName);
 		  model.addAttribute("reviewList", reviewList);
 	      return reviewList;
 	   }
