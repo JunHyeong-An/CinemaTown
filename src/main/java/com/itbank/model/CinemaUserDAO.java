@@ -1,6 +1,7 @@
 package com.itbank.model;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -60,6 +61,19 @@ public interface CinemaUserDAO {
 	// 1:1 문의 내역 (세부내용)
 	@Select("select * from oneToOne where oneToOne_idx=#{oneToOne_idx}")
 	OneToOneDTO inquiryRead(int oneToOne_idx);
+
+	// 마이페이지에서 예매내역 보여주기  ==> 필요없는 컬럼은 빼기★
+	@Select("select seatNameAll, adultCount, teenagerCount, movieName, showDay," + 
+			" to_char(startTime,'HH24:mi') as start_time, to_char(endTime,'HH24:mi') as end_time, hallName, paymentDay, totalAmount" + 
+			" from cinemaTicketing" + 
+			" join cinemaSchedule" + 
+			" on cinemaTicketing.schedule_idx = cinemaSchedule.schedule_idx" + 
+			" join cinemaHall" + 
+			" on cinemaHall.hall_idx = cinemaTicketing.hall_idx" + 
+			" join cinemaPayment" + 
+			" on cinematicketing.ticketing_idx = cinemapayment.ticketing_idx" + 
+			" where cinemaTicketing.userId = #{userId} order by cinemaTicketing.ticketing_idx")
+	List<HashMap<String, Object>> ticketingHistory(@Param("userId")String userId);
 
 	// myPage 정보 불러오기(List로처리하는방법)
 //	@Select("select userName, userId, userBirth, userPh, userEmail from cinemaUser where userId = #{userId}")

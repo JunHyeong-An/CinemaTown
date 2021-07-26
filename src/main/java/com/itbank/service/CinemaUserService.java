@@ -2,6 +2,7 @@ package com.itbank.service;
 
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -99,6 +100,11 @@ public class CinemaUserService {
 	// 1:1 문의 내역 (세부내용)
 	public OneToOneDTO inquiryRead(int oneToOne_idx) {
 		return user_dao.inquiryRead(oneToOne_idx);
+	}
+
+	public List<HashMap<String, Object>> ticketingHistory(String userId) {
+	
+		return user_dao.ticketingHistory(userId);
 	}
 	
 	

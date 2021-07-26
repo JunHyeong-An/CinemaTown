@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -186,10 +187,7 @@ public class CinemaUserController {
 	@PostMapping("/myPage/deleteCheck")
 	public String deleteCheck(CinemaUserDTO dto, HttpSession session) {
 		dto.setUserId((String)session.getAttribute("userId"));
-		System.out.println(dto.getUserId());
-		System.out.println(dto.getUserPw());
 		int row = cus.deleteCheck(dto);
-		System.out.println(row);
 		return "redirect:/cinemaUser/" + (row == 1 ? "logout" : "myPage/deleteCheck");
 	}
 	
@@ -198,6 +196,15 @@ public class CinemaUserController {
 	public void pageHome(Model model,HttpSession session) {
 		CinemaUserDTO dto = (CinemaUserDTO)session.getAttribute("login");
 		model.addAttribute("dto", dto);
+	}
+	
+	// user의  예매내역 보여주기 ==> ajax처리할 지 의논하기★
+	@GetMapping("/myPage/ticketingHistory")
+	public String ticketingHistory(HttpSession session, Model model) {
+		String userId = (String)session.getAttribute("userId");
+		List<HashMap<String, Object>> ticketingHistoryList = cus.ticketingHistory(userId);
+		model.addAttribute("ticketingHistoryList", ticketingHistoryList);
+		return "/myPage/ticketingHistory";
 	}
 	
 	// 자신의 문의한 1:1문의 리스트 불러오기 
