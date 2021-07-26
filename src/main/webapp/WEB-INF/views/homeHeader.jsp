@@ -47,11 +47,11 @@
             <ul id="headerList">
                 <li><div class="menuText">영화</div><div class="dropDownMenu hidden"><a href="${cpath }/cinemaMovie/schedule">상영시간표</a></div></li>
                 <li><div class="menuText">예매</div><div class="dropDownMenu hidden"><a href="${cpath }/cinemaMovie/ticketing">예매</a></div></li>
-                <li><div class="menuText">이벤트</div><div class="dropDownMenu hidden"><a>이벤트</a></div></li>
+                <li><div class="menuText">이벤트</div><div class="dropDownMenu hidden"><a href="${cpath }/cinemaEvent/movieEvent">이벤트</a></div></li>
                 <li>
                     <div class="menuText">고객센터</div>
                     <div id="serviceCenterDropDown" class="dropDownMenu hidden">
-                        <a href="${cpath }/serviceCenter/notice" class="serviceCenterDropDownElement">공지사항</a>
+                        <a href="${cpath }/serviceCenter/noticeList" class="serviceCenterDropDownElement">공지사항</a>
                         <a href="${cpath }/serviceCenter/oneToOne" class="serviceCenterDropDownElement">일대일 문의</a>
                         <a href="${cpath }/serviceCenter/lost" class="serviceCenterDropDownElement">분실물 문의</a>
                     </div>

@@ -43,6 +43,8 @@ public interface ServiceCenterDAO {
 	// 공지사항 글 삭제
 	@Delete("delete from masterNotice where notice_idx = #{notice_idx}")
 	int noticeDelete(int notice_idx);
+
+	
 	
 	
 }

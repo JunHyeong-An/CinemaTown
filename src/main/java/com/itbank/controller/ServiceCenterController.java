@@ -49,6 +49,7 @@ public class ServiceCenterController {
 		return "redirect:/";
 	}
 	
+	
 	// 관리자 공지사항 리스트
 	@GetMapping("/master/masterServiceCenter/masterNoticeList")
 	public List<MasterNoticeDTO> noticeList(Model model, HttpServletRequest request){
