@@ -75,7 +75,7 @@ public class CinemaUserService {
 
 	// user의 비밀번호를 기입한 후 탈퇴하기
 	public int deleteCheck(CinemaUserDTO dto) {
-		
+		dto.setUserPw(Hash.getHash(dto.getUserPw()));
 		return user_dao.deleteCheck(dto);
 	}
 

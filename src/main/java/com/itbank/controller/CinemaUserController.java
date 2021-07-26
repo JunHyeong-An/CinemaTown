@@ -87,7 +87,7 @@ public class CinemaUserController {
 			return url == null ? "redirect:/" : "redirect:"+url;
 		}
 			
-		return url == null ? "redirect:/" : "redirect:"+url;
+		return url == null ? "redirect:/cinemaUser/login" : "redirect:"+url;
 	}
 
 	// 로그아웃 
@@ -179,15 +179,18 @@ public class CinemaUserController {
 	}
 
 	// user의 탈퇴 페이지 보여주기
-	@GetMapping("/deleteCheck")
+	@GetMapping("/myPage/deleteCheck")
 	public void delete() {}
 
 	// user의 비밀번호를 기입한 후 탈퇴하기 
-	@PostMapping("/deleteCheck")
+	@PostMapping("/myPage/deleteCheck")
 	public String deleteCheck(CinemaUserDTO dto, HttpSession session) {
 		dto.setUserId((String)session.getAttribute("userId"));
+		System.out.println(dto.getUserId());
+		System.out.println(dto.getUserPw());
 		int row = cus.deleteCheck(dto);
-		return "redirect:/cinemaUser/" + (row == 1 ? "logout" : "deleteCheck");
+		System.out.println(row);
+		return "redirect:/cinemaUser/" + (row == 1 ? "logout" : "myPage/deleteCheck");
 	}
 	
 	// user의 마이페이지 정보창
