@@ -60,10 +60,7 @@
 							href="${cpath }/master/masterServiceCenter/masterNotice?page=${paging.pageCount}">[맨끝]
 						</a>
 					</c:if>
-
 				</div>
-				<a href="${cpath }/master/masterServiceCenter/masterNoticeAdd"><button>공지사항
-						추가</button></a>
 			</div>
 		</div>
 

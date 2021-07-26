@@ -10,8 +10,6 @@
 				<img src="https://media.discordapp.net/attachments/856752011814895645/867672165084299264/myPageImg1.png" width="100px"
 					height="100px"></a>
 			</div>
-			<!--for문 해주세요-->
-<%-- 			<c:forEach var="dto" items="${list }"> --%>
 			<div class="info">
 				<table>
 					<tbody>

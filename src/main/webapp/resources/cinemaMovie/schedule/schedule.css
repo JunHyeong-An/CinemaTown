@@ -53,6 +53,12 @@ body {
 }
 
 .ageLimit {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 40px;
+	height: 40px;
+	font-size: 16px;
 	border-radius: 30px;
 	background-color: #a8e7f8;
 	padding: 1px;

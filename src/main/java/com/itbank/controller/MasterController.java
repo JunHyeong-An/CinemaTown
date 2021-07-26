@@ -40,7 +40,7 @@ public class MasterController {
 	
 	
 		// 관리자 페이지 및 매출 페이지
-		@GetMapping("/master/masterHome")
+		@GetMapping("/masterHome")
 		public String masterHome(Model model) {
 	
 			// 영화 별로 매출

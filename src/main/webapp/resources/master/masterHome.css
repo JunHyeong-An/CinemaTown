@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+.main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.movieAllMoney {
+	width: 100%;
+	height: 1200px;
+	border-top: 1px solid black;
+	border-right: 1px solid black;
+	font-size: 20px;
+}
+
+.monthAllMoney {
+	width: 100%;
+	height: 1200px;
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+	font-size: 20px;
+}
+
+.poster {
+	width: 200px;
+	height: 320px;
+}
+
+.movieTitle {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.monthTitle {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.movieType {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px
+}
+
+.movieMoney {
+	padding: 20px;
+}
+
+.monthMoney {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+}
+
+.mNm {
+	display: flex;
+	justify-content: center;
+}
+
+.month {
+	padding-right: 20px;
+}

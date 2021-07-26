@@ -9,10 +9,10 @@ var todayDate = new Date();
 const year = todayDate.getFullYear();
 const month = todayDate.getMonth() + 1;
 const date =  todayDate.getDate();
-console.log(nowDate)
+
 const userYear = nowDate.getFullYear();
 const userMonth = nowDate.getMonth() + 1;
-console.log(userMonth-1)
+
 const userDate =  nowDate.getDate();
 const days = ["일", "월", "화", "수", "목", "금", "토"] 
 const dayName = days[nowDate.getDay()];
@@ -25,7 +25,7 @@ allDate.innerText = DateAll
 			//i만큼 날짜일수가 바뀐다
 			todayDate.setDate(i) 
 			const dateDiv = document.createElement('div')
-			console.log(dateDiv)
+			
 			dateDiv.classList.add('divDate')
 			//i가 32가 안넘으면 담아라
 			if(i < 32){
@@ -64,6 +64,8 @@ allDate.innerText = DateAll
 					return resp.json()
 				})
 				.then(movieAllInfo => {
+					console.log(movieAllInfo)
+					
 					for(let j = 0; j < movieAllInfo.length; j++) {
 						let divAge = document.createElement('div')
 						let divName = document.createElement('div')
@@ -91,7 +93,21 @@ allDate.innerText = DateAll
 						movieInfo.appendChild(divAge)
 						movieInfo.appendChild(divName)
 						Alltable.appendChild(movieInfo)
-
+						if(movieAllInfo[j].ageLimit == 0) {
+							divAge.innerHTML = "전체"
+							divAge.style.fontSize = "10pt"
+							divAge.style.backgroundColor = "#55C155"
+						}
+						else if(movieAllInfo[j].ageLimit == '12'){
+							divAge.style.backgroundColor = "#45B9F3"
+						}
+						else if(movieAllInfo[j].ageLimit == '15'){
+							divAge.style.backgroundColor = "#EFBB11"
+						}
+						else if(movieAllInfo[j].ageLimit == '18') {
+							divAge.style.backgroundColor = "#CA1212"
+						}
+							
 							
 						// 6만큼 증가를 시키는데 movieAllInfo[j][a]가 undefined면 멈춰라
 						for(let a = 0; a < 6; a++){
@@ -101,12 +117,37 @@ allDate.innerText = DateAll
 							//끝나는 시간 길이만큼 정보들을 출력시켜라
 							for(let q = 0;  q < movieAllInfo[j][a].end_time.length; q++){
 								let divInfo = document.createElement('div')
+								let spanRed = document.createElement('spanRed')
+								let aTag = document.createElement('a')
+								
 								divInfo.className = 'movieInfoDetail'
 								let start_time = movieAllInfo[j][a].start_time[q]
 								let end_time = movieAllInfo[j][a].end_time[q]
 								let seatCountRemain = movieAllInfo[j][a].seatCountRemain[q]
 								let hallName = movieAllInfo[j][a].hallName
-								divInfo.innerText = start_time + '~' + end_time + '\t' + seatCountRemain + '/72' + '\t' + hallName
+								//오늘 시간을 받아서
+								let compareDate = new Date();
+								let hour = compareDate.getHours();
+								let starttime = parseInt(start_time.split(':')[0]);
+							
+								//지금 시간이 시작시간보다 작으면 a태그사용하도록 해라
+								if(hour < starttime){
+									aTag.setAttribute("href", cpath + "/cinemaMovie/ticketing?movieNm=" 
+											+ movieAllInfo[j].movieName + "&hallName=" + hallName 
+											+ "&startTime=" + start_time
+											+ "&endTime=" + end_time
+											+ "&schedule=" + movieAllInfo[j][a].schedule_idx[q]
+									+ "&urlName=" + movieAllInfo[j].urlName
+									+ "&ageNum=" + movieAllInfo[j].ageLimit
+									+ "&resToken=1")
+									aTag.innerText = start_time + '~' + end_time + '\t' + seatCountRemain + '/72' + '\t' + hallName
+									divInfo.appendChild(aTag)										
+									
+								}else {
+									divInfo.innerText = start_time + '~' + end_time + '\t' + seatCountRemain + '/72' + '\t' + hallName
+									divInfo.style.backgroundColor = '#dadada'
+								}
+								
 								// 관이 다르면 다른 div에 넣어라
 								if(hallName == "1관"){
 									oneSpace.appendChild(divInfo)							
