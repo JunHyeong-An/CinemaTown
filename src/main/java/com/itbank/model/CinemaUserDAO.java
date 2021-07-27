@@ -63,7 +63,7 @@ public interface CinemaUserDAO {
 	OneToOneDTO inquiryRead(int oneToOne_idx);
 
 	// 마이페이지에서 예매내역 보여주기
-	@Select("select movieName," + 
+	@Select("select cinemaTicketing.ticketing_idx, movieName," + 
 			" to_char(startTime,'yyyy-MM-dd HH24:mi') as start_time, hallName, totalAmount" + 
 			" from cinemaTicketing" + 
 			" join cinemaSchedule" + 
