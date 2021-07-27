@@ -62,9 +62,9 @@ public interface CinemaUserDAO {
 	@Select("select * from oneToOne where oneToOne_idx=#{oneToOne_idx}")
 	OneToOneDTO inquiryRead(int oneToOne_idx);
 
-	// 마이페이지에서 예매내역 보여주기  ==> 필요없는 컬럼은 빼기★
-	@Select("select seatNameAll, adultCount, teenagerCount, movieName, showDay," + 
-			" to_char(startTime,'HH24:mi') as start_time, to_char(endTime,'HH24:mi') as end_time, hallName, paymentDay, totalAmount" + 
+	// 마이페이지에서 예매내역 보여주기
+	@Select("select cinemaTicketing.ticketing_idx, movieName," + 
+			" to_char(startTime,'yyyy-MM-dd HH24:mi') as start_time, hallName, totalAmount" + 
 			" from cinemaTicketing" + 
 			" join cinemaSchedule" + 
 			" on cinemaTicketing.schedule_idx = cinemaSchedule.schedule_idx" + 

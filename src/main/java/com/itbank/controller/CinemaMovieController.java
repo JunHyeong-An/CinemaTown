@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.mail.Session;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -52,10 +50,16 @@ public class CinemaMovieController {
 	
 	// 영화 정보 페이지 보여주기
 	@GetMapping("/movieInfo")
-	public String movieInfo(ModelAndView model, String movieNm) throws IOException {
-		String vodUrl = mvs.vodUrl(movieNm.trim());
-		model.addObject("vodUrl", vodUrl);
+	public String movieInfo() {
 		return "cinemaMovie/movieInfo";
+	}
+	
+	// movieInfo에서 티저예고편 보여주기
+	@GetMapping(value="/movieInfo/vodUrl/{movieNm}/",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String vodUrl(@PathVariable String movieNm) throws IOException {
+		String vodUrl = mvs.vodUrl(movieNm.trim());
+		return vodUrl; 
 	}
 	
 	// 영화 리뷰 등록하기
@@ -238,10 +242,10 @@ public class CinemaMovieController {
 	}
 	
 	// 예매 취소 시 돌아가는 메서드 ==> 주소 넣어야함
-	@PostMapping("")
-	public String ticketingCancel(int ticketing_idx) {	// hidden으로 받아오자
-		cms.ticketingCancel(ticketing_idx);
-		return "redirect:/";
+	@GetMapping("/ticketingHistoryCancel")
+	public String ticketingCancel(int idx) {	// idx = ticketing_idx
+		cms.ticketingCancel(idx);
+		return "redirect:/cinemaUser/myPage/ticketingHistory";
 	}
 	
 
