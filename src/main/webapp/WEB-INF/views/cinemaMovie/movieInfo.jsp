@@ -4,7 +4,8 @@
 
 <link rel="stylesheet" href="${cpath }/resources/cinemaMovie/movieInfo/movieInfo.css">
 <c:set var="userId" value="${userId }"/>
-<input type="hidden" value="${userId }">
+<input type="hidden" id="userId" value="${userId }">
+<%-- \${userId } : ${userId } --%>
 <div id="movieInfoContainer">
 	<div id="movieInfoPosterAndTitle">
 		<img id="movieInfoPoster">

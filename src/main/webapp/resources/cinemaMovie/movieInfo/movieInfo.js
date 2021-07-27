@@ -96,8 +96,9 @@ fetch(kmdbUrl, opt)
 
 // 리뷰
 let movieNm = getParameterByName("movieNm")
-movieNm = movieNm.replace(" ", "")
-console.log(movieNm)
+console.log(movieNm.substr(0,1))
+if(movieNm.substr(0,1) == ' ')
+	movieNm = movieNm.replace(" ", "")
 
 document.onscroll = function() {
 	let documentHeight = Math.max(
@@ -116,8 +117,6 @@ document.onscroll = function() {
 		method: "GET"
 	}
 	
-	console.log('d : ' + documentHeight)
-	console.log('s : ' + scrollHeight)
 	if(documentHeight <= scrollHeight) {
 		fetch(reviewUrl, opt)
 		.then(resp => {
@@ -156,6 +155,10 @@ const reviewBtn = document.querySelector("#reviewBtn")
 const reviewText = document.querySelector("#reviewText")
 
 reviewBtn.onclick = function(event) {
+	if(document.querySelector("#userId").value == '') {
+		location.href = cpath + "/cinemaUser/login?url=" + location.href
+	}
+	
 	let ob = {}
 	ob.reviewContent = reviewText.value
 	ob.movieNm = movieNm

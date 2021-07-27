@@ -70,6 +70,7 @@ public class CinemaMovieController {
 			userId = login.getUserId();
 		}
 		map.put("userId", userId);
+		System.out.println(map);
 
 		return cms.reviewAdd(map);
 	}
