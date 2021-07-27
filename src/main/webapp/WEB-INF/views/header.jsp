@@ -42,8 +42,8 @@
                 <li><div class="menuText">고객센터</div>
                     <div id="serviceCenterDropDown" class="dropDownMenu hidden">
                         <a href="${cpath }/serviceCenter/noticeList" class="serviceCenterDropDownElement">공지사항</a>
-                        <a class="serviceCenterDropDownElement">일대일 문의</a>
-                        <a class="serviceCenterDropDownElement">분실물 문의</a>
+                        <a href="${cpath }/serviceCenter/oneToOne" class="serviceCenterDropDownElement">일대일 문의</a>
+                        <a href="${cpath }/serviceCenter/lost" class="serviceCenterDropDownElement">분실물 문의</a>
                     </div></li>
             </ul>
         </div>
