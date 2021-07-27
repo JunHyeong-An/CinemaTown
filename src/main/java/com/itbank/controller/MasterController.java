@@ -56,10 +56,27 @@ public class MasterController {
 	   
 	   // 관리자 페이지 리뷰 리스트 관리
 	   @GetMapping("/masterReview/masterReviewList/")
-	   public void movieDelete(Model model) {
-	      String[] movieNameList = rs.movieNameList();
-	      model.addAttribute("movieNameList", movieNameList);
-	      System.out.println(movieNameList);
+	   public List<ReviewDTO> movieDelete(Model model, HttpServletRequest request) {
+//	      String[] movieNameList = rs.movieNameList();
+		  int boardCount = rs.selectCount();
+		  
+		  String page = request.getParameter("page");
+			if(page == null) {
+				Paging paging = new Paging(1, boardCount);
+				List<ReviewDTO> movieNameList = rs.noticeSelect(paging.getOffset(),
+						paging.getPerPage());
+				model.addAttribute("movieNameList", movieNameList);
+				model.addAttribute("paging", paging);
+				return movieNameList;
+			}
+			Paging paging = new Paging(Integer.parseInt(page), boardCount);
+			List<ReviewDTO> movieNameList = rs.noticeSelect(paging.getOffset(),
+					paging.getPerPage());
+			model.addAttribute("movieNameList", movieNameList);
+			model.addAttribute("paging", paging);
+			return movieNameList;
+//	      model.addAttribute("movieNameList", movieNameList);
+//	      System.out.println(movieNameList);
 	   }
 	   // 관리자 리뷰 리스트 영화이름으로 분류
 	   @GetMapping(value="/masterReview/masterReviewList/{movieName}/",produces="application/json;charset=utf-8")

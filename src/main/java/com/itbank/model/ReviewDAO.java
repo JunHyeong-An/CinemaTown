@@ -25,8 +25,8 @@ public interface ReviewDAO {
 	@Update("update review set reviewContent=#{reviewContent} where review_idx=#{review_idx}")
 	int reviewModify(ReviewDTO dto);
 
-	@Select("select movieName from cinemaMovie")
-	String[] movieNameList();
+//	@Select("select movieName from cinemaMovie")
+//	String[] movieNameList();
 
 	@Delete("delete from review where review_idx=#{review_idx}")
 	int reviewDelete(int review_idx);
@@ -37,6 +37,11 @@ public interface ReviewDAO {
 	// 리뷰 한개 페이징
 	@Select("select count(*) from review")
 	int selectCount();
+
+	// 리뷰 전체 페이징
+	@Select("select * from review where movieName=#{movieName}")
+	List<ReviewDTO> noticeSelect(@Param("offset")int offset, @Param("perPage")int perPage);
+
 
 	
 
