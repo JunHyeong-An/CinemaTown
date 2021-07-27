@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itbank.model.CinemaUserDTO;
 import com.itbank.model.OneToOneAnswerDTO;
 import com.itbank.model.OneToOneDTO;
@@ -33,6 +35,7 @@ import com.itbank.service.CinemaUserService;
 public class CinemaUserController {
 
 	@Autowired private CinemaUserService cus;
+	private ObjectMapper mapper = new ObjectMapper();
 
 	// 회원가입 페이지 보여주기
 	@GetMapping("/join")
@@ -202,13 +205,19 @@ public class CinemaUserController {
 		model.addAttribute("dto", dto);
 	}
 	
-	// user의  예매내역 보여주기 ==> ajax처리할 지 의논하기★
+	// user의 예매 내역 페이지 보여주기
 	@GetMapping("/myPage/ticketingHistory")
-	public String ticketingHistory(HttpSession session, Model model) {
+	public void ticketingHistory() {}
+	
+	// user의  예매내역 보여주기
+	@GetMapping("/myPage/ticketingHistoryList")
+	@ResponseBody
+	public String ticketingHistoryList(HttpSession session, Model model) throws JsonProcessingException {
 		String userId = (String)session.getAttribute("userId");
-		List<HashMap<String, Object>> ticketingHistoryList = cus.ticketingHistory(userId);
-		model.addAttribute("ticketingHistoryList", ticketingHistoryList);
-		return "/cinemaUser/myPage/ticketingHistory";
+		List<HashMap<String, Object>> ticketingList = cus.ticketingHistory(userId);
+		String ticketingHistoryList = mapper.writeValueAsString(ticketingList);
+		System.out.println(ticketingHistoryList);
+		return ticketingHistoryList;
 	}
 	
 	// 자신의 문의한 1:1문의 리스트 불러오기 

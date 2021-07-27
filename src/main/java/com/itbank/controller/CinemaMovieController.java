@@ -54,6 +54,7 @@ public class CinemaMovieController {
 	@GetMapping("/movieInfo")
 	public String movieInfo(ModelAndView model, String movieNm) throws IOException {
 		String vodUrl = mvs.vodUrl(movieNm.trim());
+		System.out.println(vodUrl);
 		model.addObject("vodUrl", vodUrl);
 		return "cinemaMovie/movieInfo";
 	}
@@ -238,10 +239,10 @@ public class CinemaMovieController {
 	}
 	
 	// 예매 취소 시 돌아가는 메서드 ==> 주소 넣어야함
-	@PostMapping("")
-	public String ticketingCancel(int ticketing_idx) {	// hidden으로 받아오자
-		cms.ticketingCancel(ticketing_idx);
-		return "redirect:/";
+	@GetMapping("/ticketingHistoryCancel")
+	public String ticketingCancel(int idx) {	// idx = ticketing_idx
+		cms.ticketingCancel(idx);
+		return "redirect:/cinemaUser/myPage/ticketingHistory";
 	}
 	
 
