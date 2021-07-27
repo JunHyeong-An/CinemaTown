@@ -1,15 +1,10 @@
 @charset "UTF-8";
-
-body {
+.all {
 	width: 100%;
 	display: flex;
 	flex-flow: column;
 	align-items: center;
 	justify-content: center;
-}
-
-.all {
-	width: 60%;
 	background-image:
 		url('https://media.discordapp.net/attachments/856752011814895645/868045459275534356/infoModify_background-001.png?width=535&height=613');
 	background-size: 100%;
@@ -37,7 +32,7 @@ body {
 	padding: 20px;
 }
 
-.idx, .time,.kind {
+.time,.kind {
 	display: flex;
 	align-items: center;
 	justify-content: center;

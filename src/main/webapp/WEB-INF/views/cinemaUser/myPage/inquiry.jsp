@@ -10,10 +10,9 @@
         </div>
         <c:forEach var="dto" items="${inquiryList}">
             <div class="board">
-                <div class="idx">${dto.oneToOne_idx}</div>
                 <div class="kind">문의종류 : ${dto.otoKind}</div>
-                <div class="title"><a href="${cpath}/cinemaUser/myPage/inquiryRead/${dto.oneToOne_idx}">${dto.otoTitle }</a></div>
-                <div class="time">${dto.otoWriteDay }</div>
+                <div class="title"><a href="${cpath}/cinemaUser/myPage/inquiryRead/${dto.oneToOne_idx}">제목 : ${dto.otoTitle }</a></div>
+                <div class="time">날짜 : ${dto.otoWriteDay }</div>
             </div>
         </c:forEach>
     </div>
