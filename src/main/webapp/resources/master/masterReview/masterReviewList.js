@@ -2,9 +2,6 @@ const movieName = document.getElementById('movieName')
 const movieNameButton = document.getElementById('movieNameButton')
 const main = document.querySelector('.main')
 
-console.log(movieName)
-console.log(movieName[1].value)
-console.log(movieNameButton)
 
 movieNameButton.onclick = function() {
 	

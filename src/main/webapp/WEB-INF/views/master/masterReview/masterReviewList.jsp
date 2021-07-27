@@ -55,11 +55,11 @@
 						</a>
 					</c:if>
 				</div>
-<<<<<<< HEAD
-=======
-				<a href="${cpath }/master/masterReview/masterReviewList"><button>공지사항
-						추가</button></a>
->>>>>>> c7eedb758f2a48d6138f4862c055d573a24f7e96
+<!-- <<<<<<< HEAD -->
+<!-- ======= -->
+<%-- 				<a href="${cpath }/master/masterReview/masterReviewList"><button>공지사항 --%>
+<!-- 						추가</button></a> -->
+<!-- >>>>>>> c7eedb758f2a48d6138f4862c055d573a24f7e96 -->
 			</div>
 		</div>
 

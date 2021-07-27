@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+body {
+	width: 100%;
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.all {
+	width: 60%;
+	background-image:
+		url('https://media.discordapp.net/attachments/856752011814895645/868045459275534356/infoModify_background-001.png?width=535&height=613');
+	background-size: 100%;
+}
+
+.head {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100px;
+	margin-bottom: 70px;
+}
+
+.myInquiry {
+	text-align: center;
+	border-bottom: 1px solid black;
+	width: 100px;
+}
+
+.board {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+}
+
+.idx, .time,.kind {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 200px;
+	border-bottom: 1px solid rgb(150, 147, 147);
+}
+
+.title {
+	width: 500px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-bottom: 1px solid rgb(150, 147, 147);
+}
