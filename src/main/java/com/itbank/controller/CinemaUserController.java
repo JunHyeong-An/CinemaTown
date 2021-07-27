@@ -208,7 +208,7 @@ public class CinemaUserController {
 		String userId = (String)session.getAttribute("userId");
 		List<HashMap<String, Object>> ticketingHistoryList = cus.ticketingHistory(userId);
 		model.addAttribute("ticketingHistoryList", ticketingHistoryList);
-		return "/myPage/ticketingHistory";
+		return "/cinemaUser/myPage/ticketingHistory";
 	}
 	
 	// 자신의 문의한 1:1문의 리스트 불러오기 
