@@ -210,7 +210,7 @@ public class CinemaUserController {
 	public void ticketingHistory() {}
 	
 	// user의  예매내역 보여주기
-	@GetMapping("/myPage/ticketingHistoryList")
+	@GetMapping(value="/myPage/ticketingHistoryList",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String ticketingHistoryList(HttpSession session, Model model) throws JsonProcessingException {
 		String userId = (String)session.getAttribute("userId");
