@@ -41,7 +41,7 @@
 		</div>
 		<div class="goLink">
 			<div class="ticketList">
-				<a href=""><img
+				<a href="${cpath }/cinemaUser/myPage/ticketingHistory"><img
 					src="https://media.discordapp.net/attachments/856752011814895645/867672253185392640/myPageTicket.png"
 					width="140px" height="80px"></a>
 			</div>

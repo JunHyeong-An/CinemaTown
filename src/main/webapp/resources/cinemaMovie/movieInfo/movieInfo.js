@@ -185,3 +185,15 @@ reviewBtn.onclick = function(event) {
 	}
 }
 
+// 예고편 받아오기
+
+const vodUrl = cpath + "/cinemaMovie/movieInfo/vodUrl/" + getParameterByName("movieNm") + "/"
+const vodOpt = {method : 'GET'}
+
+fetch(vodUrl, vodOpt)
+.then(resp => {
+	return resp.json()
+})
+.then(json => {
+	console.log(json)
+})
