@@ -47,12 +47,12 @@ public class MasterService {
 			}
 		}
 
-	public List<ServiceCenterDTO> lostList() {
-		return dao.lostList();
+	public List<ServiceCenterDTO> lostList(int offset,int perPage) {
+		return dao.lostList(offset,perPage);
 	}
 
-	public List<OneToOneDTO> oneToOneList() {
-		return dao.oneToOneList();
+	public List<OneToOneDTO> oneToOneList(int offset,int perPage) {
+		return dao.oneToOneList(offset,perPage);
 	}
 
 	public OneToOneDTO EachOneToOne(int oneToOne_idx) {
@@ -183,6 +183,18 @@ public class MasterService {
 
 		public int eventDelete(int event_idx) {
 			return dao.eventDelete(event_idx);
+		}
+
+		public int selectCount() {
+			return dao.selectCount();
+		}
+
+		public int selectCount2() {
+			return dao.selectCount2();
+		}
+
+		public ServiceCenterDTO LostEach(int cinemaLost_idx) {
+			return dao.LostEach(cinemaLost_idx);
 		}
 
 		

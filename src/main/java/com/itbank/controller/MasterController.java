@@ -76,20 +76,59 @@ public class MasterController {
 		   return rs.reviewDelete(review_idx);
 	   }
 	   
-	   //문의 정보 리스트 불러오기
+	   //분실물 문의 정보 리스트 불러오기
 	   @GetMapping("/masterServiceCenter/masterLost")
-	   public String lostList(Model model) {
-		   List<ServiceCenterDTO> list = mse.lostList();
+	   public List<ServiceCenterDTO> lostList(Model model, HttpServletRequest request) {
+		   int boardCount = mse.selectCount();
+		   
+		   String page = request.getParameter("page");
+		   if(page == null) {
+			   Paging paging = new Paging(1,boardCount);
+			   List<ServiceCenterDTO> list = mse.lostList(paging.getOffset(),
+					   paging.getPerPage());
+			   model.addAttribute("lostList", list);
+			   model.addAttribute("paging", paging);
+			   return list;
+		   }
+		   Paging paging = new Paging(Integer.parseInt(page), boardCount);
+		   List<ServiceCenterDTO> list = mse.lostList(paging.getOffset(),
+				   paging.getPerPage());
 		   model.addAttribute("lostList", list);
-		   return "/master/masterServiceCenter/masterLost";
+		   model.addAttribute("paging", paging);
+		   return list;
 	   }
+	   
+	   // 분실물문의 제목 클릭 하고 들어와서 내용 보여주게 하기 (낱개낱개 보여줌), 답변 단것 보여주기
+	   @GetMapping("/masterServiceCenter/masterLostRead/{cinemaLost_idx}")
+	   public ModelAndView LostEach(@PathVariable int cinemaLost_idx ) {
+		   ModelAndView mav = new ModelAndView("master/masterServiceCenter/masterLostRead");
+		   ServiceCenterDTO dto = mse.LostEach(cinemaLost_idx);
+		   mav.addObject("dto",dto);
+		   return mav;
+	   }
+	   
 	   
 	   // 1:1문의 리스트 불러오기 
 	   @GetMapping("/masterServiceCenter/masterOneToOne")
-	   public String oneToOneList(Model model) {
-		   List<OneToOneDTO> list = mse.oneToOneList();
+	   public List<OneToOneDTO> oneToOneList(Model model,HttpServletRequest request) {
+		   int boardCount = mse.selectCount2();
+		   
+		   String page = request.getParameter("page");
+		   System.out.println(page);
+		   if(page == null) {
+			   Paging paging = new Paging(1,boardCount);
+			   List<OneToOneDTO> list = mse.oneToOneList(paging.getOffset(),
+					   paging.getPerPage());
+			   model.addAttribute("oneToOneList", list);
+			   model.addAttribute("paging", paging);
+			   return list;
+		   }
+		   Paging paging = new Paging(Integer.parseInt(page),boardCount);
+		   List<OneToOneDTO> list = mse.oneToOneList(paging.getOffset(),
+				   paging.getPerPage());
 		   model.addAttribute("oneToOneList", list);
-		   return "/master/masterServiceCenter/masterOneToOne";
+		   model.addAttribute("paging", paging);
+		   return list;
 	   }
 	   
 	   // 1:1문의 제목 클릭 하고 들어와서 내용 보여주게 하기 (낱개낱개 보여줌), 답변 단것 보여주기
@@ -230,6 +269,17 @@ public class MasterController {
 		   int row = mse.eventDelete(event_idx);
 		   return "redirect:/master/masterEvent/masterEventList";
 	   }
+	   
+	   
+
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
 	   
 	   
 }

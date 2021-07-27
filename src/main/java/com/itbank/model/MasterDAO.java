@@ -23,12 +23,27 @@ public interface MasterDAO {
 			"    group by salesday")
 	List<HashMap<String, Object>> monthSales();
 	
-	@Select("select * from cinemaLost")
-	List<ServiceCenterDTO> lostList();
+	// 마스터 분실물 게시글 페이징
+	@Select("select count(*) from cinemaLost")
+	int selectCount();
+	
+	// 마스터 분실물 게시글 전체 불러오기 와 페이징
+	@Select("select * from cinemaLost order by cinemaLost_idx desc offset #{offset} rows fetch first #{perPage} rows only")
+	List<ServiceCenterDTO> lostList(@Param("offset")int offset,@Param("perPage")int perPage);
 
-	@Select("select * from oneToOne order by otoWriteDay desc")
-	List<OneToOneDTO> oneToOneList();
+	// 마스터 분실물 글 하나를 클릭해서 보는것
+	@Select("select * from cinemaLost where cinemaLost_idx=#{cinemaLost_idx}")
+	ServiceCenterDTO LostEach(int cinemaLost_idx);
+	
+	// 마스터 1:1 문의 게시글 페이징
+	@Select("select count(*) from oneToOne")
+	int selectCount2();
+	
+	// 마스터 1:1 문의 게시글 전체불러오기 (날자순으로 불러오기)
+	@Select("select * from oneToOne order by otoWriteDay desc offset #{offset} rows fetch first #{perPage} rows only")
+	List<OneToOneDTO> oneToOneList(@Param("offset")int offset,@Param("perPage")int perPage);
 
+	// 마스터 1:1문의 글 하나를 클릭해서 보는것
 	@Select("select * from oneToOne where oneToOne_idx=#{oneToOne_idx}")
 	OneToOneDTO EachOneToOne(int oneToOne_idx);
 
@@ -90,6 +105,13 @@ public interface MasterDAO {
 
 	@Delete("delete from cinemaEventList where event_idx = #{event_idx}")
 	int eventDelete(int event_idx);
+
+	
+	
+
+
+
+
 
 
 

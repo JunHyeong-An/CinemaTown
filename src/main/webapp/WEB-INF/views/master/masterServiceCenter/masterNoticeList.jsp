@@ -7,7 +7,7 @@
       <div id="boardMenu">
          <a href="${cpath }/master/masterServiceCenter/masterNoticeList"><div class="notice">공지사항</div></a> 
          <a href="${cpath }/master/masterServiceCenter/masterOneToOne"><div class="inquiry">1:1문의</div></a> 
-         <a href="${cpath }/master/masterServiceCenter/masterlost"><div class="lostAndFound">분실물 문의</div></a>
+         <a href="${cpath }/master/masterServiceCenter/masterLost"><div class="lostAndFound">분실물 문의</div></a>
       </div>
       
       
@@ -24,15 +24,15 @@
          <div class="paging">
             <div id="number">
                <c:if test="${paging.prev }">
-                  <a href="${cpath }/master/masterServiceCenter/masterNotice"> [처음] </a>
+                  <a href="${cpath }/master/masterServiceCenter/masterNoticeList"> [처음] </a>
                </c:if>
                
                <c:if test="${paging.prev }">
-                  <a href="${cpath }/master/masterServiceCenter/masterNotice?page=${paging.begin-1}">[이전] </a>
+                  <a href="${cpath }/master/masterServiceCenter/masterNoticeList?page=${paging.begin-1}">[이전] </a>
                </c:if>
 
                <c:if test="${empty param.page}">
-                  <a href="${cpath }/master/masterServiceCenter/masterNotice"><strong>1</strong></a>
+                  <a href="${cpath }/master/masterServiceCenter/masterNoticeList"><strong>1</strong></a>
                </c:if>
                
                <c:forEach var="i"
@@ -40,20 +40,20 @@
                   end="${paging.end }">
                   <span> ${i == param.page ? '<strong>' : '' } 
                      <c:if test="${i ==1 }">
-                        <a href="${cpath }/master/masterServiceCenter/masterNotice">${i }</a>
+                        <a href="${cpath }/master/masterServiceCenter/masterNoticeList">${i }</a>
                      </c:if> 
                      <c:if test="${i != 1}">
-                        <a href="${cpath }/master/masterServiceCenter/masterNotice?page=${i}">${i }</a>
+                        <a href="${cpath }/master/masterServiceCenter/masterNoticeList?page=${i}">${i }</a>
                      </c:if> ${i == param.page ? '</strong>' : '' }
                   </span>
                </c:forEach>
 
                <c:if test="${paging.next }">
-                  <a href="${cpath }/master/masterServiceCenter/masterNotice?page=${paging.end+1}">[다음] </a>
+                  <a href="${cpath }/master/masterServiceCenter/masterNoticeList?page=${paging.end+1}">[다음] </a>
                </c:if>
                
                <c:if test="${paging.next }">
-                  <a href="${cpath }/master/masterServiceCenter/masterNotice?page=${paging.pageCount}">[맨끝] </a>
+                  <a href="${cpath }/master/masterServiceCenter/masterNoticeList?page=${paging.pageCount}">[맨끝] </a>
                </c:if>
             
             </div>
