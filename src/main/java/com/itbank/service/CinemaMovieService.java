@@ -84,15 +84,14 @@ public class CinemaMovieService {
 	// 예매 취소 시 => 예매 취소, 좌석 취소, 결제 취소, 매출 취소
 	@Transactional
 	public void ticketingCancel(int ticketing_idx) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
 		ticketing_dao.ticketingCancel(ticketing_idx);
-		int schedule_idx = (Integer)map.get("schedule_idx");
-
+		int schedule_idx = ticketing_dao.getSchedule_idx(ticketing_idx);
+		System.out.println(schedule_idx);
 		int seatCountRemainAdd = seat_dao.seatCancel(ticketing_idx);
 		schedule_dao.seatCountRemainAdd(schedule_idx, seatCountRemainAdd);
 
 		payment_dao.paymentCancel(ticketing_idx);
-		int payment_idx = (Integer)map.get("payment_idx");// 예매 결제 취소시 해당 payment_idx값 가져오기
+		int payment_idx = payment_dao.getPayment_idxCancel(ticketing_idx);// 예매 결제 취소시 해당 payment_idx값 가져오기
 		
 		sales_dao.salesCancel(payment_idx); // 매출 취소
 
