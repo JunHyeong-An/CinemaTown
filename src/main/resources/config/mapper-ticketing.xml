@@ -18,10 +18,6 @@
 	
 	<!-- 예매 취소 시 -->
 	<update id="ticketingCancel" parameterType="int" useGeneratedKeys="true">
-		<selectKey resultType="java.util.HashMap" keyProperty="schedule_idx" order="AFTER">
-			select SCHEDULE_IDX from cinemaTicketing where ticketing_idx = #{ticketing_idx}
-		</selectKey>
-		
 		update cinemaTicketing set deleted = 'y' where ticketing_idx = #{ticketing_idx}
 	
 	</update>

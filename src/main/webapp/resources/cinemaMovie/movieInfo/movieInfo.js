@@ -70,7 +70,6 @@ fetch(kmdbUrl, opt)
     	img.classList.add("movieStillCut")
     	stillCutBox.appendChild(img)
     })
-    video.setAttribute("src", vod)
     // 스틸컷 슬라이드
     let leftPos = 0;
 	stillCutBox.style.left = leftPos + "px"
@@ -195,5 +194,8 @@ fetch(vodUrl, vodOpt)
 	return resp.json()
 })
 .then(json => {
-	console.log(json)
+	//http://caching.lottecinema.co.kr//Media/MovieFile/MovieMedia/202107/17623_301_2.mp4
+//	video.setAttribute("src", json.Data[0].Result[0].vods.vod[0].vodUrl)
+//	video.setAttribute("src", "http://caching.lottecinema.co.kr//Media/MovieFile/MovieMedia/202107/17623_301_2.mp4")
+//	console.log(json.Data[0].Result[0].vods.vod[0].vodUrl)
 })

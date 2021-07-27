@@ -1,5 +1,6 @@
 package com.itbank.model;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +14,8 @@ public interface CinemaTicketingDAO {
 	// 예매 취소 시 티켓 취소
 	int ticketingCancel(@Param("ticketing_idx")int ticketing_idx);
 
-	
-	List<CinemaTicketingDTO> all();
+
+	@Select("select SCHEDULE_IDX from cinemaTicketing where ticketing_idx = #{ticketing_idx}")
+	int getSchedule_idx(int ticketing_idx);
 
 }

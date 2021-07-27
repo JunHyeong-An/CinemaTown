@@ -7,9 +7,9 @@
 
 	<!-- 예매 취소 시 결제 취소하기-->
 	<update id="paymentCancel" parameterType="int" useGeneratedKeys="true">
-		<selectKey resultType="java.util.HashMap" keyProperty="payment_idx" order="AFTER">
-			select PAYMENT_IDX from cinemaPayment where ticketing_idx = #{ticketing_idx}
-		</selectKey>
+<!-- 		<selectKey resultType="java.util.HashMap" keyProperty="payment_idx" order="AFTER"> -->
+<!-- 			select PAYMENT_IDX from cinemaPayment where ticketing_idx = #{ticketing_idx} -->
+<!-- 		</selectKey> -->
 		
 		update cinemaPayment set canceled = 'y' where ticketing_idx=#{ticketing_idx}
 	

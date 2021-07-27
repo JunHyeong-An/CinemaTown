@@ -244,6 +244,7 @@ public class CinemaMovieController {
 	// 예매 취소 시 돌아가는 메서드 ==> 주소 넣어야함
 	@GetMapping("/ticketingHistoryCancel")
 	public String ticketingCancel(int idx) {	// idx = ticketing_idx
+	
 		cms.ticketingCancel(idx);
 		return "redirect:/cinemaUser/myPage/ticketingHistory";
 	}
