@@ -55,35 +55,38 @@ public class MasterController {
 		}
 	   
 	   // 관리자 페이지 리뷰 리스트 관리
-	   @GetMapping("/masterReview/masterReviewList/")
-	   public List<ReviewDTO> movieDelete(Model model, HttpServletRequest request) {
-//	      String[] movieNameList = rs.movieNameList();
-		  int boardCount = rs.selectCount();
+	   @GetMapping("/masterReview/masterReviewList")
+	   public String movieDelete(Model model, HttpServletRequest request) {
+	      String[] movieNameList = rs.movieNameList();
+//		  int boardCount = rs.selectCount();
 		  
-		  String page = request.getParameter("page");
-			if(page == null) {
-				Paging paging = new Paging(1, boardCount);
-				List<ReviewDTO> movieNameList = rs.noticeSelect(paging.getOffset(),
-						paging.getPerPage());
-				model.addAttribute("movieNameList", movieNameList);
-				model.addAttribute("paging", paging);
-				return movieNameList;
-			}
-			Paging paging = new Paging(Integer.parseInt(page), boardCount);
-			List<ReviewDTO> movieNameList = rs.noticeSelect(paging.getOffset(),
-					paging.getPerPage());
+//		  String page = request.getParameter("page");
+//			if(page == null) {
+//				Paging paging = new Paging(1, boardCount);
+//				List<ReviewDTO> reviewList = rs.noticeSelect(paging.getOffset(),
+//						paging.getPerPage());
+//				model.addAttribute("movieNameList", movieNameList);
+//				model.addAttribute("reviewList", reviewList);
+//				model.addAttribute("paging", paging);
+//				return "master/masterReview/masterReviewList";
+//			}
+//			Paging paging = new Paging(Integer.parseInt(page), boardCount);
+//			List<ReviewDTO> reviewList = rs.noticeSelect(paging.getOffset(),
+//					paging.getPerPage());
+//			model.addAttribute("reviewList", reviewList);
+//			model.addAttribute("paging", paging);
 			model.addAttribute("movieNameList", movieNameList);
-			model.addAttribute("paging", paging);
-			return movieNameList;
+			return "master/masterReview/masterReviewList";
 //	      model.addAttribute("movieNameList", movieNameList);
 //	      System.out.println(movieNameList);
 	   }
 	   // 관리자 리뷰 리스트 영화이름으로 분류
 	   @GetMapping(value="/masterReview/masterReviewList/{movieName}/",produces="application/json;charset=utf-8")
 	   @ResponseBody
-	   public List<ReviewDTO> movieReviewList(@PathVariable String movieName, Model model){
-		   List<ReviewDTO> reviewList =  rs.movieReviewList(movieName);
-		  model.addAttribute("reviewList", reviewList);
+	   public List<ReviewDTO> movieReviewList(@PathVariable String movieName){	// paging 작업 ajax에서 필요
+		   int boardCount = rs.selectCount();
+		   Paging paging = new Paging(1, boardCount);
+		   List<ReviewDTO> reviewList =  rs.movieReviewList(paging.getOffset(),paging.getPerPage(),movieName);
 	      return reviewList;
 	   }
 	   // 관리자 리뷰 리스트 중 한개 삭제

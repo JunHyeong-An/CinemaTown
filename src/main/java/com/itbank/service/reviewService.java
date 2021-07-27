@@ -14,10 +14,10 @@ public class reviewService {
 	@Autowired private ReviewDAO dao;
 
 
-//	// 리뷰 전체 페이징
-//	public String[] movieNameList() {
-//		return dao.movieNameList();
-//	}
+	// 리뷰 전체 페이징
+	public String[] movieNameList() {
+		return dao.movieNameList();
+	}
 	
 	// 리뷰 한개 페이징
 	public int selectCount() {
@@ -28,8 +28,8 @@ public class reviewService {
 		return dao.reviewDelete(review_idx);
 	}
 
-	public List<ReviewDTO> movieReviewList(String movieNm) {
-		return dao.movieReviewList(movieNm);
+	public List<ReviewDTO> movieReviewList(int offset, int perPage, String movieNm) {
+		return dao.movieReviewList(offset, perPage, movieNm);
 	}
 
 	public List<ReviewDTO> noticeSelect(int offset, int perPage) {
