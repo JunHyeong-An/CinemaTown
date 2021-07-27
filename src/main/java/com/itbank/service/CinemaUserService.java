@@ -106,6 +106,11 @@ public class CinemaUserService {
 	
 		return user_dao.ticketingHistory(userId);
 	}
+
+	public CinemaUserDTO newUserInfo(String userId) {
+		
+		return user_dao.newUserInfo(userId);
+	}
 	
 	
 	

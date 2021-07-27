@@ -128,7 +128,7 @@ public class CinemaUserController {
 		
 		CinemaUserDTO cinemaUserInfo = cus.passwordModifyCheck(dto);
 		if(cinemaUserInfo != null) {			
-			session.setAttribute("userInfo", cinemaUserInfo);
+			
 			return "redirect:/cinemaUser/myPage/infoModify";
 		}
 		
@@ -140,7 +140,7 @@ public class CinemaUserController {
 	@GetMapping("/myPage/infoModify")
 	public ModelAndView infoModify(HttpSession session, ModelAndView mav) {
 	
-		CinemaUserDTO cinemaUserInfo = (CinemaUserDTO)session.getAttribute("userInfo");
+		CinemaUserDTO cinemaUserInfo = (CinemaUserDTO)session.getAttribute("login");
 		
 		mav.addObject("info", cinemaUserInfo);
 		mav.addObject("userBirth", cinemaUserInfo.getUserBirth().split("-")[0]);
@@ -161,9 +161,13 @@ public class CinemaUserController {
 
 	// user의 정보 변경(이메일주소, 주소)해서 DB에 수정하기
 	@PostMapping("/myPage/infoModify")
-	public String infoModify(String userId, String userAddr, String userPh) {		
+	public String infoModify(String userId, String userAddr, String userPh, HttpSession session) {		
 
 		int row = cus.infoModify(userId, userAddr, userPh);
+		CinemaUserDTO userInfo = cus.newUserInfo(userId);
+		if(row == 1) {
+			session.setAttribute("login", userInfo);
+		}
 		return "redirect:/"; 	
 	}
 

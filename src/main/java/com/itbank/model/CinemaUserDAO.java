@@ -75,6 +75,9 @@ public interface CinemaUserDAO {
 			" where cinemaTicketing.userId = #{userId} order by cinemaTicketing.ticketing_idx")
 	List<HashMap<String, Object>> ticketingHistory(@Param("userId")String userId);
 
+	@Select("select * from cinemaUser where userId=#{userId}")
+	CinemaUserDTO newUserInfo(String userId);
+
 	// myPage 정보 불러오기(List로처리하는방법)
 //	@Select("select userName, userId, userBirth, userPh, userEmail from cinemaUser where userId = #{userId}")
 //	List<CinemaUserDTO> myPageInfo(String userId);
