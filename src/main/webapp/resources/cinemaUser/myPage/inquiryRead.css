@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+.main {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+	background-image:
+		url('https://media.discordapp.net/attachments/856752011814895645/868045459275534356/infoModify_background-001.png?width=535&height=613');
+	background-size: 100%;
+}
+
+.readTitle {
+	border-bottom: 1px solid black;
+}
+
+.idKind {
+	width: 70%;
+	display: flex;
+	border: 1px black;
+	padding-left: 150px;
+}
+
+.readId {
+	width: 70%;
+	float: left;
+	padding-left: 150px;
+}
+
+.readContent {
+	padding: 20px;
+	width: 1000px;
+	border: 1px solid rgba(0, 0, 0, 0.192);
+	height: 500px;
+	border-radius: 15px;
+}
+
+.readKind {
+	width: 70%;
+	float: left;
+}
+
+.readDate {
+	float: right;
+}
+
+a {
+	text-decoration: none;
+}
+
+.Page {
+	padding-top: 30px;
+}
+
+.beforePage {
+	width: 300px;
+	height: 50px;
+	background-color: cornsilk;
+	border-color: cornsilk;
+	border-radius: 20px;
+}

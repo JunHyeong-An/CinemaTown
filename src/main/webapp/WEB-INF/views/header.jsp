@@ -17,7 +17,18 @@
 	const cpath = "${cpath}"
 </script>
  <header>
-
+		<div id="loginStatusBox">
+            <ul id="loginStatus">
+            	<c:if test="${empty login and empty cookie.loginCookie}">
+                	<li><a href="${cpath }/cinemaUser/login">로그인</a></li>
+                	<li><a href="${cpath }/cinemaUser/tos">회원가입</a></li>
+            	</c:if>
+            	<c:if test="${not empty login or not empty cookie.loginCookie }">
+            		<li><a href="${cpath }/cinemaUser/logout">로그아웃</a></li>
+                	<li><a href="${cpath }/cinemaUser/myPage/myPageHome">마이페이지</a></li>
+            	</c:if>
+            </ul>
+        </div>
         <!-- 로고 -->
         <h1 id="logo"><a href="${cpath }/">CINEMA TOWN</a></h1>
 

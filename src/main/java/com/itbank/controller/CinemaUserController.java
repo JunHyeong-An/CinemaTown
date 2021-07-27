@@ -63,11 +63,12 @@ public class CinemaUserController {
 
 	// id, pw 입력해서 로그인 구현 + 자동로그인 유지
 	@PostMapping("/login")
-	public String login(CinemaUserDTO dto, HttpSession session, HttpServletRequest request, HttpServletResponse response) {      
+	public String login(CinemaUserDTO dto, HttpSession session, HttpServletRequest request, HttpServletResponse response,Model model) {      
 		
 		String url = (String)session.getAttribute("url");
 		CinemaUserDTO login = cus.login(dto);
 		session.setAttribute("login", login);
+		model.addAttribute("grade", login);
 		if(login !=  null) {
 			session.setAttribute("userId", login.getUserId());
 			// JSESSION cookie
