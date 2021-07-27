@@ -127,7 +127,7 @@ if(resToken == "1") {
 function insertMonthAndDate() {
     selectDateBox.innerHTML = ''
     let month = selectDate.getMonth() + 1 < 10 ? '0' + (selectDate.getMonth() + 1) : selectDate.getMonth() + 1
-
+    
     monthBox.innerHTML = month
     headerMonthBox.innerHTML = month
     showSelectMonth.innerHTML = month
@@ -147,7 +147,6 @@ function insertMonthAndDate() {
     	else if(limit.innerHTML == 15) limit.style.backgroundColor = "#EFBB11"
     	else if(limit.innerHTML == 18) limit.style.backgroundColor = "#CA1212"
     })
-
 }
 
 //영화버튼 누르면 그 영화에 배당된 시간 출력
@@ -232,27 +231,29 @@ function insertDate() {
 }
 
 function getMovieList() {
+	console.log(ticketingDate)
 	const url = "ticketing/" + movieName +"/" + ticketingDate + "/"
 	const opt = {
 		method: "GET"
 	}
-	
+	console.log(url)
 	fetch(url, opt)
 	.then(resp => resp.json())
 	.then(json => {
 		let sCurrDate = new Date()
-		let currHour = sCurrDate.getHours()
-		let currMin = sCurrDate.getMinutes()
-		let currTime = currHour + "" + currMin
-		console.log(currTime)
+//		console.log(currTime)
 		
 		console.log(json)
 		showTimeList.innerHTML = ''
 		for(i in json) {
-			console.log(json)
 			let startTime = json[i].START_TIME
 			startTime = startTime.replace(":", "")
-			console.log(startTime)
+			let startTimeMil = new Date()
+
+			startTimeMil.setDate(ticketingDate.substr(6, 2))
+			startTimeMil.setHours(startTime.substr(0,2))
+			startTimeMil.setMinutes(startTime.substr(2,2))
+//			console.log(startTimeMil.getTime())
 			
 			const div = document.createElement("div")
 			const p1 = document.createElement("p")
@@ -281,11 +282,17 @@ function getMovieList() {
 			
 			div.appendChild(p1)
 			div.appendChild(p2)
-			if(startTime > currTime)
+			if(startTimeMil > sCurrDate)
 				div.addEventListener("click", function(){showCoverBox(div, json[i])})
 			else 
 				div.style.backgroundColor = "gray"
 			showTimeList.appendChild(div)
+			
+//			console.log(startTimeMil)
+//			console.log(sCurrDate)
+			console.log(startTimeMil)
+			console.log(sCurrDate)
+			console.log(startTimeMil > sCurrDate)
 		}
 	})
 }
@@ -431,6 +438,19 @@ function showCoverBox(div, json) {
 				seat.onclick = function() {
 					if(!remainSeatArr.includes(seat.innerHTML))
 						selectSeat(seat)
+				}
+			})	
+		}
+		
+		if(json == '') {
+			seats2.forEach(seat => {
+				if(remainSeatArr.includes(seat.innerHTML)) 
+					seat.style.backgroundColor = "gray"
+				
+				else {
+					seat.onclick = function() {
+						selectSeat(seat)
+					}						
 				}
 			})	
 		}

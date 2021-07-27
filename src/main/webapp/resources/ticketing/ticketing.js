@@ -29,7 +29,7 @@ let cardCompany = ""
 let cardPassword = ""
 let scheduleIdx = ""
 let reservationSeat =""
-	
+	console.log(ticketingDate)
 // ticketing2로 보내는 변수들
 let movieEndTime = ""
 let movieScheduleIdx = ""

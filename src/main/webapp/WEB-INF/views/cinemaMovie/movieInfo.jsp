@@ -59,7 +59,7 @@
 	</div>
 
 	<div id="moveiTrailer">
-		<video src="" id="video"></video>
+		<video src="http://caching.lottecinema.co.kr//Media/MovieFile/MovieMedia/202107/17623_301_2.mp4" id="video" autoplay></video>
 	</div>
 	
 	<div id="reviewContainer">
