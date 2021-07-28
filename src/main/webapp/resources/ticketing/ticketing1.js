@@ -178,31 +178,38 @@ function movieListInit() {
 
 // 날짜 출력 함수
 function insertDate() {
+	let cnt = 8
     for(let i = 0; i < 7; i++) {
+    		let plusDate = 0
+    		
+    		if(i == 0) plusDate = 0
+    		else plusDate = 1
+    		
+    		if(selectDate.getDate() == getLastDate()) plusDate = 0
+    		selectDate.setDate(selectDate.getDate() + plusDate)
+    		console.log(selectDate.getDate())
+    		
+    		const li = document.createElement("li")
+    		const div1 = document.createElement("div")
+    		const div2 = document.createElement("div")
+    		
+    		div1.innerHTML = selectDate.getDate()
+    		div2.innerHTML = days[selectDate.getDay()]
+    		div2.setAttribute("class", "day")
+    		
+    		li.appendChild(div1)
+    		li.appendChild(div2)
+    		li.setAttribute("class", "dates")
+    		selectDateBox.appendChild(li)    	
+    		cnt--
+    		if(getLastDate() == selectDate.getDate()) break
         // 각 달의 마지막 날에는 1 더해주면 안됨
-        let plusDate = 0
-
-        if(i == 0) plusDate = 0
-        else plusDate = 1
-
-        if(selectDate.getDate() == getLastDate()) plusDate = 0
-        selectDate.setDate(selectDate.getDate() + plusDate)
-        
-        const li = document.createElement("li")
-        const div1 = document.createElement("div")
-        const div2 = document.createElement("div")
-        
-        div1.innerHTML = selectDate.getDate()
-        div2.innerHTML = days[selectDate.getDay()]
-        div2.setAttribute("class", "day")
-    
-        li.appendChild(div1)
-        li.appendChild(div2)
-        li.setAttribute("class", "dates")
-        selectDateBox.appendChild(li)
     }
-    let date = selectDate.getDate() - 6 < 10 ? '0' + (selectDate.getDate() - 6) : selectDate.getDate() - 6
-
+    console.log(cnt)
+    let minusDate = 7 - cnt
+    console.log('md : ' + minusDate)
+    let date = selectDate.getDate() - minusDate < 10 ? '0' + (selectDate.getDate() - minusDate) : selectDate.getDate() - minusDate
+    console.log('date : ' + date)
     showSelectDate.innerHTML = date
     headerDate.innerHTML = date
 
@@ -241,19 +248,16 @@ function getMovieList() {
 	.then(resp => resp.json())
 	.then(json => {
 		let sCurrDate = new Date()
-//		console.log(currTime)
-		
-		console.log(json)
+
 		showTimeList.innerHTML = ''
 		for(i in json) {
 			let startTime = json[i].START_TIME
 			startTime = startTime.replace(":", "")
-			let startTimeMil = new Date()
+			let startTimeMil = new Date(currDate.getFullYear(), selectDate.getMonth())
 
 			startTimeMil.setDate(ticketingDate.substr(6, 2))
 			startTimeMil.setHours(startTime.substr(0,2))
 			startTimeMil.setMinutes(startTime.substr(2,2))
-//			console.log(startTimeMil.getTime())
 			
 			const div = document.createElement("div")
 			const p1 = document.createElement("p")
@@ -290,9 +294,9 @@ function getMovieList() {
 			
 //			console.log(startTimeMil)
 //			console.log(sCurrDate)
+			console.log(selectDate)
 			console.log(startTimeMil)
-			console.log(sCurrDate)
-			console.log(startTimeMil > sCurrDate)
+			console.log(startTimeMil >= sCurrDate)
 		}
 	})
 }
@@ -301,7 +305,7 @@ function getMovieList() {
 function increaseMonth() {
     selectDate.setDate(selectDate.getDate() - 1)
     selectDate.setMonth(selectDate.getMonth() + 1)
-    resetDate()
+    resetDate()  
     insertMonthAndDate()
 }
 
