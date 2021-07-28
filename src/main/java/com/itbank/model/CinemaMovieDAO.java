@@ -106,16 +106,16 @@ public interface CinemaMovieDAO {
 	@Select("select movieCode from cinemaMovie")
 	String[] movieCodeList();
 
-<<<<<<< HEAD
+
 	@Select("select event_idx ,eventListTitle, eventListContent, eventListFileName, start_time, end_time from cinemaEventList where sysdate >= start_time and end_time >= sysdate order by end_time")
 	List<CinemaEventListDTO> mainEvent();
 
 	@Select("select event_idx ,eventListTitle ,eventListContent, eventListFileName, start_time, end_time from cinemaEventList where event_idx = #{event_idx}")
 	List<CinemaEventListDTO> selectEvent(int event_idx);
-=======
+
 	@Select("select teaserUrl from cinemaMovie where movieName=#{movieName}")
 	String teaserUrl(String movieName);
->>>>>>> 6670f592be1c7a5f4a40cb7175256d69bcbc5f97
+
 
 
 

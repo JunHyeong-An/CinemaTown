@@ -192,7 +192,7 @@ const vodOpt = {method : 'GET'}
 
 fetch(vodUrl, vodOpt)
 .then(resp => {
-	return resp.json()
+	return resp.text()
 })
 .then(json => {
 	video.setAttribute("src", json)

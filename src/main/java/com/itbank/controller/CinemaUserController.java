@@ -75,7 +75,7 @@ public class CinemaUserController {
 	@PostMapping("/login")
 	public String login(CinemaUserDTO dto, HttpSession session, HttpServletRequest request, HttpServletResponse response,Model model) {      
 		String url = (String)session.getAttribute("url");
-		System.out.println(url);
+
 		session.removeAttribute("url");
 		CinemaUserDTO login = cus.login(dto);
 		session.setAttribute("login", login);
