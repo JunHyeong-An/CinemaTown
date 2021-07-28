@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
@@ -58,14 +59,22 @@ public class CinemaUserController {
 	
 	// cinemaUser폴더에 login form부분 띄우기
 	@GetMapping("/login")
-	public void login() {}
+	public void login(HttpServletRequest request, HttpSession session) {
+		String url = request.getParameter("url");
+		String movieName = request.getParameter("movieNm");
+		
+		if(url != null) {
+			session.setAttribute("url", url);		
+		}
+	}
 
 
 	// id, pw 입력해서 로그인 구현 + 자동로그인 유지
 	@PostMapping("/login")
 	public String login(CinemaUserDTO dto, HttpSession session, HttpServletRequest request, HttpServletResponse response,Model model) {      
-		
 		String url = (String)session.getAttribute("url");
+		System.out.println(url);
+		session.removeAttribute("url");
 		CinemaUserDTO login = cus.login(dto);
 		session.setAttribute("login", login);
 		model.addAttribute("grade", login);
