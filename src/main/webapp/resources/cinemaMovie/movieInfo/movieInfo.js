@@ -155,7 +155,8 @@ const reviewText = document.querySelector("#reviewText")
 
 reviewBtn.onclick = function(event) {
 	if(document.querySelector("#userId").value == '') {
-		location.href = cpath + "/cinemaUser/login?url=" + location.href + ",movieNm=" + getParameterByName("movieNm")
+//		console.log("\'" + cpath + "/cinemaUser/login?url=" + location.href +"\'")
+		location.href = "\'" + cpath + "/cinemaUser/login?url=" + location.href +"\'"
 	}
 	
 	let ob = {}
