@@ -58,7 +58,7 @@ public interface CinemaUserDAO {
 			" on cinemaHall.hall_idx = cinemaTicketing.hall_idx" + 
 			" join cinemaPayment" + 
 			" on cinematicketing.ticketing_idx = cinemapayment.ticketing_idx" + 
-			" where cinemaTicketing.userId = #{userId} order by cinemaTicketing.ticketing_idx")
+			" where cinemaTicketing.userId = #{userId} and cinemaTicketing.deleted = 'n' order by cinemaTicketing.ticketing_idx")
 	List<HashMap<String, Object>> ticketingHistory(String userId);
 	
 	// 자신의 문의한 1:1문의 리스트 불러오기 
