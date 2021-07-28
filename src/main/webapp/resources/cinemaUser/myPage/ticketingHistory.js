@@ -10,7 +10,7 @@ fetch(historyUrl, opt)
 })
 .then(json => {
 	for(i in json) {
-//		console.log(json[i].TICKETING_IDX)
+		console.log(json[i])
 		const div1 = document.createElement("div")
 		const div2 = document.createElement("div")
 		const div3 = document.createElement("div")
