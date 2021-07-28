@@ -28,6 +28,7 @@ create table cinemaMovie(
     runningTime     number              not null,
     urlName         varchar2(500),
     movieCode		varchar2(10),
+    teaserUrl		varchar2(500),
     deleted      char(1)   default 'n' check(deleted in('y','n'))
 );
 -------------------------------------------------------------------------------------------------------

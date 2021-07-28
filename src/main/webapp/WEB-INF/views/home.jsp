@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ include file="homeHeader.jsp" %>
 <link rel="stylesheet" href="${cpath }/resources/commons/home.css">
     <div id="movieList">
@@ -37,19 +36,19 @@
 
 <div id="board">
         <div class="iconList">
-            <a href="" style="color:black">
+            <a href="${cpath }/cinemaUser/myPage/myPageHome" style="color:black">
                 <div class="icon"><img src="${cpath }/resources/commons/imgs/userIcon.png"></div>
                 <div class="iconBottom">내정보</div>
             </a>
         </div>
         <div class="iconList">
-            <a href="" style="color:black">
+            <a href="${cpath }/serviceCenter/oneToOne" style="color:black">
                 <div class="icon"><img src="${cpath }/resources/commons/imgs/InformationIcon.png"></div>
                 <div class="iconBottom">1:1문의</div>
             </a>
         </div>
         <div class="iconList">
-            <a href="" style="color:black">
+            <a href="${cpath }/serviceCenter/noticeList" style="color:black">
                 <div class="icon"><img src="${cpath }/resources/commons/imgs/boardIcon.png"></div>
                 <div class="iconBottom">공지사항</div>
             </a>

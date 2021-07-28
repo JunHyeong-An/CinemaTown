@@ -1,5 +1,7 @@
 package com.itbank.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -59,12 +61,12 @@ public class CinemaUserController {
 	
 	// cinemaUser폴더에 login form부분 띄우기
 	@GetMapping("/login")
-	public void login(HttpServletRequest request, HttpSession session) {
+	public void login(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException {
 		String url = request.getParameter("url");
 		String movieName = request.getParameter("movieNm");
-		
-		if(url != null) {
-			session.setAttribute("url", url);		
+		if(url != null && movieName != null) {
+			movieName = URLEncoder.encode(movieName, "UTF-8");
+			session.setAttribute("url", url+"&movieNm="+movieName);		
 		}
 	}
 

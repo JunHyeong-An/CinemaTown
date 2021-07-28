@@ -32,6 +32,13 @@ fetch(officeUrl, officeopt)
 		li.appendChild(a)
 		a.setAttribute("href", cpath + "/cinemaMovie/movieInfo?releaseDts=" + openDt + "&movieNm=" + movieNm)
 		movieTop10.appendChild(li)
+		
+		li.onmouseover = function() {
+			li.style.fontSize = 13 + "pt"
+		}
+		li.onmouseleave = function() {
+			li.style.fontSize = 13 + "px"
+		}
 	}
 })
 

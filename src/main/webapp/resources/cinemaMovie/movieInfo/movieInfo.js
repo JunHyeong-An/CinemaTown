@@ -38,7 +38,7 @@ fetch(kmdbUrl, opt)
 	let directorsText = ""
 	let actorsText = ""
 	let stlls = data.stlls.split("|")
-	let vod = data.vods.vod[0].vodUrl
+//	let vod = data.vods.vod[0].vodUrl
 		
 	directors.forEach(direc => {
 		directorsText += direc.directorNm + ","
@@ -187,16 +187,13 @@ reviewBtn.onclick = function(event) {
 
 // 예고편 받아오기
 
-//const vodUrl = cpath + "/cinemaMovie/movieInfo/vodUrl/" + getParameterByName("movieNm") + "/"
-//const vodOpt = {method : 'GET'}
-//
-//fetch(vodUrl, vodOpt)
-//.then(resp => {
-//	return resp.json()
-//})
-//.then(json => {
-	//http://caching.lottecinema.co.kr//Media/MovieFile/MovieMedia/202107/17623_301_2.mp4
-//	video.setAttribute("src", json.Data[0].Result[0].vods.vod[0].vodUrl)
-//	video.setAttribute("src", "http://caching.lottecinema.co.kr//Media/MovieFile/MovieMedia/202107/17623_301_2.mp4")
-//	console.log(json.Data[0].Result[0].vods.vod[0].vodUrl)
-//})
+const vodUrl = cpath + "/cinemaMovie/movieInfo/teaserUrl/" + getParameterByName("movieNm") + "/"
+const vodOpt = {method : 'GET'}
+
+fetch(vodUrl, vodOpt)
+.then(resp => {
+	return resp.json()
+})
+.then(json => {
+	video.setAttribute("src", json)
+})
