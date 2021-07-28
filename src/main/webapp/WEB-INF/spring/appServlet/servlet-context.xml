@@ -26,16 +26,22 @@
 	
 	<beans:bean id="loginInterceptor"
 		class="com.itbank.interceptor.LoginInterceptor" ></beans:bean>
+	<beans:bean id="adminInterceptor"
+		class="com.itbank.interceptor.AdminInterceptor" ></beans:bean>
 	<interceptors>
 		<interceptor>
-			
-			<mapping path="/master/**"/>
 			<mapping path="/cinemaMovie/ticketing"/>
 			<mapping path="/serviceCenter/oneToOne"/>
 			<mapping path="/cinemaUser/myPage/**"/>
-
+			<mapping path="/master/**"/>		
 			
 			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+
+		<interceptor>
+			
+			<mapping path="/master/**"/>		
+			<beans:ref bean="adminInterceptor"/>
 		</interceptor>
 	
 	</interceptors>	
