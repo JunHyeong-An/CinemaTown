@@ -50,7 +50,15 @@ public class CinemaMovieController {
 	
 	// 영화 정보 페이지 보여주기
 	@GetMapping("/movieInfo")
-	public String movieInfo() {
+	public String movieInfo(HttpServletRequest request, HttpSession session, Model model) {
+		Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+		String userId = (String)session.getAttribute("userId");
+		if(loginCookie!= null && userId==null) {
+			String sessionId = loginCookie.getValue();
+			CinemaUserDTO login = cus.checkUserWithSessionId(sessionId);
+			userId = login.getUserId();
+			model.addAttribute("userId", userId);
+		}
 		return "cinemaMovie/movieInfo";
 	}
 	
@@ -58,6 +66,7 @@ public class CinemaMovieController {
 	@GetMapping(value="/movieInfo/teaserUrl/{movieNm}/",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String teaserUrl(@PathVariable String movieNm) throws IOException {
+		System.out.println(movieNm);
 		String teaserUrl = cms.teaserUrl(movieNm.trim());
 		return teaserUrl; 
 	}
