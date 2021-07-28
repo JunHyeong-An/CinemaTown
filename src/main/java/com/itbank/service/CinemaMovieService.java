@@ -162,18 +162,16 @@ public class CinemaMovieService {
 		return review_dao.reviewList(movieNm,rowMax);
 	}
 
-<<<<<<< HEAD
 	public List<CinemaEventListDTO> listEvent() {
 		return movie_dao.mainEvent();
 	}
 
 	public List<CinemaEventListDTO> selectEvent(int event_idx) {
 		return movie_dao.selectEvent(event_idx);
-=======
+	}
+	
 	public String teaserUrl(String movieName) {
-		
 		return movie_dao.teaserUrl(movieName);
->>>>>>> 6670f592be1c7a5f4a40cb7175256d69bcbc5f97
 	}
 
 

@@ -195,5 +195,6 @@ fetch(vodUrl, vodOpt)
 	return resp.json()
 })
 .then(json => {
+	console.log(1)
 	video.setAttribute("src", json)
 })
