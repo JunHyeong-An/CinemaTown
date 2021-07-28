@@ -13,10 +13,11 @@
 		<div>
 			<h4>영화등록</h4>
 		</div>
-		<div>
+		<div class="searchAll">
 			<span><input type="text" name="movieName" id="searchName"></span>
-			<span class="imgSpan"><img src="selectEmoticon.PNG"
-				id="EmoticonImg"></span>
+			<span class="imgSpan">
+				<img src="${cpath }/resources/master/img/touch.PNG" id="EmoticonImg">
+			</span>
 		</div>
 		<!--이 부분은 위에 영화 검색을 하면 글자와 관련된 제작년도 2021년인 영화이름들이 나옵니다-->
 		<div class="searchList">

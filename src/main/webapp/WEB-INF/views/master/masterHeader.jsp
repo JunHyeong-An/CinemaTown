@@ -13,7 +13,7 @@
 	<header>
 		<div class="mainPageLogo">
 			<div>
-				<img src="${cpath }/resources/master/home1.png" width="40px">
+				<img src="${cpath }/resources/master/img/home1.png" width="40px">
 			</div>	
 			<div class="mainPageGo">
 				<h3>
