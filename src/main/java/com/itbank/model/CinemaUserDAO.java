@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -23,7 +21,7 @@ public interface CinemaUserDAO {
 	int insert(CinemaUserDTO dto);
 	
 	// 로그인하기
-	@Select("select * from cinemaUser where userid = #{userId} and userpw = #{userPw}")
+	@Select("select * from cinemaUser where userId = #{userId} and userPw = #{userPw}")
 	CinemaUserDTO login(CinemaUserDTO dto);
 		
 	// 자동로그인 유지 처리
@@ -33,14 +31,14 @@ public interface CinemaUserDAO {
 	// 자동로그인유지를 위해 Interceptor에서 sessionId가 저장되어있는 지를 확인하기
 	@Select("select * from cinemaUser where sessionId=#{sessionId} and sessionLimit > sysdate")
 	CinemaUserDTO checkUserWithSessionId(@Param("sessionId")String sessionId);
-
-	// 정보 변경 전에 비밀번호 기입 시 일치, 불일치 확인하기
-	@Select("select * from cinemaUser where userId=#{userId} and userPw=#{userPw}")
-	CinemaUserDTO passwordModifyCheck(CinemaUserDTO dto);
 	
 	// user의 정보 변경(이메일주소, 주소)해서 DB에 수정하기
 	@Update("update cinemaUser set userAddr=#{userAddr}, userPh=#{userPh} where userId=#{userId}")
 	int infoModify(@Param("userId")String userId, @Param("userAddr")String userAddr, @Param("userPh")String userPh);
+	
+	// user의 정보 변경 후 login session에 수정된 내용 다시 저장을 위해 수정된 정보 받아오기
+	@Select("select * from cinemaUser where userId=#{userId}")
+	CinemaUserDTO newUserInfo(String userId);
 	
 	// user의 새 비밀번호 넣어주기
 	@Update("update cinemaUser set userPw=#{userPw} where userId=#{userId}")
@@ -49,18 +47,6 @@ public interface CinemaUserDAO {
 	// user의 비밀번호를 기입한 후 탈퇴하기
 	@Delete("delete from cinemaUser where userId=#{userId} and userPw=#{userPw}")
 	int deleteCheck(CinemaUserDTO dto);
-
-	// 자신의 문의한 1:1문의 리스트 불러오기 
-	@Select("select * from oneToOne where userId=#{userId} order by otoWriteDay desc")
-	List<OneToOneDTO> inquiryList(String userId);
-
-	// 1:1문의 리스트 개개인 답변리스트
-	@Select("select * from oneToOneAnswer")
-	List<OneToOneAnswerDTO> replyList();
-
-	// 1:1 문의 내역 (세부내용)
-	@Select("select * from oneToOne where oneToOne_idx=#{oneToOne_idx}")
-	OneToOneDTO inquiryRead(int oneToOne_idx);
 
 	// 마이페이지에서 예매내역 보여주기
 	@Select("select cinemaTicketing.ticketing_idx, movieName," + 
@@ -73,14 +59,23 @@ public interface CinemaUserDAO {
 			" join cinemaPayment" + 
 			" on cinematicketing.ticketing_idx = cinemapayment.ticketing_idx" + 
 			" where cinemaTicketing.userId = #{userId} order by cinemaTicketing.ticketing_idx")
-	List<HashMap<String, Object>> ticketingHistory(@Param("userId")String userId);
+	List<HashMap<String, Object>> ticketingHistory(String userId);
+	
+	// 자신의 문의한 1:1문의 리스트 불러오기 
+	@Select("select * from oneToOne where userId=#{userId} order by otoWriteDay desc")
+	List<OneToOneDTO> inquiryList(String userId);
 
-	@Select("select * from cinemaUser where userId=#{userId}")
-	CinemaUserDTO newUserInfo(String userId);
+	// 1:1문의 리스트 개개인 답변리스트
+	@Select("select * from oneToOneAnswer")
+	List<OneToOneAnswerDTO> replyList();
 
-	// myPage 정보 불러오기(List로처리하는방법)
-//	@Select("select userName, userId, userBirth, userPh, userEmail from cinemaUser where userId = #{userId}")
-//	List<CinemaUserDTO> myPageInfo(String userId);
+	// 1:1 문의 내역 (세부내용)
+	@Select("select * from oneToOne where oneToOne_idx=#{oneToOne_idx}")
+	OneToOneDTO inquiryRead(int oneToOne_idx);
+
+
+
+
 
 
 	

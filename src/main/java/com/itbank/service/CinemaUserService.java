@@ -55,17 +55,23 @@ public class CinemaUserService {
 		user_dao.keepLogin(userId, sessionId, sessionLimit);
 		
 	}
-
-	// 정보 변경 전에 비밀번호 기입 시 일치, 불일치 확인하기
-	public CinemaUserDTO passwordModifyCheck(CinemaUserDTO dto) {
-		dto.setUserPw(Hash.getHash(dto.getUserPw()));
-		return user_dao.passwordModifyCheck(dto);
+	
+	// 자동로그인유지를 위해 Interceptor에서 sessionId가 저장되어있는 지를 확인하기
+	public CinemaUserDTO checkUserWithSessionId(String sessionId) {
+		return user_dao.checkUserWithSessionId(sessionId);
+		
 	}
 	
 	// user의 정보 변경(이메일주소, 주소)해서 DB에 수정하기
 	public int infoModify(String userId, String userAddr, String userPh) {
 	
 		return user_dao.infoModify(userId, userAddr, userPh);
+	}
+	
+	// user의 정보 변경 후 login session에 수정된 내용 다시 저장을 위해 수정된 정보 받아오기
+	public CinemaUserDTO newUserInfo(String userId) {
+		
+		return user_dao.newUserInfo(userId);
 	}
 
 	// user의 새 비밀번호 넣어주기
@@ -80,12 +86,14 @@ public class CinemaUserService {
 		return user_dao.deleteCheck(dto);
 	}
 
-	// 자동로그인유지를 위해 Interceptor에서 sessionId가 저장되어있는 지를 확인하기
-	public CinemaUserDTO checkUserWithSessionId(String sessionId) {
-		return user_dao.checkUserWithSessionId(sessionId);
-		
+
+	// user의  예매내역 보여주기
+	public List<HashMap<String, Object>> ticketingHistory(String userId) {
+	
+		return user_dao.ticketingHistory(userId);
 	}
 
+	
 	// 자신의 문의한 1:1문의 리스트 불러오기 
 	public List<OneToOneDTO> inquiryList(HttpSession session) {
 		String userId = (String)session.getAttribute("userId");
@@ -102,23 +110,9 @@ public class CinemaUserService {
 		return user_dao.inquiryRead(oneToOne_idx);
 	}
 
-	public List<HashMap<String, Object>> ticketingHistory(String userId) {
-	
-		return user_dao.ticketingHistory(userId);
-	}
 
-	public CinemaUserDTO newUserInfo(String userId) {
-		
-		return user_dao.newUserInfo(userId);
-	}
-	
-	
-	
 
-	// myPage 정보 불러오기(List로처리하는방법)
-//	public List<CinemaUserDTO> myPageInfo(String userId) {
-//		return user_dao.myPageInfo(userId);
-//	}
+
 
 	
 	

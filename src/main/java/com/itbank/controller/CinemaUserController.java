@@ -1,8 +1,5 @@
 package com.itbank.controller;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -130,7 +127,7 @@ public class CinemaUserController {
 	public String passwordModifyCheck(CinemaUserDTO dto, HttpSession session) {
 		// passwordModifyCheck.jsp에서 비밀번호 일치 후 정보 변경 페이지 보여주기 
 		
-		CinemaUserDTO cinemaUserInfo = cus.passwordModifyCheck(dto);
+		CinemaUserDTO cinemaUserInfo = cus.login(dto);
 		if(cinemaUserInfo != null) {			
 			
 			return "redirect:/cinemaUser/myPage/infoModify";
