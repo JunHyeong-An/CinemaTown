@@ -106,6 +106,12 @@ public interface MasterDAO {
 	@Delete("delete from cinemaEventList where event_idx = #{event_idx}")
 	int eventDelete(int event_idx);
 
+	@Select("select movieName, hallName,showDay, to_char(startTime,'HH24:mi') as start_time, to_char(endTime,'HH24:mi') as end_time" + 
+			" from cinemaSchedule" + 
+			" join cinemaHall" + 
+			" on cinemaHall.hall_idx = cinemaSchedule.hall_idx order by showDay, movieName, hallName,startTime")
+	List<HashMap<String, String>> scheduleList();
+
 	
 	
 

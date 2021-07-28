@@ -197,6 +197,11 @@ public class MasterService {
 			return dao.LostEach(cinemaLost_idx);
 		}
 
+		public List<HashMap<String, String>> scheduleList() {
+			
+			return dao.scheduleList();
+		}
+
 		
 
 		

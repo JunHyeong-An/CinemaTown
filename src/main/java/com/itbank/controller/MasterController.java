@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itbank.model.CinemaEventListDTO;
 import com.itbank.model.CinemaHallDTO;
 import com.itbank.model.CinemaMovieDTO;
@@ -37,6 +39,7 @@ public class MasterController {
 	
 	@Autowired private reviewService rs;
 	@Autowired private MasterService mse;
+	private ObjectMapper mapper = new ObjectMapper();
 	
 	
 		// 관리자 페이지 및 매출 페이지
@@ -201,6 +204,15 @@ public class MasterController {
 			return mse.scheduleCheck(scheduleTime, hallName);
 		}
 		
+		// 상영관 일정 리스트 
+		@GetMapping(value="/masterMovie/cinemaSchedule/scheduleList",produces="application/json;charset=utf-8")
+		@ResponseBody
+		public String scheduleList() throws JsonProcessingException{
+			List<HashMap<String, String>> list = mse.scheduleList();
+			String scheduleList = mapper.writeValueAsString(list);
+			return scheduleList;
+		}
+		
 		// 상영 일정에 영화, 상영관 추가하기
 		@PostMapping("/masterMovie/cinemaSchedule")
 		public String insertMovie(CinemaScheduleDTO dto, String hallName) {
@@ -208,6 +220,7 @@ public class MasterController {
 			int row = mse.insertMovie(dto, hallName);
 			return "redirect:/master/masterMovie/masterMovieList";
 		}
+		
 	   
 	   // 관리자 이벤트 추가 페이지
 	   @GetMapping("/masterEvent/masterEventAdd")
