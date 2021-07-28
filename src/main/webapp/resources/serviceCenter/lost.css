@@ -1,0 +1,88 @@
+#boardContainer {
+	width: 100%;
+	height: 690px;
+	/*  border: 1px solid black;   */
+	text-align: center;
+	margin-top: 100px;
+}
+
+#boardMenu {
+	width: 300px;
+	height: 30px;
+	border-bottom: 1px solid gray;
+	display: flex;
+	margin: 0 auto;
+	justify-content: center;
+	align-items: center;
+}
+
+.writeForm {
+	/*    border: 1px solid black;     */
+	width: 100%;
+	height: 1000px;
+	margin-top: 50px;
+}
+
+.writeTitle {
+	/*    border: 1px solid red;    */
+	width: auto;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.writeContent {
+	/*  border: 1px solid green;     */
+	width: auto;
+	height: 450px;
+	margin-top: 30px;
+}
+
+.miniContainer {
+	/*    border: 1px solid purple; */
+	width: 100%;
+	height: 200px;
+	margin-top: 10px;
+}
+
+.miniMenu {
+	font-family: 'gmarketLight';
+	font-weight: 700;
+	font-size: 7pt;
+	float: top;
+	text-align: center;
+}
+
+.miniMenu>input {
+	border: 0px;
+	border-bottom: 1px solid rgb(197, 197, 197);
+	outline: none;
+	margin-bottom: 12px;
+	width: 300px;
+}
+
+.writeContent>textarea {
+	width: 785px;
+	height: 400px;
+	resize: none;
+	outline: none;
+	border: 1px solid rgb(197, 197, 197);
+	border-radius: 5px;
+	padding: 20px 20px 20px 17px;
+	margin-top: 10px;
+}
+
+.writeButton {
+	width: 300px;
+	height: 30px;
+	border: 1px solid black;
+	border-radius: 5px;
+	background-color: black;
+	margin: 0 auto;
+	margin-top: 30px;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
