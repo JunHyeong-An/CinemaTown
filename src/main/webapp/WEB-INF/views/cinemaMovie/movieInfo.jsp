@@ -6,7 +6,6 @@
 <c:set var="userId" value="${userId }"/>
 <input type="hidden" id="userId" value="${userId }">
 <%-- \${userId } : ${userId } --%>
-\${vodUrl } : ${vodUrl }
 <div id="movieInfoContainer">
 	<div id="movieInfoPosterAndTitle">
 		<img id="movieInfoPoster">
