@@ -26,8 +26,16 @@
         </div>
     </div>
 
+	<div class="eventContainer">
+	<c:forEach var="dto" items="${mainEvent }">
+		<a href="${cpath }/homeEventRead/${dto.event_idx}"> 
+		<img src="${cpath }/uploadimage/${dto.eventListFileName}">
+		</a> 
+	</c:forEach>
+</div>
 
-    <div id="board">
+
+<div id="board">
         <div class="iconList">
             <a href="" style="color:black">
                 <div class="icon"><img src="${cpath }/resources/commons/imgs/userIcon.png"></div>

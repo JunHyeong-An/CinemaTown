@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.itbank.model.CinemaEventListDTO;
 import com.itbank.model.CinemaMovieDAO;
 import com.itbank.model.CinemaMovieDTO;
 import com.itbank.model.CinemaPaymentDAO;
@@ -159,6 +160,14 @@ public class CinemaMovieService {
 
 	public List<ReviewDTO> reviewList(String movieNm, String rowMax) {
 		return review_dao.reviewList(movieNm,rowMax);
+	}
+
+	public List<CinemaEventListDTO> listEvent() {
+		return movie_dao.mainEvent();
+	}
+
+	public List<CinemaEventListDTO> selectEvent(int event_idx) {
+		return movie_dao.selectEvent(event_idx);
 	}
 
 

@@ -106,6 +106,12 @@ public interface CinemaMovieDAO {
 	@Select("select movieCode from cinemaMovie")
 	String[] movieCodeList();
 
+	@Select("select event_idx ,eventListTitle, eventListContent, eventListFileName, start_time, end_time from cinemaEventList where sysdate >= start_time and end_time >= sysdate order by end_time")
+	List<CinemaEventListDTO> mainEvent();
+
+	@Select("select event_idx ,eventListTitle ,eventListContent, eventListFileName, start_time, end_time from cinemaEventList where event_idx = #{event_idx}")
+	List<CinemaEventListDTO> selectEvent(int event_idx);
+
 
 
 

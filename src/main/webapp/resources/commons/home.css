@@ -144,3 +144,29 @@ a {
 .icon img {
 	max-width: 100%;
 }
+
+ .eventContainer {
+	display: flex;
+	position: relative;
+	justify-content: space-between;
+	align-items: center;
+	background-color: rgb(27, 2, 71);
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 7%;
+	padding-right: 7%;
+	text-align: center;
+	height: 300px;
+}
+
+.eventContainer a {
+	text-decoration-line: none;
+	/* border: 1px solid red; */
+	margin-top: 5px;
+}
+
+.eventContainer img {
+	width: 250px;
+	margin: 0 auto;
+	box-shadow: 1.5px 1.5px 3px rgb(255, 255, 255);
+}
