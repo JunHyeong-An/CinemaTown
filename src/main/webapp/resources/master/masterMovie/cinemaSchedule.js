@@ -37,3 +37,61 @@ form.onsubmit = function(event) {
 		}
 	})
 }
+const scheduleTable = document.querySelector('.scheduleTable')
+const scheduleUrl = "scheduleList"
+const method = {
+		method : 'GET'
+}
+fetch(scheduleUrl, method).then(function(resp){
+	return resp.json()
+}).then(function(json){
+	console.log(json)
+	for(let i = 0; i < json.length; i++){
+		const table = document.createElement('table')
+		const tr1 = document.createElement('tr')
+		const tr2 = document.createElement('tr')
+		const tr3 = document.createElement('tr')
+		const tr4 = document.createElement('tr')
+		
+		const th1 = document.createElement('th')
+		const th2 = document.createElement('th')
+		const th3 = document.createElement('th')
+		const th4 = document.createElement('th')
+		
+		th1.innerText = '날짜'
+		th2.innerText = '영화이름'
+		th3.innerText = '상영관'
+		th4.innerText = '시간'
+		
+		const td1 = document.createElement('td')
+		const td2 = document.createElement('td')
+		const td3 = document.createElement('td')
+		const td4 = document.createElement('td')
+		
+		td1.innerText = json[i].SHOWDAY
+		td2.innerText = json[i].MOVIENAME
+		td3.innerText = json[i].HALLNAME
+		td4.innerText = json[i].START_TIME + '~' + json[i].END_TIME
+//		console.log(json[i].END_TIME)
+		tr1.appendChild(th1)
+		tr1.appendChild(td1)
+		
+		tr2.appendChild(th2)
+		tr2.appendChild(td2)
+		
+		tr3.appendChild(th3)
+		tr3.appendChild(td3)
+		
+		tr4.appendChild(th4)
+		tr4.appendChild(td4)
+		
+		table.appendChild(tr1)
+		table.appendChild(tr2)
+		table.appendChild(tr3)
+		table.appendChild(tr4)
+		
+		scheduleTable.appendChild(table)
+	}
+})
+
+

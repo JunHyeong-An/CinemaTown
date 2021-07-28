@@ -58,6 +58,7 @@
         <div class="movieAddButton">
             <input type="submit" value="영화 추가하기" class="addButton">
         </div>
+        <div class="scheduleTable"></div>
     </form>
     </div>
 <script src="${cpath }/resources/master/masterMovie/cinemaSchedule.js"></script>
