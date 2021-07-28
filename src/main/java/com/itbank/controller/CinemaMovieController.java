@@ -55,11 +55,11 @@ public class CinemaMovieController {
 	}
 	
 	// movieInfo에서 티저예고편 보여주기
-	@GetMapping(value="/movieInfo/vodUrl/{movieNm}/",produces="application/json;charset=utf-8")
+	@GetMapping(value="/movieInfo/teaserUrl/{movieNm}/",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String vodUrl(@PathVariable String movieNm) throws IOException {
-		String vodUrl = mvs.vodUrl(movieNm.trim());
-		return vodUrl; 
+	public String teaserUrl(@PathVariable String movieNm) throws IOException {
+		String teaserUrl = cms.teaserUrl(movieNm.trim());
+		return teaserUrl; 
 	}
 	
 	// 영화 리뷰 등록하기

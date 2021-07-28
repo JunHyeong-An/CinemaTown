@@ -161,6 +161,11 @@ public class CinemaMovieService {
 		return review_dao.reviewList(movieNm,rowMax);
 	}
 
+	public String teaserUrl(String movieName) {
+		
+		return movie_dao.teaserUrl(movieName);
+	}
+
 
 
 

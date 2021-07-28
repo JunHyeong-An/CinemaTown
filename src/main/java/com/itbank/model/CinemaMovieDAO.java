@@ -106,6 +106,9 @@ public interface CinemaMovieDAO {
 	@Select("select movieCode from cinemaMovie")
 	String[] movieCodeList();
 
+	@Select("select teaserUrl from cinemaMovie where movieName=#{movieName}")
+	String teaserUrl(String movieName);
+
 
 
 

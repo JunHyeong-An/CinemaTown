@@ -7,9 +7,11 @@ public class CinemaMovieDTO {
 //	RUNNINGTIME NOT NULL NUMBER        
 //	DELETED              CHAR(1)  
 //	URLNAME              VARCHAR2(500) 
-//	MOVIECODE            VARCHAR2(10)  	
+//	MOVIECODE            VARCHAR2(10)  
+//	TEASERURL            VARCHAR2(500)
+	
 	private int ageLimit;
-	private String movieName, deleted, urlName, movieCode;
+	private String movieName, deleted, urlName, movieCode, teaserUrl;
 	private long runningTime;
 	
 	public int getAgeLimit() {
@@ -47,6 +49,12 @@ public class CinemaMovieDTO {
 	}
 	public void setMovieCode(String movieCode) {
 		this.movieCode = movieCode;
+	}
+	public String getTeaserUrl() {
+		return teaserUrl;
+	}
+	public void setTeaserUrl(String teaserUrl) {
+		this.teaserUrl = teaserUrl;
 	}
 	
 
