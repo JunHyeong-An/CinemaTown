@@ -31,16 +31,9 @@ public interface ReviewDAO {
 	@Delete("delete from review where review_idx=#{review_idx}")
 	int reviewDelete(int review_idx);
 
-	@Select("select * from review where movieName=#{movieName} order by reviewDay desc offset #{offset} rows fetch first #{perPage} rows only")
-	List<ReviewDTO> movieReviewList(@Param("offset") int offset,@Param("perPage") int perPage,@Param("movieName") String movieName);
-
-	// 리뷰 한개 페이징
-	@Select("select count(*) from review")
-	int selectCount();
-
-	// 리뷰 전체 페이징
-	@Select("select * from review order by review_idx desc offset #{offset} rows fetch first #{perPage} rows only")
-	List<ReviewDTO> noticeSelect(@Param("offset")int offset, @Param("perPage")int perPage);
+	// 마스터 리뷰 페이징
+	@Select("select * from review where movieName=#{movieName} and rownum <=#{rowMax} order by reviewDay desc")
+	List<ReviewDTO> reviewList2(@Param("movieName")String movieName, @Param("rowMax")String rowMax);
 
 
 	

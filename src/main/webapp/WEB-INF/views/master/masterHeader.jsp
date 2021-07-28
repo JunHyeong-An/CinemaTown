@@ -36,5 +36,8 @@
 			</div>
 		</diV>
 	</header>
+	<script>
+	const cpath = "${cpath}"
+</script>
 </body>
 </html>

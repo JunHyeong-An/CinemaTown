@@ -11,7 +11,7 @@
 		<div class="dayList">
 			<!-- <div class="day">20</div> -->
 		</div>
-	</div>
+	</div> 
 	<div class="Alltable"></div>
 	<hr>
 <script src="${cpath }/resources/cinemaMovie/schedule/schedule.js"></script>
