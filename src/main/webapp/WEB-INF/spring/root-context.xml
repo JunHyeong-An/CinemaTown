@@ -29,6 +29,9 @@
       <property name="jdbcUrl" value="jdbc:oracle:thin:@221.164.9.200:51521:xe" />      
       <property name="user" value="c##cinematown" />      
       <property name="password" value="0802" />      
+<!-- 	  <property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe" />       -->
+<!--       <property name="user" value="c##itbank" />       -->
+<!--       <property name="password" value="it" />     -->
       <property name="maxPoolSize" value="100" />      
       <property name="maxIdleTime" value="600" />      
       <property name="idleConnectionTestPeriod" value="300" />      
@@ -40,7 +43,6 @@
       <property name="mapperLocations">
          <list>
             <value>classpath:config/mapper-ticketing.xml</value>
-            <value>classpath:config/mapper-payment.xml</value>
          </list>
       </property>
    </bean>

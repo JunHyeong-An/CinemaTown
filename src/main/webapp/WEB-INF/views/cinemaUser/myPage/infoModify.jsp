@@ -67,6 +67,11 @@
             </div>
             <div id="modifyMsg"></div>
         </form>
+        <div class="Form">
+        	<a href="${cpath }/cinemaUser/myPage/deleteCheck">
+        		<input type="submit" value="회원 탈퇴" id="deleteModify">
+        	</a>
+        </div>
    </main>
 </div>
 <%@ include file="../../footer.jsp"%>

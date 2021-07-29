@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
 <link rel="stylesheet" href="${cpath }/resources/cinemaMovie/schedule/schedule.css">
-
+<input type="hidden"  id="userAge" value="<c:out value="${login.userAge}"/>">
 	<div class="title">
 		<h2>상영시간표</h2>
 	</div>

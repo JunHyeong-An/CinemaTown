@@ -13,9 +13,9 @@ public interface CinemaSeatDAO {
 
 	// 예매 취소 시 좌석 취소
 	@Update("update cinemaSeat set reserved = 'n' where ticketing_idx=#{ticketing_idx}")
-	int seatCancel(@Param("ticketing_idx")int ticketing_idx);
+	int seatCancel(int ticketing_idx);
 
 	// 예매된 좌석 비활성화
 	@Select("select seatName from cinemaSeat where schedule_idx=#{schedule_idx} and reserved='y'")
-	String[] reservedSeats(@Param("schedule_idx")int schedule_idx);
+	String[] reservedSeats(int schedule_idx);
 }

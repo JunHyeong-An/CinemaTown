@@ -238,6 +238,7 @@ function insertDate() {
 }
 
 function getMovieList() {
+	let ageValue = ''
 	console.log(ticketingDate)
 	const url = "ticketing/" + movieName +"/" + ticketingDate + "/"
 	const opt = {
@@ -278,6 +279,7 @@ function getMovieList() {
 			span3.innerHTML = json[i].HALLNAME
 			urlName = json[i].URLNAME
 			ageNum = json[i].AGELIMIT
+			ageValue = ageNum
 			ticketingMoviePoster.setAttribute("src", urlName)
 			
 			p2.appendChild(span1)
@@ -286,8 +288,22 @@ function getMovieList() {
 			
 			div.appendChild(p1)
 			div.appendChild(p2)
+			
 			if(startTimeMil > sCurrDate)
-				div.addEventListener("click", function(){showCoverBox(div, json[i])})
+				div.addEventListener("click", function(event){
+					
+					const age = document.getElementById('userAge').value;
+													
+					if(age < ageValue){  
+						event.preventDefault()
+						alert(ageValue+'세 관람가입니다!!')
+					}
+					else{
+						
+						showCoverBox(div, json[i])
+					}			
+					
+				})
 			else 
 				div.style.backgroundColor = "gray"
 			showTimeList.appendChild(div)

@@ -30,7 +30,7 @@ public interface CinemaUserDAO {
 	
 	// 자동로그인유지를 위해 Interceptor에서 sessionId가 저장되어있는 지를 확인하기
 	@Select("select * from cinemaUser where sessionId=#{sessionId} and sessionLimit > sysdate")
-	CinemaUserDTO checkUserWithSessionId(@Param("sessionId")String sessionId);
+	CinemaUserDTO checkUserWithSessionId(String sessionId);
 	
 	// user의 정보 변경(이메일주소, 주소)해서 DB에 수정하기
 	@Update("update cinemaUser set userAddr=#{userAddr}, userPh=#{userPh} where userId=#{userId}")

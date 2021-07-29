@@ -19,8 +19,8 @@ let totalCost = json.totalCost
 ticketingTime = ticketingTime.substr(0,2) + "시 " + ticketingTime.substr(2, 4) + "분"
 
 let year = ticketingDate.substr(0, 4) + "년 "
-let month = ticketingDate.substr(4, 2) + "월 "
-let date = ticketingDate.substr(8, 2) + "일 "
+let month = (Number(ticketingDate.substr(4, 2)) + 1) + "월 "
+let date = ticketingDate.substr(6, 2) + "일 "
 	
 ticketing4MovieName.innerHTML = movieName
 ticketing4Date.innerHTML = year + month + date

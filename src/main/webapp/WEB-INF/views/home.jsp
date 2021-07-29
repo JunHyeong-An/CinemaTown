@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="homeHeader.jsp" %>
 <link rel="stylesheet" href="${cpath }/resources/commons/home.css">
+<input type="hidden"  id="userAge" value="<c:out value="${login.userAge}"/>">
     <div id="movieList">
         <div id="movieSchedule">
             <div id="movieScheduleTitle">

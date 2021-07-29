@@ -34,7 +34,6 @@ import com.itbank.service.CinemaMovieService;
 import com.itbank.service.CinemaScheduleListService;
 import com.itbank.service.CinemaUserService;
 import com.itbank.service.KakaoPayService;
-import com.itbank.service.MovieVodUrlService;
 
 
 @Controller
@@ -45,7 +44,6 @@ public class CinemaMovieController {
 	@Autowired private CinemaUserService cus;
 	@Autowired private CinemaScheduleListService csls;
 	@Autowired private KakaoPayService kps;
-	@Autowired private MovieVodUrlService mvs;
 	private ObjectMapper mapper = new ObjectMapper();
 	
 	// 영화 정보 페이지 보여주기
@@ -250,7 +248,7 @@ public class CinemaMovieController {
 		return "cinemaMovie/ticketingSuccess";
 	}
 	
-	// 예매 취소 시 돌아가는 메서드 ==> 주소 넣어야함
+	// 예매 취소 시 돌아가는 메서드
 	@GetMapping("/ticketingHistoryCancel")
 	public String ticketingCancel(int idx) {	// idx = ticketing_idx
 	

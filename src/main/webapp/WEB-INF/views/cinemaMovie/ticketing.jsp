@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="${cpath }/resources/ticketing/ticketing2.css">
 <link rel="stylesheet" href="${cpath }/resources/ticketing/ticketing3.css">
 <link rel="stylesheet" href="${cpath }/resources/ticketing/ticketing.css">
-<div id="coverBox"></div>
+<input type="hidden"  id="userAge" value="<c:out value="${login.userAge}"/>">
+<div id="coverBox"></div>/
 <div class="coverBoxLoc" id="coverBoxInfo">
 	<div id="coverBoxHeader">
 		<div>

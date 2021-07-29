@@ -12,7 +12,6 @@
 	
 	<typeAliases>
 		<typeAlias type="com.itbank.model.CinemaTicketingDTO" alias="ticketing_dto"/>
-		<typeAlias type="com.itbank.model.CinemaPaymentDTO" alias="payment_dto"/>
 	</typeAliases>
 	
 </configuration> 

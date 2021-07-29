@@ -26,7 +26,7 @@ public interface CinemaScheduleDAO {
 			"    on cinemaSchedule.hall_idx = cinemaHall.hall_idx" + 
 			"    where cinemaSchedule.showDay = #{showDay}" + 
 			"    group by cinemaMovie.movieName order by cinemaMovie.movieName")
-	String[] movieNameList(@Param("showDay") String showDay);	// showDay 넣어주기★
+	String[] movieNameList(String showDay);
 	
 	@Select("select count(cinemaSchedule.startTime) as schedule_allCount" + 
 			"    from cinemaMovie " + 
@@ -61,7 +61,7 @@ public interface CinemaScheduleDAO {
 	String[] end_timeList(@Param("movieName")String movieName,@Param("showDay") String showDay,@Param("hallName")String hallName);
 	
 	@Select("select runningTime, ageLimit from cinemaMovie where movieName=#{movieName}")
-	CinemaMovieDTO runningTimeAgeLimitList(@Param("movieName")String movieName);
+	CinemaMovieDTO runningTimeAgeLimitList(String movieName);
 
 	@Select("select cinemaschedule.seatcountremain" + 
 			"    from cinemaMovie " + 

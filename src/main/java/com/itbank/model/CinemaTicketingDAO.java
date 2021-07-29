@@ -1,10 +1,7 @@
 package com.itbank.model;
 
-import java.util.HashMap;
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 public interface CinemaTicketingDAO {
 
@@ -12,7 +9,8 @@ public interface CinemaTicketingDAO {
 	int ticketing(CinemaTicketingDTO dto);
 	
 	// 예매 취소 시 티켓 취소
-	int ticketingCancel(@Param("ticketing_idx")int ticketing_idx);
+	@Update("update cinemaTicketing set deleted = 'y' where ticketing_idx = #{ticketing_idx}")
+	int ticketingCancel(int ticketing_idx);
 
 
 	@Select("select SCHEDULE_IDX from cinemaTicketing where ticketing_idx = #{ticketing_idx}")

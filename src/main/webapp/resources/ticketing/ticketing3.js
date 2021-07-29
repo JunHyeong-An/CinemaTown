@@ -143,7 +143,7 @@ kakaoPayBtn.onclick = function() {
 	ob.reservationSeat = reservationSeat
 	ob.urlName = urlName
 	ob.ageLimit = ageNum
-	ob.cardCompany = cardCompany
+	ob.cardCompany = '카카오페이'
 	ob.cardPassword = cardPassword
 	
 	let ticketingJson = JSON.stringify(ob)
