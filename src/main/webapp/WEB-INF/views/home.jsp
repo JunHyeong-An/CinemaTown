@@ -25,13 +25,16 @@
         </div>
     </div>
 
+	<div class="eventTitle">── EVENTS ──</div>
+	<div class="eventTitle">　2021　</div>
+
 	<div class="eventContainer">
 	<c:forEach var="dto" items="${mainEvent }">
 		<a href="${cpath }/homeEventRead/${dto.event_idx}"> 
 		<img src="${cpath }/uploadimage/${dto.eventListFileName}">
 		</a> 
 	</c:forEach>
-</div>
+	</div>
 
 
 <div id="board">
