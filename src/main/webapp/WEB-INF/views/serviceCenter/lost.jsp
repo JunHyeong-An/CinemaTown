@@ -260,7 +260,7 @@
 
 <body>
 
-
+<form method="POST">
     <div id="boardContainer">
         <div id="boardMenu">
             <div class="lostAndFound">분실물 신고</div>
@@ -296,8 +296,8 @@
             </div>
 
         </div>
+</form>
 
-    </div>
 
     <footer>
 
