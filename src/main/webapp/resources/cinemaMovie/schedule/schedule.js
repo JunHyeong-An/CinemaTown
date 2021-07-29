@@ -17,6 +17,7 @@ const userDate =  nowDate.getDate();
 const days = ["일", "월", "화", "수", "목", "금", "토"] 
 const dayName = days[nowDate.getDay()];
 const userDayName = days[todayDate.getDay()];
+let ageValue = ''
 //오늘 날짜 등록
 const DateAll = userYear + '년' + userMonth + '월' + userDate + '일' + '(' + userDayName + ')'
 allDate.innerText = DateAll
@@ -89,6 +90,7 @@ allDate.innerText = DateAll
 							
 						
 						divAge.innerText = movieAllInfo[j].ageLimit
+						ageValue = movieAllInfo[j].ageLimit
 						divName.innerText = movieAllInfo[j].movieName
 						movieInfo.appendChild(divAge)
 						movieInfo.appendChild(divName)
@@ -148,6 +150,15 @@ allDate.innerText = DateAll
 									divInfo.style.backgroundColor = '#dadada'
 								}
 								
+								aTag.onclick = function(event){
+									const age = document.getElementById('userAge').value;
+																
+									if(age < ageValue){  
+										event.preventDefault()
+										alert(ageValue+'세 관람가입니다!!')
+									}
+											
+								}
 								// 관이 다르면 다른 div에 넣어라
 								if(hallName == "1관"){
 									oneSpace.appendChild(divInfo)							
@@ -185,6 +196,7 @@ allDate.innerText = DateAll
 						Alltable.appendChild(divNo)
 					}
 				})
+
 			}
 			dateDiv.onclick = cb
 			
@@ -192,4 +204,9 @@ allDate.innerText = DateAll
 				const customEvent = new Event('click')
 				dateDiv.onclick(customEvent)
 			}
+			
+			
 		}
+
+
+	

@@ -39,6 +39,7 @@ fetch(officeUrl, officeopt)
 		li.onmouseleave = function() {
 			li.style.fontSize = 13 + "px"
 		}
+		
 	}
 })
 
@@ -50,7 +51,8 @@ const movieNameList = document.querySelector(".movieNameList ul")
 const movieSchedule = document.querySelector("#movieSchedule")
 const movieScheduleDate = document.querySelector(".currentDate")
 let scheduleDate = new Date()
-
+let ageValue = ''
+	
 movieScheduleDate.innerHTML = scheduleDate.getFullYear() + "년 " + (scheduleDate.getMonth() + 1) + "월 "
 							 + scheduleDate.getDate() + "일"
 fetch(listUrl, listOpt)
@@ -73,6 +75,7 @@ fetch(listUrl, listOpt)
 		
 		ageLimitInput.setAttribute("type", "hidden")
 		ageLimitInput.value = json[i].ageLimit
+		ageValue = json[i].ageLimit
 		console.log(json[i].ageLimit)
 		
 		endTimeInput.setAttribute("type", "hidden")
@@ -116,15 +119,28 @@ fetch(listUrl, listOpt)
 				
 				a2.innerHTML = json[i].hallName[j] + "<br>" + json[i].start_time[j]
 				div2.appendChild(a2)
+				
+				a2.onclick = function(event){
+					const age = document.getElementById('userAge').value;						
+					if(age < ageValue){  
+						event.preventDefault()
+						alert(ageValue+'세 관람가입니다!!')
+					}
+					
+				}
+				
 			}
 			else {
 				div2.innerHTML = json[i].hallName[j] + "<br>" + json[i].start_time[j]
 				div2.style.backgroundColor = "gray"
 			}
 			
+			
+			
 			div2.classList.add("movieSelectBox")
 			movieSelect.appendChild(div2)
 		}
 		movieSchedule.appendChild(movieSelect)
 	}
+	
 })
