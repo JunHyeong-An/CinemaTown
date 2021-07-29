@@ -10,6 +10,7 @@
             <div class="name"><div class="ex">작성자</div>${dto.cinemaLostName }</div>
             <div class="birth"><div class="ex">생년월일</div>${dto.cinemaLostBirth }</div>
             <div class="phone"><div class="ex">연락처</div>${dto.cinemaLostPH }</div>
+            <div class="phone"><div class="ex">상영관</div>${dto.cinemaLostHall }</div>
             <div class="content">${dto.cinemaLostContent }</div>
         </div>
     </div>

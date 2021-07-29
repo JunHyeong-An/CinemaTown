@@ -199,8 +199,9 @@ create table cinemaLost(
     cinemaLostKind      varchar2(300)   not null,
     cinemaLostContent   varchar2(1000)  not null,
     cinemaLostName      varchar2(20)    not null,
-    cinemaLostBirth     varchar2(6)     not null,
+    cinemaLostBirth     varchar2(20)     not null,
     cinemaLostPH        varchar2(13)    not null,
+    cinemaLostHall 		varchar2(10),
     cinemaLostToDay     varchar2(50)    default to_char(sysdate,'yyyy-MM-dd HH24:mi')
 );
 

@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 public interface ServiceCenterDAO {
 
-	@Insert("insert into cinemaLost(cinemaLostDateTime, cinemaLostKind,cinemaLostContent,cinemaLostName,cinemaLostBirth,cinemaLostPH) values (#{cinemaLostDateTime},#{cinemaLostKind},#{cinemaLostContent},#{cinemaLostName},#{cinemaLostBirth},#{cinemaLostPH})")
+	@Insert("insert into cinemaLost(cinemaLostDateTime, cinemaLostKind,cinemaLostContent,cinemaLostName,cinemaLostBirth,cinemaLostPH, cinemaLostHall) values (#{cinemaLostDateTime},#{cinemaLostKind},#{cinemaLostContent},#{cinemaLostName},#{cinemaLostBirth},#{cinemaLostPH},#{cinemaLostHall})")
 	int addlostList(ServiceCenterDTO dto);
 
 	@Insert("insert into oneToOne(otoKind,otoTitle,otoContent,userId) values(#{otoKind},#{otoTitle},#{otoContent},#{userId})")
