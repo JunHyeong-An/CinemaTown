@@ -94,7 +94,7 @@ create sequence cinemaTicketing_seq
 
 create table cinemaTicketing(
     ticketing_idx   number          default cinemaTicketing_seq.nextval primary key,
-    userId          varchar2(20)    not null,
+    userId          varchar2(20),
     schedule_idx    number          not null,
     hall_idx        number          not null,
     seatNameAll        varchar2(50)    not null,
@@ -149,7 +149,7 @@ create sequence cinemaPayment_seq
 create table cinemaPayment(
     payment_idx     number          default cinemaPayment_seq.nextval primary key,
     ticketing_idx   number          not null,
-    userId          varchar2(20)    not null,
+    userId          varchar2(20),
     paymentDay      varchar2(50)    default to_char(sysdate,'yyyy-MM-dd HH24:mi'),
     canceled        char(1)         default 'n' check(canceled in('y','n')),    
     totalAmount     number          not null,
@@ -219,11 +219,9 @@ create sequence review_seq
 create table review(
     review_idx      number          default review_seq.nextval primary key,
     movieName       varchar2(50)    not null,
-    userId          varchar2(20)    not null,
+    userId          varchar2(20),
     reviewContent   varchar2(1000)  not null,
     reviewDay       varchar2(50)    default to_char(sysdate,'yyyy-MM-dd HH24:mi'),
-    constraint userId_review_fk foreign key(userId)
-        references cinemaUser(userId) on delete cascade,
     constraint movieName_review_fk foreign key(movieName)
         references cinemaMovie(movieName) on delete cascade
 );   
@@ -266,9 +264,7 @@ create table oneToOne(
     otoTitle            varchar2(300)   not null,
     otoContent          varchar2(1000)  not null,
     otoWriteDay         varchar2(50)    default to_char(sysdate,'yyyy-MM-dd HH24:mi'),
-    userId              varchar2(20)    not null,
-    constraint userId_oneToOne_fk foreign key(userId)
-        references cinemaUser(userId) on delete cascade
+    userId              varchar2(20)
 );
 
 ---------------------------------------------------------------------------------------------------
