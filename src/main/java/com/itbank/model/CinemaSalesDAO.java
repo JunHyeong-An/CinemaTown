@@ -10,5 +10,5 @@ public interface CinemaSalesDAO {
 	int sales(@Param("payment_idx")int payment_idx, @Param("schedule_idx")int schedule_idx, @Param("price")int totalAmount);
 	
 	@Update("update cinemaSales set price = 0 where payment_idx = #{payment_idx}")
-	void salesCancel(@Param("payment_idx")int payment_idx);
+	void salesCancel(int payment_idx);
 }

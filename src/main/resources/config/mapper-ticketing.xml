@@ -15,11 +15,6 @@
 			values(#{userId}, #{schedule_idx}, (select hall_idx from cinemaSchedule where schedule_idx=#{schedule_idx}), #{seatNameAll}, #{adultCount}, #{teenagerCount})
 	
 	</insert>
-	
-	<!-- 예매 취소 시 -->
-	<update id="ticketingCancel" parameterType="int" useGeneratedKeys="true">
-		update cinemaTicketing set deleted = 'y' where ticketing_idx = #{ticketing_idx}
-	
-	</update>
+
 	
 </mapper>

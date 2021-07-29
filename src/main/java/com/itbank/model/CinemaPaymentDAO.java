@@ -15,7 +15,8 @@ public interface CinemaPaymentDAO {
 	int getPayment_idx();
 	
 	// 예매 취소 시 결제 취소 
-	int paymentCancel(@Param("ticketing_idx")int ticketing_idx);
+	@Update("update cinemaPayment set canceled = 'y' where ticketing_idx=#{ticketing_idx}")
+	int paymentCancel(int ticketing_idx);
 
 	@Select("select PAYMENT_IDX from cinemaPayment where ticketing_idx = #{ticketing_idx}")
 	int getPayment_idxCancel(int ticketing_idx);

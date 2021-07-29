@@ -40,7 +40,6 @@
       <property name="mapperLocations">
          <list>
             <value>classpath:config/mapper-ticketing.xml</value>
-            <value>classpath:config/mapper-payment.xml</value>
          </list>
       </property>
    </bean>
