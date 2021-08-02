@@ -79,7 +79,7 @@
             이벤트 상세
         </div>
 		<c:forEach var="dto" items="${list }">
-        <div class="eventImg"><img src="${cpath }/uploadimage/${dto.eventListFileName}" width="220px"></div>
+        <div class="eventImg"><img src="${cpath }/resources/master/img/${dto.event_idx }.jpg" width="220px"></div>
         <div class="smallTitle">${dto.eventListTitle }</div>
         <div class="msg">
         	${dto.eventListContent }

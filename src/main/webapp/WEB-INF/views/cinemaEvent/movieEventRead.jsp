@@ -12,7 +12,7 @@
         <div class="eventDate">${dto.start_time } ~ ${dto.end_time }</div>
         <div class="smallTitle"></div>
         
-        <div class="msg"><div class="eventImg"><img src="${cpath }/uploadimage/${dto.eventListFileName}" width="220px"></div>
+        <div class="msg"><div class="eventImg"><img src="${cpath }/resources/master/img/${dto.event_idx }.jpg" width="220px"></div>
     	${dto.eventListContent }
     	</div>
 		</c:forEach> 

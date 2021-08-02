@@ -15,8 +15,8 @@
                 <div class="eventList1">
                 <c:forEach var="dto" items="${list }">
     
-                    <div class="events"><a href="${cpath }/cinemaEvent/movieEventRead/${dto.event_idx}">
-                    <img src="${cpath }/uploadimage/${dto.eventListFileName}" width="160px"></a>
+                    <div class="events"><a href="${cpath }/cinemaEvent/movieEventRead/${dto.event_idx}">            
+                    <img src="${cpath }/resources/master/img/${dto.event_idx }.jpg" width="160px"></a>
                         <div class="eventDate">${dto.start_time } ~ ${dto.end_time }</div>
                     </div>
                    

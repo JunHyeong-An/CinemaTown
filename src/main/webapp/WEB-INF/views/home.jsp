@@ -31,8 +31,8 @@
 
 	<div class="eventContainer">
 	<c:forEach var="dto" items="${mainEvent }">
-		<a href="${cpath }/homeEventRead/${dto.event_idx}"> 
-		<img src="${cpath }/uploadimage/${dto.eventListFileName}">
+		<a href="${cpath }/cinemaEvent/movieEventRead/${dto.event_idx}"> 
+		<img src="${cpath }/resources/master/img/${dto.event_idx }.jpg">
 		</a> 
 	</c:forEach>
 	</div>
