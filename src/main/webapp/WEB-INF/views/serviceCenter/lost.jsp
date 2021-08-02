@@ -273,7 +273,7 @@
                         <input type="text" name="cinemaLostKind" placeholder="분실물의 종류를 입력하세요">
                     </div>
                     <div class="miniMenu">
-                        <input type="text" name="cinemaLostContent" placeholder="분실 장소를 입력하세요 (예: 5관)">
+                        <input type="text" name="cinemaLostHall" placeholder="분실 장소를 입력하세요 (예: 5관)">
                     </div>
                     <div class="miniMenu">
                         <input type="text" name="cinemaLostName" placeholder="이름">
@@ -286,7 +286,7 @@
                     </div>
                 </div>
                 <div class="writeContent">
-                    <textarea name="writeContent" placeholder="상세내용을 입력하세요"></textarea>
+                    <textarea name="cinemaLostContent" placeholder="상세내용을 입력하세요"></textarea>
                 </div>
                 <div class="writeButton">
                     <input type="submit" 

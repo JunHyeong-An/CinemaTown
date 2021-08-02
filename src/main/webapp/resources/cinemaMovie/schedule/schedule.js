@@ -130,10 +130,20 @@ allDate.innerText = DateAll
 								//오늘 시간을 받아서
 								let compareDate = new Date();
 								let hour = compareDate.getHours();
+								let minute = compareDate.getMinutes();
 								let starttime = parseInt(start_time.split(':')[0]);
-							
+								let starttimeM = parseInt(start_time.split(':')[1]);
+								
+							    let nowT = hour * 100 + minute
+							    let startT = starttime * 100 + starttimeM
+							    
+							    console.log(minute)
+							    console.log(starttimeM)
+							    
+							    console.log(nowT)
+							    console.log(startT)
 								//지금 시간이 시작시간보다 작으면 a태그사용하도록 해라
-								if(hour < starttime){
+								if(nowT < startT){
 									aTag.setAttribute("href", cpath + "/cinemaMovie/ticketing?movieNm=" 
 											+ movieAllInfo[j].movieName + "&hallName=" + hallName 
 											+ "&startTime=" + start_time

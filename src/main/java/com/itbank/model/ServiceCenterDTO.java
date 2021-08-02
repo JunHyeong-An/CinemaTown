@@ -12,7 +12,7 @@ public class ServiceCenterDTO {
 //	CINEMALOSTTODAY             VARCHAR2(50)
 	
 	private int cinemaLost_idx;
-	private String cinemaLostDateTime, cinemaLostKind, cinemaLostContent, cinemaLostName, cinemaLostBirth, cinemaLostPH, cinemaLostToDay;
+	private String cinemaLostDateTime, cinemaLostKind, cinemaLostContent, cinemaLostName, cinemaLostBirth, cinemaLostPH, cinemaLostToDay, cinemaLostHall;
 	
 	
 	
@@ -63,6 +63,12 @@ public class ServiceCenterDTO {
 	}
 	public void setCinemaLostToDay(String cinemaLostToDay) {
 		this.cinemaLostToDay = cinemaLostToDay;
+	}
+	public String getCinemaLostHall() {
+		return cinemaLostHall;
+	}
+	public void setCinemaLostHall(String cinemaLostHall) {
+		this.cinemaLostHall = cinemaLostHall;
 	}
 	
 	
