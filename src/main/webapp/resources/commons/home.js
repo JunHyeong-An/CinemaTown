@@ -51,7 +51,7 @@ const movieNameList = document.querySelector(".movieNameList ul")
 const movieSchedule = document.querySelector("#movieSchedule")
 const movieScheduleDate = document.querySelector(".currentDate")
 let scheduleDate = new Date()
-let ageValue = ''
+
 	
 movieScheduleDate.innerHTML = scheduleDate.getFullYear() + "년 " + (scheduleDate.getMonth() + 1) + "월 "
 							 + scheduleDate.getDate() + "일"
@@ -61,6 +61,7 @@ fetch(listUrl, listOpt)
 })
 .then(json => {
 	for(i in json) {
+		let ageValue = ''
 		if(i == 5)
 			break;
 		// 영화 이름 추가
@@ -75,8 +76,7 @@ fetch(listUrl, listOpt)
 		
 		ageLimitInput.setAttribute("type", "hidden")
 		ageLimitInput.value = json[i].ageLimit
-		ageValue = json[i].ageLimit
-		console.log(json[i].ageLimit)
+	
 		
 		endTimeInput.setAttribute("type", "hidden")
 		endTimeInput.value = json[i].endTime
@@ -106,6 +106,7 @@ fetch(listUrl, listOpt)
 			const div2 = document.createElement("div")
 			
 			if(startTime > currTime) {
+				
 				const a2 = document.createElement("a")
 				a2.style.color = "black"
 				a2.setAttribute("href", cpath + "/cinemaMovie/ticketing?movieNm=" 
@@ -119,9 +120,11 @@ fetch(listUrl, listOpt)
 				
 				a2.innerHTML = json[i].hallName[j] + "<br>" + json[i].start_time[j]
 				div2.appendChild(a2)
+				ageValue = json[i].ageLimit
 				
 				a2.onclick = function(event){
 					const age = document.getElementById('userAge').value;						
+
 					if(age < ageValue){  
 						event.preventDefault()
 						alert(ageValue+'세 관람가입니다!!')

@@ -17,7 +17,7 @@ const userDate =  nowDate.getDate();
 const days = ["일", "월", "화", "수", "목", "금", "토"] 
 const dayName = days[nowDate.getDay()];
 const userDayName = days[todayDate.getDay()];
-let ageValue = ''
+
 //오늘 날짜 등록
 const DateAll = userYear + '년' + userMonth + '월' + userDate + '일' + '(' + userDayName + ')'
 allDate.innerText = DateAll
@@ -90,7 +90,6 @@ allDate.innerText = DateAll
 							
 						
 						divAge.innerText = movieAllInfo[j].ageLimit
-						ageValue = movieAllInfo[j].ageLimit
 						divName.innerText = movieAllInfo[j].movieName
 						movieInfo.appendChild(divAge)
 						movieInfo.appendChild(divName)
@@ -113,6 +112,7 @@ allDate.innerText = DateAll
 							
 						// 6만큼 증가를 시키는데 movieAllInfo[j][a]가 undefined면 멈춰라
 						for(let a = 0; a < 6; a++){
+							let ageValue = ''
 							if(movieAllInfo[j][a] == undefined){
 								break;
 							}
@@ -152,6 +152,7 @@ allDate.innerText = DateAll
 									+ "&urlName=" + movieAllInfo[j].urlName
 									+ "&ageNum=" + movieAllInfo[j].ageLimit
 									+ "&resToken=1")
+									ageValue = movieAllInfo[j].ageLimit
 									aTag.innerText = start_time + '~' + end_time + '\t' + seatCountRemain + '/72' + '\t' + hallName
 									divInfo.appendChild(aTag)										
 									
